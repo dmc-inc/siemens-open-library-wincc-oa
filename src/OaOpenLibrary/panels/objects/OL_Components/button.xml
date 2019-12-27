@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<panel version="14">
+ <properties>
+  <prop name="Name">
+   <prop name="en_US.utf8"></prop>
+  </prop>
+  <prop name="Size">116 50</prop>
+  <prop name="BackColor">_3DFace</prop>
+  <prop name="RefPoint">0 0</prop>
+  <prop name="InitAndTermRef">True</prop>
+  <prop name="SendClick">False</prop>
+  <prop name="RefFileName"></prop>
+  <prop name="DPI">96</prop>
+  <prop name="layoutType">None</prop>
+ </properties>
+ <events>
+  <script name="ScopeLib" isEscaped="1"><![CDATA[/**
+  * WinCC OA Open Library
+  * @author DMC, Inc. http://www.dmcinfo.com
+  *
+  * File: Button.xml
+  *
+  * Revisions: 2019-01-07 - Eric Baggen (eric.baggen@dmcinfo.com) : Created
+  *
+  * @description
+  * This panel is meant to provide developers a collection of predefined button configurations within a single panel.
+  * Implementations of the ComponentClass may be used anywhere, but providing concrete defitions associated with an ComponentType enumeration allows for a reuseable panel reference to be used in multiple locations
+  * If a developer would like to modify the behaviors of a single button type, they may do so here without needing to modify any behavior or component libaries
+  * Developers may also define additional button types here based on the individual needs of a project
+  * The button enumeration exists in the Open Library Enums folder
+*/
+
+#uses &quot;OpenLibrary/Classes/Implementations/DisplayBehaviors/Common/DynamicColor&quot;
+#uses &quot;OpenLibrary/Classes/Implementations/DisplayBehaviors/Common/DynamicEnable&quot;
+#uses &quot;OpenLibrary/Classes/Implementations/DisplayBehaviors/Common/DynamicText&quot;
+#uses &quot;OpenLibrary/Classes/Implementations/DisplayBehaviors/Common/StaticText&quot;
+#uses &quot;OpenLibrary/Classes/Implementations/DisplayBehaviors/Common/StaticColor&quot;
+#uses &quot;OpenLibrary/Classes/Implementations/DisplayBehaviors/SpecialCase/DynamicEnableWithColor&quot;
+#uses &quot;OpenLibrary/Classes/Implementations/DisplayBehaviors/SpecialCase/DynamicEnableWithEnumColor&quot;
+#uses &quot;OpenLibrary/Classes/Implementations/ActionBehaviors/SetDpeValue&quot;
+#uses &quot;OpenLibrary/Classes/Implementations/ActionBehaviors/ExitPanel&quot;
+#uses &quot;OpenLibrary/Classes/Implementations/ActionBehaviors/OpenHelp&quot;
+#uses &quot;OpenLibrary/Classes/Components/Component&quot;
+#uses &quot;OpenLibrary/Enums/ModeType&quot;
+#uses &quot;OpenLibrary/Enums/ButtonType&quot;
+#uses &quot;OpenLibrary/Enums/StatusType&quot;
+#uses &quot;OpenLibrary/Constants/Colors&quot;
+
+private string dp = $dpe;
+private ComponentClass Button = ComponentClass(getShape(&quot;button&quot;));
+private ButtonType buttonType;
+private const dyn_string STOP_COMMAND_BUTTON_COLORS =
+    makeDynString(
+        BUTTON_ACTIVE_COLOR,    // 0 = stopped
+        BUTTON_NEUTRAL_COLOR,   // 1 = E-stopped
+        BUTTON_NEUTRAL_COLOR,   // 2 = Error
+        BUTTON_NEUTRAL_COLOR,   // 3 = Forward / Work
+        BUTTON_NEUTRAL_COLOR,   // 4 = Reverse / Home
+        BUTTON_NEUTRAL_COLOR,   // 5 = Forwarding / Working
+        BUTTON_NEUTRAL_COLOR);  // 6 = Reversing / Homing
+
+private const dyn_string FORWARDWORK_COMMAND_BUTTON_COLORS =
+    makeDynString(
+        BUTTON_NEUTRAL_COLOR,    // 0 = stopped
+        BUTTON_NEUTRAL_COLOR,    // 1 = E-stopped
+        BUTTON_NEUTRAL_COLOR,    // 2 = Error
+        BUTTON_ACTIVE_COLOR,     // 3 = Forward / Work
+        BUTTON_NEUTRAL_COLOR,    // 4 = Reverse / Home
+        BUTTON_ACTIVATING_COLOR, // 5 = Forwarding / Working
+        BUTTON_NEUTRAL_COLOR);   // 6 = Reversing / Homing
+
+private const dyn_string REVERSEHOME_COMMAND_BUTTON_COLORS =
+    makeDynString(
+        BUTTON_NEUTRAL_COLOR,     // 0 = stopped
+        BUTTON_NEUTRAL_COLOR,     // 1 = E-stopped
+        BUTTON_NEUTRAL_COLOR,     // 2 = Error
+        BUTTON_NEUTRAL_COLOR,     // 3 = Forward / Work
+        BUTTON_ACTIVE_COLOR,      // 4 = Reverse / Home
+        BUTTON_NEUTRAL_COLOR,     // 5 = Forwarding / Working
+        BUTTON_ACTIVATING_COLOR); // 6 = Reversing / Homing
+
+public void init()
+{
+  // Handle button preset options
+  switch (buttonType)
+  {
+    case ButtonType::HomeCommand:
+      Button.addActionBehavior(new SetDpeValueActionBehaviorClass(dp + &quot;.bPB_Home&quot;));
+      Button.addDisplayBehavior(new DynamicEnableWithEnumColorDispayBehaviorClass(dp + &quot;.bPBEN_Home&quot;, dp + &quot;.iStatus&quot;, REVERSEHOME_COMMAND_BUTTON_COLORS));
+      Button.addDisplayBehavior(new StaticTextDisplayBehaviorClass(&quot;Home&quot;));
+      break;
+    case ButtonType::WorkCommand:
+      Button.addActionBehavior(new SetDpeValueActionBehaviorClass(dp + &quot;.bPB_Work&quot;));
+      Button.addDisplayBehavior(new DynamicEnableWithEnumColorDispayBehaviorClass(dp + &quot;.bPBEN_Work&quot;, dp + &quot;.iStatus&quot;, FORWARDWORK_COMMAND_BUTTON_COLORS));
+      Button.addDisplayBehavior(new StaticTextDisplayBehaviorClass(&quot;Work&quot;));
+      break;
+    case ButtonType::ForwardCommand:
+      Button.addActionBehavior(new SetDpeValueActionBehaviorClass(dp + &quot;.bPB_Forward&quot;));
+      Button.addDisplayBehavior(new DynamicEnableWithEnumColorDispayBehaviorClass(dp + &quot;.bPBEN_Forward&quot;, dp + &quot;.iStatus&quot;, FORWARDWORK_COMMAND_BUTTON_COLORS));
+      Button.addDisplayBehavior(new StaticTextDisplayBehaviorClass(&quot;Forward&quot;));
+      break;
+    case ButtonType::ReverseCommand:
+      Button.addActionBehavior(new SetDpeValueActionBehaviorClass(dp + &quot;.bPB_Reverse&quot;));
+      Button.addDisplayBehavior(new DynamicEnableWithEnumColorDispayBehaviorClass(dp + &quot;.bPBEN_Reverse&quot;, dp + &quot;.iStatus&quot;, REVERSEHOME_COMMAND_BUTTON_COLORS));
+      Button.addDisplayBehavior(new StaticTextDisplayBehaviorClass(&quot;Reverse&quot;));
+      break;
+    case ButtonType::StopCommand:
+      Button.addActionBehavior(new SetDpeValueActionBehaviorClass(dp + &quot;.bPB_Stop&quot;));
+      Button.addDisplayBehavior(new DynamicEnableWithEnumColorDispayBehaviorClass(dp + &quot;.bPBEN_Stop&quot;, dp + &quot;.iStatus&quot;, STOP_COMMAND_BUTTON_COLORS));
+      Button.addDisplayBehavior(new StaticTextDisplayBehaviorClass(&quot;Stop&quot;));
+      break;
+    case ButtonType::ResetError:
+      Button.addActionBehavior(new SetDpeValueActionBehaviorClass(dp + &quot;.bPB_ResetError&quot;));
+      Button.addDisplayBehavior(new DynamicEnableWithColorDispayBehaviorClass(dp + &quot;.bPBEN_ResetError&quot; ,dp + &quot;.bError&quot;, BUTTON_ACTIVE_NEEDS_ATTENTION_COLOR, BUTTON_NEUTRAL_COLOR));
+      Button.addDisplayBehavior(new StaticTextDisplayBehaviorClass(&quot;Reset Error&quot;));
+      break;
+    case ButtonType::ManualMode:
+      Button.addActionBehavior(new SetDpeValueActionBehaviorClass(dp + &quot;.iMode&quot;, (int)ModeType::Manual));
+      Button.addDisplayBehavior(new DynamicColorDisplayBehaviorClass(dp + &quot;.iMode&quot;, BUTTON_ACTIVE_COLOR, BUTTON_NEUTRAL_COLOR, ColoringType::Back, (int)ModeType::Manual));
+      Button.addDisplayBehavior(new StaticTextDisplayBehaviorClass(&quot;Manual&quot;));
+      break;
+    case ButtonType::AutoMode:
+      Button.addActionBehavior(new SetDpeValueActionBehaviorClass(dp + &quot;.iMode&quot;, (int)ModeType::Auto));
+      Button.addDisplayBehavior(new DynamicColorDisplayBehaviorClass(dp + &quot;.iMode&quot;, BUTTON_ACTIVE_COLOR, BUTTON_NEUTRAL_COLOR, ColoringType::Back, (int)ModeType::Auto));
+      Button.addDisplayBehavior(new StaticTextDisplayBehaviorClass(&quot;Auto&quot;));
+      break;
+    case ButtonType::StopMode:
+      Button.addActionBehavior(new SetDpeValueActionBehaviorClass(dp + &quot;.iMode&quot;, (int)ModeType::Stopped));
+      Button.addDisplayBehavior(new DynamicColorDisplayBehaviorClass(dp + &quot;.iMode&quot;, BUTTON_ACTIVE_COLOR, BUTTON_NEUTRAL_COLOR, ColoringType::Back, (int)ModeType::Stopped));
+      Button.addDisplayBehavior(new StaticTextDisplayBehaviorClass(&quot;Stop&quot;));
+      break;
+    case ButtonType::IndependentMode:
+      Button.addActionBehavior(new SetDpeValueActionBehaviorClass(dp + &quot;.iMode&quot;, (int)ModeType::Independent));
+      Button.addDisplayBehavior(new DynamicColorDisplayBehaviorClass(dp + &quot;.iMode&quot;, BUTTON_ACTIVE_COLOR, BUTTON_NEUTRAL_COLOR, ColoringType::Back, (int)ModeType::Independent));
+      Button.addDisplayBehavior(new StaticTextDisplayBehaviorClass(&quot;Independent&quot;));
+      break;
+    case ButtonType::ExitPanel:
+      Button.addActionBehavior(new ExitPanelActionBehaviorClass());
+      Button.addDisplayBehavior(new StaticTextDisplayBehaviorClass(&quot;Exit&quot;));
+      Button.addDisplayBehavior(new StaticColorDisplayBehaviorClass(BUTTON_NEUTRAL_COLOR));
+      break;
+    case ButtonType::Help:
+      Button.addActionBehavior(new OpenHelpActionBehaviorClass());
+      Button.addDisplayBehavior(new StaticTextDisplayBehaviorClass(&quot;Help&quot;));
+      Button.addDisplayBehavior(new StaticColorDisplayBehaviorClass(BUTTON_NEUTRAL_COLOR));
+      break;
+    case ButtonType::On:
+      Button.addActionBehavior(new SetDpeValueActionBehaviorClass(dp + &quot;.bPB_On&quot;));
+      Button.addDisplayBehavior(new DynamicEnableWithColorDispayBehaviorClass(dp + &quot;.bPBEN_On&quot;, dp + &quot;.bOn&quot;, BUTTON_ACTIVE_COLOR, BUTTON_NEUTRAL_COLOR));
+      Button.addDisplayBehavior(new StaticTextDisplayBehaviorClass(&quot;On&quot;));
+      break;
+    case ButtonType::Off:
+      Button.addActionBehavior(new SetDpeValueActionBehaviorClass(dp + &quot;.bPB_Off&quot;));
+      Button.addDisplayBehavior(new DynamicEnableWithColorDispayBehaviorClass(dp + &quot;.bPBEN_Off&quot;, dp + &quot;.bOn&quot;, BUTTON_NEUTRAL_COLOR, BUTTON_ACTIVE_COLOR));
+      Button.addDisplayBehavior(new StaticTextDisplayBehaviorClass(&quot;Off&quot;));
+      break;
+    case ButtonType::Simulate:
+      Button.addActionBehavior(new SetDpeValueActionBehaviorClass(dp + &quot;.bPB_Simulate&quot;));
+      Button.addDisplayBehavior(new DynamicEnableWithColorDispayBehaviorClass(dp + &quot;.bPBEN_Simulate&quot;, dp + &quot;.bSimulationActive&quot;, BUTTON_ACTIVE_COLOR, BUTTON_NEUTRAL_COLOR));
+      Button.addDisplayBehavior(new StaticTextDisplayBehaviorClass(&quot;Simulate&quot;));
+
+  }
+}
+
+
+
+public void click()
+{
+  Button.invokeAction();
+}
+
+
+
+// Panel Properties
+#property ButtonType buttonType
+public void setButtonType(ButtonType editedButtonType)
+{
+  buttonType = editedButtonType;
+}
+public ButtonType getButtonType()
+{
+  return buttonType;
+}
+
+
+// Custom Button - use these methods to pass custom display and action behaviors to the component from a calling panel
+public void addDisplayBehavior(shared_ptr&lt;IDisplayBehaviorClass&gt; displayBehavior)
+{
+  if (buttonType == ButtonType::Custom)
+  {
+    Button.addDisplayBehavior(displayBehavior);
+  }
+}
+
+public void addActionBehavior(shared_ptr&lt;IActionBehaviorClass&gt; actionBehavior)
+{
+  if (buttonType == ButtonType::Custom)
+  {
+    Button.addActionBehavior(actionBehavior);
+  }
+}]]></script>
+  <script name="Initialize" isEscaped="1"><![CDATA[main()
+{
+  init();
+}]]></script>
+ </events>
+ <shapes>
+  <shape layerId="0" Name="button" shapeType="PUSH_BUTTON">
+   <properties>
+    <prop name="serialId">3</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">0 0</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">OL_UI_Light_Text</prop>
+    <prop name="BackColor">OL_UI_ButtonNeutral</prop>
+    <prop name="TabOrder">1</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="Font">
+     <prop name="en_US.utf8">Segoe UI Semibold,-1,11,5,63,0,0,0,0,0,Regular</prop>
+    </prop>
+    <prop name="Location">0.01249999999999885 -0.2500000000000568</prop>
+    <prop name="Size">75 28</prop>
+    <prop name="BorderStyle">None</prop>
+    <prop name="Text">
+     <prop name="en_US.utf8">Button</prop>
+    </prop>
+   </properties>
+   <events>
+    <script name="Clicked" isEscaped="1"><![CDATA[main(mapping event)
+{
+  click();
+}
+]]></script>
+   </events>
+  </shape>
+ </shapes>
+</panel>

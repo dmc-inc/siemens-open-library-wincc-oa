@@ -1,0 +1,34 @@
+﻿TYPE "udtError_VFD"
+VERSION : 0.1
+   STRUCT
+      MotorProtectorTripped { ExternalWritable := 'False'} : Bool;   // Motor protector tripped
+      LocalDisconnectOff { ExternalWritable := 'False'} : Bool;   // Motor disconnect off
+      ClutchTripped { ExternalWritable := 'False'} : Bool;   // Clutch tripped
+      NoContactorFeedback { ExternalWritable := 'False'} : Bool;   // No feedback from motor contactor
+      ContactorStillOn { ExternalWritable := 'False'} : Bool;   // Contactor still on
+      NoSignalForward { ExternalWritable := 'False'} : Bool;   // No signal forward from VFD
+      NoSignalReverse { ExternalWritable := 'False'} : Bool;   // No signal reverse from VFD
+      MotorNotStopped { ExternalWritable := 'False'} : Bool;   // Motor doesn't stop
+      MaxFrequencyReached { ExternalWritable := 'False'} : Bool;   // Max frequency reached
+      Overcurrent { ExternalWritable := 'False'} : Bool;   // VFD overcurrent
+      MotorOverload { ExternalWritable := 'False'} : Bool;   // Motor overload
+      VFDOverload { ExternalWritable := 'False'} : Bool;   // VFD overload
+      GeneralFault { ExternalWritable := 'False'} : Bool;   // VFD fault
+      NoCoolingFanFeedback { ExternalWritable := 'False'} : Bool;   // No feedback from cooling fan
+   END_STRUCT;
+
+END_TYPE
+
+DATA_BLOCK "dbErrors_AirSystem"
+{ S7_Optimized_Access := 'FALSE' }
+VERSION : 0.1
+NON_RETAIN
+   VAR 
+      VFD_RecirculationFan : "udtError_VFD";   // Recirculation Fan
+   END_VAR
+
+
+BEGIN
+
+END_DATA_BLOCK
+

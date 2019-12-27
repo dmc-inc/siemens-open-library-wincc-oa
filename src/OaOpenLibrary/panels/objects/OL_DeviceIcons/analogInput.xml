@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<panel version="14">
+ <properties>
+  <prop name="Name">
+   <prop name="en_US.utf8"></prop>
+  </prop>
+  <prop name="Size">170 49</prop>
+  <prop name="BackColor">_3DFace</prop>
+  <prop name="RefPoint">6.113967193502072 1.00625684494494</prop>
+  <prop name="InitAndTermRef">True</prop>
+  <prop name="SendClick">False</prop>
+  <prop name="RefFileName"></prop>
+  <prop name="DPI">96</prop>
+  <prop name="layoutType">None</prop>
+ </properties>
+ <events>
+  <script name="ScopeLib" isEscaped="1"><![CDATA[/////////////////////////////////////////////////////////////////////////////
+//
+//  WinCC OA Open Library
+//
+//  Author:     DMC, Inc. http://www.dmcinfo.com
+//
+//  File:       fpAnalogInput.xml
+//
+//  Revisions:  01/20/17 - Leigh Mathews (leigh.mathews@dmcinfo.com) :
+//                         Created
+//              10/13/18 - Oliver Reed (oliver.reed@dmcinfo.com) :
+//                         Changed from pnl to xml
+//              01/22/19 - Nick Leisle (nicholas.leisle@dmcinfo.com):
+//                         Implemented OL Component class into popup
+//
+//  Description: Analog Input Icon faceplate
+//
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#uses &quot;OpenLibrary/Classes/Implementations/DisplayBehaviors/Common/DynamicText&quot;
+#uses &quot;OpenLibrary/Classes/Implementations/DisplayBehaviors/Common/DynamicVisibility&quot;
+#uses &quot;OpenLibrary/Classes/Implementations/ActionBehaviors/OpenPopup&quot;
+#uses &quot;OpenLibrary/Classes/Components/Component&quot;
+#uses &quot;OpenLibrary/Enums/ModeType&quot;
+#uses &quot;OpenLibrary/Enums/VisibilityType&quot;
+#uses &quot;OpenLibrary/ErrorHandling&quot;
+
+
+private string dp = $dpe;
+private ComponentClass Overlay = ComponentClass(getShape(&quot;overlay&quot;));
+private ComponentClass ManualIndicator = ComponentClass(getShape(&quot;manualIndicator&quot;));
+private ComponentClass Textbox = ComponentClass(getShape(&quot;textBox&quot;));
+
+
+
+public void initializePanel()
+{
+  Overlay.addActionBehavior(new OpenPopupActionBehaviorClass(makeDynString(&quot;$dpe:&quot; + dp), &quot;objects/OL_DevicePopups/analogInput.xml&quot;));
+  ManualIndicator.addDisplayBehavior(new DynamicVisibilityDisplayBehaviorClass(dp + &quot;.iMode&quot;, (int)ModeType::Manual));
+  Textbox.addDisplayBehavior(new DynamicTextDisplayBehaviorClass(dp + &quot;.rActiveValue&quot;));
+}
+
+
+public void displayDevicePopup()
+{
+  Overlay.invokeAction();
+}]]></script>
+  <script name="Initialize" isEscaped="1"><![CDATA[main()
+{
+  initializePanel();
+}]]></script>
+ </events>
+ <shapes>
+  <shape layerId="0" Name="textBox" shapeType="PRIMITIVE_TEXT">
+   <properties>
+    <prop name="serialId">1</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">77.3426367245337 17.71450612460868</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">OL_UI_Dark_Text</prop>
+    <prop name="BackColor">_Window</prop>
+    <prop name="TabOrder">0</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,2]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[solid]</prop>
+    <prop name="Location">15.20750158939857 8.082749367851907</prop>
+    <prop name="Size">126 21</prop>
+    <prop name="Font">
+     <prop name="en_US.utf8">Segoe UI Semibold,-1,13,5,63,0,0,0,0,0,Regular</prop>
+    </prop>
+    <prop name="Text">
+     <prop name="en_US.utf8">&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;
+</prop>
+    </prop>
+    <prop name="Distance">2</prop>
+    <prop name="BorderOffset">2</prop>
+    <prop name="Bordered">True</prop>
+    <prop name="Fit">False</prop>
+    <prop name="Transformable">False</prop>
+    <prop name="TextFormat">[0s,,,AlignRight]</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="manualIndicator" shapeType="RECTANGLE">
+   <properties>
+    <prop name="serialId">6</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">107.7344278923533 68.93155827847164</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">OL_Device_Manual_Control</prop>
+    <prop name="BackColor">OL_Device_Manual_Control</prop>
+    <prop name="TabOrder">3</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,5]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[outline]</prop>
+    <prop name="Geometry">0.6619047619047619 0 0 0.2133333333333334 8.27506915696614 1.898627746230289</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop name="Location">0 0</prop>
+    <prop name="Size">211 151</prop>
+    <prop name="CornerRadius">0</prop>
+    <prop name="Transformable">True</prop>
+   </properties>
+  </shape>
+  <shape layerId="7" Name="overlay" shapeType="RECTANGLE">
+   <properties>
+    <prop name="serialId">3</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">199.205343018034 185.2890406037296</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">{0,0,0}</prop>
+    <prop name="BackColor">_Transparent</prop>
+    <prop name="TabOrder">2</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[none,oneColor,JoinBevel,CapProjecting,1]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[solid]</prop>
+    <prop name="Geometry">0.3866913396380468 0 0 0.1333333333333333 0.4368012293567745 -7.434705587103036</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop name="Location">20 70</prop>
+    <prop name="Size">361 241</prop>
+    <prop name="CornerRadius">0</prop>
+    <prop name="Transformable">True</prop>
+   </properties>
+   <events>
+    <script name="Clicked" isEscaped="1"><![CDATA[main()
+{
+  displayDevicePopup();
+}
+]]></script>
+   </events>
+  </shape>
+ </shapes>
+</panel>

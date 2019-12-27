@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<panel version="14">
+ <properties>
+  <prop name="Name">
+   <prop name="en_US.utf8"></prop>
+  </prop>
+  <prop name="Size">343 74</prop>
+  <prop name="BackColor">_3DFace</prop>
+  <prop name="RefPoint">1 0</prop>
+  <prop name="InitAndTermRef">True</prop>
+  <prop name="SendClick">False</prop>
+  <prop name="RefFileName"></prop>
+  <prop name="DPI">96</prop>
+  <prop name="layoutType">None</prop>
+ </properties>
+ <events>
+  <script name="ScopeLib" isEscaped="1"><![CDATA[/*
+  * WinCC OA Open Library
+  * @author DMC, Inc. http://www.dmcinfo.com
+  *
+  * File: banner.xml
+  *
+  * Revisions: 2019-20-03 - Eric Baggen (eric.baggen@dmcinfo.com): Created
+  *
+  * @description
+  * The banner is a generic component that combines enumerations of colors (font and back) and text to indicate information like status, errors, etc.
+*/
+
+#uses &quot;OpenLibrary/Classes/Components/Component&quot;
+#uses &quot;OpenLibrary/Classes/Implementations/DisplayBehaviors/Common/Enumeration&quot;
+#uses &quot;OpenLibrary/Classes/Implementations/DisplayBehaviors/Common/DynamicColor&quot;
+#uses &quot;OpenLibrary/Classes/Implementations/DisplayBehaviors/Common/StaticColor&quot;
+#uses &quot;OpenLibrary/Constants/Colors&quot;
+#uses &quot;OpenLibrary/Enums/ColoringType&quot;
+#uses &quot;OpenLibrary/Enums/TextAlignmentType&quot;
+
+private string dp = $dpe;
+private ComponentClass Banner = ComponentClass(getShape(&quot;banner&quot;));
+
+
+// This function should be called by device popups in order to add enumerated texts.
+public void setParameters(dyn_string texts, dyn_string backgroundColors, dyn_string fontColors, int offset = 0)
+{
+  // Ensure that all three lists are of equal lengths
+  int textCount = dynlen(texts);
+  if ((textCount != dynlen(backgroundColors)) || (textCount != dynlen(fontColors)))
+  {
+    // TODO: Throw error
+    Banner.addDisplayBehavior(new StaticColorDisplayBehaviorClass(UNDEFINED_VALUE_COLOR));
+    return;
+  }
+
+  Banner.addDisplayBehavior(new EnumerationDisplayBehaviorClass(dp, texts, &quot;text&quot;, offset));
+  Banner.addDisplayBehavior(new EnumerationDisplayBehaviorClass(dp, fontColors, &quot;foreCol&quot;, offset));
+  Banner.addDisplayBehavior(new EnumerationDisplayBehaviorClass(dp, backgroundColors, &quot;backCol&quot;, offset));
+}
+
+
+// Additional Banner Properties - use these methods to pass custom display and action behaviors to the component from a calling panel
+public void addDisplayBehavior(shared_ptr&lt;IDisplayBehaviorClass&gt; displayBehavior)
+{
+  Banner.addDisplayBehavior(displayBehavior);
+}
+
+public void addActionBehavior(shared_ptr&lt;IActionBehaviorClass&gt; actionBehavior)
+{
+  Banner.addActionBehavior(actionBehavior);
+}
+
+
+
+
+
+
+
+
+// Panel Properties (Text Alignment)
+TextAlignmentType textAlignment = TextAlignmentType::Center;
+#property TextAlignmentType textAlignment
+public void setTextAlignment(TextAlignmentType editedTextAlignment)
+{
+  textAlignment = editedTextAlignment;
+
+  switch(textAlignment)
+  {
+    case TextAlignmentType::Left:
+      banner.format(&quot;[,,,ALIGNMENT_BEGINNING]&quot;);
+      break;
+    case TextAlignmentType::Center:
+      banner.format(&quot;[,,,ALIGNMENT_CENTER]&quot;);
+      break;
+    case TextAlignmentType::Right:
+      banner.format(&quot;[,,,ALIGNMENT_END]&quot;);
+      break;
+  }
+  banner.text = &quot;Banner&quot;;
+}
+public TextAlignmentType getTextAlignment()
+{
+  return textAlignment;
+}]]></script>
+ </events>
+ <shapes>
+  <shape layerId="0" Name="banner" shapeType="TEXT_FIELD">
+   <properties>
+    <prop name="serialId">1</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">0 0</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">OL_UI_Dark_Text</prop>
+    <prop name="BackColor">OL_Orange</prop>
+    <prop name="TabOrder">0</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="Font">
+     <prop name="en_US.utf8">Segoe UI Semibold,-1,11,5,63,0,0,0,0,0,Regular</prop>
+    </prop>
+    <prop name="Location">0 0</prop>
+    <prop name="Size">200 20</prop>
+    <prop name="BorderStyle">None</prop>
+    <prop name="Editable">False</prop>
+    <prop name="TextFormat">[0s,,,AlignHCenter]</prop>
+   </properties>
+  </shape>
+ </shapes>
+</panel>

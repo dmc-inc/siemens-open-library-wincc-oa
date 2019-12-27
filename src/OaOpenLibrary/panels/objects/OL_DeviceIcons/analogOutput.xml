@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<panel version="14">
+ <properties>
+  <prop name="Name">
+   <prop name="en_US.utf8"></prop>
+  </prop>
+  <prop name="Size">183 84</prop>
+  <prop name="BackColor">_3DFace</prop>
+  <prop name="RefPoint">12.00000000000001 12</prop>
+  <prop name="InitAndTermRef">True</prop>
+  <prop name="SendClick">False</prop>
+  <prop name="RefFileName"></prop>
+  <prop name="DPI">96</prop>
+  <prop name="layoutType">None</prop>
+ </properties>
+ <events>
+  <script name="ScopeLib" isEscaped="1"><![CDATA[/////////////////////////////////////////////////////////////////////////////
+//
+//  WinCC OA Open Library
+//
+//  Author:     DMC, Inc. http://www.dmcinfo.com
+//
+//  File:       fpAnalogOutput.xml
+//
+//  Revisions:  01/20/17 - Leigh Mathews (leigh.mathews@dmcinfo.com) :
+//                         Created
+//              10/13/18 - Oliver Reed (oliver.reed@dmcinfo.com) :
+//                         Changed from pnl to xml
+//              01/22/19 - Nick Leisle (nicholas.leisle@dmcinfo.com):
+//                         Implemented OL Component class into popup
+//
+//  Description: Analog Output Icon faceplate
+//
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#uses &quot;OpenLibrary/Classes/Implementations/DisplayBehaviors/Common/DynamicText&quot;
+#uses &quot;OpenLibrary/Classes/Implementations/DisplayBehaviors/Common/DynamicVisibility&quot;
+#uses &quot;OpenLibrary/Classes/Implementations/ActionBehaviors/OpenPopup&quot;
+#uses &quot;OpenLibrary/Classes/Components/Component&quot;
+#uses &quot;OpenLibrary/Enums/VisibilityType&quot;
+#uses &quot;OpenLibrary/Enums/ModeType&quot;
+
+
+private string dp = $dpe;
+private string interlockDp = $_interlockDpe;
+
+private ComponentClass Overlay = ComponentClass(getShape(&quot;overlay&quot;));
+private ComponentClass ManualIndicator = ComponentClass(getShape(&quot;manualIndicator&quot;));
+private ComponentClass TextBox = ComponentClass(getShape(&quot;textBox&quot;));
+
+
+
+public void initializePanel()
+{
+  Overlay.addActionBehavior(new OpenPopupActionBehaviorClass(makeDynString(&quot;$dpe:&quot; + dp, &quot;$_interlockDpe:&quot; + interlockDp), &quot;objects/OL_DevicePopups/AnalogOutput.xml&quot;));
+  ManualIndicator.addDisplayBehavior(new DynamicVisibilityDisplayBehaviorClass(dp + &quot;.iMode&quot;, (int)ModeType::Manual));
+  TextBox.addDisplayBehavior(new DynamicTextDisplayBehaviorClass(dp + &quot;.rValue&quot;));
+}
+
+
+public void displayDevicePopup()
+{
+  Overlay.invokeAction();
+}]]></script>
+  <script name="Initialize" isEscaped="1"><![CDATA[main()
+{
+  initializePanel();
+}]]></script>
+ </events>
+ <shapes>
+  <shape layerId="0" Name="manualIndicator" shapeType="RECTANGLE">
+   <properties>
+    <prop name="serialId">13</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">107.7344278923533 68.93155827847164</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">OL_Device_Manual_Control</prop>
+    <prop name="BackColor">OL_Device_Manual_Control</prop>
+    <prop name="TabOrder">4</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,5]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[outline]</prop>
+    <prop name="Geometry">0.6666666666666666 0 0 0.2400000000000001 12.99999999999996 14</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop name="Location">0 0</prop>
+    <prop name="Size">211 151</prop>
+    <prop name="CornerRadius">0</prop>
+    <prop name="Transformable">True</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="textBox" shapeType="PRIMITIVE_TEXT">
+   <properties>
+    <prop name="serialId">2</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">83.00000000000003 32.00000000000001</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">OL_UI_Dark_Text</prop>
+    <prop name="BackColor">OL_UI_Disabled</prop>
+    <prop name="TabOrder">2</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,1]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[solid]</prop>
+    <prop name="Location">20.5000000000001 22.00000000000004</prop>
+    <prop name="Size">125 21</prop>
+    <prop name="Font">
+     <prop name="en_US.utf8">MS Shell Dlg 2,-1,13,5,50,0,0,0,0,0,Regular</prop>
+    </prop>
+    <prop name="Text">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="Distance">2</prop>
+    <prop name="BorderOffset">2</prop>
+    <prop name="Bordered">False</prop>
+    <prop name="Fit">False</prop>
+    <prop name="Transformable">True</prop>
+    <prop name="TextFormat">[0s,,,AlignRight]</prop>
+   </properties>
+  </shape>
+  <reference referenceId="1" Name="PANEL_REF1" parentSerial="-1">
+   <properties>
+    <prop name="FileName">objects/OL_Components/interlockIcon.xml</prop>
+    <prop name="Location">147.1562500000001 41.59375000000006</prop>
+    <prop name="Geometry">0.3793103448275862 0 0 0.3689320388349515 26.57957769532957 17.04413062665506</prop>
+    <prop name="TabOrder">5</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dpe</prop>
+      <prop name="Value">$dpe</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+   </properties>
+  </reference>
+  <shape layerId="7" Name="overlay" shapeType="RECTANGLE">
+   <properties>
+    <prop name="serialId">7</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">200.0000000000001 190</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">{0,0,0}</prop>
+    <prop name="BackColor">_Transparent</prop>
+    <prop name="TabOrder">3</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[none,oneColor,JoinBevel,CapProjecting,1]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[solid]</prop>
+    <prop name="Geometry">0.3888888888888888 0 0 0.15 5.2222222222222 3.5</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop name="Location">20 70</prop>
+    <prop name="Size">361 241</prop>
+    <prop name="CornerRadius">0</prop>
+    <prop name="Transformable">True</prop>
+   </properties>
+   <events>
+    <script name="Clicked" isEscaped="1"><![CDATA[main()
+{
+  displayDevicePopup();
+}
+]]></script>
+   </events>
+  </shape>
+ </shapes>
+</panel>

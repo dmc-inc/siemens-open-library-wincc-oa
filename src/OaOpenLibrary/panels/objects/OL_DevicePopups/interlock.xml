@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<panel version="14">
+ <properties>
+  <prop name="Name">
+   <prop name="en_US.utf8"></prop>
+  </prop>
+  <prop name="Size">386 348</prop>
+  <prop name="BackColor">_3DFace</prop>
+  <prop name="RefPoint">0 0</prop>
+  <prop name="InitAndTermRef">True</prop>
+  <prop name="SendClick">False</prop>
+  <prop name="RefFileName"></prop>
+  <prop name="DPI">96</prop>
+  <prop name="layoutType">None</prop>
+ </properties>
+ <events>
+  <script name="ScopeLib" isEscaped="1"><![CDATA[/////////////////////////////////////////////////////////////////////////////
+//
+//  WinCC OA Open Library
+//
+//  Author:     DMC, Inc. http://www.dmcinfo.com
+//
+//  File:       fpInterlock_Popup.xml
+//
+//  Revisions:  00/00/00 - NAME HERE (NAME.HERE@dmcinfo.com) :
+//                         Created
+//              10/13/18 - Oliver Reed (oliver.reed@dmcinfo.com) :
+//                         Change from pnl to xml
+//              01/03/2019 - Nick Leisle:
+//                           Moved function definitions to ScopeLib to comply with standards.
+//                           Added and configured InterlockObject panels.
+//
+//  Description: Analog Input popup faceplate
+//
+/////////////////////////////////////////////////////////////////////////////
+
+#uses &quot;OpenLibrary/Macros&quot;
+
+void initializePanel()
+{
+  resizePanelToShape(getShape(&quot;border&quot;));
+  titleBar(false);
+}]]></script>
+  <script name="Initialize" isEscaped="1"><![CDATA[main()
+{
+  initializePanel();
+}]]></script>
+ </events>
+ <shapes>
+  <shape layerId="0" Name="border" shapeType="RECTANGLE">
+   <properties>
+    <prop name="serialId">37</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">0 0</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">{0,0,0}</prop>
+    <prop name="BackColor">OL_UI_Menu_Bar</prop>
+    <prop name="TabOrder">38</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[none,oneColor,JoinBevel,CapProjecting,1]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[solid]</prop>
+    <prop name="Geometry">1.582222222222222 0 0 1.271317829457364 0 0</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop name="Location">0 0</prop>
+    <prop name="Size">226 259</prop>
+    <prop name="CornerRadius">0</prop>
+    <prop name="Transformable">True</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="background" shapeType="RECTANGLE">
+   <properties>
+    <prop name="serialId">1</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">60 50</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">OL_UI_Menu_Bar</prop>
+    <prop name="BackColor">OL_UI_Popup_Background_Color</prop>
+    <prop name="TabOrder">0</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[none,oneColor,JoinBevel,CapProjecting,3]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[solid]</prop>
+    <prop name="Geometry">1.521853546910755 0 0 0.6075471698113207 -88.32437070938221 -26.87735849056611</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop name="Location">60 50</prop>
+    <prop name="Size">231 531</prop>
+    <prop name="CornerRadius">0</prop>
+    <prop name="Transformable">True</prop>
+   </properties>
+  </shape>
+  <reference referenceId="19" Name="interlock1" parentSerial="37">
+   <properties>
+    <prop name="FileName">objects/OL_Components/interlockPopupComponent.xml</prop>
+    <prop name="Location">60.53401191658378 373</prop>
+    <prop name="Geometry">1 0 0 1 -48.52085402184696 -329.5701754385966</prop>
+    <prop name="TabOrder">21</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dp</prop>
+      <prop name="Value">$dp</prop>
+     </prop>
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dpnum</prop>
+      <prop name="Value">1</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+   </properties>
+  </reference>
+  <reference referenceId="20" Name="interlock2" parentSerial="37">
+   <properties>
+    <prop name="FileName">objects/OL_Components/interlockPopupComponent.xml</prop>
+    <prop name="Location">20.34769440631692 82.34962406015045</prop>
+    <prop name="Geometry">1 0 0 1 -8.334536511580097 -8.293233082706948</prop>
+    <prop name="TabOrder">22</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dp</prop>
+      <prop name="Value">$dp</prop>
+     </prop>
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dpnum</prop>
+      <prop name="Value">2</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+   </properties>
+  </reference>
+  <reference referenceId="21" Name="interlock3" parentSerial="37">
+   <properties>
+    <prop name="FileName">objects/OL_Components/interlockPopupComponent.xml</prop>
+    <prop name="Location">19.89524547741033 122.4266917293233</prop>
+    <prop name="Geometry">1 0 0 1 -7.882087582673535 -17.74373433583972</prop>
+    <prop name="TabOrder">23</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dp</prop>
+      <prop name="Value">$dp</prop>
+     </prop>
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dpnum</prop>
+      <prop name="Value">3</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+   </properties>
+  </reference>
+  <reference referenceId="22" Name="interlock4" parentSerial="37">
+   <properties>
+    <prop name="FileName">objects/OL_Components/interlockPopupComponent.xml</prop>
+    <prop name="Location">20.05900206058485 172.062656641604</prop>
+    <prop name="Geometry">1 0 0 1 -8.045844165848052 -36.75313283208027</prop>
+    <prop name="TabOrder">24</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dp</prop>
+      <prop name="Value">$dp</prop>
+     </prop>
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dpnum</prop>
+      <prop name="Value">4</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+   </properties>
+  </reference>
+  <reference referenceId="23" Name="interlock5" parentSerial="37">
+   <properties>
+    <prop name="FileName">objects/OL_Components/interlockPopupComponent.xml</prop>
+    <prop name="Location">20.23600824233938 207.8972431077696</prop>
+    <prop name="Geometry">1 0 0 1 -8.222850347602559 -41.96115288220571</prop>
+    <prop name="TabOrder">25</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dp</prop>
+      <prop name="Value">$dp</prop>
+     </prop>
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dpnum</prop>
+      <prop name="Value">5</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+   </properties>
+  </reference>
+  <reference referenceId="24" Name="interlock6" parentSerial="37">
+   <properties>
+    <prop name="FileName">objects/OL_Components/interlockPopupComponent.xml</prop>
+    <prop name="Location">8.12631810602528 253.3157894736843</prop>
+    <prop name="Geometry">1 0 0 1 3.886839788711541 -56.75313283208038</prop>
+    <prop name="TabOrder">26</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dp</prop>
+      <prop name="Value">$dp</prop>
+     </prop>
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dpnum</prop>
+      <prop name="Value">6</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+   </properties>
+  </reference>
+  <reference referenceId="25" Name="interlock7" parentSerial="37">
+   <properties>
+    <prop name="FileName">objects/OL_Components/interlockPopupComponent.xml</prop>
+    <prop name="Location">20.08684442181431 304.5344328703691</prop>
+    <prop name="Geometry">1 0 0 1 -8.073686527077484 -77.34520981272505</prop>
+    <prop name="TabOrder">27</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dp</prop>
+      <prop name="Value">$dp</prop>
+     </prop>
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dpnum</prop>
+      <prop name="Value">7</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+   </properties>
+  </reference>
+  <reference referenceId="26" Name="interlock8" parentSerial="37">
+   <properties>
+    <prop name="FileName">objects/OL_Components/interlockPopupComponent.xml</prop>
+    <prop name="Location">23.68118404445582 351</prop>
+    <prop name="Geometry">1 0 0 1 -11.66802614971897 -93.18421052631578</prop>
+    <prop name="TabOrder">28</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dp</prop>
+      <prop name="Value">$dp</prop>
+     </prop>
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dpnum</prop>
+      <prop name="Value">8</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+   </properties>
+  </reference>
+  <reference referenceId="27" Name="interlock9" parentSerial="37">
+   <properties>
+    <prop name="FileName">objects/OL_Components/interlockPopupComponent.xml</prop>
+    <prop name="Location">215.5618370606115 49.80152040256888</prop>
+    <prop name="Geometry">1 0 0 1 -38.70098475955791 -6.371695841165447</prop>
+    <prop name="TabOrder">29</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dp</prop>
+      <prop name="Value">$dp</prop>
+     </prop>
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dpnum</prop>
+      <prop name="Value">9</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+   </properties>
+  </reference>
+  <reference referenceId="28" Name="interlock10" parentSerial="37">
+   <properties>
+    <prop name="FileName">objects/OL_Components/interlockPopupComponent.xml</prop>
+    <prop name="Location">178.4420340289583 66.92982456140358</prop>
+    <prop name="Geometry">1 0 0 1 -1.581181727904777 7.126566416039978</prop>
+    <prop name="TabOrder">30</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dp</prop>
+      <prop name="Value">$dp</prop>
+     </prop>
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dpnum</prop>
+      <prop name="Value">10</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+   </properties>
+  </reference>
+  <reference referenceId="29" Name="interlock11" parentSerial="37">
+   <properties>
+    <prop name="FileName">objects/OL_Components/interlockPopupComponent.xml</prop>
+    <prop name="Location">188.5941480413361 92.71553884711777</prop>
+    <prop name="Geometry">1 0 0 1 -11.73329574028253 11.96741854636586</prop>
+    <prop name="TabOrder">31</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dp</prop>
+      <prop name="Value">$dp</prop>
+     </prop>
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dpnum</prop>
+      <prop name="Value">11</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+   </properties>
+  </reference>
+  <reference referenceId="30" Name="interlock12" parentSerial="37">
+   <properties>
+    <prop name="FileName">objects/OL_Components/interlockPopupComponent.xml</prop>
+    <prop name="Location">195.0471219159944 123.5012531328322</prop>
+    <prop name="Geometry">1 0 0 1 -18.18626961494084 11.80827067669151</prop>
+    <prop name="TabOrder">32</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dp</prop>
+      <prop name="Value">$dp</prop>
+     </prop>
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dpnum</prop>
+      <prop name="Value">12</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+   </properties>
+  </reference>
+  <reference referenceId="31" Name="interlock13" parentSerial="37">
+   <properties>
+    <prop name="FileName">objects/OL_Components/interlockPopupComponent.xml</prop>
+    <prop name="Location">194.641461538636 161.5012531328323</prop>
+    <prop name="Geometry">1 0 0 1 -17.78060923758238 4.434837092731584</prop>
+    <prop name="TabOrder">33</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dp</prop>
+      <prop name="Value">$dp</prop>
+     </prop>
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dpnum</prop>
+      <prop name="Value">13</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+   </properties>
+  </reference>
+  <reference referenceId="32" Name="interlock14" parentSerial="37">
+   <properties>
+    <prop name="FileName">objects/OL_Components/interlockPopupComponent.xml</prop>
+    <prop name="Location">194.9895362882198 186.4047619047629</prop>
+    <prop name="Geometry">1 0 0 1 -18.12868398716626 10.15789473684111</prop>
+    <prop name="TabOrder">34</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dp</prop>
+      <prop name="Value">$dp</prop>
+     </prop>
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dpnum</prop>
+      <prop name="Value">14</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+   </properties>
+  </reference>
+  <reference referenceId="33" Name="interlock15" parentSerial="37">
+   <properties>
+    <prop name="FileName">objects/OL_Components/interlockPopupComponent.xml</prop>
+    <prop name="Location">194.6291443273208 211.0701754386065</prop>
+    <prop name="Geometry">1 0 0 1 -17.76829202626726 16.11904761903756</prop>
+    <prop name="TabOrder">35</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dp</prop>
+      <prop name="Value">$dp</prop>
+     </prop>
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dpnum</prop>
+      <prop name="Value">15</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+   </properties>
+  </reference>
+  <reference referenceId="34" Name="interlock16" parentSerial="37">
+   <properties>
+    <prop name="FileName">objects/OL_Components/interlockPopupComponent.xml</prop>
+    <prop name="Location">198.0028905747812 250.6140350877195</prop>
+    <prop name="Geometry">1 0 0 1 -21.14203827372762 7.201754385964705</prop>
+    <prop name="TabOrder">36</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dp</prop>
+      <prop name="Value">$dp</prop>
+     </prop>
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dpnum</prop>
+      <prop name="Value">16</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+   </properties>
+  </reference>
+  <reference referenceId="35" Name="exitButton" parentSerial="37">
+   <properties>
+    <prop name="FileName">objects/OL_Components/button.xml</prop>
+    <prop name="Location">169.9937500000001 500.5209899749374</prop>
+    <prop name="Geometry">4.45945945945946 0 0 0.8928571428571429 -746.06707859175 -153.2446182420337</prop>
+    <prop name="TabOrder">37</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dp</prop>
+      <prop name="Value">$dp</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <extended>
+     <prop name="buttonType" type="ENUM">11</prop>
+    </extended>
+   </properties>
+  </reference>
+  <reference referenceId="36" Name="header" parentSerial="37">
+   <properties>
+    <prop name="FileName">objects/OL_Components/headerBanner.xml</prop>
+    <prop name="Location">76.77154160947526 486.8833020050128</prop>
+    <prop name="Geometry">1.598173515981735 0 0 1 -119.6810866866164 -484.383302005013</prop>
+    <prop name="TabOrder">38</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dp</prop>
+      <prop name="Value">$dp</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+   </properties>
+  </reference>
+ </shapes>
+ <groups>
+  <group Name="SHAPE_GROUP1" parentSerial="-1" serial="37">
+   <properties>
+    <prop name="shapeSerial">1</prop>
+    <prop name="groupSerial">19</prop>
+    <prop name="groupSerial">20</prop>
+    <prop name="groupSerial">21</prop>
+    <prop name="groupSerial">22</prop>
+    <prop name="groupSerial">23</prop>
+    <prop name="groupSerial">24</prop>
+    <prop name="groupSerial">25</prop>
+    <prop name="groupSerial">26</prop>
+    <prop name="groupSerial">27</prop>
+    <prop name="groupSerial">28</prop>
+    <prop name="groupSerial">29</prop>
+    <prop name="groupSerial">30</prop>
+    <prop name="groupSerial">31</prop>
+    <prop name="groupSerial">32</prop>
+    <prop name="groupSerial">33</prop>
+    <prop name="groupSerial">34</prop>
+    <prop name="groupSerial">35</prop>
+    <prop name="groupSerial">36</prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+   </properties>
+  </group>
+ </groups>
+</panel>

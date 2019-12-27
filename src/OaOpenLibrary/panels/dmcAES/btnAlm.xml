@@ -1,0 +1,98 @@
+V 14
+3
+LANG:10001 8 (NoName)
+LANG:10000 8 (NoName)
+LANG:10027 18 (БезИмени)
+PANEL,-1 -1 368 214 N "_3DFace" 0
+E E E E E 1 -1 -1 0  10 10
+"objects_parampanels/STD_PANELS/PTSumAlert_para.pnl"0  1
+E "#uses \"Alarms/DMCAES.ctl\"" 0
+ 3
+"CBRef" "0"
+"EClose" E
+"dpi" "96"
+0 0 0
+""
+NC
+DISPLAY_LAYER, 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0
+LAYER, 0 
+1
+LANG:10001 6 Layer1
+13 0
+"cmdPanelAlarms"
+""
+1 10 10 E E E 1 E 1 E N "OL_UI_Light_Text" E N "OL_UI_ButtonNeutral" E E
+ E E
+1 0 0 0 0 0
+E E E
+1
+3
+LANG:10001 0 
+LANG:10000 0 
+LANG:10027 0 
+
+3
+"hoverfclr" "N \"OL_UI_Light_Text\""
+"hoverbclr" "N \"OL_UI_ButtonNeutral\""
+"layoutAlignment" "AlignCenter"
+3
+LANG:10001 46 Segoe UI Semibold,-1,13,5,63,0,0,0,0,0,Regular
+LANG:10000 26 Arial,-1,13,5,50,0,0,0,0,0
+LANG:10027 26 arial,-1,13,5,50,0,0,0,0,0
+0  8 8 205 91
+
+T 
+1
+LANG:10001 6 Alarms
+"//main()
+//{
+//  pt_click_PT_navi_as();
+//}
+
+main()
+{
+  int ret;
+  int iModuleNumber;
+  string moduleName;
+
+  moduleName = myModuleName();
+  pt_moduleNumber(moduleName, iModuleNumber);
+  moduleName = pt_buildModuleName(\"mainModule\", iModuleNumber);
+
+  ret = DMCopenAES(\"DMC_OL_alerts\", moduleName,  AES_ACTION_AUTORUN);
+}" 0
+ E E "main()
+{
+  pt_init_PT_navi_as();     
+}" 0
+
+0
+LAYER, 1 
+1
+LANG:10001 6 Layer2
+0
+LAYER, 2 
+1
+LANG:10001 6 Layer3
+0
+LAYER, 3 
+1
+LANG:10001 6 Layer4
+0
+LAYER, 4 
+1
+LANG:10001 6 Layer5
+0
+LAYER, 5 
+1
+LANG:10001 6 Layer6
+0
+LAYER, 6 
+1
+LANG:10001 6 Layer7
+0
+LAYER, 7 
+1
+LANG:10001 6 Layer8
+0
+0

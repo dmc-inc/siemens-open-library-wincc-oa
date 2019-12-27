@@ -1,0 +1,13 @@
+0 0 12
+"OL_UI_Border" "OL_Dark_Grey"
+"OL_UI_ButtonNeutral" "OL_Grey"
+"OL_UI_Dark_Text" "OL_Dark_Grey"
+"OL_UI_Disabled" "OL_Light_Grey"
+"OL_UI_Light_Text" "OL_White"
+"OL_UI_Menu_Bar" "OL_Off_Blue"
+"OL_UI_Popup_Background_Color" "OL_Soft_Grey"
+"OL_UI_Subgroup_Color" "OL_Light_Grey"
+"OL_UI_Undefined_Value" "OL_Magenta"
+"OL_UI_ButtonActivating" "OL_Soft_Grey"
+"OL_UI_ButtonActive" "OL_Green"
+"OL_UI_ButtonActiveNeedsAttention" "OL_Red"

@@ -1,0 +1,24 @@
+﻿TYPE "udtError_Valve"
+VERSION : 0.1
+   STRUCT
+      NoHomeFeedback { ExternalWritable := 'False'} : Bool;   // Home position feedback not active
+      NoWorkFeedback { ExternalWritable := 'False'} : Bool;   // Work position feedback not active
+      HomeFeedbackStillActive { ExternalWritable := 'False'} : Bool;   // Home position feedback still active
+      WorkFeedbackStillActive { ExternalWritable := 'False'} : Bool;   // Work position feedback still active
+   END_STRUCT;
+
+END_TYPE
+
+DATA_BLOCK "dbErrors_Multiplexing"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+NON_RETAIN
+   VAR 
+      Valve_Array : Array[0..3] of "udtError_Valve";
+   END_VAR
+
+
+BEGIN
+
+END_DATA_BLOCK
+

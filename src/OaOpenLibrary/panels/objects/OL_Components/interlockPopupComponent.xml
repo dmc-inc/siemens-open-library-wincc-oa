@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<panel version="14">
+ <properties>
+  <prop name="Name">
+   <prop name="en_US.utf8"></prop>
+  </prop>
+  <prop name="Size">196 59</prop>
+  <prop name="BackColor">_3DFace</prop>
+  <prop name="RefPoint">8 14.16666666666667</prop>
+  <prop name="InitAndTermRef">True</prop>
+  <prop name="SendClick">False</prop>
+  <prop name="RefFileName"></prop>
+  <prop name="DPI">96</prop>
+  <prop name="layoutType">None</prop>
+ </properties>
+ <events>
+  <script name="ScopeLib" isEscaped="1"><![CDATA[/////////////////////////////////////////////////////////////////////////////
+//
+//  WinCC OA Open Library
+//
+//  Author:     DMC, Inc. http://www.dmcinfo.com
+//
+//  File:       fpInterlockObject.xml
+//
+//  Revisions:  01/03/2019 - Nick Leisle:
+//                           Configured object properties to reflect tag values/changes.
+//
+//  Description: Analog Input popup faceplate
+//
+/////////////////////////////////////////////////////////////////////////////
+
+#uses &quot;OpenLibrary/Classes/Implementations/DisplayBehaviors/Common/DynamicText&quot;
+#uses &quot;OpenLibrary/Classes/Implementations/DisplayBehaviors/Common/DynamicVisibility&quot;
+#uses &quot;OpenLibrary/Classes/Implementations/DisplayBehaviors/Common/DynamicColor&quot;
+#uses &quot;OpenLibrary/Classes/Components/Component&quot;
+#uses &quot;OpenLibrary/Constants/Colors&quot;
+
+
+
+private string dp = $dpe;
+private string dpnum = $dpnum;
+
+private ComponentClass TextInterlockName = ComponentClass(getShape(&quot;textInterlockName&quot;));
+private ComponentClass TextInterlockValue = ComponentClass(getShape(&quot;textInterlockValue&quot;));
+
+
+
+public void initializePanel()
+{
+  TextInterlockName.addDisplayBehavior(new DynamicTextDisplayBehaviorClass(dp + &quot;.asInterlockNames&quot; + dpnum));
+  TextInterlockValue.addDisplayBehavior(new DynamicColorDisplayBehaviorClass(dp + &quot;.abInterlocks&quot; + dpnum, DEVICE_INTERLOCKED_COLOR,  OK_STATUS_COLOR));
+  dpConnect(&quot;onNameChange&quot;, dp + &quot;.asInterlockNames&quot; + dpnum);
+}
+
+// Update interlock name upon initialization and name change
+// Make interlock status object invisible when interlock has no name
+void onNameChange(string dpInterlockName, string strName)
+{
+ textInterlockValue.visible = strName != &quot;&quot;;
+}]]></script>
+  <script name="Initialize" isEscaped="1"><![CDATA[main()
+{
+  initializePanel();
+}]]></script>
+ </events>
+ <shapes>
+  <shape layerId="0" Name="textInterlockName" shapeType="PRIMITIVE_TEXT">
+   <properties>
+    <prop name="serialId">1</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">10 20</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">OL_UI_Dark_Text</prop>
+    <prop name="BackColor">_Window</prop>
+    <prop name="TabOrder">0</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="sizePolicy">
+     <sizePolicy vertical="Fixed" horizontal="Fixed"/>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,1]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[outline]</prop>
+    <prop name="Location">10 20</prop>
+    <prop name="Size">76 16</prop>
+    <prop name="Font">
+     <prop name="en_US.utf8">Segoe UI Semibold,-1,11,5,63,0,0,0,0,0,Regular</prop>
+    </prop>
+    <prop name="Text">
+     <prop name="en_US.utf8">Input Value:</prop>
+    </prop>
+    <prop name="Distance">2</prop>
+    <prop name="BorderOffset">2</prop>
+    <prop name="Bordered">False</prop>
+    <prop name="Fit">False</prop>
+    <prop name="Transformable">True</prop>
+    <prop name="TextFormat">[0s,,,AlignLeft]</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="textInterlockValue" shapeType="TEXT_FIELD">
+   <properties>
+    <prop name="serialId">2</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">87 41.00000000000001</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">white</prop>
+    <prop name="BackColor">OL_Device_Interlocked</prop>
+    <prop name="TabOrder">1</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="Font">
+     <prop name="en_US.utf8">Segoe UI Semibold,-1,11,5,63,0,0,0,0,0,Regular</prop>
+    </prop>
+    <prop name="Location">81.90566037735849 15.99999999999998</prop>
+    <prop name="Size">82 20</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop name="Editable">False</prop>
+    <prop name="TextFormat">[0s,,,AlignHCenter]</prop>
+   </properties>
+  </shape>
+ </shapes>
+</panel>

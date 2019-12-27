@@ -1,0 +1,16 @@
+tag,active,comment,unit,floating point precision,Type Sub Active,Data Type,Subscription
+dbErrors_AirSystem.VFD_RecirculationFan,True,,,-1,False,udtError_VFD,_Slow
+dbErrors_AirSystem.VFD_RecirculationFan.MotorProtectorTripped,True,,,-1,False,Bool,_Slow
+dbErrors_AirSystem.VFD_RecirculationFan.LocalDisconnectOff,True,,,-1,False,Bool,_Slow
+dbErrors_AirSystem.VFD_RecirculationFan.ClutchTripped,True,,,-1,False,Bool,_Slow
+dbErrors_AirSystem.VFD_RecirculationFan.NoContactorFeedback,True,,,-1,False,Bool,_Slow
+dbErrors_AirSystem.VFD_RecirculationFan.ContactorStillOn,True,,,-1,False,Bool,_Slow
+dbErrors_AirSystem.VFD_RecirculationFan.NoSignalForward,True,,,-1,False,Bool,_Slow
+dbErrors_AirSystem.VFD_RecirculationFan.NoSignalReverse,True,,,-1,False,Bool,_Slow
+dbErrors_AirSystem.VFD_RecirculationFan.MotorNotStopped,True,,,-1,False,Bool,_Slow
+dbErrors_AirSystem.VFD_RecirculationFan.MaxFrequencyReached,True,,,-1,False,Bool,_Slow
+dbErrors_AirSystem.VFD_RecirculationFan.Overcurrent,True,,,-1,False,Bool,_Slow
+dbErrors_AirSystem.VFD_RecirculationFan.MotorOverload,True,,,-1,False,Bool,_Slow
+dbErrors_AirSystem.VFD_RecirculationFan.VFDOverload,True,,,-1,False,Bool,_Slow
+dbErrors_AirSystem.VFD_RecirculationFan.GeneralFault,True,,,-1,False,Bool,_Slow
+dbErrors_AirSystem.VFD_RecirculationFan.NoCoolingFanFeedback,True,,,-1,False,Bool,_Slow

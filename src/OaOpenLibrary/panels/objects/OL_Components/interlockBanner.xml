@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<panel version="14">
+ <properties>
+  <prop name="Name">
+   <prop name="en_US.utf8"></prop>
+  </prop>
+  <prop name="Size">343 95</prop>
+  <prop name="BackColor">_3DFace</prop>
+  <prop name="RefPoint">1 -0.5</prop>
+  <prop name="InitAndTermRef">True</prop>
+  <prop name="SendClick">False</prop>
+  <prop name="RefFileName"></prop>
+  <prop name="DPI">96</prop>
+  <prop name="layoutType">None</prop>
+ </properties>
+ <events>
+  <script name="ScopeLib" isEscaped="1"><![CDATA[/*
+  * WinCC OA Open Library
+  * @author DMC, Inc. http://www.dmcinfo.com
+  *
+  * File: interlockBanner.xml
+  *
+  * Revisions: 2019-02-03 - Eric Baggen (eric.baggen@dmcinfo.com): Created
+  *
+  * @description
+  * The interlock banner is a specific banner type that is meant to live on a device's control popup.
+  * When interlocks are active, a user may click on this to display a the interlock popup.
+  * Due to the current para structure for interlocks, interlock tags are decoupled from a device.
+  * To accomdate this, this component expects a tag path from the caller to the specific Interlock DP container.
+*/
+
+#uses &quot;OpenLibrary/Classes/Components/Component&quot;
+#uses &quot;OpenLibrary/Classes/Implementations/ActionBehaviors/OpenPopup&quot;
+#uses &quot;OpenLibrary/Classes/Implementations/DisplayBehaviors/Common/DynamicColor&quot;
+#uses &quot;OpenLibrary/Classes/Implementations/DisplayBehaviors/Common/Enumeration&quot;
+#uses &quot;OpenLibrary/Enums/ColoringType&quot;
+#uses &quot;OpenLibrary/Constants/Colors&quot;
+#uses &quot;OpenLibrary/Enums/TextAlignmentType&quot;
+
+private string dp = $dpe;
+private string interlockDp = $_interlockDpe; //udtHMI_Interlocks tag that holds device interlock info
+private ComponentClass InterlockBanner = ComponentClass(getShape(&quot;banner&quot;));
+
+public void init()
+{
+  //This section is entirely dependent upon the device's bInterlock bit and has nothing to do with udtHMI_Interlock.
+  string interlockStatusDPE = dp + &quot;.bInterlock&quot;;
+  InterlockBanner.addDisplayBehavior(new DynamicColorDisplayBehaviorClass(interlockStatusDPE, DEVICE_INTERLOCKED_COLOR, OK_STATUS_COLOR));
+  InterlockBanner.addDisplayBehavior(new EnumerationDisplayBehaviorClass(interlockStatusDPE, makeDynAnytype(&quot;Interlock Inactive&quot;, &quot;Interlock Active&quot;) ,&quot;text&quot;));
+
+  //This section regulates the interlock behavior depending on if a $_interlockDpe is passed in
+  //If a parameter is given, provide the banner with an &quot;Open Popup&quot; action behavior and allow the banner to be recognized by the mouse
+  //Otherwise, do not provide the behavior and make the banner invisible to the user's mouse
+  if (interlockDp != &quot;&quot;)
+  {
+    InterlockBanner.addActionBehavior(new OpenPopupActionBehaviorClass(makeDynString(&quot;$dpe:&quot; + interlockDp), &quot;objects/OL_DevicePopups/interlock.xml&quot;));
+    banner.transparentForMouse(false);
+  }
+
+  else
+  {
+    banner.transparentForMouse(true);
+  }
+}
+
+public void click()
+{
+  InterlockBanner.invokeAction();
+}
+
+
+// Additional Interlock Banner Properties - use these methods to pass custom display and action behaviors to the component from a calling panel
+public void addDisplayBehavior(shared_ptr&lt;IDisplayBehaviorClass&gt; displayBehavior)
+{
+  InterlockBanner.addDisplayBehavior(displayBehavior);
+}
+
+public void addActionBehavior(shared_ptr&lt;IActionBehaviorClass&gt; actionBehavior)
+{
+  InterlockBanner.addActionBehavior(actionBehavior);
+}
+
+
+// Panel Properties (Text Alignment)
+TextAlignmentType textAlignment = TextAlignmentType::Center;
+#property TextAlignmentType textAlignment
+public void setTextAlignment(TextAlignmentType editedTextAlignment)
+{
+  textAlignment = editedTextAlignment;
+  switch(textAlignment)
+  {
+    case TextAlignmentType::Left:
+      banner.format(&quot;[,,,ALIGNMENT_BEGINNING]&quot;);
+      break;
+    case TextAlignmentType::Center:
+      banner.format(&quot;[,,,ALIGNMENT_CENTER]&quot;);
+      break;
+    case TextAlignmentType::Right:
+      banner.format(&quot;[,,,ALIGNMENT_END]&quot;);
+      break;
+  }
+  banner.text = &quot;Interlock&quot;;
+}
+public TextAlignmentType getTextAlignment()
+{
+  return textAlignment;
+}]]></script>
+  <script name="Initialize" isEscaped="1"><![CDATA[main()
+{
+  init();
+}]]></script>
+ </events>
+ <shapes>
+  <shape layerId="0" Name="banner" shapeType="TEXT_FIELD">
+   <properties>
+    <prop name="serialId">1</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">0 0</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">OL_UI_Dark_Text</prop>
+    <prop name="BackColor">OL_Mustard_Yellow</prop>
+    <prop name="TabOrder">0</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="Font">
+     <prop name="en_US.utf8">Segoe UI Semibold,-1,11,5,63,0,0,0,0,0,Regular</prop>
+    </prop>
+    <prop name="Location">0 0</prop>
+    <prop name="Size">200 20</prop>
+    <prop name="BorderStyle">None</prop>
+    <prop name="Editable">False</prop>
+    <prop name="TextFormat">[0s,,,AlignHCenter]</prop>
+   </properties>
+   <events>
+    <script name="Clicked" isEscaped="1"><![CDATA[main(mapping event)
+{
+  click();
+}]]></script>
+   </events>
+  </shape>
+ </shapes>
+</panel>

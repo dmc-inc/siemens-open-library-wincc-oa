@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<panel version="14">
+ <properties>
+  <prop name="Name">
+   <prop name="en_US.utf8"></prop>
+  </prop>
+  <prop name="Size">119 58</prop>
+  <prop name="BackColor">_3DFace</prop>
+  <prop name="RefPoint">0 0</prop>
+  <prop name="InitAndTermRef">True</prop>
+  <prop name="SendClick">False</prop>
+  <prop name="RefFileName"></prop>
+  <prop name="DPI">96</prop>
+  <prop name="layoutType">None</prop>
+ </properties>
+ <events>
+  <script name="ScopeLib" isEscaped="1"><![CDATA[/*
+  * WinCC OA Open Library
+  * @author DMC, Inc. http://www.dmcinfo.com
+  *
+  * File: textEntry.xml
+  *
+  * Revisions: 2019-01-07 - Eric Baggen (eric.baggen@dmcinfo.com) : Created
+  *            2019-01-10 - Nick Leisle (nicholas.leisle@dmcinfo.com):
+  *                         Modified button panel to adapt to textbox function
+  *
+  * @description
+  * This panel is a reusable text entry panel for user input. Add dynamic enabled properties using the publically exposed addEnabledDisplayBehavior method.
+*/
+
+#uses &quot;OpenLibrary/Classes/Implementations/DisplayBehaviors/Common/DynamicColor&quot;
+#uses &quot;OpenLibrary/Classes/Implementations/DisplayBehaviors/Common/DynamicText&quot;
+#uses &quot;OpenLibrary/Classes/Implementations/DisplayBehaviors/Common/DynamicEnable&quot;
+#uses &quot;OpenLibrary/Classes/Implementations/ActionBehaviors/CopyText&quot;
+#uses &quot;OpenLibrary/Classes/Components/Component&quot;
+#uses &quot;OpenLibrary/Enums/ColoringType&quot;
+#uses &quot;OpenLibrary/Enums/TextAlignmentType&quot;
+
+private string dp = $dpe;
+private ComponentClass TextField = ComponentClass(getShape(&quot;textEntry&quot;));
+
+public void init()
+{
+  TextField.addDisplayBehavior(new DynamicTextDisplayBehaviorClass(dp));
+  TextField.addActionBehavior(new CopyTextActionBehaviorClass(dp, getShape(&quot;textEntry&quot;)));
+}
+
+public void command()
+{
+  TextField.invokeAction();
+}
+
+// Allow calling panels to assign enable behaviors for Read/Write text fields
+public void addDynamicEnableBehavior(string enableDpe, int targetValue = 1)
+{
+  TextField.addDisplayBehavior(new DynamicEnableDisplayBehaviorClass(enableDpe, targetValue));
+  TextField.addDisplayBehavior(new DynamicColorDisplayBehaviorClass(enableDpe, &quot;white&quot;, DISABLED_COLOR, ColoringType::Back, targetValue));
+}
+
+
+// Additional Text Field Properties - use these methods to pass custom display and action behaviors to the component from a calling panel
+public void addDisplayBehavior(shared_ptr&lt;IDisplayBehaviorClass&gt; displayBehavior)
+{
+  TextField.addDisplayBehavior(displayBehavior);
+}
+
+public void addActionBehavior(shared_ptr&lt;IActionBehaviorClass&gt; actionBehavior)
+{
+  TextField.addActionBehavior(actionBehavior);
+}
+
+
+// Panel Properties (Text Alignment)
+TextAlignmentType textAlignment = TextAlignmentType::Center;
+#property TextAlignmentType textAlignment
+public void setTextAlignment(TextAlignmentType editedTextAlignment)
+{
+  textAlignment = editedTextAlignment;
+  switch(textAlignment)
+  {
+    case TextAlignmentType::Left:
+      textEntry.format(&quot;[,,,ALIGNMENT_BEGINNING]&quot;);
+      break;
+    case TextAlignmentType::Center:
+      textEntry.format(&quot;[,,,ALIGNMENT_CENTER]&quot;);
+      break;
+    case TextAlignmentType::Right:
+      textEntry.format(&quot;[,,,ALIGNMENT_END]&quot;);
+      break;
+  }
+  textEntry.text = &quot;Text&quot;;
+}
+public TextAlignmentType getTextAlignment()
+{
+  return textAlignment;
+}]]></script>
+  <script name="Initialize" isEscaped="1"><![CDATA[main()
+{
+  init();
+}]]></script>
+ </events>
+ <shapes>
+  <shape layerId="0" Name="textEntry" shapeType="TEXT_FIELD">
+   <properties>
+    <prop name="serialId">6</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">0 0</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">OL_UI_Dark_Text</prop>
+    <prop name="BackColor">White</prop>
+    <prop name="TabOrder">3</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="Font">
+     <prop name="en_US.utf8">Segoe UI Semibold,-1,11,5,63,0,0,0,0,0,Regular</prop>
+    </prop>
+    <prop name="Location">0 0.4624999999999702</prop>
+    <prop name="Size">75 20</prop>
+    <prop name="BorderStyle">None</prop>
+    <prop name="Editable">True</prop>
+    <prop name="TextFormat">[0s,,,AlignHCenter]</prop>
+   </properties>
+   <events>
+    <script name="Command" isEscaped="1"><![CDATA[main()
+{
+  command();
+}]]></script>
+   </events>
+  </shape>
+ </shapes>
+</panel>

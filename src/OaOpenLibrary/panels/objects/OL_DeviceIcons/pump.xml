@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<panel version="14">
+ <properties>
+  <prop name="Name">
+   <prop name="en_US.utf8"></prop>
+  </prop>
+  <prop name="Size">210 156</prop>
+  <prop name="BackColor">_3DFace</prop>
+  <prop name="RefPoint">-1.604217040336437 -2.472014556615193</prop>
+  <prop name="InitAndTermRef">True</prop>
+  <prop name="SendClick">False</prop>
+  <prop name="RefFileName"></prop>
+  <prop name="DPI">96</prop>
+  <prop name="layoutType">None</prop>
+ </properties>
+ <events>
+  <script name="ScopeLib" isEscaped="1"><![CDATA[/////////////////////////////////////////////////////////////////////////////
+//
+//  WinCC OA Open Library
+//
+//  Author:     DMC, Inc. http://www.dmcinfo.com
+//
+//  File:       fpPump.xml
+//
+//  Revisions:  01/20/17 - Leigh Mathews (leigh.mathews@dmcinfo.com) :
+//                         Created
+//  Revisions:  10/07/18 - Oliver Reed (oliver.reed@dmcinfo.com) :
+//                         Changed from pnl to xml
+//              01/21/19 - Nick Leisle (nicholas.leisle@dmcinfo.com):
+//                         Implemented OL Component class into popup
+//              02/01/19 - Eric Baggen (eric.baggen@dmcinfo.com):
+//                         Combined VFD and Motor icons into a unified icon, differentiated by the DriveType property
+//
+//  Description: Motor (Pump) Icon faceplate
+//
+/////////////////////////////////////////////////////////////////////////////
+
+#uses &quot;OpenLibrary/Classes/Implementations/DisplayBehaviors/Common/Enumeration&quot;
+#uses &quot;OpenLibrary/Classes/Implementations/DisplayBehaviors/Common/DynamicVisibility&quot;
+#uses &quot;OpenLibrary/Classes/Implementations/ActionBehaviors/OpenPopup&quot;
+#uses &quot;OpenLibrary/Classes/Components/Component&quot;
+#uses &quot;OpenLibrary/Constants/Colors&quot;
+#uses &quot;OpenLibrary/Enums/DirectionType&quot;
+#uses &quot;OpenLibrary/Enums/DriveType&quot;
+#uses &quot;OpenLibrary/Enums/ModeType&quot;
+#uses &quot;OpenLibrary/Enums/VisibilityType&quot;
+#uses &quot;OpenLibrary/Macros&quot;
+
+private dyn_string deviceColors = makeDynString(
+    DEVICE_STOPPED_COLOR,     // 0 = stopped
+    DEVICE_ERRORED_COLOR,     // 1 = E-stopped
+    DEVICE_ERRORED_COLOR,     // 2 = Error
+    DEVICE_FORWARD_COLOR,     // 3 = Forward / Work
+    DEVICE_REVERSE_COLOR,     // 4 = Reverse / Home
+    DEVICE_ON_FORWARD_COLOR,  // 5 = Forwarding / Working
+    DEVICE_ON_REVERSE_COLOR); // 6 = Reversing / Homing
+
+private dyn_string outlineColors = generateContrastingColors(deviceColors, DEVICE_OUTLINE_LIGHT, DEVICE_OUTLINE_DARK);
+
+// DriveType Property
+private DriveType driveType;
+#property DriveType driveType
+public void setDriveType(DriveType newDriveType){ driveType = newDriveType; }
+public DriveType getDriveType() { return driveType; }
+
+private string dp = $dpe;
+private string interlockDp = $_interlockDpe;
+
+private ComponentClass Overlay = ComponentClass(getShape(&quot;overlay&quot;));
+private ComponentClass ManualIndicator = ComponentClass(getShape(&quot;manualIndicator&quot;));
+private ComponentClass Pump = ComponentClass(makeDynShape(
+    getShape(&quot;inletFlange&quot;),
+    getShape(&quot;inlet&quot;),
+    getShape(&quot;pumpBody&quot;),
+    getShape(&quot;outlet&quot;),
+    getShape(&quot;outletFlange&quot;)));
+
+
+
+public void initializePanel()
+{
+  // Determine which popup to use based on drive type
+  string popupFilePath;
+  switch(driveType)
+  {
+    case DriveType::Contactor:
+      popupFilePath = &quot;objects/OL_DevicePopups/reversingMotor.xml&quot;;
+      break;
+    case DriveType::VFD:
+      popupFilePath = &quot;objects/OL_DevicePopups/vfd.xml&quot;;
+      break;
+  }
+
+  //Overlay and Manual Indicator behaviors
+  Overlay.addActionBehavior(new OpenPopupActionBehaviorClass(makeDynString(&quot;$dpe:&quot; + dp, &quot;$_interlockDpe:&quot; + interlockDp), popupFilePath));
+  ManualIndicator.addDisplayBehavior(new DynamicVisibilityDisplayBehaviorClass(dp + &quot;.iMode&quot;, (int)ModeType::Manual));
+
+  //Device colors
+  Pump.addDisplayBehavior(new EnumerationDisplayBehaviorClass(dp + &quot;.iStatus&quot;, deviceColors, &quot;backCol&quot;));
+  Pump.addDisplayBehavior(new EnumerationDisplayBehaviorClass(dp + &quot;.iStatus&quot;, outlineColors, &quot;foreCol&quot;));
+}
+
+
+public void displayDevicePopup()
+{
+  Overlay.invokeAction();
+}
+
+
+// Rotation Property of panel
+private dyn_string shapes = makeDynString(
+    &quot;overlay&quot;,
+    &quot;manualIndicator&quot;,
+    &quot;inletFlange&quot;,
+    &quot;inlet&quot;,
+    &quot;pumpBody&quot;,
+    &quot;outlet&quot;,
+    &quot;outletFlange&quot;
+    );
+DirectionType orientation = DirectionType::Horizontal;
+#property DirectionType orientation
+public void setOrientation(DirectionType newOrientation){  changeOrientation(newOrientation, shapes);}
+public DirectionType getOrientation(){  return orientation;}
+]]></script>
+  <script name="Initialize" isEscaped="1"><![CDATA[main()
+{
+  initializePanel();
+}
+
+
+
+]]></script>
+ </events>
+ <shapes>
+  <shape layerId="0" Name="outlet" shapeType="RECTANGLE">
+   <properties>
+    <prop name="serialId">17</prop>
+    <prop name="Type">Rotatable</prop>
+    <prop name="RefPoint">43.42692337720732 218.2020719648936</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">White</prop>
+    <prop name="BackColor">OL_Device_Stopped</prop>
+    <prop name="TabOrder">14</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,2]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[solid]</prop>
+    <prop name="Geometry">0.993940144103702 0 0 0.7590456257831203 60.07584320971098 -90.3642378159834</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop name="Location">40 150</prop>
+    <prop name="Size">81 51</prop>
+    <prop name="CornerRadius">0</prop>
+    <prop name="Transformable">True</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="outletFlange" shapeType="RECTANGLE">
+   <properties>
+    <prop name="serialId">18</prop>
+    <prop name="Type">Rotatable</prop>
+    <prop name="RefPoint">-77.09572329710534 234.8920443789235</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">White</prop>
+    <prop name="BackColor">OL_Device_Stopped</prop>
+    <prop name="TabOrder">15</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,2]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[solid]</prop>
+    <prop name="Geometry">0.6499729680119226 0 0 0.5973970202922709 153.3497417816783 -65.06271695654604</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop name="Location">40 140</prop>
+    <prop name="Size">21 81</prop>
+    <prop name="CornerRadius">0</prop>
+    <prop name="Transformable">True</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="pumpBody" shapeType="ELLIPSE">
+   <properties>
+    <prop name="serialId">19</prop>
+    <prop name="Type">Rotatable</prop>
+    <prop name="RefPoint">120.3069245163026 74.63681116873484</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">White</prop>
+    <prop name="BackColor">OL_Device_Stopped</prop>
+    <prop name="TabOrder">16</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">True</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,2]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[solid]</prop>
+    <prop name="Geometry">1.444384373359828 0 0 1.405640047746519 -70.52983608909501 -29.65140036908562</prop>
+    <prop name="Center">120 75</prop>
+    <prop name="X-Radius">37.5</prop>
+    <prop name="Y-Radius">37.5</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="inlet" shapeType="POLYGON">
+   <properties>
+    <prop name="serialId">20</prop>
+    <prop name="Type">Rotatable</prop>
+    <prop name="RefPoint">120.3069245163026 74.63681116873484</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">White</prop>
+    <prop name="BackColor">OL_Device_Stopped</prop>
+    <prop name="TabOrder">17</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">True</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,2]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[solid]</prop>
+    <prop name="Geometry">1.444384373359828 0 0 1.405640047746519 -70.52983608909501 -29.65140036908562</prop>
+    <prop name="Closed">True</prop>
+    <prop name="Points">
+     <prop name="Location">65.36842105263153 61.5</prop>
+     <prop name="Location">111 61.5</prop>
+     <prop name="Location">120 70</prop>
+     <prop name="Location">120 80</prop>
+     <prop name="Location">110.5300881563818 88.64817571508951</prop>
+     <prop name="Location">65.36842105263155 88.50000000000001</prop>
+     <prop name="Location">65.36842105263153 61.5</prop>
+     <prop name="CurveIdx">1</prop>
+    </prop>
+   </properties>
+  </shape>
+  <reference referenceId="0" Name="interlockIndicator" parentSerial="1">
+   <properties>
+    <prop name="FileName">objects/OL_Components/interlockIcon.xml</prop>
+    <prop name="Location">179.489871788071 111.0093634144464</prop>
+    <prop name="Geometry">0.8735632183908046 0 0 0.8627450980392157 -54.03329646213658 -19.57380725432686</prop>
+    <prop name="TabOrder">22</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dpe</prop>
+      <prop name="Value">$dpe</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+   </properties>
+  </reference>
+  <shape layerId="0" Name="inletFlange" shapeType="RECTANGLE">
+   <properties>
+    <prop name="serialId">16</prop>
+    <prop name="Type">Rotatable</prop>
+    <prop name="RefPoint">169.8770069273422 179.1454380440819</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">White</prop>
+    <prop name="BackColor">OL_Device_Stopped</prop>
+    <prop name="TabOrder">13</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,2]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[solid]</prop>
+    <prop name="Geometry">0.7221921866799137 0 0 0.5973970202922709 -19.44424141026325 -31.75986044070547</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop name="Location">40 140</prop>
+    <prop name="Size">21 81</prop>
+    <prop name="CornerRadius">0</prop>
+    <prop name="Transformable">True</prop>
+   </properties>
+  </shape>
+  <shape layerId="1" Name="manualIndicator" shapeType="RECTANGLE">
+   <properties>
+    <prop name="serialId">36</prop>
+    <prop name="Type">Rotatable</prop>
+    <prop name="RefPoint">107.7344278923533 68.93155827847164</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">OL_Device_Manual_Control</prop>
+    <prop name="BackColor">OL_Device_Manual_Control</prop>
+    <prop name="TabOrder">21</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,5]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[outline]</prop>
+    <prop name="Geometry">0.9523809523809524 0 0 0.9933333333333337 0.3957829596635065 -0.4720145566151928</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop name="Location">0 0</prop>
+    <prop name="Size">211 151</prop>
+    <prop name="CornerRadius">0</prop>
+    <prop name="Transformable">True</prop>
+   </properties>
+  </shape>
+  <shape layerId="7" Name="overlay" shapeType="RECTANGLE">
+   <properties>
+    <prop name="serialId">25</prop>
+    <prop name="Type">Rotatable</prop>
+    <prop name="RefPoint">205.6926273766074 179.6754874781051</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">{0,0,0}</prop>
+    <prop name="BackColor">_Transparent</prop>
+    <prop name="TabOrder">18</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[none,oneColor,JoinBevel,CapProjecting,1]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[solid]</prop>
+    <prop name="Geometry">0.5555555555555556 0 0 0.6208333333333337 -10.71532815144761 -43.93034788994855</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop name="Location">20 70</prop>
+    <prop name="Size">361 241</prop>
+    <prop name="CornerRadius">0</prop>
+    <prop name="Transformable">True</prop>
+   </properties>
+   <events>
+    <script name="Clicked" isEscaped="1"><![CDATA[main()
+{
+  displayDevicePopup();
+}
+
+
+]]></script>
+   </events>
+  </shape>
+ </shapes>
+ <groups>
+  <group Name="SHAPE_GROUP1" parentSerial="-1" serial="1">
+   <properties>
+    <prop name="shapeSerial">17</prop>
+    <prop name="shapeSerial">18</prop>
+    <prop name="shapeSerial">19</prop>
+    <prop name="shapeSerial">20</prop>
+    <prop name="shapeSerial">16</prop>
+    <prop name="groupSerial">0</prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+   </properties>
+  </group>
+ </groups>
+</panel>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<panel version="14">
+ <properties>
+  <prop name="Name">
+   <prop name="en_US.utf8"></prop>
+  </prop>
+  <prop name="Size">171 43</prop>
+  <prop name="BackColor">_3DFace</prop>
+  <prop name="RefPoint">-0.1897567381139993 -0.1002172121938258</prop>
+  <prop name="InitAndTermRef">True</prop>
+  <prop name="SendClick">False</prop>
+  <prop name="RefFileName"></prop>
+  <prop name="DPI">96</prop>
+  <prop name="layoutType">None</prop>
+ </properties>
+ <events>
+  <script name="ScopeLib" isEscaped="1"><![CDATA[/////////////////////////////////////////////////////////////////////////////
+//
+//  WinCC OA Open Library
+//
+//  Author:     DMC, Inc. http://www.dmcinfo.com
+//
+//  File:       fpBarGraph.pnl
+//
+//  Revisions:  06/19/17 - Leon Grossman (leon.grossman@dmcinfo.com) :
+//                         Created
+//              10/13/18 - Oliver Reed (oliver.reed@dmcinfo.com) :
+//                         Changed from pnl to xml
+//              02/22/19 - Adapted to fit new Component Class
+//
+//  Description: Bar Graph Face Plate
+//
+/////////////////////////////////////////////////////////////////////////////
+
+#uses &quot;OpenLibrary/Classes/Components/Component&quot;
+#uses &quot;OpenLibrary/Enums/DirectionType&quot;
+#uses &quot;OpenLibrary/Classes/Implementations/DisplayBehaviors/Common/DynamicSize&quot;
+
+
+private string dp = $dpe;
+
+private ComponentClass BarGraph = ComponentClass(getShape(&quot;barGraph&quot;));
+
+
+public void initializePanel()
+{
+  BarGraph.addDisplayBehavior(new DynamicSizeDisplayBehaviorClass(dp, getShape(&quot;barGraphOutline&quot;), DirectionType::Horizontal));
+}]]></script>
+  <script name="Initialize" isEscaped="1"><![CDATA[main()
+{
+  initializePanel();
+}]]></script>
+ </events>
+ <shapes>
+  <shape layerId="0" Name="barGraphOutline" shapeType="RECTANGLE">
+   <properties>
+    <prop name="serialId">1</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">61 130</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">OL_UI_Border</prop>
+    <prop name="BackColor">White</prop>
+    <prop name="TabOrder">0</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,1]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[solid]</prop>
+    <prop name="Geometry">0.6971830985915494 0 0 0.6153846153846154 -42.52816901408451 -80</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop name="Location">61 130</prop>
+    <prop name="Size">143 40</prop>
+    <prop name="CornerRadius">0</prop>
+    <prop name="Transformable">True</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="barGraph" shapeType="RECTANGLE">
+   <properties>
+    <prop name="serialId">2</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">115 73</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">_Transparent</prop>
+    <prop name="BackColor">OL_UI_Menu_Bar</prop>
+    <prop name="TabOrder">1</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,1]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[solid]</prop>
+    <prop name="Geometry">0.6684236735010556 0 0 1 -77.0584791907354 -73.10021721219384</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop name="Location">115 73</prop>
+    <prop name="Size">109 25</prop>
+    <prop name="CornerRadius">0</prop>
+    <prop name="Transformable">True</prop>
+   </properties>
+   <events>
+    <script name="Initialize" isEscaped="1"><![CDATA[
+]]></script>
+   </events>
+  </shape>
+ </shapes>
+</panel>

@@ -1,0 +1,266 @@
+V 14
+1
+LANG:10001 0 
+PANEL,-1 -1 202 202 N "_3DFace" 2
+"$_interlockDpe"
+"$dpe"
+"// SimpleCtrlScriptStart {invalid}
+main()
+{
+  initializePanel();
+}
+
+
+" 0
+ E E E E 1 -1 -1 0  1.639637717472695 3
+""0  1
+E "/////////////////////////////////////////////////////////////////////////////
+//
+//  WinCC OA Open Library
+//
+//  Author:     DMC, Inc. http://www.dmcinfo.com
+//
+//  File:       fpValve_Analog_Horizontal.pnl
+//
+//  Revisions:  10/02/2018 Jay LaFave:
+//                         Created
+//              01/23/19 - Nick Leisle (nicholas.leisle@dmcinfo.com):
+//                         Implemented OL Component class into popup
+//
+//  Description: Analog Valve Icon faceplate
+//
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#uses \"OpenLibrary/Classes/Implementations/DisplayBehaviors/Common/Enumeration\"
+#uses \"OpenLibrary/Classes/Implementations/DisplayBehaviors/Common/DynamicVisibility\"
+#uses \"OpenLibrary/Classes/Implementations/ActionBehaviors/OpenPopup\"
+#uses \"OpenLibrary/Classes/Components/Component\"
+#uses \"OpenLibrary/Constants/Colors\"
+#uses \"OpenLibrary/Enums/DirectionType\"
+#uses \"OpenLibrary/Enums/ModeType\"
+#uses \"OpenLibrary/Enums/VisibilityType\"
+#uses \"OpenLibrary/Macros\"
+
+private dyn_string deviceColors = makeDynString(
+    DEVICE_STOPPED_COLOR,  // 0 = stopped
+    DEVICE_ERRORED_COLOR,  // 1 = E-stopped
+    DEVICE_ERRORED_COLOR,  // 2 = Error
+    DEVICE_WORK_COLOR,     // 3 = Forward / Work
+    DEVICE_HOME_COLOR,     // 4 = Reverse / Home
+    DEVICE_ON_WORK_COLOR,  // 5 = Forwarding / Working
+    DEVICE_ON_HOME_COLOR); // 6 = Reversing / Homing
+
+private dyn_string outlineColors = generateContrastingColors(deviceColors, DEVICE_OUTLINE_LIGHT, DEVICE_OUTLINE_DARK);
+
+private string dp = $dpe;
+private string interlockDp = $_interlockDpe;
+
+private ComponentClass Overlay = ComponentClass(getShape(\"overlay\"));
+private ComponentClass ManualIndicator = ComponentClass(getShape(\"manualIndicator\"));
+private ComponentClass AnalogValve = ComponentClass(makeDynShape(
+    getShape(\"valve\"),
+    getShape(\"valveShaft\"),
+    getShape(\"valveTop\")));
+
+
+
+public void initializePanel()
+{
+  //Overlay and Manual Indicator behaviors
+  Overlay.addActionBehavior(new OpenPopupActionBehaviorClass(makeDynString(\"$dpe:\" + dp, \"$_interlockDpe:\" + interlockDp), \"objects/OL_DevicePopups/analogValve.xml\"));
+  ManualIndicator.addDisplayBehavior(new DynamicVisibilityDisplayBehaviorClass(dp + \".iMode\", (int)ModeType::Manual));
+
+  //Device colors
+  AnalogValve.addDisplayBehavior(new EnumerationDisplayBehaviorClass(dp + \".iStatus\", deviceColors, \"backCol\"));
+  AnalogValve.addDisplayBehavior(new EnumerationDisplayBehaviorClass(dp + \".iStatus\", outlineColors, \"foreCol\"));
+}
+
+
+public void displayDevicePopup()
+{
+  Overlay.invokeAction();
+}
+
+
+
+//Rotation property of panel
+
+DirectionType orientation = DirectionType::Horizontal;
+#property DirectionType orientation
+private dyn_string shapes = makeDynString(
+  \"overlay\",
+  \"manualIndicator\",
+  \"valve\",
+  \"valveShaft\",
+  \"valveTop\"
+);
+
+public void setOrientation(DirectionType newOrientation)
+{
+  changeOrientation(newOrientation, shapes);
+}
+
+public DirectionType getOrientation()
+{
+  return orientation;
+}" 0
+ 3
+"CBRef" "1"
+"EClose" E
+"dpi" "96"
+0 0 0
+""
+DISPLAY_LAYER, 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0
+LAYER, 0 
+1
+LANG:10001 0 
+10 1
+"valve"
+"Rotatable"
+1 179.9297362791165 208.8119955169773 E E E 1 E 1 E N "White" E N "OL_Device_Stopped" E E
+ E E
+2 0 0 0 0 0
+E E E
+0
+1
+LANG:10001 0 
+
+3
+"layoutAlignment" "AlignNone"
+"dashclr"N "_Transparent"
+"antiAliased" "1"
+E E 0 2 3 2 1 E 0.9936686793473739 0 0.7618972529576722 -74.72072456505468 -11.18814841687831 1 E 6 90 160
+90 260
+180 210
+270 260
+270 160
+180 210
+ 1
+9 2
+"valveTop"
+"Rotatable"
+1 182.3192789175542 219.9512608692338 E E E 1 E 1 E N "White" E N "OL_Device_Stopped" E E
+ E E
+3 0 0 0 0 0
+E E E
+0
+1
+LANG:10001 0 
+
+3
+"layoutAlignment" "AlignNone"
+"dashclr"N "_Transparent"
+"antiAliased" "1"
+E E 0 2 3 1 1 E 1.091507608277068 0 0.9259827035639108 -95.00288007409925 -54.67106319198409 1 E 182.7142857142857 141 67.293145 67.293145
+ 0 250 140 120 140 1
+10 3
+"valveShaft"
+"Rotatable"
+1 212.0728638506492 264.3376398063681 E E E 1 E 1 E N "White" E N "OL_Device_Stopped" E E
+ E E
+4 0 0 0 0 0
+E E E
+0
+1
+LANG:10001 0 
+
+3
+"layoutAlignment" "AlignNone"
+"dashclr"N "_Transparent"
+"antiAliased" "1"
+E E 0 2 3 2 1 E 0.5420010978258402 0 0.5780362591428572 -10.94372502612176 -3.796740464325026 1 E 5 200 137.8620064302195
+224.4033613445376 137.8620064302195
+224.4033613445376 265.6666666666666
+212.2016806722688 265.9035231533032
+200 265.9035231533032
+ 1
+6 29
+"manualIndicator"
+"Rotatable"
+1 109.8344278923533 113.3539703183333 E E E 1 E 1 E N "OL_Device_Manual_Control" E N "OL_Device_Manual_Control" E E
+ E E
+10 0 0 0 0 0
+E E E
+0
+1
+LANG:10001 0 
+
+3
+"layoutAlignment" "AlignNone"
+"dashclr"N "_Transparent"
+"antiAliased" "0"
+E E 0 5 3 2 1 E 0.9523809523809524 0 1.320000000000001 0.6396377174723966 2.188261247672528 0 E 0 0 210 150
+1 30 2 "" 15
+0
+1 34 3 "" 1
+0
+0
+LAYER, 1 
+1
+LANG:10001 0 
+0
+LAYER, 2 
+1
+LANG:10001 0 
+0
+LAYER, 3 
+1
+LANG:10001 0 
+0
+LAYER, 4 
+1
+LANG:10001 0 
+0
+LAYER, 5 
+1
+LANG:10001 0 
+0
+LAYER, 6 
+1
+LANG:10001 0 
+0
+LAYER, 7 
+1
+LANG:10001 0 
+6 12
+"overlay"
+"Rotatable"
+1 205.8817543577307 247.8789721200738 E E E 1 E 1 E N {0,0,0} E N "_Transparent" E E
+ E E
+6 0 0 0 0 0
+E E E
+0
+1
+LANG:10001 0 
+
+3
+"layoutAlignment" "AlignNone"
+"dashclr"N "_Transparent"
+"antiAliased" "0"
+E "// SimpleCtrlScriptStart {invalid}
+main()
+{
+  displayDevicePopup();
+}
+
+
+
+
+" 0
+ -1 1 3 2 1 E 0.5550230382864153 0 0.8260640609363064 -10.46082304825591 -55.76391033022563 1 E 20 70 380 310
+0
+3 2 "interlockIndicator" -1
+"layoutAlignment" "AlignNone"
+"" ""
+"objects/OL_Components/interlockIcon.xml" 108.3125 151.4914772727274 T 11 0.8735632183908046 0 0.8823529411764706 9.670977011494243 15.71925133689843
+1
+"$dpe""$dpe"
+3 3 "PANEL_REF2" -1
+"layoutAlignment" "AlignNone"
+"" ""
+"objects/OL_Components/barGraph.xml" 54.3800621206223 99.89249801052759 T 12 1 0 1 -1.4210854715202e-14 -24.10021721219383
+1
+"$dpe""$dpe + .rActual"
+0

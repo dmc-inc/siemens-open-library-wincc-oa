@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<panel version="14">
+ <properties>
+  <prop name="Name">
+   <prop name="en_US.utf8"></prop>
+  </prop>
+  <prop name="Size">210 110</prop>
+  <prop name="BackColor">_3DFace</prop>
+  <prop name="RefPoint">18.99999999999999 17.99999999999999</prop>
+  <prop name="InitAndTermRef">True</prop>
+  <prop name="SendClick">False</prop>
+  <prop name="RefFileName"></prop>
+  <prop name="DPI">96</prop>
+  <prop name="layoutType">None</prop>
+ </properties>
+ <events>
+  <script name="ScopeLib" isEscaped="1"><![CDATA[/////////////////////////////////////////////////////////////////////////////
+//
+//  WinCC OA Open Library
+//
+//  Author:     DMC, Inc. http://www.dmcinfo.com
+//
+//  File:       fpSystemControl.xml
+//
+//  Revisions:  01/20/17 - Leigh Mathews (leigh.mathews@dmcinfo.com) :
+//                         Created
+//              10/13/18 - Oliver Reed (oliver.reed@dmcinfo.com) :
+//                         Changed from pnl to xml
+//              10/25/18 - Leon Grossman (leon.grossman@dmcinfo.com) :
+//                         Added system control class functionality
+//              01/23/19 - Nick Leisle (nicholas.leisle@dmcinfo.com):
+//                         Implemented OL Component class into popup
+//
+//  Description: System Control Indicator faceplate
+//
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#uses &quot;OpenLibrary/Classes/Implementations/DisplayBehaviors/Common/Enumeration&quot;
+#uses &quot;OpenLibrary/Classes/Implementations/DisplayBehaviors/Common/DynamicVisibility&quot;
+#uses &quot;OpenLibrary/Classes/Implementations/ActionBehaviors/OpenPopup&quot;
+#uses &quot;OpenLibrary/Classes/Components/Component&quot;
+#uses &quot;OpenLibrary/Enums/VisibilityType&quot;
+#uses &quot;OpenLibrary/Constants/Colors&quot;
+
+
+
+private string dp = $dpe;
+
+private ComponentClass Overlay = ComponentClass(getShape(&quot;overlay&quot;));
+private ComponentClass Background = ComponentClass(getShape(&quot;background&quot;));
+private ComponentClass ModeTextField = ComponentClass(getShape(&quot;modeText&quot;));
+
+private const dyn_string modes = makeDynString(
+    &quot;Stop&quot;,
+    &quot;Auto&quot;,
+    &quot;Manual&quot;,
+    &quot;Unknown Mode&quot;,
+    &quot;Unknown Mode&quot;,
+    &quot;Unknown Mode&quot;,
+    &quot;Unknown Mode&quot;,
+    &quot;Unknown Mode&quot;,
+    &quot;Unknown Mode&quot;,
+    &quot;Unknown Mode&quot;,
+    &quot;Independent&quot;
+  );
+
+
+private const dyn_string backgroundColors = makeDynString(
+    SYSTEM_STOPPED_COLOR,
+    SYSTEM_AUTO_COLOR,
+    SYSTEM_MANUAL_COLOR,
+    UNDEFINED_VALUE_COLOR,
+    UNDEFINED_VALUE_COLOR,
+    UNDEFINED_VALUE_COLOR,
+    UNDEFINED_VALUE_COLOR,
+    UNDEFINED_VALUE_COLOR,
+    UNDEFINED_VALUE_COLOR,
+    UNDEFINED_VALUE_COLOR,
+    SYSTEM_INDEPEDENT_COLOR
+  );
+
+private const dyn_string textColors = generateContrastingColors(backgroundColors, &quot;OL_UI_Light_Text&quot;, &quot;OL_UI_Dark_Text&quot;);
+
+public void initializePanel()
+{
+  Overlay.addActionBehavior(new OpenPopupActionBehaviorClass(makeDynString(&quot;$dpe:&quot; + dp), &quot;objects/OL_DevicePopups/systemControl.xml&quot;));
+
+  ModeTextField.addDisplayBehavior(new EnumerationDisplayBehaviorClass(dp + &quot;.iMode&quot;, modes, &quot;text&quot;));
+  ModeTextField.addDisplayBehavior(new EnumerationDisplayBehaviorClass(dp + &quot;.iMode&quot;, backgroundColors, &quot;backCol&quot;));
+  ModeTextField.addDisplayBehavior(new EnumerationDisplayBehaviorClass(dp + &quot;.iMode&quot;, textColors, &quot;foreCol&quot;));
+}
+
+
+public void click()
+{
+  Overlay.invokeAction();
+}]]></script>
+  <script name="Initialize" isEscaped="1"><![CDATA[main()
+{
+  initializePanel();
+}]]></script>
+ </events>
+ <shapes>
+  <shape layerId="0" Name="background" shapeType="RECTANGLE">
+   <properties>
+    <prop name="serialId">1</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">20 20</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">OL_UI_Border</prop>
+    <prop name="BackColor">OL_UI_Menu_Bar</prop>
+    <prop name="TabOrder">0</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[none,oneColor,JoinBevel,CapProjecting,1]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[solid]</prop>
+    <prop name="Geometry">1 0 0 0.8695652173913043 -1 0.6086956521739126</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop name="Location">20 20</prop>
+    <prop name="Size">170 70</prop>
+    <prop name="CornerRadius">0</prop>
+    <prop name="Transformable">True</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="modeText" shapeType="PRIMITIVE_TEXT">
+   <properties>
+    <prop name="serialId">2</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">45 82</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">OL_UI_Light_Text</prop>
+    <prop name="BackColor">OL_SystemMode_Stopped</prop>
+    <prop name="TabOrder">1</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignBottom</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,1]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[solid]</prop>
+    <prop name="Geometry">0.7373482726423903 0 0 0.5387931034482758 -7.102240896358548 4.543103448275865</prop>
+    <prop name="Location">45 82</prop>
+    <prop name="Size">211 41</prop>
+    <prop name="Font">
+     <prop name="en_US.utf8">Segoe UI Semibold,-1,15,5,63,0,0,0,0,0,Regular</prop>
+    </prop>
+    <prop name="Text">
+     <prop name="en_US.utf8">STATUS</prop>
+    </prop>
+    <prop name="Distance">2</prop>
+    <prop name="BorderOffset">2</prop>
+    <prop name="Bordered">False</prop>
+    <prop name="Fit">False</prop>
+    <prop name="Transformable">False</prop>
+    <prop name="TextFormat">[0s,,,AlignHCenter]</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="titleText" shapeType="PRIMITIVE_TEXT">
+   <properties>
+    <prop name="serialId">3</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">45 82</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">white</prop>
+    <prop name="BackColor">OL_UI_Light_Text</prop>
+    <prop name="TabOrder">2</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignBottom</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,1]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[outline]</prop>
+    <prop name="Geometry">0.7857142857142857 0 0 0.625 -14.35714285714286 -27.25</prop>
+    <prop name="Location">45 82</prop>
+    <prop name="Size">211 41</prop>
+    <prop name="Font">
+     <prop name="en_US.utf8">Segoe UI Semibold,-1,13,5,63,0,0,0,0,0,Regular</prop>
+    </prop>
+    <prop name="Text">
+     <prop name="en_US.utf8">System Mode</prop>
+    </prop>
+    <prop name="Distance">2</prop>
+    <prop name="BorderOffset">2</prop>
+    <prop name="Bordered">False</prop>
+    <prop name="Fit">False</prop>
+    <prop name="Transformable">False</prop>
+    <prop name="TextFormat">[0s,,,AlignHCenter]</prop>
+   </properties>
+  </shape>
+  <shape layerId="7" Name="overlay" shapeType="RECTANGLE">
+   <properties>
+    <prop name="serialId">4</prop>
+    <prop name="Type">overlay</prop>
+    <prop name="RefPoint">21.99999999999999 23</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">_Transparent</prop>
+    <prop name="BackColor">_Transparent</prop>
+    <prop name="TabOrder">3</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,1]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[solid]</prop>
+    <prop name="Geometry">1.009409751924722 0 0 0.9090909090909089 -2.778443113772466 -2.90909090909092</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop name="Location">21.99999999999999 23</prop>
+    <prop name="Size">168 67</prop>
+    <prop name="CornerRadius">0</prop>
+    <prop name="Transformable">True</prop>
+   </properties>
+   <events>
+    <script name="Clicked" isEscaped="1"><![CDATA[// SimpleCtrlScriptStart {invalid}
+main()
+{
+  click();
+}
+
+
+]]></script>
+   </events>
+  </shape>
+ </shapes>
+</panel>

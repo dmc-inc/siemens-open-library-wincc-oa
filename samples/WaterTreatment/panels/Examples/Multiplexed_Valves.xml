@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<panel version="14">
+ <properties>
+  <prop name="Name">
+   <prop name="en_US.utf8"></prop>
+  </prop>
+  <prop name="Size">1764 927</prop>
+  <prop name="BackColor">_3DFace</prop>
+  <prop name="RefPoint">191.3770119879093 184.9602917803009</prop>
+  <prop name="InitAndTermRef">True</prop>
+  <prop name="SendClick">False</prop>
+  <prop name="RefFileName"></prop>
+  <prop name="DPI">96</prop>
+  <prop name="layoutType">None</prop>
+ </properties>
+ <events>
+  <script name="ScopeLib" isEscaped="1"><![CDATA[string refName = &quot;&quot;;
+string dpRoot = &quot;dbMultiplexing.Valve_Array&quot;;
+
+
+void initializeScreen() {
+  addValve(dpRoot + &quot;0&quot;, dpRoot + &quot;&quot;);
+}
+
+void addValve(string dp, string interlockDp) {
+  if (refName != &quot;&quot;) {
+    removeSymbol(myModuleName(), myPanelName(), refName);
+  }
+
+  string labelText = dpGetDescription(dp);
+  Valve_Label.text = labelText;
+  refName = &quot;MultValve&quot;;
+  addSymbol(myModuleName(), myPanelName(), &quot;objects/OL_DeviceIcons/solenoidValve.xml&quot;, refName, makeDynString(&quot;$dpe:&quot; + dp, &quot;$_interlockDpe:&quot; + interlockDp), 675, 485, 0, 2.75, 2.75);
+
+}
+]]></script>
+  <script name="Initialize" isEscaped="1"><![CDATA[main()
+{
+  initializeScreen();
+}]]></script>
+ </events>
+ <shapes>
+  <shape layerId="0" Name="Load_Valve_0" shapeType="PUSH_BUTTON">
+   <properties>
+    <prop name="serialId">16</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">1013.060372912944 265.6274979195878</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">_ButtonText</prop>
+    <prop name="BackColor">_Button</prop>
+    <prop name="TabOrder">3</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="Font">
+     <prop name="en_US.utf8">MS Shell Dlg 2,-1,27,5,50,0,0,0,0,0,Regular</prop>
+    </prop>
+    <prop name="Location">1013.060372912944 235.333390330928</prop>
+    <prop name="Size">225 90</prop>
+    <prop name="BorderStyle">Styled</prop>
+    <prop name="Text">
+     <prop name="en_US.utf8">Valve 0</prop>
+    </prop>
+   </properties>
+   <events>
+    <script name="Clicked" isEscaped="1"><![CDATA[main(mapping event)
+{
+  addValve(dpRoot + &quot;0&quot;, dpRoot + &quot;0_Interlocks&quot;);
+}]]></script>
+   </events>
+  </shape>
+  <shape layerId="0" Name="Valve_Label" shapeType="PRIMITIVE_TEXT">
+   <properties>
+    <prop name="serialId">17</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">215 195</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">_WindowText</prop>
+    <prop name="BackColor">_Window</prop>
+    <prop name="TabOrder">4</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,1]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[outline]</prop>
+    <prop name="Geometry">2.520391786787396 0 0 2.253340194891693 -83.31005433957273 -203.8457444499281</prop>
+    <prop name="Location">215 195</prop>
+    <prop name="Size">167 31</prop>
+    <prop name="Font">
+     <prop name="en_US.utf8">MS Shell Dlg 2,-1,64,5,50,0,0,0,0,0,Regular</prop>
+    </prop>
+    <prop name="Text">
+     <prop name="en_US.utf8">Valve 0</prop>
+    </prop>
+    <prop name="Distance">2</prop>
+    <prop name="BorderOffset">2</prop>
+    <prop name="Bordered">False</prop>
+    <prop name="Fit">False</prop>
+    <prop name="Transformable">False</prop>
+    <prop name="TextFormat">[0s,,,AlignLeft]</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="Load_Valve_1" shapeType="PUSH_BUTTON">
+   <properties>
+    <prop name="serialId">18</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">1013.060372912944 380.0719043656356</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">_ButtonText</prop>
+    <prop name="BackColor">_Button</prop>
+    <prop name="TabOrder">5</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="Font">
+     <prop name="en_US.utf8">MS Shell Dlg 2,-1,27,5,50,0,0,0,0,0,Regular</prop>
+    </prop>
+    <prop name="Location">1013.060372912944 349.7777967769759</prop>
+    <prop name="Size">225 89</prop>
+    <prop name="BorderStyle">Styled</prop>
+    <prop name="Text">
+     <prop name="en_US.utf8">Valve 1</prop>
+    </prop>
+   </properties>
+   <events>
+    <script name="Clicked" isEscaped="1"><![CDATA[main(mapping event)
+{
+  addValve(dpRoot + &quot;1&quot;, dpRoot + &quot;1_Interlocks&quot;);
+}]]></script>
+   </events>
+  </shape>
+  <shape layerId="0" Name="Load_Valve_2" shapeType="PUSH_BUTTON">
+   <properties>
+    <prop name="serialId">19</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">1013.060372912944 494.5163108116837</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">_ButtonText</prop>
+    <prop name="BackColor">_Button</prop>
+    <prop name="TabOrder">6</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="Font">
+     <prop name="en_US.utf8">MS Shell Dlg 2,-1,27,5,50,0,0,0,0,0,Regular</prop>
+    </prop>
+    <prop name="Location">1013.060372912944 464.222203223024</prop>
+    <prop name="Size">225 91</prop>
+    <prop name="BorderStyle">Styled</prop>
+    <prop name="Text">
+     <prop name="en_US.utf8">Valve 2</prop>
+    </prop>
+   </properties>
+   <events>
+    <script name="Clicked" isEscaped="1"><![CDATA[main(mapping event)
+{
+  addValve(dpRoot + 2, dpRoot + &quot;2_Interlocks&quot;);
+}]]></script>
+   </events>
+  </shape>
+  <shape layerId="0" Name="Load_Valve_3" shapeType="PUSH_BUTTON">
+   <properties>
+    <prop name="serialId">20</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">1013.060372912944 608.9607172577316</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">_ButtonText</prop>
+    <prop name="BackColor">_Button</prop>
+    <prop name="TabOrder">7</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="Font">
+     <prop name="en_US.utf8">MS Shell Dlg 2,-1,27,5,50,0,0,0,0,0,Regular</prop>
+    </prop>
+    <prop name="Location">1013.060372912944 578.6666096690719</prop>
+    <prop name="Size">225 89</prop>
+    <prop name="BorderStyle">Styled</prop>
+    <prop name="Text">
+     <prop name="en_US.utf8">Valve 3</prop>
+    </prop>
+   </properties>
+   <events>
+    <script name="Clicked" isEscaped="1"><![CDATA[main(mapping event)
+{
+  addValve(dpRoot + &quot;3&quot;, dpRoot + &quot;3_Interlocks&quot;);
+}]]></script>
+   </events>
+  </shape>
+  <reference referenceId="0" Name="PANEL_REF1" parentSerial="-1">
+   <properties>
+    <prop name="FileName">objects/OL_Components/colorSchemeSelector.xml</prop>
+    <prop name="Location">307.138258167023 11.00000000000006</prop>
+    <prop name="Geometry">1 0 0 1 -301.138258167023 25.99999999999994</prop>
+    <prop name="TabOrder">8</prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+   </properties>
+  </reference>
+  <shape layerId="0" Name="PRIMITIVE_TEXT3" shapeType="PRIMITIVE_TEXT">
+   <properties>
+    <prop name="serialId">23</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">40 120</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">_WindowText</prop>
+    <prop name="BackColor">_Window</prop>
+    <prop name="TabOrder">9</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,1]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[outline]</prop>
+    <prop name="Geometry">1.134328358208955 0 0 0.4074074074074074 -35.3731343283582 -38.88888888888889</prop>
+    <prop name="Location">40 120</prop>
+    <prop name="Size">131 51</prop>
+    <prop name="Font">
+     <prop name="en_US.utf8">Segoe UI Semibold,-1,16,5,63,0,0,0,0,0,Regular</prop>
+    </prop>
+    <prop name="Text">
+     <prop name="en_US.utf8">HMI Color Scheme:</prop>
+    </prop>
+    <prop name="Distance">2</prop>
+    <prop name="BorderOffset">2</prop>
+    <prop name="Bordered">False</prop>
+    <prop name="Fit">False</prop>
+    <prop name="Transformable">False</prop>
+    <prop name="TextFormat">[0s,,,AlignLeft]</prop>
+   </properties>
+  </shape>
+ </shapes>
+</panel>

@@ -1,0 +1,718 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<panel version="14">
+ <properties>
+  <prop name="Name">
+   <prop name="en_US.utf8"></prop>
+  </prop>
+  <prop name="Size">205 154</prop>
+  <prop name="BackColor">_3DFace</prop>
+  <prop name="RefPoint">-2.397725595127412 -1.499999999999986</prop>
+  <prop name="InitAndTermRef">True</prop>
+  <prop name="SendClick">False</prop>
+  <prop name="RefFileName"></prop>
+  <prop name="DPI">96</prop>
+  <prop name="layoutType">None</prop>
+ </properties>
+ <events>
+  <script name="ScopeLib" isEscaped="1"><![CDATA[/////////////////////////////////////////////////////////////////////////////
+//
+//  WinCC OA Open Library
+//
+//  Author:     DMC, Inc. http://www.dmcinfo.com
+//
+//  File:       fpVFD_Motor_Horizontal.xml
+//
+//  Revisions:  01/20/17 - Leigh Mathews (leigh.mathews@dmcinfo.com) :
+//                         Created
+//              10/13/18 - Oliver Reed (oliver.reed@dmcinfo.com) :
+//                         Changed from pnl to xml
+//              01/23/19 - Nick Leisle (nicholas.leisle@dmcinfo.com):
+//                         Implemented OL Component class into popup
+//              02/01/19 - Eric Baggen (eric.baggen@dmcinfo.com):
+//                         Combined VFD and Motor icons into a unified icon, differentiated by the DriveType property
+//
+//  Description: Horizontal VFD Motor Icon faceplate
+//
+/////////////////////////////////////////////////////////////////////////////
+
+#uses &quot;OpenLibrary/Classes/Implementations/DisplayBehaviors/Common/Enumeration&quot;
+#uses &quot;OpenLibrary/Classes/Implementations/DisplayBehaviors/Common/DynamicVisibility&quot;
+#uses &quot;OpenLibrary/Classes/Implementations/ActionBehaviors/OpenPopup&quot;
+#uses &quot;OpenLibrary/Classes/Components/Component&quot;
+#uses &quot;OpenLibrary/Constants/Colors&quot;
+#uses &quot;OpenLibrary/Enums/DirectionType&quot;
+#uses &quot;OpenLibrary/Enums/DriveType&quot;
+#uses &quot;OpenLibrary/Enums/ModeType&quot;
+#uses &quot;OpenLibrary/Enums/VisibilityType&quot;
+#uses &quot;OpenLibrary/Macros&quot;
+
+private dyn_string deviceColors = makeDynString(
+    DEVICE_STOPPED_COLOR,     // 0 = stopped
+    DEVICE_ERRORED_COLOR,     // 1 = E-stopped
+    DEVICE_ERRORED_COLOR,     // 2 = Error
+    DEVICE_FORWARD_COLOR,     // 3 = Forward / Work
+    DEVICE_REVERSE_COLOR,     // 4 = Reverse / Home
+    DEVICE_ON_FORWARD_COLOR,  // 5 = Forwarding / Working
+    DEVICE_ON_REVERSE_COLOR); // 6 = Reversing / Homing
+
+private dyn_string outlineColors = generateContrastingColors(deviceColors, DEVICE_OUTLINE_LIGHT, DEVICE_OUTLINE_DARK);
+
+private string dp = $dpe;
+private string interlockDp = $_interlockDpe;
+
+private ComponentClass Overlay = ComponentClass(getShape(&quot;overlay&quot;));
+private ComponentClass ManualIndicator = ComponentClass(getShape(&quot;indicatorManual&quot;));
+private ComponentClass Motor = ComponentClass(makeDynShape(
+    getShape(&quot;shaft&quot;),
+    getShape(&quot;shaftStep&quot;),
+    getShape(&quot;motorFront&quot;),
+    getShape(&quot;motorBody&quot;),
+    getShape(&quot;motorBase1&quot;),
+    getShape(&quot;motorBase2&quot;)));
+private ComponentClass MotorAccents = ComponentClass(makeDynShape(
+    getShape(&quot;line1&quot;),
+    getShape(&quot;line2&quot;),
+    getShape(&quot;line3&quot;),
+    getShape(&quot;line4&quot;),
+    getShape(&quot;line5&quot;),
+    getShape(&quot;line6&quot;),
+    getShape(&quot;line7&quot;),
+    getShape(&quot;line8&quot;),
+    getShape(&quot;line9&quot;),
+    getShape(&quot;line10&quot;),
+    getShape(&quot;line11&quot;)));
+
+
+
+public void initializePanel()
+{
+  string popupFilePath;
+  switch(driveType)
+  {
+    case DriveType::Contactor:
+      popupFilePath = &quot;objects/OL_DevicePopups/reversingMotor.xml&quot;;
+      break;
+    case DriveType::VFD:
+      popupFilePath = &quot;objects/OL_DevicePopups/vfd.xml&quot;;
+      break;
+  }
+
+  //Overlay and Manual Indicator behaviors
+  Overlay.addActionBehavior(new OpenPopupActionBehaviorClass(makeDynString(&quot;$dpe:&quot; + dp, &quot;$_interlockDpe:&quot; + interlockDp), popupFilePath));
+  ManualIndicator.addDisplayBehavior(new DynamicVisibilityDisplayBehaviorClass(dp + &quot;.iMode&quot;, (int)ModeType::Manual));
+
+  //Device colors
+  Motor.addDisplayBehavior(new EnumerationDisplayBehaviorClass(dp + &quot;.iStatus&quot;, deviceColors, &quot;backCol&quot;));
+  Motor.addDisplayBehavior(new EnumerationDisplayBehaviorClass(dp + &quot;.iStatus&quot;, outlineColors, &quot;foreCol&quot;));
+
+  //Accent colors
+  MotorAccents.addDisplayBehavior(new EnumerationDisplayBehaviorClass(dp + &quot;.iStatus&quot;, outlineColors, &quot;foreCol&quot;));
+}
+
+
+public void displayDevicePopup()
+{
+  Overlay.invokeAction();
+}
+
+
+
+
+//Rotation property of panel
+
+DirectionType orientation = DirectionType::Horizontal;
+#property DirectionType orientation
+private dyn_string shapes =
+    makeDynString(
+        &quot;overlay&quot;, &quot;indicatorManual&quot;,
+        &quot;shaft&quot;, &quot;shaftStep&quot;, &quot;motorFront&quot;, &quot;motorBody&quot;, &quot;motorBase1&quot;, &quot;motorBase2&quot;,
+        &quot;line1&quot;, &quot;line2&quot;, &quot;line3&quot;, &quot;line4&quot;, &quot;line5&quot;, &quot;line6&quot;, &quot;line7&quot;, &quot;line8&quot;, &quot;line9&quot;, &quot;line10&quot;, &quot;line11&quot;);
+
+
+
+
+
+public void setOrientation(DirectionType newOrientation)
+{
+  changeOrientation(newOrientation, shapes);
+}
+
+public DirectionType getOrientation()
+{
+  return orientation;
+}
+
+private DriveType driveType;
+#property DriveType driveType
+
+public void setDriveType(DriveType newDriveType)
+{
+  driveType = newDriveType;
+}
+
+public DriveType getDriveType()
+{
+  return driveType;
+}]]></script>
+  <script name="Initialize" isEscaped="1"><![CDATA[main()
+{
+  initializePanel();
+}
+
+]]></script>
+ </events>
+ <shapes>
+  <shape layerId="0" Name="motorBody" shapeType="RECTANGLE">
+   <properties>
+    <prop name="serialId">1</prop>
+    <prop name="Type">Rotatable</prop>
+    <prop name="RefPoint">192.1334952076668 195.6462292573308</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">White</prop>
+    <prop name="BackColor">OL_Device_Stopped</prop>
+    <prop name="TabOrder">1</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="sizePolicy">
+     <sizePolicy vertical="Expanding" horizontal="Ignored"/>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,2]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[solid]</prop>
+    <prop name="Geometry">0.4918593935082391 0 0 0.5531947861514316 17.49733557453883 -37.23047395534306</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop name="Location">60 100</prop>
+    <prop name="Size">291 191</prop>
+    <prop name="CornerRadius">10</prop>
+    <prop name="Transformable">True</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="motorFront" shapeType="RECTANGLE">
+   <properties>
+    <prop name="serialId">2</prop>
+    <prop name="Type">Rotatable</prop>
+    <prop name="RefPoint">1653.116706887569 194.6975169689927</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">White</prop>
+    <prop name="BackColor">OL_Device_Stopped</prop>
+    <prop name="TabOrder">2</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="Draggable">True</prop>
+    <prop name="sizePolicy">
+     <sizePolicy vertical="Expanding" horizontal="Ignored"/>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,1]</prop>
+    <prop name="BorderZoomable">True</prop>
+    <prop name="FillType">[solid]</prop>
+    <prop name="Geometry">0.04988431982842181 0 0 0.4212044512100375 29.53539747991303 -11.00746078688154</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop name="Location">60 100</prop>
+    <prop name="Size">291 191</prop>
+    <prop name="CornerRadius">6</prop>
+    <prop name="Transformable">True</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="motorBase1" shapeType="RECTANGLE">
+   <properties>
+    <prop name="serialId">3</prop>
+    <prop name="Type">Rotatable</prop>
+    <prop name="RefPoint">233.7821854789248 -169.6308645027746</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">White</prop>
+    <prop name="BackColor">OL_Device_Stopped</prop>
+    <prop name="TabOrder">3</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="sizePolicy">
+     <sizePolicy vertical="Expanding" horizontal="Ignored"/>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,1]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[solid]</prop>
+    <prop name="Geometry">1.718587113590065 0 0 0.1521549088005091 -289.7750513510025 96.8101687181712</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop name="Location">210 180</prop>
+    <prop name="Size">51 51</prop>
+    <prop name="CornerRadius">0</prop>
+    <prop name="Transformable">True</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="motorBase2" shapeType="RECTANGLE">
+   <properties>
+    <prop name="serialId">4</prop>
+    <prop name="Type">Rotatable</prop>
+    <prop name="RefPoint">233.491395806805 -228.6490361919183</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">White</prop>
+    <prop name="BackColor">OL_Device_Stopped</prop>
+    <prop name="TabOrder">4</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="sizePolicy">
+     <sizePolicy vertical="Expanding" horizontal="Ignored"/>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,1]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[solid]</prop>
+    <prop name="Geometry">2.257283288064598 0 0 0.1521549088005091 -415.0562256615774 105.7900732491057</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop name="Location">210 180</prop>
+    <prop name="Size">51 51</prop>
+    <prop name="CornerRadius">0</prop>
+    <prop name="Transformable">True</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="shaft" shapeType="RECTANGLE">
+   <properties>
+    <prop name="serialId">5</prop>
+    <prop name="Type">Rotatable</prop>
+    <prop name="RefPoint">500.3018301866059 191.5776192024222</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">White</prop>
+    <prop name="BackColor">OL_Device_Stopped</prop>
+    <prop name="TabOrder">5</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="sizePolicy">
+     <sizePolicy vertical="Expanding" horizontal="Ignored"/>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,1]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[solid]</prop>
+    <prop name="Geometry">0.3511329559211588 0 0 0.1821854829058714 -63.6724604861886 36.09733893164958</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop name="Location">210 180</prop>
+    <prop name="Size">51 51</prop>
+    <prop name="CornerRadius">0</prop>
+    <prop name="Transformable">True</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="shaftStep" shapeType="RECTANGLE">
+   <properties>
+    <prop name="serialId">6</prop>
+    <prop name="Type">Rotatable</prop>
+    <prop name="RefPoint">932.7637368964735 195.3060583128604</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">White</prop>
+    <prop name="BackColor">OL_Device_Stopped</prop>
+    <prop name="TabOrder">6</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="sizePolicy">
+     <sizePolicy vertical="Expanding" horizontal="Ignored"/>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,1]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[solid]</prop>
+    <prop name="Geometry">0.1181269723261124 0 0 0.2522568224850525 1.815443864829078 21.73271431791747</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop name="Location">210 180</prop>
+    <prop name="Size">51 51</prop>
+    <prop name="CornerRadius">0</prop>
+    <prop name="Transformable">True</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="line4" shapeType="LINE">
+   <properties>
+    <prop name="serialId">7</prop>
+    <prop name="Type">Rotatable</prop>
+    <prop name="RefPoint">112 71.00000000000001</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">White</prop>
+    <prop name="BackColor">STD_text</prop>
+    <prop name="TabOrder">7</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="sizePolicy">
+     <sizePolicy vertical="Expanding" horizontal="Ignored"/>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">True</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,2]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="Start">70.51372754345762 60.13180840730877</prop>
+    <prop name="End">139.4862724565423 60.13180840730877</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="line1" shapeType="LINE">
+   <properties>
+    <prop name="serialId">8</prop>
+    <prop name="Type">Rotatable</prop>
+    <prop name="RefPoint">112 71.00000000000001</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">White</prop>
+    <prop name="BackColor">STD_text</prop>
+    <prop name="TabOrder">8</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="sizePolicy">
+     <sizePolicy vertical="Expanding" horizontal="Ignored"/>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">True</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,2]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="Start">70.51372754345762 39.11040653355452</prop>
+    <prop name="End">139.4862724565423 39.11040653355452</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="line3" shapeType="LINE">
+   <properties>
+    <prop name="serialId">9</prop>
+    <prop name="Type">Rotatable</prop>
+    <prop name="RefPoint">112 71.00000000000001</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">White</prop>
+    <prop name="BackColor">STD_text</prop>
+    <prop name="TabOrder">9</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="sizePolicy">
+     <sizePolicy vertical="Expanding" horizontal="Ignored"/>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">True</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,2]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="Start">70.51372754345762 53.1246744493907</prop>
+    <prop name="End">139.4862724565423 53.1246744493907</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="line2" shapeType="LINE">
+   <properties>
+    <prop name="serialId">10</prop>
+    <prop name="Type">Rotatable</prop>
+    <prop name="RefPoint">112 71.00000000000001</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">White</prop>
+    <prop name="BackColor">STD_text</prop>
+    <prop name="TabOrder">10</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="sizePolicy">
+     <sizePolicy vertical="Expanding" horizontal="Ignored"/>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">True</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,2]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="Start">70.51372754345762 46.11754049147257</prop>
+    <prop name="End">139.4862724565423 46.11754049147257</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="line9" shapeType="LINE">
+   <properties>
+    <prop name="serialId">11</prop>
+    <prop name="Type">Rotatable</prop>
+    <prop name="RefPoint">112 71.00000000000001</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">White</prop>
+    <prop name="BackColor">STD_text</prop>
+    <prop name="TabOrder">11</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="sizePolicy">
+     <sizePolicy vertical="Expanding" horizontal="Ignored"/>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">True</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,2]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="Start">70.51372754345762 95.16747819689961</prop>
+    <prop name="End">139.4862724565423 95.16747819689961</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="line6" shapeType="LINE">
+   <properties>
+    <prop name="serialId">12</prop>
+    <prop name="Type">Rotatable</prop>
+    <prop name="RefPoint">112 71.00000000000001</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">White</prop>
+    <prop name="BackColor">STD_text</prop>
+    <prop name="TabOrder">12</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="sizePolicy">
+     <sizePolicy vertical="Expanding" horizontal="Ignored"/>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">True</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,2]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="Start">70.51372754345762 74.14607632314515</prop>
+    <prop name="End">139.4862724565423 74.14607632314515</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="line7" shapeType="LINE">
+   <properties>
+    <prop name="serialId">13</prop>
+    <prop name="Type">Rotatable</prop>
+    <prop name="RefPoint">112 71.00000000000001</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">White</prop>
+    <prop name="BackColor">STD_text</prop>
+    <prop name="TabOrder">13</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="sizePolicy">
+     <sizePolicy vertical="Expanding" horizontal="Ignored"/>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">True</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,2]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="Start">70.51372754345762 81.15321028106331</prop>
+    <prop name="End">139.4862724565423 81.15321028106331</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="line5" shapeType="LINE">
+   <properties>
+    <prop name="serialId">14</prop>
+    <prop name="Type">Rotatable</prop>
+    <prop name="RefPoint">112 71.00000000000001</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">White</prop>
+    <prop name="BackColor">STD_text</prop>
+    <prop name="TabOrder">14</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="sizePolicy">
+     <sizePolicy vertical="Expanding" horizontal="Ignored"/>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">True</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,2]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="Start">70.51372754345762 67.13894236522695</prop>
+    <prop name="End">139.4862724565423 67.13894236522695</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="line8" shapeType="LINE">
+   <properties>
+    <prop name="serialId">15</prop>
+    <prop name="Type">Rotatable</prop>
+    <prop name="RefPoint">112 71.00000000000001</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">White</prop>
+    <prop name="BackColor">STD_text</prop>
+    <prop name="TabOrder">15</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="sizePolicy">
+     <sizePolicy vertical="Expanding" horizontal="Ignored"/>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">True</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,2]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="Start">70.51372754345762 88.16034423898149</prop>
+    <prop name="End">139.4862724565423 88.16034423898149</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="line11" shapeType="LINE">
+   <properties>
+    <prop name="serialId">16</prop>
+    <prop name="Type">Rotatable</prop>
+    <prop name="RefPoint">112 71.00000000000001</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">White</prop>
+    <prop name="BackColor">STD_text</prop>
+    <prop name="TabOrder">16</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="sizePolicy">
+     <sizePolicy vertical="Expanding" horizontal="Ignored"/>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">True</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,2]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="Start">164.5284566696184 18.11298433412223</prop>
+    <prop name="End">164.5284566696184 122.1129843341222</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="line10" shapeType="LINE">
+   <properties>
+    <prop name="serialId">17</prop>
+    <prop name="Type">Rotatable</prop>
+    <prop name="RefPoint">112 71.00000000000001</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">White</prop>
+    <prop name="BackColor">STD_text</prop>
+    <prop name="TabOrder">17</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="sizePolicy">
+     <sizePolicy vertical="Expanding" horizontal="Ignored"/>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">True</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,2]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="Start">70.51372754345762 102.1746121548177</prop>
+    <prop name="End">139.4862724565423 102.1746121548177</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="indicatorManual" shapeType="RECTANGLE">
+   <properties>
+    <prop name="serialId">30</prop>
+    <prop name="Type">Rotatable</prop>
+    <prop name="RefPoint">117.1844278923533 71.95169250665955</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">OL_Device_Manual_Control</prop>
+    <prop name="BackColor">OL_Device_Manual_Control</prop>
+    <prop name="TabOrder">20</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,5]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[outline]</prop>
+    <prop name="Geometry">0.9523809523809524 0 0 0.9933333333333337 0.3957829596635065 -0.4720145566151928</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop name="Location">0 0</prop>
+    <prop name="Size">211 151</prop>
+    <prop name="CornerRadius">0</prop>
+    <prop name="Transformable">True</prop>
+   </properties>
+  </shape>
+  <reference referenceId="1" Name="PANEL_REF1" parentSerial="-1">
+   <properties>
+    <prop name="FileName">objects/OL_Components/interlockIcon.xml</prop>
+    <prop name="Location">178.8700981824144 172.0359113786519</prop>
+    <prop name="Geometry">1 0 0 1 -66.93259818241431 -100.7655611253748</prop>
+    <prop name="TabOrder">21</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dpe</prop>
+      <prop name="Value">$dpe</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+   </properties>
+  </reference>
+  <shape layerId="7" Name="overlay" shapeType="RECTANGLE">
+   <properties>
+    <prop name="serialId">23</prop>
+    <prop name="Type">Rotatable</prop>
+    <prop name="RefPoint">220.0926273766073 181.5444983328404</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">{0,0,0}</prop>
+    <prop name="BackColor">_Transparent</prop>
+    <prop name="TabOrder">19</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[none,oneColor,JoinBevel,CapProjecting,1]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[solid]</prop>
+    <prop name="Geometry">0.5555555555555556 0 0 0.6208333333333337 -10.27368187589293 -41.70887604830514</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop name="Location">20 70</prop>
+    <prop name="Size">361 241</prop>
+    <prop name="CornerRadius">0</prop>
+    <prop name="Transformable">True</prop>
+   </properties>
+   <events>
+    <script name="Clicked" isEscaped="1"><![CDATA[main()
+{
+  displayDevicePopup();
+}
+
+]]></script>
+   </events>
+  </shape>
+ </shapes>
+</panel>

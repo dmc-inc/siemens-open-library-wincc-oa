@@ -1,0 +1,5 @@
+enum RotationDirectionType
+{
+  CW,
+  CCW
+};

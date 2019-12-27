@@ -1,0 +1,362 @@
+# ascii dump of database
+
+# DpType
+TypeName
+udtHMI_SystemControl.udtHMI_SystemControl	1#1
+	iMode	21#2
+	bEStop	23#3
+	bError	23#4
+	bWarning	23#5
+	bAuto	23#6
+	bPB_ResetError	23#7
+udtHMI_VFD_Control.udtHMI_VFD_Control	1#1
+	iMode	21#2
+	iErrorCode	21#3
+	iStatus	21#4
+	rManualSpeedSP	22#5
+	rAutoSpeedSP	22#6
+	rActualSpeed	22#7
+	rActualCurrent	22#8
+	rActualPower	22#9
+	bPB_ResetError	23#10
+	bPB_Forward	23#11
+	bPB_Reverse	23#12
+	bPB_Stop	23#13
+	bPBEN_ResetError	23#14
+	bPBEN_Forward	23#15
+	bPBEN_Reverse	23#16
+	bPBEN_Stop	23#17
+	bForwardOn	23#18
+	bReverseOn	23#19
+	bSignalForward	23#20
+	bSignalReverse	23#21
+	bError	23#22
+	bInterlock	23#23
+udtHMI_SystemControl.udtHMI_SystemControl	1#1
+	iMode	21#2
+	bEStop	23#3
+	bError	23#4
+	bWarning	23#5
+	bAuto	23#6
+	bPB_ResetError	23#7
+udtHMI_VFD_Control.udtHMI_VFD_Control	1#1
+	iMode	21#2
+	iErrorCode	21#3
+	iStatus	21#4
+	rManualSpeedSP	22#5
+	rAutoSpeedSP	22#6
+	rActualSpeed	22#7
+	rActualCurrent	22#8
+	rActualPower	22#9
+	bPB_ResetError	23#10
+	bPB_Forward	23#11
+	bPB_Reverse	23#12
+	bPB_Stop	23#13
+	bPBEN_ResetError	23#14
+	bPBEN_Forward	23#15
+	bPBEN_Reverse	23#16
+	bPBEN_Stop	23#17
+	bForwardOn	23#18
+	bReverseOn	23#19
+	bSignalForward	23#20
+	bSignalReverse	23#21
+	bError	23#22
+	bInterlock	23#23
+udtHMI_SystemControl.udtHMI_SystemControl	1#1
+	iMode	21#2
+	bEStop	23#3
+	bError	23#4
+	bWarning	23#5
+	bAuto	23#6
+	bPB_ResetError	23#7
+udtHMI_VFD_Control.udtHMI_VFD_Control	1#1
+	iMode	21#2
+	iErrorCode	21#3
+	iStatus	21#4
+	rManualSpeedSP	22#5
+	rAutoSpeedSP	22#6
+	rActualSpeed	22#7
+	rActualCurrent	22#8
+	rActualPower	22#9
+	bPB_ResetError	23#10
+	bPB_Forward	23#11
+	bPB_Reverse	23#12
+	bPB_Stop	23#13
+	bPBEN_ResetError	23#14
+	bPBEN_Forward	23#15
+	bPBEN_Reverse	23#16
+	bPBEN_Stop	23#17
+	bForwardOn	23#18
+	bReverseOn	23#19
+	bSignalForward	23#20
+	bSignalReverse	23#21
+	bError	23#22
+	bInterlock	23#23
+udtError_VFD.udtError_VFD	1#1
+	MotorProtectorTripped	23#2
+	LocalDisconnectOff	23#3
+	ClutchTripped	23#4
+	NoContactorFeedback	23#5
+	ContactorStillOn	23#6
+	NoSignalForward	23#7
+	NoSignalReverse	23#8
+	MotorNotStopped	23#9
+	MaxFrequencyReached	23#10
+	Overcurrent	23#11
+	MotorOverload	23#12
+	VFDOverload	23#13
+	GeneralFault	23#14
+	NoCoolingFanFeedback	23#15
+udtError_Valve.udtError_Valve	1#1
+	NoHomeFeedback	23#2
+	NoWorkFeedback	23#3
+	HomeFeedbackStillActive	23#4
+	WorkFeedbackStillActive	23#5
+udtError_Valve.udtError_Valve	1#1
+	NoHomeFeedback	23#2
+	NoWorkFeedback	23#3
+	HomeFeedbackStillActive	23#4
+	WorkFeedbackStillActive	23#5
+udtError_VFD.udtError_VFD	1#1
+	MotorProtectorTripped	23#2
+	LocalDisconnectOff	23#3
+	ClutchTripped	23#4
+	NoContactorFeedback	23#5
+	ContactorStillOn	23#6
+	NoSignalForward	23#7
+	NoSignalReverse	23#8
+	MotorNotStopped	23#9
+	MaxFrequencyReached	23#10
+	Overcurrent	23#11
+	MotorOverload	23#12
+	VFDOverload	23#13
+	GeneralFault	23#14
+	NoCoolingFanFeedback	23#15
+udtError_PID.udtError_PID	1#1
+	InputOutOfRange	23#2
+	InputPERInvalid	23#3
+	ValueOscillationFailed	23#4
+	ProcessValueCloseToSetPoint	23#5
+	SetPointChangedDuringTuning	23#6
+	PretuningDuringFineTuning	23#7
+	InvalidOutputValueLimits	23#8
+	InvalidFineTuningParameter	23#9
+	InputInvalidFormat	23#10
+	OutputCalculationError	23#11
+	SamplingTimeError	23#12
+	SetPointInvalidFormat	23#13
+	ManualInvalidFormat	23#14
+	SubstituteOutputInvalidFormat	23#15
+	DisturbanceInvalidFormat	23#16
+udtError_Motor.udtError_Motor	1#1
+	MotorProtectorTripped	23#2
+	LocalDisconnectOff	23#3
+	ClutchTripped	23#4
+	NoSignalForward	23#5
+	NoSignalReverse	23#6
+	MotorNotStopped	23#7
+udtError_AnalogValve.udtError_AnalogValve	1#1
+	InvalidFeedback	23#2
+udtError_AnalogOutput.udtError_AnalogOutput	1#1
+	OutOfRange	23#2
+	ConfigurationError	23#3
+udtError_AnalogInput.udtError_AnalogInput	1#1
+	LowLowAlarm	23#2
+	HighHighAlarm	23#3
+	Invalid	23#4
+
+# ascii dump of database
+# ascii dump of database
+
+# DpType
+TypeName
+dbErrors_WaterSystem.dbErrors_WaterSystem	1#1
+	SOL_MainWater	41#2:udtError_Valve
+	VFD_WaterPump	41#3:udtError_VFD
+	AI_WaterPumpPressure	41#4:udtError_AnalogInput
+	MTR_ReturnWaterPump	41#5:udtError_Motor
+	ANA_SteamValve	41#6:udtError_AnalogValve
+	AO_CoolingCoil	41#7:udtError_AnalogOutput
+	PID_WaterTemperature	41#8:udtError_PID
+	AI_WaterTemperature	41#9:udtError_AnalogInput
+	bMainPumpHighHighPressure	23#10
+	bMainPumpHighPressure	23#11
+
+
+
+# Datapoint/DpId
+DpName	TypeName	ID
+dbErrors_WaterSystem	dbErrors_WaterSystem
+
+# PvssRangeCheck
+Manager/User	ElementName	TypeName	_pv_range.._type	_pv_range.._ignor_inv	_pv_range.._neg	_pv_range.._min	_pv_range.._max	_pv_range.._incl_min	_pv_range.._incl_max	_pv_range.._set	_pv_range.._match
+
+# AlertValue
+Manager/User	ElementName	TypeName	DetailNr	_alert_hdl.._type	_alert_hdl.._l_limit	_alert_hdl.._u_limit	_alert_hdl.._l_incl	_alert_hdl.._u_incl	_alert_hdl.._panel	_alert_hdl.._panel_param	_alert_hdl.._help	_alert_hdl.._min_prio	_alert_hdl.._class	_alert_hdl.._text	_alert_hdl.._active	_alert_hdl.._orig_hdl	_alert_hdl.._ok_range	_alert_hdl.._hyst_type	_alert_hdl.._hyst_time	_alert_hdl.._multi_instance	_alert_hdl.._l_hyst_limit	_alert_hdl.._u_hyst_limit	_alert_hdl.._text1	_alert_hdl.._text0	_alert_hdl.._ack_has_prio	_alert_hdl.._order	_alert_hdl.._dp_pattern	_alert_hdl.._dp_list	_alert_hdl.._prio_pattern	_alert_hdl.._abbr_pattern	_alert_hdl.._ack_deletes	_alert_hdl.._non_ack	_alert_hdl.._came_ack	_alert_hdl.._pair_ack	_alert_hdl.._both_ack	_alert_hdl.._impulse	_alert_hdl.._filter_threshold	_alert_hdl.._went_text	_alert_hdl.._add_text	_alert_hdl.._status64_pattern	_alert_hdl.._neg	_alert_hdl.._status64_match	_alert_hdl.._match	_alert_hdl.._set
+
+# DistributionInfo
+Manager/User	ElementName	TypeName	_distrib.._type	_distrib.._driver
+UI (1)/0	dbErrors_WaterSystem.SOL_MainWater.NoHomeFeedback		56	\1
+UI (1)/0	dbErrors_WaterSystem.SOL_MainWater.NoWorkFeedback		56	\1
+UI (1)/0	dbErrors_WaterSystem.SOL_MainWater.HomeFeedbackStillActive		56	\1
+UI (1)/0	dbErrors_WaterSystem.SOL_MainWater.WorkFeedbackStillActive		56	\1
+UI (1)/0	dbErrors_WaterSystem.VFD_WaterPump.MotorProtectorTripped		56	\1
+UI (1)/0	dbErrors_WaterSystem.VFD_WaterPump.LocalDisconnectOff		56	\1
+UI (1)/0	dbErrors_WaterSystem.VFD_WaterPump.ClutchTripped		56	\1
+UI (1)/0	dbErrors_WaterSystem.VFD_WaterPump.NoContactorFeedback		56	\1
+UI (1)/0	dbErrors_WaterSystem.VFD_WaterPump.ContactorStillOn		56	\1
+UI (1)/0	dbErrors_WaterSystem.VFD_WaterPump.NoSignalForward		56	\1
+UI (1)/0	dbErrors_WaterSystem.VFD_WaterPump.NoSignalReverse		56	\1
+UI (1)/0	dbErrors_WaterSystem.VFD_WaterPump.MotorNotStopped		56	\1
+UI (1)/0	dbErrors_WaterSystem.VFD_WaterPump.MaxFrequencyReached		56	\1
+UI (1)/0	dbErrors_WaterSystem.VFD_WaterPump.Overcurrent		56	\1
+UI (1)/0	dbErrors_WaterSystem.VFD_WaterPump.MotorOverload		56	\1
+UI (1)/0	dbErrors_WaterSystem.VFD_WaterPump.VFDOverload		56	\1
+UI (1)/0	dbErrors_WaterSystem.VFD_WaterPump.GeneralFault		56	\1
+UI (1)/0	dbErrors_WaterSystem.VFD_WaterPump.NoCoolingFanFeedback		56	\1
+UI (1)/0	dbErrors_WaterSystem.AI_WaterPumpPressure.LowLowAlarm		56	\1
+UI (1)/0	dbErrors_WaterSystem.AI_WaterPumpPressure.HighHighAlarm		56	\1
+UI (1)/0	dbErrors_WaterSystem.AI_WaterPumpPressure.Invalid		56	\1
+UI (1)/0	dbErrors_WaterSystem.MTR_ReturnWaterPump.MotorProtectorTripped		56	\1
+UI (1)/0	dbErrors_WaterSystem.MTR_ReturnWaterPump.LocalDisconnectOff		56	\1
+UI (1)/0	dbErrors_WaterSystem.MTR_ReturnWaterPump.ClutchTripped		56	\1
+UI (1)/0	dbErrors_WaterSystem.MTR_ReturnWaterPump.NoSignalForward		56	\1
+UI (1)/0	dbErrors_WaterSystem.MTR_ReturnWaterPump.NoSignalReverse		56	\1
+UI (1)/0	dbErrors_WaterSystem.MTR_ReturnWaterPump.MotorNotStopped		56	\1
+UI (1)/0	dbErrors_WaterSystem.ANA_SteamValve.InvalidFeedback		56	\1
+UI (1)/0	dbErrors_WaterSystem.AO_CoolingCoil.OutOfRange		56	\1
+UI (1)/0	dbErrors_WaterSystem.AO_CoolingCoil.ConfigurationError		56	\1
+UI (1)/0	dbErrors_WaterSystem.PID_WaterTemperature.InputOutOfRange		56	\1
+UI (1)/0	dbErrors_WaterSystem.PID_WaterTemperature.InputPERInvalid		56	\1
+UI (1)/0	dbErrors_WaterSystem.PID_WaterTemperature.ValueOscillationFailed		56	\1
+UI (1)/0	dbErrors_WaterSystem.PID_WaterTemperature.ProcessValueCloseToSetPoint		56	\1
+UI (1)/0	dbErrors_WaterSystem.PID_WaterTemperature.SetPointChangedDuringTuning		56	\1
+UI (1)/0	dbErrors_WaterSystem.PID_WaterTemperature.PretuningDuringFineTuning		56	\1
+UI (1)/0	dbErrors_WaterSystem.PID_WaterTemperature.InvalidOutputValueLimits		56	\1
+UI (1)/0	dbErrors_WaterSystem.PID_WaterTemperature.InvalidFineTuningParameter		56	\1
+UI (1)/0	dbErrors_WaterSystem.PID_WaterTemperature.InputInvalidFormat		56	\1
+UI (1)/0	dbErrors_WaterSystem.PID_WaterTemperature.OutputCalculationError		56	\1
+UI (1)/0	dbErrors_WaterSystem.PID_WaterTemperature.SamplingTimeError		56	\1
+UI (1)/0	dbErrors_WaterSystem.PID_WaterTemperature.SetPointInvalidFormat		56	\1
+UI (1)/0	dbErrors_WaterSystem.PID_WaterTemperature.ManualInvalidFormat		56	\1
+UI (1)/0	dbErrors_WaterSystem.PID_WaterTemperature.SubstituteOutputInvalidFormat		56	\1
+UI (1)/0	dbErrors_WaterSystem.PID_WaterTemperature.DisturbanceInvalidFormat		56	\1
+UI (1)/0	dbErrors_WaterSystem.AI_WaterTemperature.LowLowAlarm		56	\1
+UI (1)/0	dbErrors_WaterSystem.AI_WaterTemperature.HighHighAlarm		56	\1
+UI (1)/0	dbErrors_WaterSystem.AI_WaterTemperature.Invalid		56	\1
+UI (1)/0	dbErrors_WaterSystem.bMainPumpHighHighPressure		56	\1
+UI (1)/0	dbErrors_WaterSystem.bMainPumpHighPressure		56	\1
+
+# # Aliases/Comments
+AliasId	AliasName	CommentName
+dbErrors_WaterSystem.SOL_MainWater	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.SOL_MainWater.NoHomeFeedback	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.SOL_MainWater.NoWorkFeedback	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.SOL_MainWater.HomeFeedbackStillActive	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.SOL_MainWater.WorkFeedbackStillActive	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.VFD_WaterPump	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.VFD_WaterPump.MotorProtectorTripped	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.VFD_WaterPump.LocalDisconnectOff	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.VFD_WaterPump.ClutchTripped	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.VFD_WaterPump.NoContactorFeedback	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.VFD_WaterPump.ContactorStillOn	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.VFD_WaterPump.NoSignalForward	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.VFD_WaterPump.NoSignalReverse	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.VFD_WaterPump.MotorNotStopped	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.VFD_WaterPump.MaxFrequencyReached	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.VFD_WaterPump.Overcurrent	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.VFD_WaterPump.MotorOverload	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.VFD_WaterPump.VFDOverload	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.VFD_WaterPump.GeneralFault	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.VFD_WaterPump.NoCoolingFanFeedback	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.AI_WaterPumpPressure	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.AI_WaterPumpPressure.LowLowAlarm	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.AI_WaterPumpPressure.HighHighAlarm	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.AI_WaterPumpPressure.Invalid	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.MTR_ReturnWaterPump	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.MTR_ReturnWaterPump.MotorProtectorTripped	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.MTR_ReturnWaterPump.LocalDisconnectOff	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.MTR_ReturnWaterPump.ClutchTripped	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.MTR_ReturnWaterPump.NoSignalForward	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.MTR_ReturnWaterPump.NoSignalReverse	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.MTR_ReturnWaterPump.MotorNotStopped	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.ANA_SteamValve	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.ANA_SteamValve.InvalidFeedback	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.AO_CoolingCoil	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.AO_CoolingCoil.OutOfRange	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.AO_CoolingCoil.ConfigurationError	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.PID_WaterTemperature	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.PID_WaterTemperature.InputOutOfRange	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.PID_WaterTemperature.InputPERInvalid	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.PID_WaterTemperature.ValueOscillationFailed	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.PID_WaterTemperature.ProcessValueCloseToSetPoint	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.PID_WaterTemperature.SetPointChangedDuringTuning	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.PID_WaterTemperature.PretuningDuringFineTuning	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.PID_WaterTemperature.InvalidOutputValueLimits	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.PID_WaterTemperature.InvalidFineTuningParameter	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.PID_WaterTemperature.InputInvalidFormat	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.PID_WaterTemperature.OutputCalculationError	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.PID_WaterTemperature.SamplingTimeError	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.PID_WaterTemperature.SetPointInvalidFormat	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.PID_WaterTemperature.ManualInvalidFormat	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.PID_WaterTemperature.SubstituteOutputInvalidFormat	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.PID_WaterTemperature.DisturbanceInvalidFormat	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.AI_WaterTemperature	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.AI_WaterTemperature.LowLowAlarm	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.AI_WaterTemperature.HighHighAlarm	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.AI_WaterTemperature.Invalid	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.bMainPumpHighHighPressure	""	lt:1 LANG:10001 "@@"
+dbErrors_WaterSystem.bMainPumpHighPressure	""	lt:1 LANG:10001 "@@"
+
+# PeriphAddrMain
+Manager/User	ElementName	TypeName	_address.._type	_address.._reference	_address.._poll_group	_address.._connection	_address.._offset	_address.._subindex	_address.._direction	_address.._internal	_address.._lowlevel	_address.._active	_address.._start	_address.._interval	_address.._reply	_address.._datatype	_address.._drv_ident
+UI (1)/0	dbErrors_WaterSystem.SOL_MainWater.NoHomeFeedback		16	"dbErrors_WaterSystem.SOL_MainWater.NoHomeFeedback"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.SOL_MainWater.NoWorkFeedback		16	"dbErrors_WaterSystem.SOL_MainWater.NoWorkFeedback"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.SOL_MainWater.HomeFeedbackStillActive		16	"dbErrors_WaterSystem.SOL_MainWater.HomeFeedbackStillActive"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.SOL_MainWater.WorkFeedbackStillActive		16	"dbErrors_WaterSystem.SOL_MainWater.WorkFeedbackStillActive"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.VFD_WaterPump.MotorProtectorTripped		16	"dbErrors_WaterSystem.VFD_WaterPump.MotorProtectorTripped"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.VFD_WaterPump.LocalDisconnectOff		16	"dbErrors_WaterSystem.VFD_WaterPump.LocalDisconnectOff"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.VFD_WaterPump.ClutchTripped		16	"dbErrors_WaterSystem.VFD_WaterPump.ClutchTripped"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.VFD_WaterPump.NoContactorFeedback		16	"dbErrors_WaterSystem.VFD_WaterPump.NoContactorFeedback"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.VFD_WaterPump.ContactorStillOn		16	"dbErrors_WaterSystem.VFD_WaterPump.ContactorStillOn"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.VFD_WaterPump.NoSignalForward		16	"dbErrors_WaterSystem.VFD_WaterPump.NoSignalForward"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.VFD_WaterPump.NoSignalReverse		16	"dbErrors_WaterSystem.VFD_WaterPump.NoSignalReverse"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.VFD_WaterPump.MotorNotStopped		16	"dbErrors_WaterSystem.VFD_WaterPump.MotorNotStopped"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.VFD_WaterPump.MaxFrequencyReached		16	"dbErrors_WaterSystem.VFD_WaterPump.MaxFrequencyReached"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.VFD_WaterPump.Overcurrent		16	"dbErrors_WaterSystem.VFD_WaterPump.Overcurrent"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.VFD_WaterPump.MotorOverload		16	"dbErrors_WaterSystem.VFD_WaterPump.MotorOverload"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.VFD_WaterPump.VFDOverload		16	"dbErrors_WaterSystem.VFD_WaterPump.VFDOverload"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.VFD_WaterPump.GeneralFault		16	"dbErrors_WaterSystem.VFD_WaterPump.GeneralFault"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.VFD_WaterPump.NoCoolingFanFeedback		16	"dbErrors_WaterSystem.VFD_WaterPump.NoCoolingFanFeedback"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.AI_WaterPumpPressure.LowLowAlarm		16	"dbErrors_WaterSystem.AI_WaterPumpPressure.LowLowAlarm"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.AI_WaterPumpPressure.HighHighAlarm		16	"dbErrors_WaterSystem.AI_WaterPumpPressure.HighHighAlarm"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.AI_WaterPumpPressure.Invalid		16	"dbErrors_WaterSystem.AI_WaterPumpPressure.Invalid"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.MTR_ReturnWaterPump.MotorProtectorTripped		16	"dbErrors_WaterSystem.MTR_ReturnWaterPump.MotorProtectorTripped"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.MTR_ReturnWaterPump.LocalDisconnectOff		16	"dbErrors_WaterSystem.MTR_ReturnWaterPump.LocalDisconnectOff"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.MTR_ReturnWaterPump.ClutchTripped		16	"dbErrors_WaterSystem.MTR_ReturnWaterPump.ClutchTripped"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.MTR_ReturnWaterPump.NoSignalForward		16	"dbErrors_WaterSystem.MTR_ReturnWaterPump.NoSignalForward"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.MTR_ReturnWaterPump.NoSignalReverse		16	"dbErrors_WaterSystem.MTR_ReturnWaterPump.NoSignalReverse"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.MTR_ReturnWaterPump.MotorNotStopped		16	"dbErrors_WaterSystem.MTR_ReturnWaterPump.MotorNotStopped"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.ANA_SteamValve.InvalidFeedback		16	"dbErrors_WaterSystem.ANA_SteamValve.InvalidFeedback"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.AO_CoolingCoil.OutOfRange		16	"dbErrors_WaterSystem.AO_CoolingCoil.OutOfRange"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.AO_CoolingCoil.ConfigurationError		16	"dbErrors_WaterSystem.AO_CoolingCoil.ConfigurationError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.PID_WaterTemperature.InputOutOfRange		16	"dbErrors_WaterSystem.PID_WaterTemperature.InputOutOfRange"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.PID_WaterTemperature.InputPERInvalid		16	"dbErrors_WaterSystem.PID_WaterTemperature.InputPERInvalid"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.PID_WaterTemperature.ValueOscillationFailed		16	"dbErrors_WaterSystem.PID_WaterTemperature.ValueOscillationFailed"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.PID_WaterTemperature.ProcessValueCloseToSetPoint		16	"dbErrors_WaterSystem.PID_WaterTemperature.ProcessValueCloseToSetPoint"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.PID_WaterTemperature.SetPointChangedDuringTuning		16	"dbErrors_WaterSystem.PID_WaterTemperature.SetPointChangedDuringTuning"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.PID_WaterTemperature.PretuningDuringFineTuning		16	"dbErrors_WaterSystem.PID_WaterTemperature.PretuningDuringFineTuning"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.PID_WaterTemperature.InvalidOutputValueLimits		16	"dbErrors_WaterSystem.PID_WaterTemperature.InvalidOutputValueLimits"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.PID_WaterTemperature.InvalidFineTuningParameter		16	"dbErrors_WaterSystem.PID_WaterTemperature.InvalidFineTuningParameter"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.PID_WaterTemperature.InputInvalidFormat		16	"dbErrors_WaterSystem.PID_WaterTemperature.InputInvalidFormat"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.PID_WaterTemperature.OutputCalculationError		16	"dbErrors_WaterSystem.PID_WaterTemperature.OutputCalculationError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.PID_WaterTemperature.SamplingTimeError		16	"dbErrors_WaterSystem.PID_WaterTemperature.SamplingTimeError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.PID_WaterTemperature.SetPointInvalidFormat		16	"dbErrors_WaterSystem.PID_WaterTemperature.SetPointInvalidFormat"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.PID_WaterTemperature.ManualInvalidFormat		16	"dbErrors_WaterSystem.PID_WaterTemperature.ManualInvalidFormat"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.PID_WaterTemperature.SubstituteOutputInvalidFormat		16	"dbErrors_WaterSystem.PID_WaterTemperature.SubstituteOutputInvalidFormat"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.PID_WaterTemperature.DisturbanceInvalidFormat		16	"dbErrors_WaterSystem.PID_WaterTemperature.DisturbanceInvalidFormat"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.AI_WaterTemperature.LowLowAlarm		16	"dbErrors_WaterSystem.AI_WaterTemperature.LowLowAlarm"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.AI_WaterTemperature.HighHighAlarm		16	"dbErrors_WaterSystem.AI_WaterTemperature.HighHighAlarm"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.AI_WaterTemperature.Invalid		16	"dbErrors_WaterSystem.AI_WaterTemperature.Invalid"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.bMainPumpHighHighPressure		16	"dbErrors_WaterSystem.bMainPumpHighHighPressure"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbErrors_WaterSystem.bMainPumpHighPressure		16	"dbErrors_WaterSystem.bMainPumpHighPressure"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"

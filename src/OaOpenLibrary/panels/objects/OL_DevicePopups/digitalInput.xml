@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<panel version="14">
+ <properties>
+  <prop name="Name">
+   <prop name="en_US.utf8"></prop>
+  </prop>
+  <prop name="Size">259 220</prop>
+  <prop name="BackColor">_3DFace</prop>
+  <prop name="RefPoint">-7 -5</prop>
+  <prop name="InitAndTermRef">True</prop>
+  <prop name="SendClick">False</prop>
+  <prop name="RefFileName"></prop>
+  <prop name="WindowIcon"> </prop>
+  <prop name="DPI">96</prop>
+  <prop name="layoutType">None</prop>
+ </properties>
+ <events>
+  <script name="ScopeLib" isEscaped="1"><![CDATA[/////////////////////////////////////////////////////////////////////////////
+//
+//  WinCC OA Open Library
+//
+//  Author:     DMC, Inc. http://www.dmcinfo.com
+//
+//  File:       DevicePopups/digitalInput.xml
+//
+//  Revisions:  03/07/2019 - Nick Leisle (nicholas.leisle@dmcinfo.com):
+//                           Created
+//
+//  Description: Digital input popup
+//
+/////////////////////////////////////////////////////////////////////////////
+
+#uses &quot;OpenLibrary/Macros&quot;
+
+void initializePanel()
+{
+  resizePanelToShape(getShape(&quot;border&quot;));
+  titleBar(false);
+
+  dyn_string bannerText = makeDynString(
+      &quot;&quot;,
+      &quot;Overriding Digital Input Values&quot;);
+  dyn_string bannerColors = makeDynString(
+      OK_STATUS_COLOR,
+      WARNING_STATUS_COLOR);
+  dyn_string bannerTextColors = generateContrastingColors(bannerColors, LIGHT_TEXT_COLOR, DARK_TEXT_COLOR);
+
+  infoBanner.setParameters(bannerText, bannerColors, bannerTextColors, 1);
+}]]></script>
+  <script name="Initialize" isEscaped="1"><![CDATA[main()
+{
+  initializePanel();
+}]]></script>
+ </events>
+ <shapes>
+  <shape layerId="0" Name="border" shapeType="RECTANGLE">
+   <properties>
+    <prop name="serialId">12</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">0 0</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">{0,0,0}</prop>
+    <prop name="BackColor">OL_UI_Menu_Bar</prop>
+    <prop name="TabOrder">19</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[none,oneColor,JoinBevel,CapProjecting,1]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[solid]</prop>
+    <prop name="Geometry">1 0 0 0.7692426602106077 1.13686837721616e-13 -0.388691883372843</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop name="Location">0 0</prop>
+    <prop name="Size">226 259</prop>
+    <prop name="CornerRadius">0</prop>
+    <prop name="Transformable">True</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="background" shapeType="RECTANGLE">
+   <properties>
+    <prop name="serialId">1</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">70 110</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">OL_UI_Menu_Bar</prop>
+    <prop name="BackColor">OL_UI_Popup_Background_Color</prop>
+    <prop name="TabOrder">9</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="minimumSize">0 0</prop>
+    <prop name="maximumSize">180 -1</prop>
+    <prop name="sizePolicy">
+     <sizePolicy vertical="Fixed" horizontal="Fixed"/>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[none,oneColor,JoinRound,CapRound,3]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[solid]</prop>
+    <prop name="Geometry">1.223463687150838 0 0 0.4986338797814205 -82.64245810055854 -52.23841865932916</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop name="Location">70 110</prop>
+    <prop name="Size">180 387</prop>
+    <prop name="CornerRadius">0</prop>
+    <prop name="Transformable">True</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="LINE3" shapeType="LINE">
+   <properties>
+    <prop name="serialId">3</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">12.07921974522304 120.7363081166271</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">OL_UI_Subgroup_Color</prop>
+    <prop name="BackColor">{255,255,255}</prop>
+    <prop name="TabOrder">11</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">True</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,1]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="Start">12.07921974522303 120.7363081166271</prop>
+    <prop name="End">211.079219745223 120.7363081166271</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="LINE4" shapeType="LINE">
+   <properties>
+    <prop name="serialId">4</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">12.07921974522301 72.61130811662713</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">OL_UI_Subgroup_Color</prop>
+    <prop name="BackColor">{255,255,255}</prop>
+    <prop name="TabOrder">12</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">True</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,1]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="Start">12.07921974522301 72.61130811662713</prop>
+    <prop name="End">211.079219745223 72.61130811662713</prop>
+   </properties>
+  </shape>
+  <reference referenceId="0" Name="exitButton" parentSerial="-1">
+   <properties>
+    <prop name="FileName">objects/OL_Components/button.xml</prop>
+    <prop name="Location">292 382.625</prop>
+    <prop name="Geometry">2.662611927690488 0 0 0.8888888888888888 -764.5159655347188 -178.999802994484</prop>
+    <prop name="TabOrder">0</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dpe</prop>
+      <prop name="Value">$dpe</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <extended>
+     <prop name="buttonType" type="ENUM">11</prop>
+    </extended>
+   </properties>
+  </reference>
+  <reference referenceId="3" Name="autoButton" parentSerial="-1">
+   <properties>
+    <prop name="FileName">objects/OL_Components/button.xml</prop>
+    <prop name="Location">292 382.625</prop>
+    <prop name="Geometry">1.27027027027027 0 0 1 -357.9347972972971 -347.0136918833729</prop>
+    <prop name="TabOrder">3</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dpe</prop>
+      <prop name="Value">$dpe</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <extended>
+     <prop name="buttonType" type="ENUM">7</prop>
+    </extended>
+   </properties>
+  </reference>
+  <reference referenceId="4" Name="manualButton" parentSerial="-1">
+   <properties>
+    <prop name="FileName">objects/OL_Components/button.xml</prop>
+    <prop name="Location">292 382.625</prop>
+    <prop name="Geometry">1.27027027027027 0 0 1 -252.9189189189187 -347.0136918833729</prop>
+    <prop name="TabOrder">4</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dpe</prop>
+      <prop name="Value">$dpe</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <extended>
+     <prop name="buttonType" type="ENUM">6</prop>
+    </extended>
+   </properties>
+  </reference>
+  <reference referenceId="5" Name="titleBar" parentSerial="-1">
+   <properties>
+    <prop name="FileName">objects/OL_Components/headerBanner.xml</prop>
+    <prop name="Location">270 324.596</prop>
+    <prop name="Geometry">1 0 0 1 -266.9999999999999 -321.9846918833729</prop>
+    <prop name="TabOrder">5</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dpe</prop>
+      <prop name="Value">$dpe</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+   </properties>
+  </reference>
+  <reference referenceId="6" Name="onButton" parentSerial="-1">
+   <properties>
+    <prop name="FileName">objects/OL_Components/button.xml</prop>
+    <prop name="Location">292 382.625</prop>
+    <prop name="Geometry">1.27027027027027 0 0 1 -357.9347972972971 -298.7636918833728</prop>
+    <prop name="TabOrder">18</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dpe</prop>
+      <prop name="Value">$dpe</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <extended>
+     <prop name="buttonType" type="ENUM">13</prop>
+    </extended>
+   </properties>
+  </reference>
+  <reference referenceId="7" Name="offButton" parentSerial="-1">
+   <properties>
+    <prop name="FileName">objects/OL_Components/button.xml</prop>
+    <prop name="Location">292 382.625</prop>
+    <prop name="Geometry">1.27027027027027 0 0 1 -252.9189189189186 -298.7636918833728</prop>
+    <prop name="TabOrder">19</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dpe</prop>
+      <prop name="Value">$dpe</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <extended>
+     <prop name="buttonType" type="ENUM">14</prop>
+    </extended>
+   </properties>
+  </reference>
+  <reference referenceId="9" Name="infoBanner" parentSerial="-1">
+   <properties>
+    <prop name="FileName">objects/OL_Components/enumerationBanner.xml</prop>
+    <prop name="Location">13.999999999999 136.0842198581551</prop>
+    <prop name="Geometry">0.9899497487437224 0 0 1 0.1306532663319714 -4.195133963750322</prop>
+    <prop name="TabOrder">20</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dpe</prop>
+      <prop name="Value">$dpe + .iMode</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+   </properties>
+  </reference>
+  <shape layerId="0" Name="RECTANGLE3" shapeType="RECTANGLE">
+   <properties>
+    <prop name="serialId">21</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">110 360</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">_Transparent</prop>
+    <prop name="BackColor">OL_UI_Subgroup_Color</prop>
+    <prop name="TabOrder">20</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,0]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[solid]</prop>
+    <prop name="Geometry">2.985000000000002 0 0 1.479285714285714 -320.3500000000001 -453.93154902623</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop name="Location">110 360</prop>
+    <prop name="Size">71 26</prop>
+    <prop name="CornerRadius">0</prop>
+    <prop name="Transformable">True</prop>
+   </properties>
+  </shape>
+ </shapes>
+</panel>

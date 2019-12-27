@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<panel version="14">
+ <properties>
+  <prop name="Name">
+   <prop name="en_US.utf8"></prop>
+  </prop>
+  <prop name="Size">253 322</prop>
+  <prop name="BackColor">_3DFace</prop>
+  <prop name="RefPoint">0 0</prop>
+  <prop name="InitAndTermRef">True</prop>
+  <prop name="SendClick">False</prop>
+  <prop name="RefFileName"></prop>
+  <prop name="DPI">96</prop>
+  <prop name="layoutType">None</prop>
+ </properties>
+ <events>
+  <script name="ScopeLib" isEscaped="1"><![CDATA[/////////////////////////////////////////////////////////////////////////////
+//
+//  WinCC OA Open Library
+//
+//  Author:     DMC, Inc. http://www.dmcinfo.com
+//
+//  File:       fpIO_AnalogOutput_Popup.pnl
+//
+//  Revisions:  01/20/17 - Leigh Mathews (leigh.mathews@dmcinfo.com) :
+//                         Created
+//              01/21/19 - Nick Leisle (nicholas.leisle@dmcinfo.com):
+//                         Implemented component class into popup items
+//
+//  Description: Analog Output popup faceplate
+//
+/////////////////////////////////////////////////////////////////////////////
+#uses &quot;OpenLibrary/Constants/Colors&quot;
+#uses &quot;OpenLibrary/Macros&quot;
+
+void initializePanel()
+{
+  resizePanelToShape(getShape(&quot;border&quot;));
+  titleBar(false);
+
+  dyn_string bannerText = makeDynString(
+      &quot;Status OK&quot;,
+      &quot;Out of Range&quot;,
+      &quot;Configuration Error&quot;,
+      &quot;E-Stop&quot;);
+  dyn_string bannerColors = makeDynString(
+      OK_STATUS_COLOR,
+      ERROR_STATUS_COLOR,
+      ERROR_STATUS_COLOR,
+      ERROR_STATUS_COLOR);
+  dyn_string bannerTextColors = generateContrastingColors(bannerColors, LIGHT_TEXT_COLOR, DARK_TEXT_COLOR);
+
+  errorBanner.setParameters(bannerText, bannerColors, bannerTextColors);
+}]]></script>
+  <script name="Initialize" isEscaped="1"><![CDATA[main()
+{
+  initializePanel();
+}
+]]></script>
+ </events>
+ <shapes>
+  <shape layerId="0" Name="border" shapeType="RECTANGLE">
+   <properties>
+    <prop name="serialId">49</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">0 0</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">{0,0,0}</prop>
+    <prop name="BackColor">OL_UI_Menu_Bar</prop>
+    <prop name="TabOrder">62</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[none,oneColor,JoinBevel,CapProjecting,1]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[solid]</prop>
+    <prop name="Geometry">1 0 0 1.222614365463641 -0.3764551955338504 -0.2141175595237428</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop name="Location">0 0</prop>
+    <prop name="Size">226 259</prop>
+    <prop name="CornerRadius">0</prop>
+    <prop name="Transformable">True</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="background" shapeType="RECTANGLE">
+   <properties>
+    <prop name="serialId">22</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">70 110</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">OL_UI_Menu_Bar</prop>
+    <prop name="BackColor">OL_UI_Popup_Background_Color</prop>
+    <prop name="TabOrder">21</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="minimumSize">180 0</prop>
+    <prop name="maximumSize">180 -1</prop>
+    <prop name="sizePolicy">
+     <sizePolicy vertical="Fixed" horizontal="Fixed"/>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[none,oneColor,JoinBevel,CapProjecting,3]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[solid]</prop>
+    <prop name="Geometry">1.223463687150838 0 0 0.8016577069968752 -83.01891329609251 -85.39646532917999</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop name="Location">70 110</prop>
+    <prop name="Size">180 387</prop>
+    <prop name="CornerRadius">0</prop>
+    <prop name="Transformable">True</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="LINE2" shapeType="LINE">
+   <properties>
+    <prop name="serialId">24</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">13.62354480446615 264.6898824404763</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">OL_UI_Subgroup_Color</prop>
+    <prop name="BackColor">{255,255,255}</prop>
+    <prop name="TabOrder">23</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">True</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,1]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="Start">13.62354480446615 264.6898824404763</prop>
+    <prop name="End">212.6235448044662 264.6898824404763</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="LINE3" shapeType="LINE">
+   <properties>
+    <prop name="serialId">26</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">13.62354480446617 198.8148824404763</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">OL_UI_Subgroup_Color</prop>
+    <prop name="BackColor">{255,255,255}</prop>
+    <prop name="TabOrder">25</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">True</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,1]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="Start">13.62354480446616 198.8148824404763</prop>
+    <prop name="End">212.6235448044662 198.8148824404763</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="LINE4" shapeType="LINE">
+   <properties>
+    <prop name="serialId">27</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">13.62354480446615 137.6898824404763</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">OL_UI_Subgroup_Color</prop>
+    <prop name="BackColor">{255,255,255}</prop>
+    <prop name="TabOrder">26</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">True</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,1]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="Start">13.62354480446615 137.6898824404763</prop>
+    <prop name="End">212.6235448044662 137.6898824404763</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="PRIMITIVE_TEXT2" shapeType="PRIMITIVE_TEXT">
+   <properties>
+    <prop name="serialId">28</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">31.62540664803848 147.1898824404763</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">OL_UI_Dark_Text</prop>
+    <prop name="BackColor">_Window</prop>
+    <prop name="TabOrder">27</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="sizePolicy">
+     <sizePolicy vertical="Fixed" horizontal="Fixed"/>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,1]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[outline]</prop>
+    <prop name="Location">31.62540664803848 147.1898824404763</prop>
+    <prop name="Size">75 15</prop>
+    <prop name="Font">
+     <prop name="en_US.utf8">Segoe UI Semibold,-1,11,5,63,0,0,0,0,0,Regular</prop>
+    </prop>
+    <prop name="Text">
+     <prop name="en_US.utf8">EStop Value:</prop>
+    </prop>
+    <prop name="Distance">2</prop>
+    <prop name="BorderOffset">2</prop>
+    <prop name="Bordered">False</prop>
+    <prop name="Fit">False</prop>
+    <prop name="Transformable">True</prop>
+    <prop name="TextFormat">[0s,,,AlignRight]</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="PRIMITIVE_TEXT3" shapeType="PRIMITIVE_TEXT">
+   <properties>
+    <prop name="serialId">29</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">31.83790664803848 172.6898824404763</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">OL_UI_Dark_Text</prop>
+    <prop name="BackColor">_Window</prop>
+    <prop name="TabOrder">28</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="sizePolicy">
+     <sizePolicy vertical="Fixed" horizontal="Fixed"/>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,1]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[outline]</prop>
+    <prop name="Location">31.83790664803848 172.6898824404763</prop>
+    <prop name="Size">75 15</prop>
+    <prop name="Font">
+     <prop name="en_US.utf8">Segoe UI Semibold,-1,11,5,63,0,0,0,0,0,Regular</prop>
+    </prop>
+    <prop name="Text">
+     <prop name="en_US.utf8">Output Value:</prop>
+    </prop>
+    <prop name="Distance">2</prop>
+    <prop name="BorderOffset">2</prop>
+    <prop name="Bordered">False</prop>
+    <prop name="Fit">False</prop>
+    <prop name="Transformable">True</prop>
+    <prop name="TextFormat">[0s,,,AlignRight]</prop>
+   </properties>
+  </shape>
+  <reference referenceId="10" Name="exitButton" parentSerial="-1">
+   <properties>
+    <prop name="FileName">objects/OL_Components/button.xml</prop>
+    <prop name="Location">176.4285714285712 476.6194285714286</prop>
+    <prop name="Geometry">1.202702702702703 0 0 0.9300595238095239 -94.20615347490332 -166.1522200255101</prop>
+    <prop name="TabOrder">48</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dpe</prop>
+      <prop name="Value">$dpe</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <extended>
+     <prop name="buttonType" type="ENUM">11</prop>
+    </extended>
+   </properties>
+  </reference>
+  <reference referenceId="11" Name="resetErrorButton" parentSerial="-1">
+   <properties>
+    <prop name="FileName">objects/OL_Components/button.xml</prop>
+    <prop name="Location">176.4285714285712 476.6194285714286</prop>
+    <prop name="Geometry">1.202702702702703 0 0 0.9300595238095239 -192.9440300821872 -166.1522200255101</prop>
+    <prop name="TabOrder">49</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dpe</prop>
+      <prop name="Value">$dpe</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <extended>
+     <prop name="buttonType" type="ENUM">10</prop>
+    </extended>
+   </properties>
+  </reference>
+  <reference referenceId="12" Name="autoButton" parentSerial="-1">
+   <properties>
+    <prop name="FileName">objects/OL_Components/button.xml</prop>
+    <prop name="Location">176.4285714285712 476.6194285714286</prop>
+    <prop name="Geometry">1.27027027027027 0 0 1.004464285714286 -210.8648795030364 -444.0294506081103</prop>
+    <prop name="TabOrder">50</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dpe</prop>
+      <prop name="Value">$dpe</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <extended>
+     <prop name="buttonType" type="ENUM">7</prop>
+    </extended>
+   </properties>
+  </reference>
+  <reference referenceId="13" Name="manualButton" parentSerial="-1">
+   <properties>
+    <prop name="FileName">objects/OL_Components/button.xml</prop>
+    <prop name="Location">176.4285714285712 476.6194285714286</prop>
+    <prop name="Geometry">1.27027027027027 0 0 1.004464285714286 -105.1278474903472 -444.0294506081103</prop>
+    <prop name="TabOrder">51</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dpe</prop>
+      <prop name="Value">$dpe</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <extended>
+     <prop name="buttonType" type="ENUM">6</prop>
+    </extended>
+   </properties>
+  </reference>
+  <reference referenceId="15" Name="manualSpTextField" parentSerial="-1">
+   <properties>
+    <prop name="FileName">objects/OL_Components/textEntry.xml</prop>
+    <prop name="Location">284 251.0000000000001</prop>
+    <prop name="Geometry">1.270270270270271 0 0 1.029974489795918 -241.7567567567569 -147.7102713116496</prop>
+    <prop name="TabOrder">53</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dpe</prop>
+      <prop name="Value">$dpe + .rManualValue</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <extended>
+     <prop name="textAlignment" type="ENUM">2</prop>
+    </extended>
+   </properties>
+  </reference>
+  <reference referenceId="19" Name="header" parentSerial="-1">
+   <properties>
+    <prop name="FileName">objects/OL_Components/headerBanner.xml</prop>
+    <prop name="Location">60.87499999999963 476.834</prop>
+    <prop name="Geometry">1 0 0 1 -58.25145519553348 -474.0481175595237</prop>
+    <prop name="TabOrder">57</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dpe</prop>
+      <prop name="Value">$dpe</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+   </properties>
+  </reference>
+  <reference referenceId="20" Name="interlockBanner" parentSerial="-1">
+   <properties>
+    <prop name="FileName">objects/OL_Components/interlockBanner.xml</prop>
+    <prop name="Location">250 214.3651607142857</prop>
+    <prop name="Geometry">0.9908675799086758 0 0 1.007838745800672 -232.1938067937074 -10.25963227716891</prop>
+    <prop name="TabOrder">58</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dpe</prop>
+      <prop name="Value">$dpe</prop>
+     </prop>
+     <prop name="dollarParameter">
+      <prop name="Dollar">$interlockDpe</prop>
+      <prop name="Value">$interlockDpe</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+   </properties>
+  </reference>
+  <reference referenceId="21" Name="errorBanner" parentSerial="-1">
+   <properties>
+    <prop name="FileName">objects/OL_Components/enumerationBanner.xml</prop>
+    <prop name="Location">9.999999999999986 178.0818980189731</prop>
+    <prop name="Geometry">1 0 0 1 4.62354480446615 54.88188244047628</prop>
+    <prop name="TabOrder">59</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dpe</prop>
+      <prop name="Value">$dpe + .iErrorCode</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+   </properties>
+  </reference>
+  <reference referenceId="27" Name="EstopValueTextField" parentSerial="-1">
+   <properties>
+    <prop name="FileName">objects/OL_Components/textDisplay.xml</prop>
+    <prop name="Location">71.55267981843576 109.7443482142857</prop>
+    <prop name="Geometry">1.270055697589481 0 0 1 26.85405562121022 33.47478422619054</prop>
+    <prop name="TabOrder">61</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dpe</prop>
+      <prop name="Value">$dpe + .iEstopFunction</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <extended>
+     <prop name="textAlignment" type="ENUM">2</prop>
+    </extended>
+   </properties>
+  </reference>
+  <reference referenceId="28" Name="autoSpTextField" parentSerial="-1">
+   <properties>
+    <prop name="FileName">objects/OL_Components/textDisplay.xml</prop>
+    <prop name="Location">71.55267981843576 109.7443482142857</prop>
+    <prop name="Geometry">1.270270270270271 0 0 1 26.83848779820305 -25.74434821428569</prop>
+    <prop name="TabOrder">62</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dpe</prop>
+      <prop name="Value">$dpe + .rAutoValue</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <extended>
+     <prop name="textAlignment" type="ENUM">2</prop>
+    </extended>
+   </properties>
+  </reference>
+  <reference referenceId="29" Name="outputValueTextField" parentSerial="-1">
+   <properties>
+    <prop name="FileName">objects/OL_Components/textDisplay.xml</prop>
+    <prop name="Location">170.9383912400194 161.2351693729003</prop>
+    <prop name="Geometry">1.27027027027027 0 0 1 -99.4082267102949 7.733963067576109</prop>
+    <prop name="TabOrder">62</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dpe</prop>
+      <prop name="Value">$dpe + .rValue</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <extended>
+     <prop name="textAlignment" type="ENUM">2</prop>
+    </extended>
+   </properties>
+  </reference>
+  <shape layerId="0" Name="PRIMITIVE_TEXT6" shapeType="PRIMITIVE_TEXT">
+   <properties>
+    <prop name="serialId">62</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">40 90</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">OL_UI_Dark_Text</prop>
+    <prop name="BackColor">_Window</prop>
+    <prop name="TabOrder">63</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,1]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[outline]</prop>
+    <prop name="Geometry">1.108108108108108 0 0 0.8277363184079617 -15.89189189189187 11.15920398009939</prop>
+    <prop name="Location">40 90</prop>
+    <prop name="Size">71 21</prop>
+    <prop name="Font">
+     <prop name="en_US.utf8">Segoe UI Semibold,-1,11,5,63,0,0,0,0,0,Regular</prop>
+    </prop>
+    <prop name="Text">
+     <prop name="en_US.utf8">Auto Setpoint:</prop>
+    </prop>
+    <prop name="Distance">2</prop>
+    <prop name="BorderOffset">2</prop>
+    <prop name="Bordered">False</prop>
+    <prop name="Fit">False</prop>
+    <prop name="Transformable">False</prop>
+    <prop name="TextFormat">[0s,,,AlignRight]</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="PRIMITIVE_TEXT7" shapeType="PRIMITIVE_TEXT">
+   <properties>
+    <prop name="serialId">63</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">40 90</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">OL_UI_Dark_Text</prop>
+    <prop name="BackColor">_Window</prop>
+    <prop name="TabOrder">64</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,1]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[outline]</prop>
+    <prop name="Geometry">1.246896996399979 0 0 0.75 -31.15866960399764 45.28968882865647</prop>
+    <prop name="Location">40 90</prop>
+    <prop name="Size">71 21</prop>
+    <prop name="Font">
+     <prop name="en_US.utf8">Segoe UI Semibold,-1,11,5,63,0,0,0,0,0,Regular</prop>
+    </prop>
+    <prop name="Text">
+     <prop name="en_US.utf8">Manual Setpoint:</prop>
+    </prop>
+    <prop name="Distance">2</prop>
+    <prop name="BorderOffset">2</prop>
+    <prop name="Bordered">False</prop>
+    <prop name="Fit">False</prop>
+    <prop name="Transformable">False</prop>
+    <prop name="TextFormat">[0s,,,AlignRight]</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="LINE5" shapeType="LINE">
+   <properties>
+    <prop name="serialId">76</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">12.62354480446612 73.68988244047631</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">OL_UI_Subgroup_Color</prop>
+    <prop name="BackColor">{255,255,255}</prop>
+    <prop name="TabOrder">65</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">True</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,1]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="Start">12.62354480446612 73.68988244047631</prop>
+    <prop name="End">211.6235448044662 73.68988244047631</prop>
+   </properties>
+  </shape>
+ </shapes>
+</panel>

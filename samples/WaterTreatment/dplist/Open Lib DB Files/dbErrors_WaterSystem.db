@@ -1,0 +1,116 @@
+﻿TYPE "udtError_Valve"
+VERSION : 0.1
+   STRUCT
+      NoHomeFeedback { ExternalWritable := 'False'} : Bool;   // Home position feedback not active
+      NoWorkFeedback { ExternalWritable := 'False'} : Bool;   // Work position feedback not active
+      HomeFeedbackStillActive { ExternalWritable := 'False'} : Bool;   // Home position feedback still active
+      WorkFeedbackStillActive { ExternalWritable := 'False'} : Bool;   // Work position feedback still active
+   END_STRUCT;
+
+END_TYPE
+
+TYPE "udtError_VFD"
+VERSION : 0.1
+   STRUCT
+      MotorProtectorTripped { ExternalWritable := 'False'} : Bool;   // Motor protector tripped
+      LocalDisconnectOff { ExternalWritable := 'False'} : Bool;   // Motor disconnect off
+      ClutchTripped { ExternalWritable := 'False'} : Bool;   // Clutch tripped
+      NoContactorFeedback { ExternalWritable := 'False'} : Bool;   // No feedback from motor contactor
+      ContactorStillOn { ExternalWritable := 'False'} : Bool;   // Contactor still on
+      NoSignalForward { ExternalWritable := 'False'} : Bool;   // No signal forward from VFD
+      NoSignalReverse { ExternalWritable := 'False'} : Bool;   // No signal reverse from VFD
+      MotorNotStopped { ExternalWritable := 'False'} : Bool;   // Motor doesn't stop
+      MaxFrequencyReached { ExternalWritable := 'False'} : Bool;   // Max frequency reached
+      Overcurrent { ExternalWritable := 'False'} : Bool;   // VFD overcurrent
+      MotorOverload { ExternalWritable := 'False'} : Bool;   // Motor overload
+      VFDOverload { ExternalWritable := 'False'} : Bool;   // VFD overload
+      GeneralFault { ExternalWritable := 'False'} : Bool;   // VFD fault
+      NoCoolingFanFeedback { ExternalWritable := 'False'} : Bool;   // No feedback from cooling fan
+   END_STRUCT;
+
+END_TYPE
+
+TYPE "udtError_PID"
+VERSION : 0.1
+   STRUCT
+      InputOutOfRange { ExternalWritable := 'False'} : Bool;   // Input value is out of the configured range
+      InputPERInvalid { ExternalWritable := 'False'} : Bool;   // InputPER value is invalid
+      ValueOscillationFailed { ExternalWritable := 'False'} : Bool;   // Fine tuning - process value oscillation could not be maintained
+      ProcessValueCloseToSetPoint { ExternalWritable := 'False'} : Bool;   // Pre-tuning - process value is too close to set point
+      SetPointChangedDuringTuning { ExternalWritable := 'False'} : Bool;   // PID set point was changed during tuning
+      PretuningDuringFineTuning { ExternalWritable := 'False'} : Bool;   // Pre-tuning not allowed while fine tuning is active
+      InvalidOutputValueLimits { ExternalWritable := 'False'} : Bool;   // Pre-tuning - invalid configuration of output value limits
+      InvalidFineTuningParameter { ExternalWritable := 'False'} : Bool;   // Fine tuning - error occurred causing invalid parameters
+      InputInvalidFormat { ExternalWritable := 'False'} : Bool;   // Input value has an invalid number format
+      OutputCalculationError { ExternalWritable := 'False'} : Bool;   // Output value calculation error ocurred
+      SamplingTimeError { ExternalWritable := 'False'} : Bool;   // PID_Compact not called within sampling time of cyclic interrupt OB
+      SetPointInvalidFormat { ExternalWritable := 'False'} : Bool;   // Set point value has an invalid number format
+      ManualInvalidFormat { ExternalWritable := 'False'} : Bool;   // Manual value has an invalid number format
+      SubstituteOutputInvalidFormat { ExternalWritable := 'False'} : Bool;   // Substitute output value has an invalid number format
+      DisturbanceInvalidFormat { ExternalWritable := 'False'} : Bool;   // Disturbance value has an invlaid number format
+   END_STRUCT;
+
+END_TYPE
+
+TYPE "udtError_Motor"
+VERSION : 0.1
+   STRUCT
+      MotorProtectorTripped { ExternalWritable := 'False'} : Bool;   // Motor protector tripped
+      LocalDisconnectOff { ExternalWritable := 'False'} : Bool;   // Local disconnect off
+      ClutchTripped { ExternalWritable := 'False'} : Bool;   // Clutch tripped
+      NoSignalForward { ExternalWritable := 'False'} : Bool;   // No signal from forward contactor
+      NoSignalReverse { ExternalWritable := 'False'} : Bool;   // No signal from Reverse contactor
+      MotorNotStopped { ExternalWritable := 'False'} : Bool;   // Motor doesn't stop
+   END_STRUCT;
+
+END_TYPE
+
+TYPE "udtError_AnalogValve"
+VERSION : 0.1
+   STRUCT
+      InvalidFeedback { ExternalWritable := 'False'} : Bool;   // Valve feedback is not within command tolerance
+   END_STRUCT;
+
+END_TYPE
+
+TYPE "udtError_AnalogOutput"
+VERSION : 0.1
+   STRUCT
+      OutOfRange { ExternalWritable := 'False'} : Bool;   // Input value is outside range of engineering units
+      ConfigurationError { ExternalWritable := 'False'} : Bool;   // Engineering units are not properly configured
+   END_STRUCT;
+
+END_TYPE
+
+TYPE "udtError_AnalogInput"
+VERSION : 0.1
+   STRUCT
+      LowLowAlarm { ExternalWritable := 'False'} : Bool;   // Value below low low set point
+      HighHighAlarm { ExternalWritable := 'False'} : Bool;   // Value above high high set point
+      Invalid { ExternalWritable := 'False'} : Bool;   // Invalid input valid
+   END_STRUCT;
+
+END_TYPE
+
+DATA_BLOCK "dbErrors_WaterSystem"
+{ S7_Optimized_Access := 'FALSE' }
+VERSION : 0.1
+NON_RETAIN
+   VAR 
+      SOL_MainWater : "udtError_Valve";   // Main Water Valve
+      VFD_WaterPump : "udtError_VFD";   // Main Water Pump
+      AI_WaterPumpPressure : "udtError_AnalogInput";   // Main Water Pump Pressure
+      MTR_ReturnWaterPump : "udtError_Motor";   // Return Water Pump
+      ANA_SteamValve : "udtError_AnalogValve";   // Water Temperature Steam Valve
+      AO_CoolingCoil : "udtError_AnalogOutput";   // Water Cooling Coil
+      PID_WaterTemperature : "udtError_PID";   // Water Temperature PID
+      AI_WaterTemperature : "udtError_AnalogInput";   // Water Temperature Analog Input
+      bMainPumpHighHighPressure : Bool;   // Main Water Pump High Pressure Alarm
+      bMainPumpHighPressure : Bool;   // Main Water Pump High Pressure Warning
+   END_VAR
+
+
+BEGIN
+
+END_DATA_BLOCK
+

@@ -1,0 +1,5 @@
+enum VisibilityType
+{
+  Visible,
+  Invisible
+};

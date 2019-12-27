@@ -1,0 +1,4362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<panel version="14">
+ <properties>
+  <prop name="Name">
+   <prop name="en_US.utf8">AEScreen</prop>
+   <prop name="de_AT.utf8">AESchirm</prop>
+   <prop name="ru_RU.utf8">Панель алармов и событий</prop>
+  </prop>
+  <prop name="Size">2360 1289</prop>
+  <prop name="BackColor">OL_UI_Popup_Background_Color</prop>
+  <prop name="RefPoint">0 0</prop>
+  <prop name="InitAndTermRef">True</prop>
+  <prop name="SendClick">False</prop>
+  <prop name="RefFileName"></prop>
+  <prop name="KeepInMemory">False</prop>
+  <prop name="DPI">96</prop>
+  <prop name="layoutType">None</prop>
+ </properties>
+ <events>
+  <script name="ScopeLib" isEscaped="1"><![CDATA[#uses &quot;aec.ctl&quot;
+#uses &quot;aes.ctl&quot;
+#uses &quot;aesuser.ctl&quot;
+//#uses &quot;dpGroups.ctl&quot;
+/////// neuer Teil - nicht loeschen
+///////////////////////////////////
+
+bool g_bTableLineSynchronisation;
+unsigned g_uJumpingTimeout;
+
+int g_iLineHoldThreadTop = -2;
+int g_iLineHoldThreadBot = -2;
+
+bool gb_automaticScrollTop;
+bool gb_automaticScrollBot;
+
+bool gb_automaticScrollTimeoutTop;
+bool gb_automaticScrollTimeoutBot;
+
+bool g_initFromAES;
+dyn_anytype vst;
+dyn_anytype vstn;
+bool g_langSwitched=false;
+int g_lsActiveRegister;
+string g_lsActiveScreenConfig;
+int g_lsProportion;
+
+bool g_firstHL=true;
+int g_arHeight=1;
+
+// flag for table init - wait for start operation
+bool g_regGeneralInit=false;
+
+bool p_startAction=false;
+string p_screenConfig;
+int p_action;
+string p_fileName;
+bool p_dispSlider=true;
+
+const bool g_autoAction=true;   // flag for automatic run
+const bool g_alertRow=false;    // flag to indicate alert row mode
+
+// neu
+dyn_anytype ddaRes;
+dyn_dyn_anytype vstn;   // new vst for AESCREEN =&gt; not global
+
+dyn_string      g_visibleColumnsTop;// da die sichtbaren Spalten auch die Reihenfolge im AS bestimmen
+dyn_string      g_visibleColumnsBot;// da die sichtbaren Spalten auch die Reihenfolge im AS bestimmen
+
+// speichert die letzte selektierte  registerkarte
+// wird in regChanged event beruecksichtigt um config und configList der
+// registerkarten top/bot mit general zu synchronisieren !!!
+// ACHTUNG - bei querystart muss immer die konfiguration der activen registerkarte verwendet werden !!!!!!
+// init mit 2 =&gt; entspricht reg_general
+unsigned g_lastActiveRegister=AESREGTAB_GENERAL;
+// header names for register tabs
+dyn_string g_regHeaderNames;
+
+// reg init statusinformation - important for table init routine ( _propDP check )
+int g_regInitReady=AES_INITSTATE_WAITING;
+
+// panel global propDP names ( _AESProperties )
+string g_propDpNameTop;   // name changed from gp_propDpName
+string g_propDpNameBot;
+
+// keeps the menuinformation
+dyn_dyn_anytype g_ddam;
+
+// global variables for shape information ( for top and bottom table )
+shape g_top;
+shape g_bottom;
+// §§§ alle panelglobalen mit gp !!!!!!!! damit kein konflikt mit scriptglobalen !!!!!
+
+/////// neuer Teil - nicht loeschen / end
+/////////////////////////////////////////
+
+int firstAlertMenu, lastAlertMenu;
+int firstEventMenu, lastEventMenu;
+int firstAlertRowMenu, lastAlertRowMenu;
+//****************************
+// from as/es_init() ****begin
+
+////// alerts
+//***********
+int AS_HIST_RANGE_SEC = 3600*24;
+int E_AS_FUNCTION = 0;
+int E_AS_DP_VAL = 1;
+dyn_string AS_TYPEFILTER;   // init in aes_initMainReg()
+dyn_int AS_TYPECONST;
+
+////// events
+//***********
+int ES_HIST_RANGE_SEC = 3600*24;
+int E_ES_FUNCTION = 0;
+int E_ES_DP_VAL = 1;
+dyn_string ES_TYPEFILTER;  // init in aes_initMainReg()
+dyn_int ES_TYPECONST;
+
+// §§§ ACHTUNG jetzt noch as - in zukunft aes oder ohne prefix !!!!!!!!!!!!!!!!
+// init ==&gt; see aes_initOldScreenVariables() / initRegMain()
+int g_asMaxLinesToDisplay=0;
+int g_asMaxDpeToDisplay=0;
+int g_asMaxDpeHourToDisplay=0;
+
+// sync flags for reggeneralinit
+bool g_ctrlFlagTop=false;
+bool g_ctrlFlagBot=false;
+
+// global variables for splitscreen treating
+int  g_percent=50;
+int  g_splitMax=100;
+int  g_splitMin=0;
+int  g_splitInc=10;
+bool g_splitInit=false;
+int  g_percent;
+int  g_snap=4;
+
+int   g_both_x;
+float g_both_w;
+
+int   g_top_y;
+float g_total_h;
+
+string sDummyStringForDollarParameter1;// = $SCREENTYPE;
+string sDummyStringForDollarParameter2;// = $ACTION;
+string sDummyStringForDollarParameter3;// = $FILENAME;
+
+aes_scrollHandling(int tabType, int &amp;iLineHoldThread)
+{
+  int propMode;
+  string propDpName;
+  bool b_automaticScroll;
+ 
+  if(g_uJumpingTimeout == 0)
+    return;
+  
+  propDpName = aes_getPropDpName(AES_DPTYPE_PROPERTIES, true, tabType);
+  aes_getPropMode(propDpName, propMode);
+
+  // check if scrolling was made automatically or manually
+  if(tabType == AESTAB_TOP)
+  {
+    if(gb_automaticScrollTop == 1)
+    {
+      b_automaticScroll = 1;
+      gb_automaticScrollTop = 0;
+    }
+  }
+  else
+  {
+    if(gb_automaticScrollBot == 1)
+    {
+      b_automaticScroll = 1;
+      gb_automaticScrollBot = 0;
+    }
+  }
+
+  if(iLineHoldThread == -2)
+  {
+    iLineHoldThread = -1;
+    return;
+  }
+
+  // stop the thread only if scrolling was made manually
+  if(iLineHoldThread != -1 &amp;&amp; b_automaticScroll == 0)
+  {
+    stopThread(iLineHoldThread);
+    iLineHoldThread = -1;
+  }
+
+  // start the thread only if scrolling was made manually
+  if(propMode != AES_MODE_CLOSED &amp;&amp; b_automaticScroll == 0)
+  {
+    iLineHoldThread = startThread(&quot;aes_lineHoldTimeoutThread&quot;, tabType);
+  }
+}
+
+aes_lineHoldTimeoutThread(int tabType)
+{
+  dyn_string sortList;
+  dyn_bool sortAsc;
+  string s_propDp;
+  bool b_automaticScroll;
+  
+  do
+  {
+    delay(g_uJumpingTimeout);
+  } while( ((tabType == AESTAB_TOP) &amp;&amp; table_top.isVerticalSliderPressed()) ||
+           ((tabType == AESTAB_BOT) &amp;&amp; table_bot.isVerticalSliderPressed()) );
+
+  // check if scrolling shall be made when timeout is reached
+  if(tabType == AESTAB_TOP)
+  {
+    if(gb_automaticScrollTimeoutTop == 1)
+    {
+      b_automaticScroll = 1;
+      gb_automaticScrollTimeoutTop = 0;
+    }
+    gb_automaticScrollTop = 0;
+    
+    s_propDp = g_propDpNameTop;
+  }
+  else
+  {
+    if(gb_automaticScrollTimeoutBot == 1)
+    {
+      b_automaticScroll = 1;
+      gb_automaticScrollTimeoutBot = 0;
+    }
+    gb_automaticScrollBot = 0;
+
+    s_propDp = g_propDpNameBot;
+  }
+
+  // start automatic scrolling
+  if(b_automaticScroll == 1)
+  {
+    int i_sort;
+    bool b_sort;
+
+    if (dynlen(sortList)==0) //e.g. on delete
+    {
+      aes_getSortList( s_propDp, sortList, sortAsc );
+    }
+
+    i_sort = dynContains(sortList, &quot;__V_time&quot;);
+    if (i_sort&lt;1)
+      i_sort = dynContains(sortList, &quot;timeStr&quot;);
+
+    if(i_sort&lt;1)
+      b_sort=true;
+    else
+      b_sort = sortAsc[i_sort];
+    
+    if ( b_sort == 1 )
+      this.lineVisible = -1;
+    else
+      this.lineVisible = 0;
+  }
+  
+  if(tabType == AESTAB_TOP)
+    g_iLineHoldThreadTop = -2;
+  else
+    g_iLineHoldThreadBot = -2;
+}
+
+
+
+
+
+
+
+]]></script>
+  <script name="LangChanged" isEscaped="1"><![CDATA[main()
+{
+  int areg;
+  string sconfig;
+
+  g_langSwitched=true;
+  
+  areg=reg_main.activeRegister;
+  sconfig=cb_aesConfig.selectedText;
+
+  reg_main.visible=false;
+  table_top.visible=false;
+  table_bot.visible=false;
+
+  if( sconfig == &quot;&quot; )
+    sconfig=cb_aesConfig.text;
+
+  g_lsActiveRegister=areg;
+  g_lsActiveScreenConfig=sconfig;
+  g_lsProportion=g_percent;
+
+}]]></script>
+  <script name="Initialize" isEscaped="1"><![CDATA[main()
+{
+  if ( isDollarDefined(&quot;$SCREENTYPE&quot;) )
+    sDummyStringForDollarParameter1 = $SCREENTYPE;
+  if ( isDollarDefined(&quot;$ACTION&quot;) )
+    sDummyStringForDollarParameter2 = $ACTION;
+  if ( isDollarDefined(&quot;$FILENAME&quot;) )
+    sDummyStringForDollarParameter3 = $FILENAME;
+  
+  g_regInitReady=AES_INITSTATE_WAITING;
+  
+  dpGetCache(&quot;_Config.TimeoutJumping:_online.._value&quot;, g_uJumpingTimeout);
+}
+]]></script>
+ </events>
+ <layers>
+  <layer layerId="0">
+   <prop name="Visible">True</prop>
+   <prop name="Name">Layer1</prop>
+  </layer>
+  <layer layerId="1">
+   <prop name="Visible">True</prop>
+   <prop name="Name">Layer2</prop>
+  </layer>
+  <layer layerId="2">
+   <prop name="Visible">True</prop>
+   <prop name="Name">Layer3</prop>
+  </layer>
+  <layer layerId="3">
+   <prop name="Visible">True</prop>
+   <prop name="Name">Layer4</prop>
+  </layer>
+  <layer layerId="4">
+   <prop name="Visible">True</prop>
+   <prop name="Name">Layer5</prop>
+  </layer>
+  <layer layerId="5">
+   <prop name="Visible">True</prop>
+   <prop name="Name">Layer6</prop>
+  </layer>
+  <layer layerId="6">
+   <prop name="Visible">True</prop>
+   <prop name="Name">Layer7</prop>
+  </layer>
+  <layer layerId="7">
+   <prop name="Visible">True</prop>
+   <prop name="Name">Layer8</prop>
+  </layer>
+ </layers>
+ <shapes>
+  <reference referenceId="5" Name="PANEL_REF5" parentSerial="-1">
+   <properties>
+    <prop name="FileName">dmcAES/ButtonBarBackground.pnl</prop>
+    <prop name="Location">484 1240.5</prop>
+    <prop name="Geometry">4.707414829659319 0 0 1 -2273.38877755511 2.5</prop>
+    <prop name="TabOrder">27</prop>
+    <prop name="layoutAlignment">AlignCenter</prop>
+   </properties>
+  </reference>
+  <shape layerId="0" Name="DEBUG" shapeType="RECTANGLE">
+   <properties>
+    <prop name="serialId">26</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">0 3</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">_3DFace</prop>
+    <prop name="BackColor">_3DFace</prop>
+    <prop name="TabOrder">22</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+     <prop name="de_AT.utf8"></prop>
+     <prop name="ru_RU.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignCenter</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[solid,oneColor,JoinMiter,CapButt,1]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[solid]</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop name="Location">0 1</prop>
+    <prop name="Size">4 3</prop>
+    <prop name="CornerRadius">0</prop>
+    <prop name="Transformable">True</prop>
+   </properties>
+   <events>
+    <script name="RightMousePressed" isEscaped="1"><![CDATA[main()
+{
+  int i;
+  for ( i=0; i&lt;=table_top.columnCount(); i++)
+  {
+    table_top.columnVisibility(i) = TRUE;
+    table_top.columnWidth(i) = 20;
+    langString ls, ls2;
+    getValue(  &quot;table_top&quot;, &quot;columnHeader&quot;, i, ls); 
+    getValue(  &quot;table_top&quot;, &quot;columnName&quot;, i, ls2); 
+  }
+}
+]]></script>
+   </events>
+  </shape>
+  <shape layerId="0" Name="reg_main" shapeType="TAB">
+   <properties>
+    <prop name="serialId">0</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">2.465356509684355 504.0000000000002</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">False</prop>
+    <prop name="ForeColor">_3DText</prop>
+    <prop name="BackColor">OL_UI_Subgroup_Color</prop>
+    <prop name="TabOrder">1</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+     <prop name="de_AT.utf8"></prop>
+     <prop name="ru_RU.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignCenter</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="Font">
+     <prop name="en_US.utf8">Arial,-1,12,5,40,0,0,0,0,0</prop>
+     <prop name="de_AT.utf8">Arial,-1,12,5,40,0,0,0,0,0</prop>
+     <prop name="ru_RU.utf8">arial,-1,12,5,40,0,0,0,0,0</prop>
+    </prop>
+    <prop name="Location">5.000000000000001 1128</prop>
+    <prop name="Size">2350 111</prop>
+    <prop name="Page">
+     <prop name="Name">tab_top</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#1</prop>
+      <prop name="de_AT.utf8">#1</prop>
+      <prop name="ru_RU.utf8">#1</prop>
+     </prop>
+     <prop name="Panel"></prop>
+    </prop>
+    <prop name="Page">
+     <prop name="Name">tab_bot</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#2</prop>
+      <prop name="de_AT.utf8">#2</prop>
+      <prop name="ru_RU.utf8">#2</prop>
+     </prop>
+     <prop name="Panel"></prop>
+    </prop>
+    <prop name="Page">
+     <prop name="Name">tab_general</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#3</prop>
+      <prop name="de_AT.utf8">#3</prop>
+      <prop name="ru_RU.utf8">#3</prop>
+     </prop>
+     <prop name="Panel"></prop>
+    </prop>
+   </properties>
+   <events>
+    <script name="SelectionChanged" isEscaped="1"><![CDATA[main()
+{
+  string config, _screenType, app, pre;
+  dyn_string configList;
+  unsigned actReg;   
+  
+  // we are using the top dp for regtab treating
+  aes_changed( g_propDpNameTop, AES_CHANGED_REGTAB );  
+}]]></script>
+    <script name="Initialize" isEscaped="1"><![CDATA[main()
+{
+
+  aes_initMainReg();
+  return;
+  
+  
+  if( !g_autoAction )   // if autoAction aes_initMainReg will be called from  aes_startAction
+  { 
+    aes_initMainReg();
+  }
+  else
+  {
+    // waiting for p_startAction
+    while( !p_startAction )
+    {
+      delay( 0, 300 );
+    }
+    aes_startAction( p_screenConfig, p_action );
+  }
+  
+  
+  
+  // inform tableinitroutine that reginitroutine has finished
+  // we are misusing the type table property
+
+}
+]]></script>
+   </events>
+  </shape>
+  <shape layerId="0" Name="table_top" shapeType="TABLE">
+   <properties>
+    <prop name="serialId">1</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">4.789729781365393 5</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">False</prop>
+    <prop name="ForeColor">_WindowText</prop>
+    <prop name="BackColor">_Window</prop>
+    <prop name="TabOrder">2</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+     <prop name="de_AT.utf8"></prop>
+     <prop name="ru_RU.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignCenter</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="Font">
+     <prop name="en_US.utf8">Arial,-1,12,5,40,0,0,0,0,0</prop>
+     <prop name="de_AT.utf8">Arial,-1,12,5,40,0,0,0,0,0</prop>
+     <prop name="ru_RU.utf8">arial,-1,12,5,40,0,0,0,0,0</prop>
+    </prop>
+    <prop name="Location">5.000000000000001 5.000000000000001</prop>
+    <prop name="Size">2350 496</prop>
+    <prop name="ShowColumnHeader">True</prop>
+    <prop name="ShowRowHeader">False</prop>
+    <prop name="SortOnClick">True</prop>
+    <prop name="RowHeight">17</prop>
+    <prop name="RowHeaderWidth">30</prop>
+    <prop name="GridType">Cross</prop>
+    <prop name="VScrollBarMode">AlwaysOn</prop>
+    <prop name="HScrollBarMode">Auto</prop>
+    <prop name="Column">
+     <prop name="Name">#1</prop>
+     <prop name="Width">40</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#1</prop>
+      <prop name="de_AT.utf8">Time</prop>
+      <prop name="ru_RU.utf8">Время</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#2</prop>
+     <prop name="Width">33</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#2</prop>
+      <prop name="de_AT.utf8">#2</prop>
+      <prop name="ru_RU.utf8">#2</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#3</prop>
+     <prop name="Width">153</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#3</prop>
+      <prop name="de_AT.utf8">#3</prop>
+      <prop name="ru_RU.utf8">#3</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#4</prop>
+     <prop name="Width">232</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#4</prop>
+      <prop name="de_AT.utf8">#4</prop>
+      <prop name="ru_RU.utf8">#4</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#5</prop>
+     <prop name="Width">152</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#5</prop>
+      <prop name="de_AT.utf8">#5</prop>
+      <prop name="ru_RU.utf8">#5</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#6</prop>
+     <prop name="Width">43</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#6</prop>
+      <prop name="de_AT.utf8">#6</prop>
+      <prop name="ru_RU.utf8">#6</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#7</prop>
+     <prop name="Width">61</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#7</prop>
+      <prop name="de_AT.utf8">#7</prop>
+      <prop name="ru_RU.utf8">#7</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#8</prop>
+     <prop name="Width">32</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#8</prop>
+      <prop name="de_AT.utf8">#8</prop>
+      <prop name="ru_RU.utf8">#8</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#9</prop>
+     <prop name="Width">136</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#9</prop>
+      <prop name="de_AT.utf8">#9</prop>
+      <prop name="ru_RU.utf8">#9</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#10</prop>
+     <prop name="Width">38</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#10</prop>
+      <prop name="de_AT.utf8">#10</prop>
+      <prop name="ru_RU.utf8">#10</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#11</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#11</prop>
+      <prop name="de_AT.utf8">#11</prop>
+      <prop name="ru_RU.utf8">#11</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#12</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#12</prop>
+      <prop name="de_AT.utf8">#12</prop>
+      <prop name="ru_RU.utf8">#12</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#13</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#13</prop>
+      <prop name="de_AT.utf8">#13</prop>
+      <prop name="ru_RU.utf8">#13</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#14</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#14</prop>
+      <prop name="de_AT.utf8">#14</prop>
+      <prop name="ru_RU.utf8">#14</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#15</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#15</prop>
+      <prop name="de_AT.utf8">#15</prop>
+      <prop name="ru_RU.utf8">#15</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#16</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#16</prop>
+      <prop name="de_AT.utf8">#16</prop>
+      <prop name="ru_RU.utf8">#16</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#17</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#17</prop>
+      <prop name="de_AT.utf8">#17</prop>
+      <prop name="ru_RU.utf8">#17</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#18</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#18</prop>
+      <prop name="de_AT.utf8">#18</prop>
+      <prop name="ru_RU.utf8">#18</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#19</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#19</prop>
+      <prop name="de_AT.utf8">#19</prop>
+      <prop name="ru_RU.utf8">#19</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#20</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#20</prop>
+      <prop name="de_AT.utf8">#20</prop>
+      <prop name="ru_RU.utf8">#20</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#21</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#21</prop>
+      <prop name="de_AT.utf8">#21</prop>
+      <prop name="ru_RU.utf8">#21</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#22</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#22</prop>
+      <prop name="de_AT.utf8">#22</prop>
+      <prop name="ru_RU.utf8">#22</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#23</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#23</prop>
+      <prop name="de_AT.utf8">#23</prop>
+      <prop name="ru_RU.utf8">#23</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#24</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#24</prop>
+      <prop name="de_AT.utf8">#24</prop>
+      <prop name="ru_RU.utf8">#24</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#25</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#25</prop>
+      <prop name="de_AT.utf8">#25</prop>
+      <prop name="ru_RU.utf8">#25</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#26</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#26</prop>
+      <prop name="de_AT.utf8">#26</prop>
+      <prop name="ru_RU.utf8">#26</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#27</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#27</prop>
+      <prop name="de_AT.utf8">#27</prop>
+      <prop name="ru_RU.utf8">#27</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#28</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#28</prop>
+      <prop name="de_AT.utf8">#28</prop>
+      <prop name="ru_RU.utf8">#28</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#29</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#29</prop>
+      <prop name="de_AT.utf8">#29</prop>
+      <prop name="ru_RU.utf8">#29</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#30</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#30</prop>
+      <prop name="de_AT.utf8">#30</prop>
+      <prop name="ru_RU.utf8">#30</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#31</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#31</prop>
+      <prop name="de_AT.utf8">#31</prop>
+      <prop name="ru_RU.utf8">#31</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#32</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#32</prop>
+      <prop name="de_AT.utf8">#32</prop>
+      <prop name="ru_RU.utf8">#32</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#33</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#33</prop>
+      <prop name="de_AT.utf8">#33</prop>
+      <prop name="ru_RU.utf8">#33</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#34</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#34</prop>
+      <prop name="de_AT.utf8">#34</prop>
+      <prop name="ru_RU.utf8">#34</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#35</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#35</prop>
+      <prop name="de_AT.utf8">#35</prop>
+      <prop name="ru_RU.utf8">#35</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#36</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#36</prop>
+      <prop name="de_AT.utf8">#36</prop>
+      <prop name="ru_RU.utf8">#36</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#37</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#37</prop>
+      <prop name="de_AT.utf8">#37</prop>
+      <prop name="ru_RU.utf8">#37</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#38</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#38</prop>
+      <prop name="de_AT.utf8">#38</prop>
+      <prop name="ru_RU.utf8">#38</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#39</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#39</prop>
+      <prop name="de_AT.utf8">#39</prop>
+      <prop name="ru_RU.utf8">#39</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#40</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#40</prop>
+      <prop name="de_AT.utf8">#40</prop>
+      <prop name="ru_RU.utf8">#40</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#41</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#41</prop>
+      <prop name="de_AT.utf8">#41</prop>
+      <prop name="ru_RU.utf8">#41</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#42</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#42</prop>
+      <prop name="de_AT.utf8">#42</prop>
+      <prop name="ru_RU.utf8">#42</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#43</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#43</prop>
+      <prop name="de_AT.utf8">#43</prop>
+      <prop name="ru_RU.utf8">#43</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#44</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#44</prop>
+      <prop name="de_AT.utf8">#44</prop>
+      <prop name="ru_RU.utf8">#44</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#45</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#45</prop>
+      <prop name="de_AT.utf8">#45</prop>
+      <prop name="ru_RU.utf8">#45</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#46</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#46</prop>
+      <prop name="de_AT.utf8">#46</prop>
+      <prop name="ru_RU.utf8">#46</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#47</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#47</prop>
+      <prop name="de_AT.utf8">#47</prop>
+      <prop name="ru_RU.utf8">#47</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#48</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#48</prop>
+      <prop name="de_AT.utf8">#48</prop>
+      <prop name="ru_RU.utf8">#48</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#49</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#49</prop>
+      <prop name="de_AT.utf8">#49</prop>
+      <prop name="ru_RU.utf8">#49</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#50</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#50</prop>
+      <prop name="de_AT.utf8">#50</prop>
+      <prop name="ru_RU.utf8">#50</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#51</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#51</prop>
+      <prop name="de_AT.utf8">#51</prop>
+      <prop name="ru_RU.utf8">#51</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#52</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#52</prop>
+      <prop name="de_AT.utf8">#52</prop>
+      <prop name="ru_RU.utf8">#52</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#53</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#53</prop>
+      <prop name="de_AT.utf8">#53</prop>
+      <prop name="ru_RU.utf8">#53</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#54</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#54</prop>
+      <prop name="de_AT.utf8">#54</prop>
+      <prop name="ru_RU.utf8">#54</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#55</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#55</prop>
+      <prop name="de_AT.utf8">#55</prop>
+      <prop name="ru_RU.utf8">#55</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#56</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#56</prop>
+      <prop name="de_AT.utf8">#56</prop>
+      <prop name="ru_RU.utf8">#56</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#57</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#57</prop>
+      <prop name="de_AT.utf8">#57</prop>
+      <prop name="ru_RU.utf8">#57</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#58</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#58</prop>
+      <prop name="de_AT.utf8">#58</prop>
+      <prop name="ru_RU.utf8">#58</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#59</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#59</prop>
+      <prop name="de_AT.utf8">#59</prop>
+      <prop name="ru_RU.utf8">#59</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#60</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#60</prop>
+      <prop name="de_AT.utf8">#60</prop>
+      <prop name="ru_RU.utf8">#60</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+   </properties>
+   <events>
+    <script name="Scrolled" isEscaped="1"><![CDATA[synchronized main()
+{
+  aes_scrollHandling(AESTAB_TOP, g_iLineHoldThreadTop);
+}]]></script>
+    <script name="Clicked" isEscaped="1"><![CDATA[main(int row, string column, string value)
+{
+  mapping mTableRow;
+  
+  synchronized(g_bTableLineSynchronisation)
+  { 
+    int length;
+    dyn_anytype alertRow;  
+    
+    alertRow = this.getLineN(row);
+    
+    length = dynlen(alertRow);
+    for(int i=1; i&lt;=length; i++)
+      mTableRow[this.columnName(i-1)] = alertRow[i];
+  }
+
+  aes_doColumnClick( AESTAB_TOP, row, column, value, mTableRow );
+}
+]]></script>
+    <script name="Initialize" isEscaped="1"><![CDATA[mapping  g_mQueryReplies;
+dyn_string g_dsSystems;
+
+// neu - fuer bessere performance in callback
+bool g_firstHL;
+int g_screenType;
+// property dp name
+string g_propDp;
+// Top/Bot info
+int g_tabType;
+// column name of register tab ( to build the tabheader eg Top/Alerts/Open )
+string g_regColumn;
+// mode
+int g_valType;
+dyn_string g_systemSelections;
+
+
+//////// neue variablen fuer configMatrix, settings and table eval commands append/update/delete
+dyn_dyn_anytype g_configMatrix;
+dyn_anytype     g_configSettings;
+
+string          g_tableCmdAppend;
+string          g_tableCmdUpdate;
+string          g_tableCmdDelete;
+
+dyn_string      g_colNames;
+bool            g_useFontProp;
+int             g_dpidIdx;
+int             g_timeIdx;
+int             g_countIdx;
+
+dyn_string      g_attrList;
+
+//*****************************
+// from old as/es_init() ***begin
+
+// momentan wird das prefix as fuer beide verwendet / es routinen werden angepasst
+// arbeitsvariablen muessen scriptglobal( pro tabelle) sein !!!!!!!!!!!
+int g_asDisplayLines = 0;
+int g_asDisplayDpes = 0;
+int g_asDisplayHours = 0;
+
+// halten die werte fuer AES_TYPEFILTER/TYPECONST ( == panelglobal )
+dyn_string g_typeFilter;
+dyn_int g_typeConst;
+
+//*****************************
+// from old aes_init() *****end
+
+
+///////////////////////////////////////////////
+// from old screen ***********************begin
+// new
+bool     g_historicalData;
+int      g_historicalDataInterval;   // display interval in sec back from now / only open mode
+int      g_queryBlockedTime; // holds to queryblocktime in ms / see general settings
+dyn_bool g_colVis;           // holds the flag wheter an optional column is visible or not
+string   g_connectId;        // holds id of current query
+dyn_string g_counterConnectId; // holds numbers of Id's
+dyn_string g_closedIdf;      // new
+
+bool     g_checkAll;         // holds property setting - connect all systems
+time     g_timeLastUpdate;   // holds time of the last update
+string   g_dpCommentFilter;  // store filter
+
+bool     g_showInternals;    // value from _Config.ShowInternals
+bool     g_showInternalsA;    // value from _Config.ShowInternalDPs.Alerts
+bool     g_showInternalsAR;   // value from _Config.ShowInternalDPs.AlertRow
+bool     g_showInternalsE;    // value from _Config.ShowInternalDPs.Events
+
+unsigned g_maxClosedLines;   // max num of lines to be queried by closed protocoll
+unsigned g_state;            // alert-state filter
+
+int g_busyThread;    // id of thread, which shows busyness
+
+int g_maxLines;      // num of max lines in open protocoll
+
+// TI 14075 (discarding pending values)
+int        g_discardThread;
+time       g_discardStart;
+bool       g_discarded;
+const time MINCB_TIME = 2;
+const time MAXCB_TIME = 5;
+
+// characters for status-bits in current language
+// only for Events
+char g_Cdefault, g_Cout_prange, g_Cinvalid, g_Cfrom_GI, g_Cuserbit1, g_Cuserbit2;
+
+// IM 114080 - moved from aes.ctl
+dyn_string g_dsWorkAttr, g_dsWorkName, g_dsWorkVsbl;
+
+///////////////////////////////////////////////
+// from old screen *************************end
+
+main()
+{
+  aes_initMainTable( AESTAB_TOP );
+}
+]]></script>
+    <script name="KeyboardFocusIn" isEscaped="1"><![CDATA[main()
+{
+  reg_main.namedActiveRegister( AES_TABNAME_TOP );
+}]]></script>
+    <script name="DoubleClicked" isEscaped="1"><![CDATA[main()
+{
+  int row, column;
+  anytype value;
+  mapping mTableRow;
+  
+  synchronized(g_bTableLineSynchronisation)
+  { 
+    int length;
+    dyn_anytype alertRow;  
+        
+    // determine position 
+    getValue(&quot;&quot;,&quot;currentCell&quot;, row, column );
+    // and content of active cell !
+    getValue(&quot;&quot;,&quot;cellValue&quot;, value );
+
+    alertRow = this.getLineN(row);
+    length = dynlen(alertRow);
+    for(int i=1; i&lt;=length; i++)
+      mTableRow[this.columnName(i-1)] = alertRow[i];
+  }
+ 
+  aes_doColumnDblClick( g_propDpNameTop, row, column, value, mTableRow );
+}
+]]></script>
+    <script name="RightMousePressed" isEscaped="1"><![CDATA[main(int row, string column)
+{
+  int i, j;
+  anytype value;
+  mapping mTableMultipleRows;
+  dyn_int diSelectedLines;
+  
+  //TFS 13652: if row has no valid line function should be interrupted
+  int lines = this.lineCount();
+  if(row &gt; lines || row == -1)
+  {
+    return;
+  } 
+  
+  //IM 116642: Trigger table widget once, to avoid timing problems  
+  synchronized(g_bTableLineSynchronisation)
+  { 
+    int length;
+    dyn_anytype alertRow;  
+    
+    value=this.cellValue;
+    int iLineCnt = this.lineCount;
+    
+    dyn_string columnNames = makeDynString();
+
+    for (j=0; j&lt;iLineCnt; j++)
+    {
+
+      alertRow = this.getLineN(j);
+      length = dynlen(alertRow);
+      
+      if (dynlen(columnNames)==0) //read column names once
+      {
+        for (i = length; i&gt;0; i--)
+          columnNames[i]= this.columnName(i-1);
+      }
+    
+      mapping rowHeaderMapping;
+      
+      for(i=1; i&lt;=length; i++)
+        rowHeaderMapping[columnNames[i]] = alertRow[i];
+      
+      mTableMultipleRows[j] = rowHeaderMapping;
+    }
+    
+    diSelectedLines = this.getSelectedLines();
+  }
+
+  aes_onRightClick( g_propDpNameTop, AESTAB_TOP, this.name, row, column, value, mTableMultipleRows, diSelectedLines );
+}
+
+]]></script>
+    <script name="Acknowledge" isEscaped="1"><![CDATA[main(int iType)
+{
+  int tableAckAction;
+  mapping mTableMultipleRows;
+  
+//check if there is an column _ACKABLE_ otherwise it is the event screen and there is nothing to ack
+  
+  int iCnt, i;
+  iCnt=this.columnCount();
+  for (i=1; i&lt;=iCnt; i++)
+  {
+    if (this.columnName(i) == _ACKABLE_)
+    {
+      i = iCnt+2;
+      break;
+    }
+  }
+  if (i!=iCnt+2) //_ACKABLE_ was not found
+    return;
+
+
+
+  //added support for SINGLE ACK mode to work per line instead of on whole widget
+  tableAckAction = (iType == DPATTR_ACKTYPE_SINGLE)?AES_CHANGED_ACKSINGLE:AES_CHANGED_ACKALLVIS;
+  
+  synchronized(g_bTableLineSynchronisation)
+  {
+    aes_prepareForTableAcknowledge(tableAckAction, AESTAB_TOP, mTableMultipleRows);    
+  }
+
+  aes_acknowledgeTableFunction( this.name, &quot;1&quot;, mTableMultipleRows);
+}
+]]></script>
+   </events>
+  </shape>
+  <shape layerId="0" Name="table_bot" shapeType="TABLE">
+   <properties>
+    <prop name="serialId">17</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">10 521.8526785714287</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">False</prop>
+    <prop name="ForeColor">_WindowText</prop>
+    <prop name="BackColor">_Window</prop>
+    <prop name="TabOrder">16</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+     <prop name="de_AT.utf8"></prop>
+     <prop name="ru_RU.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignCenter</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="Font">
+     <prop name="en_US.utf8">Arial,-1,12,5,40,0,0,0,0,0</prop>
+     <prop name="de_AT.utf8">Arial,-1,12,5,40,0,0,0,0,0</prop>
+     <prop name="ru_RU.utf8">arial,-1,12,5,40,0,0,0,0,0</prop>
+    </prop>
+    <prop name="Location">5.000000000000001 500</prop>
+    <prop name="Size">2316 446</prop>
+    <prop name="ShowColumnHeader">True</prop>
+    <prop name="ShowRowHeader">False</prop>
+    <prop name="SortOnClick">True</prop>
+    <prop name="RowHeight">17</prop>
+    <prop name="RowHeaderWidth">30</prop>
+    <prop name="GridType">Cross</prop>
+    <prop name="VScrollBarMode">AlwaysOn</prop>
+    <prop name="HScrollBarMode">Auto</prop>
+    <prop name="Column">
+     <prop name="Name">#1</prop>
+     <prop name="Width">40</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#1</prop>
+      <prop name="de_AT.utf8">Time</prop>
+      <prop name="ru_RU.utf8">Время</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#2</prop>
+     <prop name="Width">33</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#2</prop>
+      <prop name="de_AT.utf8">#2</prop>
+      <prop name="ru_RU.utf8">#2</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#3</prop>
+     <prop name="Width">153</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#3</prop>
+      <prop name="de_AT.utf8">#3</prop>
+      <prop name="ru_RU.utf8">#3</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#4</prop>
+     <prop name="Width">232</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#4</prop>
+      <prop name="de_AT.utf8">#4</prop>
+      <prop name="ru_RU.utf8">#4</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#5</prop>
+     <prop name="Width">152</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#5</prop>
+      <prop name="de_AT.utf8">#5</prop>
+      <prop name="ru_RU.utf8">#5</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#6</prop>
+     <prop name="Width">43</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#6</prop>
+      <prop name="de_AT.utf8">#6</prop>
+      <prop name="ru_RU.utf8">#6</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#7</prop>
+     <prop name="Width">61</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#7</prop>
+      <prop name="de_AT.utf8">#7</prop>
+      <prop name="ru_RU.utf8">#7</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#8</prop>
+     <prop name="Width">32</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#8</prop>
+      <prop name="de_AT.utf8">#8</prop>
+      <prop name="ru_RU.utf8">#8</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#9</prop>
+     <prop name="Width">136</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#9</prop>
+      <prop name="de_AT.utf8">#9</prop>
+      <prop name="ru_RU.utf8">#9</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#10</prop>
+     <prop name="Width">38</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#10</prop>
+      <prop name="de_AT.utf8">#10</prop>
+      <prop name="ru_RU.utf8">#10</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#11</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#11</prop>
+      <prop name="de_AT.utf8">#11</prop>
+      <prop name="ru_RU.utf8">#11</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#12</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#12</prop>
+      <prop name="de_AT.utf8">#12</prop>
+      <prop name="ru_RU.utf8">#12</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#13</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#13</prop>
+      <prop name="de_AT.utf8">#13</prop>
+      <prop name="ru_RU.utf8">#13</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#14</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#14</prop>
+      <prop name="de_AT.utf8">#14</prop>
+      <prop name="ru_RU.utf8">#14</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#15</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#15</prop>
+      <prop name="de_AT.utf8">#15</prop>
+      <prop name="ru_RU.utf8">#15</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#16</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#16</prop>
+      <prop name="de_AT.utf8">#16</prop>
+      <prop name="ru_RU.utf8">#16</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#17</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#17</prop>
+      <prop name="de_AT.utf8">#17</prop>
+      <prop name="ru_RU.utf8">#17</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#18</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#18</prop>
+      <prop name="de_AT.utf8">#18</prop>
+      <prop name="ru_RU.utf8">#18</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#19</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#19</prop>
+      <prop name="de_AT.utf8">#19</prop>
+      <prop name="ru_RU.utf8">#19</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#20</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#20</prop>
+      <prop name="de_AT.utf8">#20</prop>
+      <prop name="ru_RU.utf8">#20</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#21</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#21</prop>
+      <prop name="de_AT.utf8">#21</prop>
+      <prop name="ru_RU.utf8">#21</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#22</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#22</prop>
+      <prop name="de_AT.utf8">#22</prop>
+      <prop name="ru_RU.utf8">#22</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#23</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#23</prop>
+      <prop name="de_AT.utf8">#23</prop>
+      <prop name="ru_RU.utf8">#23</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#24</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#24</prop>
+      <prop name="de_AT.utf8">#24</prop>
+      <prop name="ru_RU.utf8">#24</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#25</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#25</prop>
+      <prop name="de_AT.utf8">#25</prop>
+      <prop name="ru_RU.utf8">#25</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#26</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#26</prop>
+      <prop name="de_AT.utf8">#26</prop>
+      <prop name="ru_RU.utf8">#26</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#27</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#27</prop>
+      <prop name="de_AT.utf8">#27</prop>
+      <prop name="ru_RU.utf8">#27</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#28</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#28</prop>
+      <prop name="de_AT.utf8">#28</prop>
+      <prop name="ru_RU.utf8">#28</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#29</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#29</prop>
+      <prop name="de_AT.utf8">#29</prop>
+      <prop name="ru_RU.utf8">#29</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#30</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">True</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#30</prop>
+      <prop name="de_AT.utf8">#30</prop>
+      <prop name="ru_RU.utf8">#30</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#31</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#31</prop>
+      <prop name="de_AT.utf8">#31</prop>
+      <prop name="ru_RU.utf8">#31</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#32</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#32</prop>
+      <prop name="de_AT.utf8">#32</prop>
+      <prop name="ru_RU.utf8">#32</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#33</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#33</prop>
+      <prop name="de_AT.utf8">#33</prop>
+      <prop name="ru_RU.utf8">#33</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#34</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#34</prop>
+      <prop name="de_AT.utf8">#34</prop>
+      <prop name="ru_RU.utf8">#34</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#35</prop>
+     <prop name="Width">24</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#35</prop>
+      <prop name="de_AT.utf8">#35</prop>
+      <prop name="ru_RU.utf8">#35</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#36</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#36</prop>
+      <prop name="de_AT.utf8">#36</prop>
+      <prop name="ru_RU.utf8">#36</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#37</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#37</prop>
+      <prop name="de_AT.utf8">#37</prop>
+      <prop name="ru_RU.utf8">#37</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#38</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#38</prop>
+      <prop name="de_AT.utf8">#38</prop>
+      <prop name="ru_RU.utf8">#38</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#39</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#39</prop>
+      <prop name="de_AT.utf8">#39</prop>
+      <prop name="ru_RU.utf8">#39</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#40</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#40</prop>
+      <prop name="de_AT.utf8">#40</prop>
+      <prop name="ru_RU.utf8">#40</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#41</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#41</prop>
+      <prop name="de_AT.utf8">#41</prop>
+      <prop name="ru_RU.utf8">#41</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#42</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#42</prop>
+      <prop name="de_AT.utf8">#42</prop>
+      <prop name="ru_RU.utf8">#42</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#43</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#43</prop>
+      <prop name="de_AT.utf8">#43</prop>
+      <prop name="ru_RU.utf8">#43</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#44</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#44</prop>
+      <prop name="de_AT.utf8">#44</prop>
+      <prop name="ru_RU.utf8">#44</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#45</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#45</prop>
+      <prop name="de_AT.utf8">#45</prop>
+      <prop name="ru_RU.utf8">#45</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#46</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#46</prop>
+      <prop name="de_AT.utf8">#46</prop>
+      <prop name="ru_RU.utf8">#46</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#47</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#47</prop>
+      <prop name="de_AT.utf8">#47</prop>
+      <prop name="ru_RU.utf8">#47</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#48</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#48</prop>
+      <prop name="de_AT.utf8">#48</prop>
+      <prop name="ru_RU.utf8">#48</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#49</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#49</prop>
+      <prop name="de_AT.utf8">#49</prop>
+      <prop name="ru_RU.utf8">#49</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#50</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#50</prop>
+      <prop name="de_AT.utf8">#50</prop>
+      <prop name="ru_RU.utf8">#50</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#51</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#51</prop>
+      <prop name="de_AT.utf8">#51</prop>
+      <prop name="ru_RU.utf8">#51</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#52</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#52</prop>
+      <prop name="de_AT.utf8">#52</prop>
+      <prop name="ru_RU.utf8">#52</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#53</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#53</prop>
+      <prop name="de_AT.utf8">#53</prop>
+      <prop name="ru_RU.utf8">#53</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#54</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#54</prop>
+      <prop name="de_AT.utf8">#54</prop>
+      <prop name="ru_RU.utf8">#54</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#55</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#55</prop>
+      <prop name="de_AT.utf8">#55</prop>
+      <prop name="ru_RU.utf8">#55</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#56</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#56</prop>
+      <prop name="de_AT.utf8">#56</prop>
+      <prop name="ru_RU.utf8">#56</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#57</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#57</prop>
+      <prop name="de_AT.utf8">#57</prop>
+      <prop name="ru_RU.utf8">#57</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#58</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#58</prop>
+      <prop name="de_AT.utf8">#58</prop>
+      <prop name="ru_RU.utf8">#58</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#59</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#59</prop>
+      <prop name="de_AT.utf8">#59</prop>
+      <prop name="ru_RU.utf8">#59</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Column">
+     <prop name="Name">#60</prop>
+     <prop name="Width">0</prop>
+     <prop name="Visible">False</prop>
+     <prop name="Editable">True</prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">#60</prop>
+      <prop name="de_AT.utf8">#60</prop>
+      <prop name="ru_RU.utf8">#60</prop>
+     </prop>
+     <prop name="ToolTipText">
+      <prop name="en_US.utf8"></prop>
+      <prop name="de_AT.utf8"></prop>
+      <prop name="ru_RU.utf8"></prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+    <prop name="Row">
+     <prop name="Name"></prop>
+     <prop name="Label">
+      <prop name="en_US.utf8">row_1</prop>
+      <prop name="de_AT.utf8">row_1</prop>
+      <prop name="ru_RU.utf8">row_1</prop>
+     </prop>
+    </prop>
+   </properties>
+   <events>
+    <script name="Scrolled" isEscaped="1"><![CDATA[synchronized main()
+{
+  aes_scrollHandling(AESTAB_BOT, g_iLineHoldThreadBot);
+}]]></script>
+    <script name="Clicked" isEscaped="1"><![CDATA[main(int row, string column, string value)
+{
+  mapping mTableRow;
+  
+  synchronized(g_bTableLineSynchronisation)
+  { 
+    int length;
+    dyn_anytype alertRow;  
+    
+    alertRow = this.getLineN(row);
+    
+    length = dynlen(alertRow);
+    for(int i=1; i&lt;=length; i++)
+      mTableRow[this.columnName(i-1)] = alertRow[i];
+  }
+ 
+  aes_doColumnClick( AESTAB_BOT, row, column, value, mTableRow );
+}
+]]></script>
+    <script name="Initialize" isEscaped="1"><![CDATA[mapping  g_mQueryReplies;
+dyn_string g_dsSystems;
+
+// neu - fuer bessere performance in callback
+bool g_firstHL = true;
+bool lastSystem = false;
+int g_screenType;
+// property dp name
+string g_propDp;
+// Top/Bot info
+int g_tabType;
+// column name of register tab ( to build the tabheader eg Top/Alerts/Open )
+string g_regColumn;
+// mode
+int g_valType;
+dyn_string g_systemSelections;
+
+//////// neue variablen fuer configMatrix, settings and table eval commands append/update/delete
+dyn_dyn_anytype g_configMatrix;
+dyn_anytype     g_configSettings;
+
+string          g_tableCmdAppend;
+string          g_tableCmdUpdate;
+string          g_tableCmdDelete;
+
+dyn_string      g_colNames;
+bool            g_useFontProp;
+int             g_dpidIdx;
+int             g_timeIdx;
+int             g_countIdx;
+
+dyn_string      g_attrList;
+
+//*****************************
+// from old as/es_init() ***begin
+
+// momentan wird das prefix as fuer beide verwendet / es routinen werden angepasst
+// arbeitsvariablen muessen scriptglobal( pro tabelle) sein !!!!!!!!!!!
+int g_asDisplayLines = 0;
+int g_asDisplayDpes = 0;
+int g_asDisplayHours = 0;
+
+// halten die werte fuer AES_TYPEFILTER/TYPECONST ( == panelglobal )
+dyn_string g_typeFilter;
+dyn_int g_typeConst;
+
+//*****************************
+// from old aes_init() *****end
+
+
+///////////////////////////////////////////////
+// from old screen ***********************begin
+// new
+bool     g_historicalData;
+int      g_historicalDataInterval;   // display interval in sec back from now / only open mode 
+int      g_queryBlockedTime; // holds to queryblocktime in ms / see general settings
+dyn_bool g_colVis;           // holds the flag wheter an optional column is visible or not
+string   g_connectId;        // holds id of current query
+dyn_string g_counterConnectId; // holds numbers of Id's
+dyn_string g_closedIdf;      // new
+
+bool     g_checkAll;         // holds property setting - connect all systems
+time     g_timeLastUpdate;   // holds time of the last update
+string   g_dpCommentFilter;  // store filter
+
+bool     g_showInternals;    // value from _Config.ShowInternals
+
+bool     g_showInternalsA;    // value from _Config.ShowInternalDPs.Alerts
+bool     g_showInternalsAR;   // value from _Config.ShowInternalDPs.AlertRow
+bool     g_showInternalsE;    // value from _Config.ShowInternalDPs.Events
+
+unsigned g_maxClosedLines;   // max num of lines to be queried by closed protocoll
+unsigned g_state;            // alert-state filter
+
+int g_busyThread;    // id of thread, which shows busyness
+
+int g_maxLines;      // num of max lines in open protocoll
+
+// TI 14075 (discarding pending values)
+int        g_discardThread;
+time       g_discardStart;
+bool       g_discarded;
+const time MINCB_TIME = 2;
+const time MAXCB_TIME = 5;
+
+// characters for status-bits in current language
+// only for Events
+char g_Cdefault, g_Cout_prange, g_Cinvalid, g_Cfrom_GI, g_Cuserbit1, g_Cuserbit2;
+
+// IM 114080 - moved from aes.ctl
+dyn_string g_dsWorkAttr, g_dsWorkName, g_dsWorkVsbl;
+
+///////////////////////////////////////////////
+// from old screen *************************end
+
+main()
+{
+  aes_initMainTable( AESTAB_BOT );
+}
+]]></script>
+    <script name="KeyboardFocusIn" isEscaped="1"><![CDATA[main()
+{
+  reg_main.namedActiveRegister( AES_TABNAME_BOT );
+}]]></script>
+    <script name="DoubleClicked" isEscaped="1"><![CDATA[main()
+{
+  int row, column;
+  anytype value;
+  mapping mTableRow;
+  
+  synchronized(g_bTableLineSynchronisation)
+  { 
+    int length;
+    dyn_anytype alertRow;  
+        
+    // determine position 
+    getValue(&quot;&quot;,&quot;currentCell&quot;, row, column );
+    // and content of active cell !
+    getValue(&quot;&quot;,&quot;cellValue&quot;, value );
+
+    alertRow = this.getLineN(row);
+    length = dynlen(alertRow);
+    for(int i=1; i&lt;=length; i++)
+      mTableRow[this.columnName(i-1)] = alertRow[i];
+  }
+
+  aes_doColumnDblClick( g_propDpNameBot, row, column, value, mTableRow );
+}
+]]></script>
+    <script name="RightMousePressed" isEscaped="1"><![CDATA[main(int row, string column)
+{
+  int i, j;
+  anytype value;
+  mapping mTableMultipleRows;
+  dyn_int diSelectedLines;
+  
+  //TFS 13652: if row has no valid line function should be interrupted
+  int lines = this.lineCount();
+  if(row &gt; lines || row == -1)
+  {
+    return;
+  } 
+  
+  //IM 116642: Trigger table widget once, to avoid timing problems 
+  synchronized(g_bTableLineSynchronisation)
+  { 
+    int length;
+    dyn_anytype alertRow;  
+    
+    value=this.cellValue;
+    int iLineCnt = this.lineCount;
+    
+    dyn_string columnNames = makeDynString();
+
+    for (j=0; j&lt;iLineCnt; j++)
+    {
+
+      alertRow = this.getLineN(j);
+      length = dynlen(alertRow);
+      
+      if (dynlen(columnNames)==0) //read column names once
+      {
+        for (i = length; i&gt;0; i--)
+          columnNames[i]= this.columnName(i-1);
+      }
+    
+      mapping rowHeaderMapping;
+      
+      for(i=1; i&lt;=length; i++)
+        rowHeaderMapping[columnNames[i]] = alertRow[i];
+      
+      mTableMultipleRows[j] = rowHeaderMapping;
+    }
+    
+    diSelectedLines = this.getSelectedLines();
+  }
+
+  aes_onRightClick( g_propDpNameBot, AESTAB_BOT, this.name, row, column, value, mTableMultipleRows, diSelectedLines );
+}
+
+]]></script>
+    <script name="Acknowledge" isEscaped="1"><![CDATA[main(int iType)
+{
+  int tableAckAction;
+  mapping mTableMultipleRows;
+  
+//check if there is an column _ACKABLE_ otherwise it is the event screen and there is nothing to ack
+  
+  int iCnt, i;
+  iCnt=this.columnCount();
+  for (i=1; i&lt;=iCnt; i++)
+  {
+    if (this.columnName(i-1) == _ACKABLE_)
+    {
+      i = iCnt+2;
+      break;
+    }
+  }
+  if (i!=iCnt+2) //_ACKABLE_ was not found
+    return;
+
+
+  //added support for SINGLE ACK mode to work per line instead of on whole widget
+  tableAckAction = (iType == DPATTR_ACKTYPE_SINGLE)?AES_CHANGED_ACKSINGLE:AES_CHANGED_ACKALLVIS;
+  
+  synchronized(g_bTableLineSynchronisation)
+  {
+    aes_prepareForTableAcknowledge(tableAckAction, AESTAB_BOT, mTableMultipleRows);    
+  }
+  
+  aes_acknowledgeTableFunction( this.name, &quot;1&quot;, mTableMultipleRows);
+}
+
+
+]]></script>
+   </events>
+  </shape>
+  <shape layerId="0" Name="cb_aesConfig" shapeType="COMBO_BOX">
+   <properties>
+    <prop name="serialId">19</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">2011 1250</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">False</prop>
+    <prop name="ForeColor">{0,0,0}</prop>
+    <prop name="BackColor">_Window</prop>
+    <prop name="TabOrder">17</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8">Screen configuration</prop>
+     <prop name="de_AT.utf8">Schirmkonfigutation</prop>
+     <prop name="ru_RU.utf8">Конфигурация экрана</prop>
+    </prop>
+    <prop name="layoutAlignment">AlignCenter</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="Font">
+     <prop name="en_US.utf8">Arial,-1,13,5,40,0,0,0,0,0</prop>
+     <prop name="de_AT.utf8">Arial,-1,13,5,40,0,0,0,0,0</prop>
+     <prop name="ru_RU.utf8">Arial,-1,13,5,40,0,0,0,0,0</prop>
+    </prop>
+    <prop name="Location">2011 1251</prop>
+    <prop name="Size">171 24</prop>
+    <prop name="Listitems"/>
+    <prop name="Editable">False</prop>
+   </properties>
+   <events>
+    <script name="Changed" isEscaped="1"><![CDATA[main()
+{
+  string screenConfigName;
+  
+  screenConfigName=this.text;
+  aes_screenConfigChanged( screenConfigName );
+
+}]]></script>
+   </events>
+  </shape>
+  <shape layerId="0" Name="TextField1" shapeType="TEXT_FIELD">
+   <properties>
+    <prop name="serialId">25</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">650.2102702186347 1179</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">False</prop>
+    <prop name="ForeColor">_WindowText</prop>
+    <prop name="BackColor">_Window</prop>
+    <prop name="TabOrder">22</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+     <prop name="de_AT.utf8"></prop>
+     <prop name="ru_RU.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignCenter</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="Font">
+     <prop name="en_US.utf8">Arial,-1,13,5,40,0,0,0,0,0</prop>
+     <prop name="de_AT.utf8">Arial,-1,13,5,40,0,0,0,0,0</prop>
+     <prop name="ru_RU.utf8">Arial,-1,13,5,40,0,0,0,0,0</prop>
+    </prop>
+    <prop name="Location">650.2102702186347 1179</prop>
+    <prop name="Size">191 24</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop name="Editable">True</prop>
+    <prop name="TextFormat">[0s,,,ALIGNMENT_BEGINNING]</prop>
+   </properties>
+   <events>
+    <script name="Initialize" isEscaped="1"><![CDATA[main()
+{
+  this.text=myUiNumber() + &quot;_&quot; + myModuleName();
+}]]></script>
+   </events>
+  </shape>
+  <shape layerId="0" Name="sl_gauge" shapeType="SLIDER">
+   <properties>
+    <prop name="serialId">11</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">2322 4.999999999999967</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">False</prop>
+    <prop name="ForeColor">_3DText</prop>
+    <prop name="BackColor">_3DFace</prop>
+    <prop name="TabOrder">11</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+     <prop name="de_AT.utf8"></prop>
+     <prop name="ru_RU.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignCenter</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="Font">
+     <prop name="en_US.utf8">MS Shell Dlg 2,-1,11,5,50,0,0,0,0,0</prop>
+     <prop name="de_AT.utf8">MS Shell Dlg 2,-1,11,5,50,0,0,0,0,0</prop>
+     <prop name="ru_RU.utf8">MS Shell Dlg 2,-1,11,5,50,0,0,0,0,0</prop>
+    </prop>
+    <prop name="Location">2322 4.999999999999794</prop>
+    <prop name="Size">24 941</prop>
+    <extended>
+     <prop name="invertedAppearance" type="BOOL">True</prop>
+     <prop name="minValue" type="INT">1</prop>
+     <prop name="lineStep" type="INT">1</prop>
+     <prop name="backgroundOrigin" type="ENUM">0</prop>
+     <prop name="value" type="INT">50</prop>
+     <prop name="tickInterval" type="INT">1</prop>
+     <prop name="maxValue" type="INT">99</prop>
+     <prop name="invertedAppearance" type="BOOL">True</prop>
+     <script name="Slide" isEscaped="1"><![CDATA[Slide(int value)
+{
+  int perc;
+  bool fromSlider=true;
+
+  perc=this.value;
+  
+  if( g_regInitReady == AES_INITSTATE_OK ) 
+  {
+    aes_setSplitPosition( g_top, g_bottom, perc, fromSlider );
+  }
+}
+]]></script>
+     <script name="Change" isEscaped="1"><![CDATA[Change(int value)
+{
+  int perc;
+  bool fromSlider=true;
+
+  perc=this.value;
+  
+  if( g_regInitReady == AES_INITSTATE_OK ) 
+  {
+    aes_setSplitPosition( g_top, g_bottom, perc, fromSlider );
+  }
+}
+]]></script>
+    </extended>
+   </properties>
+   <events>
+    <script name="Initialize" isEscaped="1"><![CDATA[int oldVal=0;
+
+main()
+{
+  int perc;
+
+  while( g_regInitReady == AES_INITSTATE_WAITING )
+  {    
+    delay( 0, 50 );
+  }
+
+  if( g_regInitReady == AES_INITSTATE_FAILURE )
+  {
+    return;
+  } 
+  
+  while( true )
+  {
+    perc=this.value;
+    if( perc != oldVal )
+    {
+      if( perc &gt;= 0 &amp;&amp; perc &lt;= 100 )
+      {
+        while (!shapeExists(&quot;te_proportionTop&quot;) || !shapeExists(&quot;te_proportionBot&quot;))
+           delay(0,100);
+
+        setMultiValue(
+          &quot;te_proportionTop&quot;, &quot;text&quot;, perc,
+          &quot;te_proportionBot&quot;, &quot;text&quot;, 100-perc );
+
+        oldVal=perc;
+        // save info to dp(only top)
+        dpSetCache( g_propDpNameTop+&quot;.Settings.Proportion&quot;+AES_ORIVAL, perc );
+      }
+    }
+        
+    delay( 0, 500 );
+  }
+}]]></script>
+   </events>
+  </shape>
+  <shape layerId="0" Name="bt_topFull" shapeType="PUSH_BUTTON">
+   <properties>
+    <prop name="serialId">12</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">2322 5</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">False</prop>
+    <prop name="ForeColor">_ButtonText</prop>
+    <prop name="BackColor">_Button</prop>
+    <prop name="TabOrder">12</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8">Expand top table to full size</prop>
+     <prop name="de_AT.utf8">Expandiere obere Tabelle auf Maximalgröße</prop>
+     <prop name="ru_RU.utf8">Максимально развернуть верхнюю таблицу</prop>
+    </prop>
+    <prop name="layoutAlignment">AlignCenter</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="Font">
+     <prop name="en_US.utf8">Arial,-1,13,5,40,0,0,0,0,0</prop>
+     <prop name="de_AT.utf8">Arial,-1,13,5,40,0,0,0,0,0</prop>
+     <prop name="ru_RU.utf8">Arial,-1,13,5,40,0,0,0,0,0</prop>
+    </prop>
+    <prop name="Location">2322 5.000000000000001</prop>
+    <prop name="Size">21 31</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop SharedPixmap="0" name="Image">
+     <prop name="BackgroundPixmap">XmUNSPECIFIED_PIXMAP</prop>
+    </prop>
+   </properties>
+   <events>
+    <script name="Clicked" isEscaped="1"><![CDATA[main()
+{
+  aes_setTopFullSize( g_top, g_bottom );
+}]]></script>
+   </events>
+  </shape>
+  <shape layerId="0" Name="bt_topSplit" shapeType="PUSH_BUTTON">
+   <properties>
+    <prop name="serialId">15</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">2322 5</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">False</prop>
+    <prop name="ForeColor">_ButtonText</prop>
+    <prop name="BackColor">_Button</prop>
+    <prop name="TabOrder">15</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8">Change to split view</prop>
+     <prop name="de_AT.utf8">Wechsle zur Splittdarstellung</prop>
+     <prop name="ru_RU.utf8">Перейти к раздельному представлению</prop>
+    </prop>
+    <prop name="layoutAlignment">AlignCenter</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="Font">
+     <prop name="en_US.utf8">Arial,-1,13,5,40,0,0,0,0,0</prop>
+     <prop name="de_AT.utf8">Arial,-1,13,5,40,0,0,0,0,0</prop>
+     <prop name="ru_RU.utf8">Arial,-1,13,5,40,0,0,0,0,0</prop>
+    </prop>
+    <prop name="Location">2322 5.000000000000001</prop>
+    <prop name="Size">21 31</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop SharedPixmap="0" name="Image">
+     <prop name="BackgroundPixmap">XmUNSPECIFIED_PIXMAP</prop>
+    </prop>
+   </properties>
+   <events>
+    <script name="Clicked" isEscaped="1"><![CDATA[main()
+{
+  // g_percent - state before full mode
+  aes_resetSplitPosition( g_top, g_bottom );
+}]]></script>
+   </events>
+  </shape>
+  <shape layerId="0" Name="bt_botFull" shapeType="PUSH_BUTTON">
+   <properties>
+    <prop name="serialId">14</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">2322 913</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">False</prop>
+    <prop name="ForeColor">_ButtonText</prop>
+    <prop name="BackColor">_Button</prop>
+    <prop name="TabOrder">14</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8">Expand bottom table to full size</prop>
+     <prop name="de_AT.utf8">Expandiere untere Tabelle auf Maximalgröße</prop>
+     <prop name="ru_RU.utf8">Максимально развернуть нижнюю таблицу</prop>
+    </prop>
+    <prop name="layoutAlignment">AlignCenter</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="Font">
+     <prop name="en_US.utf8">Arial,-1,13,5,40,0,0,0,0,0</prop>
+     <prop name="de_AT.utf8">Arial,-1,13,5,40,0,0,0,0,0</prop>
+     <prop name="ru_RU.utf8">Arial,-1,13,5,40,0,0,0,0,0</prop>
+    </prop>
+    <prop name="Location">2322 913</prop>
+    <prop name="Size">21 31</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop SharedPixmap="0" name="Image">
+     <prop name="BackgroundPixmap">XmUNSPECIFIED_PIXMAP</prop>
+    </prop>
+   </properties>
+   <events>
+    <script name="Clicked" isEscaped="1"><![CDATA[main()
+{
+  aes_setBottomFullSize( g_top, g_bottom );
+}]]></script>
+   </events>
+  </shape>
+  <shape layerId="0" Name="bt_botSplit" shapeType="PUSH_BUTTON">
+   <properties>
+    <prop name="serialId">16</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">2322 913</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">False</prop>
+    <prop name="ForeColor">_ButtonText</prop>
+    <prop name="BackColor">_Button</prop>
+    <prop name="TabOrder">16</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8">Change to split view</prop>
+     <prop name="de_AT.utf8">Wechsle zur Splittdarstellung</prop>
+     <prop name="ru_RU.utf8">Перейти к раздельному представлению</prop>
+    </prop>
+    <prop name="layoutAlignment">AlignCenter</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="Font">
+     <prop name="en_US.utf8">Arial,-1,13,5,40,0,0,0,0,0</prop>
+     <prop name="de_AT.utf8">Arial,-1,13,5,40,0,0,0,0,0</prop>
+     <prop name="ru_RU.utf8">Arial,-1,13,5,40,0,0,0,0,0</prop>
+    </prop>
+    <prop name="Location">2322 913</prop>
+    <prop name="Size">21 31</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop SharedPixmap="0" name="Image">
+     <prop name="BackgroundPixmap">XmUNSPECIFIED_PIXMAP</prop>
+    </prop>
+   </properties>
+   <events>
+    <script name="Clicked" isEscaped="1"><![CDATA[main()
+{
+  // g_percent - state before full mode
+  aes_resetSplitPosition( g_top, g_bottom );
+}]]></script>
+   </events>
+  </shape>
+  <reference referenceId="6" Name="PANEL_REF6" parentSerial="-1">
+   <properties>
+    <prop name="FileName">dmcAES/btnAlm_ACK.xml</prop>
+    <prop name="Location">40 1252.0625</prop>
+    <prop name="Geometry">0.9999999999999999 0 0 1 -24.99999999999999 -4.062500000000341</prop>
+    <prop name="TabOrder">28</prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+   </properties>
+  </reference>
+  <reference referenceId="7" Name="PANEL_REF7" parentSerial="-1">
+   <properties>
+    <prop name="FileName">OpenLibrary/Components/button.xml</prop>
+    <prop name="Location">2203 1177.125</prop>
+    <prop name="Geometry">1.743243243243243 0 0 1.251082251082251 -1625.364864864865 -224.4134199134201</prop>
+    <prop name="TabOrder">30</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dp</prop>
+      <prop name="Value">4</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <extended>
+     <prop name="buttonType" type="ENUM">12</prop>
+    </extended>
+   </properties>
+  </reference>
+ </shapes>
+</panel>

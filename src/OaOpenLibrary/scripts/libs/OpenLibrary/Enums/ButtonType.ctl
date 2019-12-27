@@ -1,0 +1,19 @@
+enum ButtonType
+{
+  Custom,
+  HomeCommand,
+  WorkCommand,
+  ForwardCommand,
+  ReverseCommand,
+  StopCommand,
+  ManualMode,
+  AutoMode,
+  StopMode,
+  IndependentMode,
+  ResetError,
+  ExitPanel,
+  Help,
+  On,
+  Off,
+  Simulate
+};

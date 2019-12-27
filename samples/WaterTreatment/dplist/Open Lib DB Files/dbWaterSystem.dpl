@@ -1,0 +1,940 @@
+# ascii dump of database
+
+# DpType
+TypeName
+udtHMI_SystemControl.udtHMI_SystemControl	1#1
+	iMode	21#2
+	bEStop	23#3
+	bError	23#4
+	bWarning	23#5
+	bAuto	23#6
+	bPB_ResetError	23#7
+udtHMI_VFD_Control.udtHMI_VFD_Control	1#1
+	iMode	21#2
+	iErrorCode	21#3
+	iStatus	21#4
+	rManualSpeedSP	22#5
+	rAutoSpeedSP	22#6
+	rActualSpeed	22#7
+	rActualCurrent	22#8
+	rActualPower	22#9
+	bPB_ResetError	23#10
+	bPB_Forward	23#11
+	bPB_Reverse	23#12
+	bPB_Stop	23#13
+	bPBEN_ResetError	23#14
+	bPBEN_Forward	23#15
+	bPBEN_Reverse	23#16
+	bPBEN_Stop	23#17
+	bForwardOn	23#18
+	bReverseOn	23#19
+	bSignalForward	23#20
+	bSignalReverse	23#21
+	bError	23#22
+	bInterlock	23#23
+udtHMI_SystemControl.udtHMI_SystemControl	1#1
+	iMode	21#2
+	bEStop	23#3
+	bError	23#4
+	bWarning	23#5
+	bAuto	23#6
+	bPB_ResetError	23#7
+udtHMI_VFD_Control.udtHMI_VFD_Control	1#1
+	iMode	21#2
+	iErrorCode	21#3
+	iStatus	21#4
+	rManualSpeedSP	22#5
+	rAutoSpeedSP	22#6
+	rActualSpeed	22#7
+	rActualCurrent	22#8
+	rActualPower	22#9
+	bPB_ResetError	23#10
+	bPB_Forward	23#11
+	bPB_Reverse	23#12
+	bPB_Stop	23#13
+	bPBEN_ResetError	23#14
+	bPBEN_Forward	23#15
+	bPBEN_Reverse	23#16
+	bPBEN_Stop	23#17
+	bForwardOn	23#18
+	bReverseOn	23#19
+	bSignalForward	23#20
+	bSignalReverse	23#21
+	bError	23#22
+	bInterlock	23#23
+udtHMI_SystemControl.udtHMI_SystemControl	1#1
+	iMode	21#2
+	bEStop	23#3
+	bError	23#4
+	bWarning	23#5
+	bAuto	23#6
+	bPB_ResetError	23#7
+udtHMI_VFD_Control.udtHMI_VFD_Control	1#1
+	iMode	21#2
+	iErrorCode	21#3
+	iStatus	21#4
+	rManualSpeedSP	22#5
+	rAutoSpeedSP	22#6
+	rActualSpeed	22#7
+	rActualCurrent	22#8
+	rActualPower	22#9
+	bPB_ResetError	23#10
+	bPB_Forward	23#11
+	bPB_Reverse	23#12
+	bPB_Stop	23#13
+	bPBEN_ResetError	23#14
+	bPBEN_Forward	23#15
+	bPBEN_Reverse	23#16
+	bPBEN_Stop	23#17
+	bForwardOn	23#18
+	bReverseOn	23#19
+	bSignalForward	23#20
+	bSignalReverse	23#21
+	bError	23#22
+	bInterlock	23#23
+udtError_VFD.udtError_VFD	1#1
+	MotorProtectorTripped	23#2
+	LocalDisconnectOff	23#3
+	ClutchTripped	23#4
+	NoContactorFeedback	23#5
+	ContactorStillOn	23#6
+	NoSignalForward	23#7
+	NoSignalReverse	23#8
+	MotorNotStopped	23#9
+	MaxFrequencyReached	23#10
+	Overcurrent	23#11
+	MotorOverload	23#12
+	VFDOverload	23#13
+	GeneralFault	23#14
+	NoCoolingFanFeedback	23#15
+udtError_Valve.udtError_Valve	1#1
+	NoHomeFeedback	23#2
+	NoWorkFeedback	23#3
+	HomeFeedbackStillActive	23#4
+	WorkFeedbackStillActive	23#5
+udtError_Valve.udtError_Valve	1#1
+	NoHomeFeedback	23#2
+	NoWorkFeedback	23#3
+	HomeFeedbackStillActive	23#4
+	WorkFeedbackStillActive	23#5
+udtError_VFD.udtError_VFD	1#1
+	MotorProtectorTripped	23#2
+	LocalDisconnectOff	23#3
+	ClutchTripped	23#4
+	NoContactorFeedback	23#5
+	ContactorStillOn	23#6
+	NoSignalForward	23#7
+	NoSignalReverse	23#8
+	MotorNotStopped	23#9
+	MaxFrequencyReached	23#10
+	Overcurrent	23#11
+	MotorOverload	23#12
+	VFDOverload	23#13
+	GeneralFault	23#14
+	NoCoolingFanFeedback	23#15
+udtError_PID.udtError_PID	1#1
+	InputOutOfRange	23#2
+	InputPERInvalid	23#3
+	ValueOscillationFailed	23#4
+	ProcessValueCloseToSetPoint	23#5
+	SetPointChangedDuringTuning	23#6
+	PretuningDuringFineTuning	23#7
+	InvalidOutputValueLimits	23#8
+	InvalidFineTuningParameter	23#9
+	InputInvalidFormat	23#10
+	OutputCalculationError	23#11
+	SamplingTimeError	23#12
+	SetPointInvalidFormat	23#13
+	ManualInvalidFormat	23#14
+	SubstituteOutputInvalidFormat	23#15
+	DisturbanceInvalidFormat	23#16
+udtError_Motor.udtError_Motor	1#1
+	MotorProtectorTripped	23#2
+	LocalDisconnectOff	23#3
+	ClutchTripped	23#4
+	NoSignalForward	23#5
+	NoSignalReverse	23#6
+	MotorNotStopped	23#7
+udtError_AnalogValve.udtError_AnalogValve	1#1
+	InvalidFeedback	23#2
+udtError_AnalogOutput.udtError_AnalogOutput	1#1
+	OutOfRange	23#2
+	ConfigurationError	23#3
+udtError_AnalogInput.udtError_AnalogInput	1#1
+	LowLowAlarm	23#2
+	HighHighAlarm	23#3
+	Invalid	23#4
+udtHMI_ValveControl.udtHMI_ValveControl	1#1
+	iMode	21#2
+	iErrorCode	21#3
+	iStatus	21#4
+	bPB_ResetError	23#5
+	bPB_Home	23#6
+	bPB_Work	23#7
+	bPBEN_ResetError	23#8
+	bPBEN_Home	23#9
+	bPBEN_Work	23#10
+	bHomeOn	23#11
+	bWorkOn	23#12
+	bSignalHome	23#13
+	bSignalWork	23#14
+	bError	23#15
+	bInterlock	23#16
+udtHMI_PID.udtHMI_PID	1#1
+	iMode	21#2
+	iPIDMode	21#3
+	iErrorCode	21#4
+	iEstopFunction	21#5
+	rEstopValue	22#6
+	rManualSP	22#7
+	rAutoSP	22#8
+	rActualInput	22#9
+	wActualInputPeripheral	20#10
+	rOutput	22#11
+	wOutputPeripheral	20#12
+	rProportionalGain	22#13
+	rIntegralTime	22#14
+	rDerivativeTime	22#15
+	rProportionalWeight	22#16
+	rDerivativeWeight	22#17
+	bPB_ResetError	23#18
+	bPB_Pretune	23#19
+	bPB_FineTune	23#20
+	bPB_AutomaticMode	23#21
+	bPB_ManualMode	23#22
+	bPB_ManualTuning	23#23
+	bTOG_ManualTuning	23#24
+	bPBEN_ResetError	23#25
+	bPBEN_Pretune	23#26
+	bPBEN_FineTune	23#27
+	bPBEN_AutomaticMode	23#28
+	bPBEN_ManualMode	23#29
+	bError	23#30
+udtHMI_ValveControl.udtHMI_ValveControl	1#1
+	iMode	21#2
+	iErrorCode	21#3
+	iStatus	21#4
+	bPB_ResetError	23#5
+	bPB_Home	23#6
+	bPB_Work	23#7
+	bPBEN_ResetError	23#8
+	bPBEN_Home	23#9
+	bPBEN_Work	23#10
+	bHomeOn	23#11
+	bWorkOn	23#12
+	bSignalHome	23#13
+	bSignalWork	23#14
+	bError	23#15
+	bInterlock	23#16
+udtHMI_SystemControl.udtHMI_SystemControl	1#1
+	iMode	21#2
+	bEStop	23#3
+	bError	23#4
+	bWarning	23#5
+	bAuto	23#6
+	bPB_ResetError	23#7
+udtHMI_VFD_Control.udtHMI_VFD_Control	1#1
+	iMode	21#2
+	iErrorCode	21#3
+	iStatus	21#4
+	rManualSpeedSP	22#5
+	rAutoSpeedSP	22#6
+	rActualSpeed	22#7
+	rActualCurrent	22#8
+	rActualPower	22#9
+	bPB_ResetError	23#10
+	bPB_Forward	23#11
+	bPB_Reverse	23#12
+	bPB_Stop	23#13
+	bPBEN_ResetError	23#14
+	bPBEN_Forward	23#15
+	bPBEN_Reverse	23#16
+	bPBEN_Stop	23#17
+	bForwardOn	23#18
+	bReverseOn	23#19
+	bSignalForward	23#20
+	bSignalReverse	23#21
+	bError	23#22
+	bInterlock	23#23
+udtHMI_AnalogInput.udtHMI_AnalogInput	1#1
+	iMode	21#2
+	iErrorCode	21#3
+	iStatus	21#4
+	rActiveValue	22#5
+	rInputValue	22#6
+	rManualValue	22#7
+	bPB_ResetError	23#8
+	bPBEN_ResetError	23#9
+	bError	23#10
+udtHMI_MotorControl.udtHMI_MotorControl	1#1
+	iMode	21#2
+	iErrorCode	21#3
+	iStatus	21#4
+	bPB_ResetError	23#5
+	bPB_Forward	23#6
+	bPB_Reverse	23#7
+	bPB_Stop	23#8
+	bPBEN_ResetError	23#9
+	bPBEN_Forward	23#10
+	bPBEN_Reverse	23#11
+	bPBEN_Stop	23#12
+	bForwardOn	23#13
+	bReverseOn	23#14
+	bSignalForward	23#15
+	bSignalReverse	23#16
+	bError	23#17
+	bInterlock	23#18
+udtHMI_AnalogValveControl.udtHMI_AnalogValveControl	1#1
+	iMode	21#2
+	iErrorCode	21#3
+	iStatus	21#4
+	rManualSP	22#5
+	rAutoSP	22#6
+	rEstopSP	22#7
+	rActual	22#8
+	bPB_ResetError	23#9
+	bPBEN_ResetError	23#10
+	bError	23#11
+	bInterlock	23#12
+	iEstopFunction	21#13
+udtHMI_Interlock.udtHMI_Interlock	1#1
+	abInterlocks1	23#2
+	abInterlocks2	23#3
+	abInterlocks3	23#4
+	abInterlocks4	23#5
+	abInterlocks5	23#6
+	abInterlocks6	23#7
+	abInterlocks7	23#8
+	abInterlocks8	23#9
+	abInterlocks9	23#10
+	abInterlocks10	23#11
+	abInterlocks11	23#12
+	abInterlocks12	23#13
+	abInterlocks13	23#14
+	abInterlocks14	23#15
+	abInterlocks15	23#16
+	abInterlocks16	23#17
+	asInterlockNames1	25#18
+	asInterlockNames2	25#19
+	asInterlockNames3	25#20
+	asInterlockNames4	25#21
+	asInterlockNames5	25#22
+	asInterlockNames6	25#23
+	asInterlockNames7	25#24
+	asInterlockNames8	25#25
+	asInterlockNames9	25#26
+	asInterlockNames10	25#27
+	asInterlockNames11	25#28
+	asInterlockNames12	25#29
+	asInterlockNames13	25#30
+	asInterlockNames14	25#31
+	asInterlockNames15	25#32
+	asInterlockNames16	25#33
+	bInterlockOk	23#34
+udtHMI_AnalogOutput.udtHMI_AnalogOutput	1#1
+	iMode	21#2
+	iErrorCode	21#3
+	rValue	22#4
+	rAutoValue	22#5
+	rManualValue	22#6
+	rEstopValue	22#7
+	bPB_ResetError	23#8
+	bPBEN_ResetError	23#9
+	bError	23#10
+	bInterlock	23#11
+	iEstopFunction	21#12
+
+# ascii dump of database
+# ascii dump of database
+
+# DpType
+TypeName
+dbWaterSystem.dbWaterSystem	1#1
+	SOL_MainWater	41#2:udtHMI_ValveControl
+	VFD_WaterPump	41#3:udtHMI_VFD_Control
+	INT_WaterPump	41#4:udtHMI_Interlock
+	AI_WaterPumpPressure	41#5:udtHMI_AnalogInput
+	MTR_ReturnWaterPump	41#6:udtHMI_MotorControl
+	ANA_SteamValve	41#7:udtHMI_AnalogValveControl
+	AO_CoolingCoil	41#8:udtHMI_AnalogOutput
+	SystemControl	41#9:udtHMI_SystemControl
+	WaterTemperature	1#10
+		AI_WaterTemperature	41#11:udtHMI_AnalogInput
+		PID_WaterTempInterface	41#12:udtHMI_PID
+
+
+
+# Datapoint/DpId
+DpName	TypeName	ID
+dbWaterSystem	dbWaterSystem
+
+# PvssRangeCheck
+Manager/User	ElementName	TypeName	_pv_range.._type	_pv_range.._ignor_inv	_pv_range.._neg	_pv_range.._min	_pv_range.._max	_pv_range.._incl_min	_pv_range.._incl_max	_pv_range.._set	_pv_range.._match
+UI (1)/0	dbWaterSystem.SOL_MainWater.iMode		7	0	0	-2147483648	2147483647	1	1
+UI (1)/0	dbWaterSystem.SOL_MainWater.iErrorCode		7	0	0	-2147483648	2147483647	1	1
+UI (1)/0	dbWaterSystem.SOL_MainWater.iStatus		7	0	0	-2147483648	2147483647	1	1
+UI (1)/0	dbWaterSystem.VFD_WaterPump.iMode		7	0	0	-2147483648	2147483647	1	1
+UI (1)/0	dbWaterSystem.VFD_WaterPump.iErrorCode		7	0	0	-2147483648	2147483647	1	1
+UI (1)/0	dbWaterSystem.VFD_WaterPump.iStatus		7	0	0	-2147483648	2147483647	1	1
+UI (1)/0	dbWaterSystem.VFD_WaterPump.rManualSpeedSP		7	0	0	-1.7976931348623e+308	1.7976931348623e+308	1	1
+UI (1)/0	dbWaterSystem.VFD_WaterPump.rAutoSpeedSP		7	0	0	-1.7976931348623e+308	1.7976931348623e+308	1	1
+UI (1)/0	dbWaterSystem.VFD_WaterPump.rActualSpeed		7	0	0	-1.7976931348623e+308	1.7976931348623e+308	1	1
+UI (1)/0	dbWaterSystem.VFD_WaterPump.rActualCurrent		7	0	0	-1.7976931348623e+308	1.7976931348623e+308	1	1
+UI (1)/0	dbWaterSystem.VFD_WaterPump.rActualPower		7	0	0	-1.7976931348623e+308	1.7976931348623e+308	1	1
+UI (1)/0	dbWaterSystem.AI_WaterPumpPressure.iMode		7	0	0	-2147483648	2147483647	1	1
+UI (1)/0	dbWaterSystem.AI_WaterPumpPressure.iErrorCode		7	0	0	-2147483648	2147483647	1	1
+UI (1)/0	dbWaterSystem.AI_WaterPumpPressure.iStatus		7	0	0	-2147483648	2147483647	1	1
+UI (1)/0	dbWaterSystem.AI_WaterPumpPressure.rActiveValue		7	0	0	-1.7976931348623e+308	1.7976931348623e+308	1	1
+UI (1)/0	dbWaterSystem.AI_WaterPumpPressure.rInputValue		7	0	0	-1.7976931348623e+308	1.7976931348623e+308	1	1
+UI (1)/0	dbWaterSystem.AI_WaterPumpPressure.rManualValue		7	0	0	-1.7976931348623e+308	1.7976931348623e+308	1	1
+UI (1)/0	dbWaterSystem.MTR_ReturnWaterPump.iMode		7	0	0	-2147483648	2147483647	1	1
+UI (1)/0	dbWaterSystem.MTR_ReturnWaterPump.iErrorCode		7	0	0	-2147483648	2147483647	1	1
+UI (1)/0	dbWaterSystem.MTR_ReturnWaterPump.iStatus		7	0	0	-2147483648	2147483647	1	1
+UI (1)/0	dbWaterSystem.ANA_SteamValve.iMode		7	0	0	-2147483648	2147483647	1	1
+UI (1)/0	dbWaterSystem.ANA_SteamValve.iErrorCode		7	0	0	-2147483648	2147483647	1	1
+UI (1)/0	dbWaterSystem.ANA_SteamValve.iStatus		7	0	0	-2147483648	2147483647	1	1
+UI (1)/0	dbWaterSystem.ANA_SteamValve.rManualSP		7	0	0	-1.7976931348623e+308	1.7976931348623e+308	1	1
+UI (1)/0	dbWaterSystem.ANA_SteamValve.rAutoSP		7	0	0	-1.7976931348623e+308	1.7976931348623e+308	1	1
+UI (1)/0	dbWaterSystem.ANA_SteamValve.rEstopSP		7	0	0	-1.7976931348623e+308	1.7976931348623e+308	1	1
+UI (1)/0	dbWaterSystem.ANA_SteamValve.rActual		7	0	0	-1.7976931348623e+308	1.7976931348623e+308	1	1
+UI (1)/0	dbWaterSystem.ANA_SteamValve.iEstopFunction		7	0	0	-2147483648	2147483647	1	1
+UI (1)/0	dbWaterSystem.AO_CoolingCoil.iMode		7	0	0	-2147483648	2147483647	1	1
+UI (1)/0	dbWaterSystem.AO_CoolingCoil.iErrorCode		7	0	0	-2147483648	2147483647	1	1
+UI (1)/0	dbWaterSystem.AO_CoolingCoil.rValue		7	0	0	-1.7976931348623e+308	1.7976931348623e+308	1	1
+UI (1)/0	dbWaterSystem.AO_CoolingCoil.rAutoValue		7	0	0	-1.7976931348623e+308	1.7976931348623e+308	1	1
+UI (1)/0	dbWaterSystem.AO_CoolingCoil.rManualValue		7	0	0	-1.7976931348623e+308	1.7976931348623e+308	1	1
+UI (1)/0	dbWaterSystem.AO_CoolingCoil.rEstopValue		7	0	0	-1.7976931348623e+308	1.7976931348623e+308	1	1
+UI (1)/0	dbWaterSystem.AO_CoolingCoil.iEstopFunction		7	0	0	-2147483648	2147483647	1	1
+UI (1)/0	dbWaterSystem.SystemControl.iMode		7	0	0	-2147483648	2147483647	1	1
+UI (1)/0	dbWaterSystem.WaterTemperature.AI_WaterTemperature.iMode		7	0	0	-2147483648	2147483647	1	1
+UI (1)/0	dbWaterSystem.WaterTemperature.AI_WaterTemperature.iErrorCode		7	0	0	-2147483648	2147483647	1	1
+UI (1)/0	dbWaterSystem.WaterTemperature.AI_WaterTemperature.iStatus		7	0	0	-2147483648	2147483647	1	1
+UI (1)/0	dbWaterSystem.WaterTemperature.AI_WaterTemperature.rActiveValue		7	0	0	-1.7976931348623e+308	1.7976931348623e+308	1	1
+UI (1)/0	dbWaterSystem.WaterTemperature.AI_WaterTemperature.rInputValue		7	0	0	-1.7976931348623e+308	1.7976931348623e+308	1	1
+UI (1)/0	dbWaterSystem.WaterTemperature.AI_WaterTemperature.rManualValue		7	0	0	-1.7976931348623e+308	1.7976931348623e+308	1	1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.iMode		7	0	0	-2147483648	2147483647	1	1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.iPIDMode		7	0	0	-2147483648	2147483647	1	1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.iErrorCode		7	0	0	-2147483648	2147483647	1	1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.iEstopFunction		7	0	0	-2147483648	2147483647	1	1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rEstopValue		7	0	0	-1.7976931348623e+308	1.7976931348623e+308	1	1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rManualSP		7	0	0	-1.7976931348623e+308	1.7976931348623e+308	1	1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rAutoSP		7	0	0	-1.7976931348623e+308	1.7976931348623e+308	1	1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rActualInput		7	0	0	-1.7976931348623e+308	1.7976931348623e+308	1	1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rOutput		7	0	0	-1.7976931348623e+308	1.7976931348623e+308	1	1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rProportionalGain		7	0	0	-1.7976931348623e+308	1.7976931348623e+308	1	1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rIntegralTime		7	0	0	-1.7976931348623e+308	1.7976931348623e+308	1	1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rDerivativeTime		7	0	0	-1.7976931348623e+308	1.7976931348623e+308	1	1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rProportionalWeight		7	0	0	-1.7976931348623e+308	1.7976931348623e+308	1	1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rDerivativeWeight		7	0	0	-1.7976931348623e+308	1.7976931348623e+308	1	1
+
+# AlertValue
+Manager/User	ElementName	TypeName	DetailNr	_alert_hdl.._type	_alert_hdl.._l_limit	_alert_hdl.._u_limit	_alert_hdl.._l_incl	_alert_hdl.._u_incl	_alert_hdl.._panel	_alert_hdl.._panel_param	_alert_hdl.._help	_alert_hdl.._min_prio	_alert_hdl.._class	_alert_hdl.._text	_alert_hdl.._active	_alert_hdl.._orig_hdl	_alert_hdl.._ok_range	_alert_hdl.._hyst_type	_alert_hdl.._hyst_time	_alert_hdl.._multi_instance	_alert_hdl.._l_hyst_limit	_alert_hdl.._u_hyst_limit	_alert_hdl.._text1	_alert_hdl.._text0	_alert_hdl.._ack_has_prio	_alert_hdl.._order	_alert_hdl.._dp_pattern	_alert_hdl.._dp_list	_alert_hdl.._prio_pattern	_alert_hdl.._abbr_pattern	_alert_hdl.._ack_deletes	_alert_hdl.._non_ack	_alert_hdl.._came_ack	_alert_hdl.._pair_ack	_alert_hdl.._both_ack	_alert_hdl.._impulse	_alert_hdl.._filter_threshold	_alert_hdl.._went_text	_alert_hdl.._add_text	_alert_hdl.._status64_pattern	_alert_hdl.._neg	_alert_hdl.._status64_match	_alert_hdl.._match	_alert_hdl.._set
+
+# DistributionInfo
+Manager/User	ElementName	TypeName	_distrib.._type	_distrib.._driver
+UI (1)/0	dbWaterSystem.SOL_MainWater.iMode		56	\1
+UI (1)/0	dbWaterSystem.SOL_MainWater.iErrorCode		56	\1
+UI (1)/0	dbWaterSystem.SOL_MainWater.iStatus		56	\1
+UI (1)/0	dbWaterSystem.SOL_MainWater.bPB_ResetError		56	\1
+UI (1)/0	dbWaterSystem.SOL_MainWater.bPB_Home		56	\1
+UI (1)/0	dbWaterSystem.SOL_MainWater.bPB_Work		56	\1
+UI (1)/0	dbWaterSystem.SOL_MainWater.bPBEN_ResetError		56	\1
+UI (1)/0	dbWaterSystem.SOL_MainWater.bPBEN_Home		56	\1
+UI (1)/0	dbWaterSystem.SOL_MainWater.bPBEN_Work		56	\1
+UI (1)/0	dbWaterSystem.SOL_MainWater.bHomeOn		56	\1
+UI (1)/0	dbWaterSystem.SOL_MainWater.bWorkOn		56	\1
+UI (1)/0	dbWaterSystem.SOL_MainWater.bSignalHome		56	\1
+UI (1)/0	dbWaterSystem.SOL_MainWater.bSignalWork		56	\1
+UI (1)/0	dbWaterSystem.SOL_MainWater.bError		56	\1
+UI (1)/0	dbWaterSystem.SOL_MainWater.bInterlock		56	\1
+UI (1)/0	dbWaterSystem.VFD_WaterPump.iMode		56	\1
+UI (1)/0	dbWaterSystem.VFD_WaterPump.iErrorCode		56	\1
+UI (1)/0	dbWaterSystem.VFD_WaterPump.iStatus		56	\1
+UI (1)/0	dbWaterSystem.VFD_WaterPump.rManualSpeedSP		56	\1
+UI (1)/0	dbWaterSystem.VFD_WaterPump.rAutoSpeedSP		56	\1
+UI (1)/0	dbWaterSystem.VFD_WaterPump.rActualSpeed		56	\1
+UI (1)/0	dbWaterSystem.VFD_WaterPump.rActualCurrent		56	\1
+UI (1)/0	dbWaterSystem.VFD_WaterPump.rActualPower		56	\1
+UI (1)/0	dbWaterSystem.VFD_WaterPump.bPB_ResetError		56	\1
+UI (1)/0	dbWaterSystem.VFD_WaterPump.bPB_Forward		56	\1
+UI (1)/0	dbWaterSystem.VFD_WaterPump.bPB_Reverse		56	\1
+UI (1)/0	dbWaterSystem.VFD_WaterPump.bPB_Stop		56	\1
+UI (1)/0	dbWaterSystem.VFD_WaterPump.bPBEN_ResetError		56	\1
+UI (1)/0	dbWaterSystem.VFD_WaterPump.bPBEN_Forward		56	\1
+UI (1)/0	dbWaterSystem.VFD_WaterPump.bPBEN_Reverse		56	\1
+UI (1)/0	dbWaterSystem.VFD_WaterPump.bPBEN_Stop		56	\1
+UI (1)/0	dbWaterSystem.VFD_WaterPump.bForwardOn		56	\1
+UI (1)/0	dbWaterSystem.VFD_WaterPump.bReverseOn		56	\1
+UI (1)/0	dbWaterSystem.VFD_WaterPump.bSignalForward		56	\1
+UI (1)/0	dbWaterSystem.VFD_WaterPump.bSignalReverse		56	\1
+UI (1)/0	dbWaterSystem.VFD_WaterPump.bError		56	\1
+UI (1)/0	dbWaterSystem.VFD_WaterPump.bInterlock		56	\1
+UI (1)/0	dbWaterSystem.INT_WaterPump.abInterlocks1		56	\1
+UI (1)/0	dbWaterSystem.INT_WaterPump.abInterlocks2		56	\1
+UI (1)/0	dbWaterSystem.INT_WaterPump.abInterlocks3		56	\1
+UI (1)/0	dbWaterSystem.INT_WaterPump.abInterlocks4		56	\1
+UI (1)/0	dbWaterSystem.INT_WaterPump.abInterlocks5		56	\1
+UI (1)/0	dbWaterSystem.INT_WaterPump.abInterlocks6		56	\1
+UI (1)/0	dbWaterSystem.INT_WaterPump.abInterlocks7		56	\1
+UI (1)/0	dbWaterSystem.INT_WaterPump.abInterlocks8		56	\1
+UI (1)/0	dbWaterSystem.INT_WaterPump.abInterlocks9		56	\1
+UI (1)/0	dbWaterSystem.INT_WaterPump.abInterlocks10		56	\1
+UI (1)/0	dbWaterSystem.INT_WaterPump.abInterlocks11		56	\1
+UI (1)/0	dbWaterSystem.INT_WaterPump.abInterlocks12		56	\1
+UI (1)/0	dbWaterSystem.INT_WaterPump.abInterlocks13		56	\1
+UI (1)/0	dbWaterSystem.INT_WaterPump.abInterlocks14		56	\1
+UI (1)/0	dbWaterSystem.INT_WaterPump.abInterlocks15		56	\1
+UI (1)/0	dbWaterSystem.INT_WaterPump.abInterlocks16		56	\1
+UI (1)/0	dbWaterSystem.INT_WaterPump.asInterlockNames1		56	\1
+UI (1)/0	dbWaterSystem.INT_WaterPump.asInterlockNames2		56	\1
+UI (1)/0	dbWaterSystem.INT_WaterPump.asInterlockNames3		56	\1
+UI (1)/0	dbWaterSystem.INT_WaterPump.asInterlockNames4		56	\1
+UI (1)/0	dbWaterSystem.INT_WaterPump.asInterlockNames5		56	\1
+UI (1)/0	dbWaterSystem.INT_WaterPump.asInterlockNames6		56	\1
+UI (1)/0	dbWaterSystem.INT_WaterPump.asInterlockNames7		56	\1
+UI (1)/0	dbWaterSystem.INT_WaterPump.asInterlockNames8		56	\1
+UI (1)/0	dbWaterSystem.INT_WaterPump.asInterlockNames9		56	\1
+UI (1)/0	dbWaterSystem.INT_WaterPump.asInterlockNames10		56	\1
+UI (1)/0	dbWaterSystem.INT_WaterPump.asInterlockNames11		56	\1
+UI (1)/0	dbWaterSystem.INT_WaterPump.asInterlockNames12		56	\1
+UI (1)/0	dbWaterSystem.INT_WaterPump.asInterlockNames13		56	\1
+UI (1)/0	dbWaterSystem.INT_WaterPump.asInterlockNames14		56	\1
+UI (1)/0	dbWaterSystem.INT_WaterPump.asInterlockNames15		56	\1
+UI (1)/0	dbWaterSystem.INT_WaterPump.asInterlockNames16		56	\1
+UI (1)/0	dbWaterSystem.INT_WaterPump.bInterlockOk		56	\1
+UI (1)/0	dbWaterSystem.AI_WaterPumpPressure.iMode		56	\1
+UI (1)/0	dbWaterSystem.AI_WaterPumpPressure.iErrorCode		56	\1
+UI (1)/0	dbWaterSystem.AI_WaterPumpPressure.iStatus		56	\1
+UI (1)/0	dbWaterSystem.AI_WaterPumpPressure.rActiveValue		56	\1
+UI (1)/0	dbWaterSystem.AI_WaterPumpPressure.rInputValue		56	\1
+UI (1)/0	dbWaterSystem.AI_WaterPumpPressure.rManualValue		56	\1
+UI (1)/0	dbWaterSystem.AI_WaterPumpPressure.bPB_ResetError		56	\1
+UI (1)/0	dbWaterSystem.AI_WaterPumpPressure.bPBEN_ResetError		56	\1
+UI (1)/0	dbWaterSystem.AI_WaterPumpPressure.bError		56	\1
+UI (1)/0	dbWaterSystem.MTR_ReturnWaterPump.iMode		56	\1
+UI (1)/0	dbWaterSystem.MTR_ReturnWaterPump.iErrorCode		56	\1
+UI (1)/0	dbWaterSystem.MTR_ReturnWaterPump.iStatus		56	\1
+UI (1)/0	dbWaterSystem.MTR_ReturnWaterPump.bPB_ResetError		56	\1
+UI (1)/0	dbWaterSystem.MTR_ReturnWaterPump.bPB_Forward		56	\1
+UI (1)/0	dbWaterSystem.MTR_ReturnWaterPump.bPB_Reverse		56	\1
+UI (1)/0	dbWaterSystem.MTR_ReturnWaterPump.bPB_Stop		56	\1
+UI (1)/0	dbWaterSystem.MTR_ReturnWaterPump.bPBEN_ResetError		56	\1
+UI (1)/0	dbWaterSystem.MTR_ReturnWaterPump.bPBEN_Forward		56	\1
+UI (1)/0	dbWaterSystem.MTR_ReturnWaterPump.bPBEN_Reverse		56	\1
+UI (1)/0	dbWaterSystem.MTR_ReturnWaterPump.bPBEN_Stop		56	\1
+UI (1)/0	dbWaterSystem.MTR_ReturnWaterPump.bForwardOn		56	\1
+UI (1)/0	dbWaterSystem.MTR_ReturnWaterPump.bReverseOn		56	\1
+UI (1)/0	dbWaterSystem.MTR_ReturnWaterPump.bSignalForward		56	\1
+UI (1)/0	dbWaterSystem.MTR_ReturnWaterPump.bSignalReverse		56	\1
+UI (1)/0	dbWaterSystem.MTR_ReturnWaterPump.bError		56	\1
+UI (1)/0	dbWaterSystem.MTR_ReturnWaterPump.bInterlock		56	\1
+UI (1)/0	dbWaterSystem.ANA_SteamValve.iMode		56	\1
+UI (1)/0	dbWaterSystem.ANA_SteamValve.iErrorCode		56	\1
+UI (1)/0	dbWaterSystem.ANA_SteamValve.iStatus		56	\1
+UI (1)/0	dbWaterSystem.ANA_SteamValve.rManualSP		56	\1
+UI (1)/0	dbWaterSystem.ANA_SteamValve.rAutoSP		56	\1
+UI (1)/0	dbWaterSystem.ANA_SteamValve.rEstopSP		56	\1
+UI (1)/0	dbWaterSystem.ANA_SteamValve.rActual		56	\1
+UI (1)/0	dbWaterSystem.ANA_SteamValve.bPB_ResetError		56	\1
+UI (1)/0	dbWaterSystem.ANA_SteamValve.bPBEN_ResetError		56	\1
+UI (1)/0	dbWaterSystem.ANA_SteamValve.bError		56	\1
+UI (1)/0	dbWaterSystem.ANA_SteamValve.bInterlock		56	\1
+UI (1)/0	dbWaterSystem.ANA_SteamValve.iEstopFunction		56	\1
+UI (1)/0	dbWaterSystem.AO_CoolingCoil.iMode		56	\1
+UI (1)/0	dbWaterSystem.AO_CoolingCoil.iErrorCode		56	\1
+UI (1)/0	dbWaterSystem.AO_CoolingCoil.rValue		56	\1
+UI (1)/0	dbWaterSystem.AO_CoolingCoil.rAutoValue		56	\1
+UI (1)/0	dbWaterSystem.AO_CoolingCoil.rManualValue		56	\1
+UI (1)/0	dbWaterSystem.AO_CoolingCoil.rEstopValue		56	\1
+UI (1)/0	dbWaterSystem.AO_CoolingCoil.bPB_ResetError		56	\1
+UI (1)/0	dbWaterSystem.AO_CoolingCoil.bPBEN_ResetError		56	\1
+UI (1)/0	dbWaterSystem.AO_CoolingCoil.bError		56	\1
+UI (1)/0	dbWaterSystem.AO_CoolingCoil.bInterlock		56	\1
+UI (1)/0	dbWaterSystem.AO_CoolingCoil.iEstopFunction		56	\1
+UI (1)/0	dbWaterSystem.SystemControl.iMode		56	\1
+UI (1)/0	dbWaterSystem.SystemControl.bEStop		56	\1
+UI (1)/0	dbWaterSystem.SystemControl.bError		56	\1
+UI (1)/0	dbWaterSystem.SystemControl.bWarning		56	\1
+UI (1)/0	dbWaterSystem.SystemControl.bAuto		56	\1
+UI (1)/0	dbWaterSystem.SystemControl.bPB_ResetError		56	\1
+UI (1)/0	dbWaterSystem.WaterTemperature.AI_WaterTemperature.iMode		56	\1
+UI (1)/0	dbWaterSystem.WaterTemperature.AI_WaterTemperature.iErrorCode		56	\1
+UI (1)/0	dbWaterSystem.WaterTemperature.AI_WaterTemperature.iStatus		56	\1
+UI (1)/0	dbWaterSystem.WaterTemperature.AI_WaterTemperature.rActiveValue		56	\1
+UI (1)/0	dbWaterSystem.WaterTemperature.AI_WaterTemperature.rInputValue		56	\1
+UI (1)/0	dbWaterSystem.WaterTemperature.AI_WaterTemperature.rManualValue		56	\1
+UI (1)/0	dbWaterSystem.WaterTemperature.AI_WaterTemperature.bPB_ResetError		56	\1
+UI (1)/0	dbWaterSystem.WaterTemperature.AI_WaterTemperature.bPBEN_ResetError		56	\1
+UI (1)/0	dbWaterSystem.WaterTemperature.AI_WaterTemperature.bError		56	\1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.iMode		56	\1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.iPIDMode		56	\1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.iErrorCode		56	\1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.iEstopFunction		56	\1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rEstopValue		56	\1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rManualSP		56	\1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rAutoSP		56	\1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rActualInput		56	\1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.wActualInputPeripheral		56	\1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rOutput		56	\1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.wOutputPeripheral		56	\1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rProportionalGain		56	\1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rIntegralTime		56	\1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rDerivativeTime		56	\1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rProportionalWeight		56	\1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rDerivativeWeight		56	\1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPB_ResetError		56	\1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPB_Pretune		56	\1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPB_FineTune		56	\1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPB_AutomaticMode		56	\1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPB_ManualMode		56	\1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPB_ManualTuning		56	\1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bTOG_ManualTuning		56	\1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPBEN_ResetError		56	\1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPBEN_Pretune		56	\1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPBEN_FineTune		56	\1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPBEN_AutomaticMode		56	\1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPBEN_ManualMode		56	\1
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bError		56	\1
+
+# # Aliases/Comments
+AliasId	AliasName	CommentName
+dbWaterSystem.SOL_MainWater	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.SOL_MainWater.iMode	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.SOL_MainWater.iErrorCode	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.SOL_MainWater.iStatus	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.SOL_MainWater.bPB_ResetError	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.SOL_MainWater.bPB_Home	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.SOL_MainWater.bPB_Work	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.SOL_MainWater.bPBEN_ResetError	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.SOL_MainWater.bPBEN_Home	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.SOL_MainWater.bPBEN_Work	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.SOL_MainWater.bHomeOn	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.SOL_MainWater.bWorkOn	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.SOL_MainWater.bSignalHome	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.SOL_MainWater.bSignalWork	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.SOL_MainWater.bError	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.SOL_MainWater.bInterlock	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.VFD_WaterPump	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.VFD_WaterPump.iMode	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.VFD_WaterPump.iErrorCode	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.VFD_WaterPump.iStatus	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.VFD_WaterPump.rManualSpeedSP	""	lt:1 LANG:10001 "@%15.2f@"
+dbWaterSystem.VFD_WaterPump.rAutoSpeedSP	""	lt:1 LANG:10001 "@%15.2f@"
+dbWaterSystem.VFD_WaterPump.rActualSpeed	""	lt:1 LANG:10001 "@%15.2f@"
+dbWaterSystem.VFD_WaterPump.rActualCurrent	""	lt:1 LANG:10001 "@%15.2f@"
+dbWaterSystem.VFD_WaterPump.rActualPower	""	lt:1 LANG:10001 "@%15.2f@"
+dbWaterSystem.VFD_WaterPump.bPB_ResetError	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.VFD_WaterPump.bPB_Forward	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.VFD_WaterPump.bPB_Reverse	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.VFD_WaterPump.bPB_Stop	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.VFD_WaterPump.bPBEN_ResetError	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.VFD_WaterPump.bPBEN_Forward	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.VFD_WaterPump.bPBEN_Reverse	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.VFD_WaterPump.bPBEN_Stop	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.VFD_WaterPump.bForwardOn	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.VFD_WaterPump.bReverseOn	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.VFD_WaterPump.bSignalForward	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.VFD_WaterPump.bSignalReverse	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.VFD_WaterPump.bError	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.VFD_WaterPump.bInterlock	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.INT_WaterPump	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.INT_WaterPump.abInterlocks1	""	lt:1 LANG:10001 "1..16@@"
+dbWaterSystem.INT_WaterPump.abInterlocks2	""	lt:1 LANG:10001 "1..16@@"
+dbWaterSystem.INT_WaterPump.abInterlocks3	""	lt:1 LANG:10001 "1..16@@"
+dbWaterSystem.INT_WaterPump.abInterlocks4	""	lt:1 LANG:10001 "1..16@@"
+dbWaterSystem.INT_WaterPump.abInterlocks5	""	lt:1 LANG:10001 "1..16@@"
+dbWaterSystem.INT_WaterPump.abInterlocks6	""	lt:1 LANG:10001 "1..16@@"
+dbWaterSystem.INT_WaterPump.abInterlocks7	""	lt:1 LANG:10001 "1..16@@"
+dbWaterSystem.INT_WaterPump.abInterlocks8	""	lt:1 LANG:10001 "1..16@@"
+dbWaterSystem.INT_WaterPump.abInterlocks9	""	lt:1 LANG:10001 "1..16@@"
+dbWaterSystem.INT_WaterPump.abInterlocks10	""	lt:1 LANG:10001 "1..16@@"
+dbWaterSystem.INT_WaterPump.abInterlocks11	""	lt:1 LANG:10001 "1..16@@"
+dbWaterSystem.INT_WaterPump.abInterlocks12	""	lt:1 LANG:10001 "1..16@@"
+dbWaterSystem.INT_WaterPump.abInterlocks13	""	lt:1 LANG:10001 "1..16@@"
+dbWaterSystem.INT_WaterPump.abInterlocks14	""	lt:1 LANG:10001 "1..16@@"
+dbWaterSystem.INT_WaterPump.abInterlocks15	""	lt:1 LANG:10001 "1..16@@"
+dbWaterSystem.INT_WaterPump.abInterlocks16	""	lt:1 LANG:10001 "1..16@@"
+dbWaterSystem.INT_WaterPump.asInterlockNames1	""	lt:1 LANG:10001 "20@@"
+dbWaterSystem.INT_WaterPump.asInterlockNames2	""	lt:1 LANG:10001 "20@@"
+dbWaterSystem.INT_WaterPump.asInterlockNames3	""	lt:1 LANG:10001 "20@@"
+dbWaterSystem.INT_WaterPump.asInterlockNames4	""	lt:1 LANG:10001 "20@@"
+dbWaterSystem.INT_WaterPump.asInterlockNames5	""	lt:1 LANG:10001 "20@@"
+dbWaterSystem.INT_WaterPump.asInterlockNames6	""	lt:1 LANG:10001 "20@@"
+dbWaterSystem.INT_WaterPump.asInterlockNames7	""	lt:1 LANG:10001 "20@@"
+dbWaterSystem.INT_WaterPump.asInterlockNames8	""	lt:1 LANG:10001 "20@@"
+dbWaterSystem.INT_WaterPump.asInterlockNames9	""	lt:1 LANG:10001 "20@@"
+dbWaterSystem.INT_WaterPump.asInterlockNames10	""	lt:1 LANG:10001 "20@@"
+dbWaterSystem.INT_WaterPump.asInterlockNames11	""	lt:1 LANG:10001 "20@@"
+dbWaterSystem.INT_WaterPump.asInterlockNames12	""	lt:1 LANG:10001 "20@@"
+dbWaterSystem.INT_WaterPump.asInterlockNames13	""	lt:1 LANG:10001 "20@@"
+dbWaterSystem.INT_WaterPump.asInterlockNames14	""	lt:1 LANG:10001 "20@@"
+dbWaterSystem.INT_WaterPump.asInterlockNames15	""	lt:1 LANG:10001 "20@@"
+dbWaterSystem.INT_WaterPump.asInterlockNames16	""	lt:1 LANG:10001 "20@@"
+dbWaterSystem.INT_WaterPump.bInterlockOk	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.AI_WaterPumpPressure	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.AI_WaterPumpPressure.iMode	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.AI_WaterPumpPressure.iErrorCode	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.AI_WaterPumpPressure.iStatus	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.AI_WaterPumpPressure.rActiveValue	""	lt:1 LANG:10001 "@%15.2f@"
+dbWaterSystem.AI_WaterPumpPressure.rInputValue	""	lt:1 LANG:10001 "@%15.2f@"
+dbWaterSystem.AI_WaterPumpPressure.rManualValue	""	lt:1 LANG:10001 "@%15.2f@"
+dbWaterSystem.AI_WaterPumpPressure.bPB_ResetError	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.AI_WaterPumpPressure.bPBEN_ResetError	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.AI_WaterPumpPressure.bError	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.MTR_ReturnWaterPump	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.MTR_ReturnWaterPump.iMode	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.MTR_ReturnWaterPump.iErrorCode	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.MTR_ReturnWaterPump.iStatus	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.MTR_ReturnWaterPump.bPB_ResetError	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.MTR_ReturnWaterPump.bPB_Forward	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.MTR_ReturnWaterPump.bPB_Reverse	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.MTR_ReturnWaterPump.bPB_Stop	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.MTR_ReturnWaterPump.bPBEN_ResetError	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.MTR_ReturnWaterPump.bPBEN_Forward	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.MTR_ReturnWaterPump.bPBEN_Reverse	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.MTR_ReturnWaterPump.bPBEN_Stop	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.MTR_ReturnWaterPump.bForwardOn	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.MTR_ReturnWaterPump.bReverseOn	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.MTR_ReturnWaterPump.bSignalForward	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.MTR_ReturnWaterPump.bSignalReverse	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.MTR_ReturnWaterPump.bError	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.MTR_ReturnWaterPump.bInterlock	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.ANA_SteamValve	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.ANA_SteamValve.iMode	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.ANA_SteamValve.iErrorCode	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.ANA_SteamValve.iStatus	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.ANA_SteamValve.rManualSP	""	lt:1 LANG:10001 "@%15.2f@"
+dbWaterSystem.ANA_SteamValve.rAutoSP	""	lt:1 LANG:10001 "@%15.2f@"
+dbWaterSystem.ANA_SteamValve.rEstopSP	""	lt:1 LANG:10001 "@%15.2f@"
+dbWaterSystem.ANA_SteamValve.rActual	""	lt:1 LANG:10001 "@%15.2f@"
+dbWaterSystem.ANA_SteamValve.bPB_ResetError	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.ANA_SteamValve.bPBEN_ResetError	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.ANA_SteamValve.bError	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.ANA_SteamValve.bInterlock	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.ANA_SteamValve.iEstopFunction	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.AO_CoolingCoil	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.AO_CoolingCoil.iMode	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.AO_CoolingCoil.iErrorCode	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.AO_CoolingCoil.rValue	""	lt:1 LANG:10001 "@%15.2f@"
+dbWaterSystem.AO_CoolingCoil.rAutoValue	""	lt:1 LANG:10001 "@%15.2f@"
+dbWaterSystem.AO_CoolingCoil.rManualValue	""	lt:1 LANG:10001 "@%15.2f@"
+dbWaterSystem.AO_CoolingCoil.rEstopValue	""	lt:1 LANG:10001 "@%15.2f@"
+dbWaterSystem.AO_CoolingCoil.bPB_ResetError	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.AO_CoolingCoil.bPBEN_ResetError	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.AO_CoolingCoil.bError	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.AO_CoolingCoil.bInterlock	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.AO_CoolingCoil.iEstopFunction	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.SystemControl	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.SystemControl.iMode	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.SystemControl.bEStop	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.SystemControl.bError	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.SystemControl.bWarning	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.SystemControl.bAuto	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.SystemControl.bPB_ResetError	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.WaterTemperature	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.WaterTemperature.AI_WaterTemperature	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.WaterTemperature.AI_WaterTemperature.iMode	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.WaterTemperature.AI_WaterTemperature.iErrorCode	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.WaterTemperature.AI_WaterTemperature.iStatus	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.WaterTemperature.AI_WaterTemperature.rActiveValue	""	lt:1 LANG:10001 "@%15.2f@"
+dbWaterSystem.WaterTemperature.AI_WaterTemperature.rInputValue	""	lt:1 LANG:10001 "@%15.2f@"
+dbWaterSystem.WaterTemperature.AI_WaterTemperature.rManualValue	""	lt:1 LANG:10001 "@%15.2f@"
+dbWaterSystem.WaterTemperature.AI_WaterTemperature.bPB_ResetError	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.WaterTemperature.AI_WaterTemperature.bPBEN_ResetError	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.WaterTemperature.AI_WaterTemperature.bError	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.WaterTemperature.PID_WaterTempInterface	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.WaterTemperature.PID_WaterTempInterface.iMode	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.WaterTemperature.PID_WaterTempInterface.iPIDMode	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.WaterTemperature.PID_WaterTempInterface.iErrorCode	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.WaterTemperature.PID_WaterTempInterface.iEstopFunction	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rEstopValue	""	lt:1 LANG:10001 "@%15.2f@"
+dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rManualSP	""	lt:1 LANG:10001 "@%15.2f@"
+dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rAutoSP	""	lt:1 LANG:10001 "@%15.2f@"
+dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rActualInput	""	lt:1 LANG:10001 "@%15.2f@"
+dbWaterSystem.WaterTemperature.PID_WaterTempInterface.wActualInputPeripheral	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rOutput	""	lt:1 LANG:10001 "@%15.2f@"
+dbWaterSystem.WaterTemperature.PID_WaterTempInterface.wOutputPeripheral	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rProportionalGain	""	lt:1 LANG:10001 "@%15.2f@"
+dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rIntegralTime	""	lt:1 LANG:10001 "@%15.2f@"
+dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rDerivativeTime	""	lt:1 LANG:10001 "@%15.2f@"
+dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rProportionalWeight	""	lt:1 LANG:10001 "@%15.2f@"
+dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rDerivativeWeight	""	lt:1 LANG:10001 "@%15.2f@"
+dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPB_ResetError	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPB_Pretune	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPB_FineTune	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPB_AutomaticMode	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPB_ManualMode	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPB_ManualTuning	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bTOG_ManualTuning	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPBEN_ResetError	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPBEN_Pretune	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPBEN_FineTune	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPBEN_AutomaticMode	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPBEN_ManualMode	""	lt:1 LANG:10001 "@@"
+dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bError	""	lt:1 LANG:10001 "@@"
+
+# PeriphAddrMain
+Manager/User	ElementName	TypeName	_address.._type	_address.._reference	_address.._poll_group	_address.._connection	_address.._offset	_address.._subindex	_address.._direction	_address.._internal	_address.._lowlevel	_address.._active	_address.._start	_address.._interval	_address.._reply	_address.._datatype	_address.._drv_ident
+UI (1)/0	dbWaterSystem.SOL_MainWater.iMode		16	"dbWaterSystem.SOL_MainWater.iMode"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.SOL_MainWater.iErrorCode		16	"dbWaterSystem.SOL_MainWater.iErrorCode"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.SOL_MainWater.iStatus		16	"dbWaterSystem.SOL_MainWater.iStatus"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.SOL_MainWater.bPB_ResetError		16	"dbWaterSystem.SOL_MainWater.bPB_ResetError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.SOL_MainWater.bPB_Home		16	"dbWaterSystem.SOL_MainWater.bPB_Home"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.SOL_MainWater.bPB_Work		16	"dbWaterSystem.SOL_MainWater.bPB_Work"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.SOL_MainWater.bPBEN_ResetError		16	"dbWaterSystem.SOL_MainWater.bPBEN_ResetError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.SOL_MainWater.bPBEN_Home		16	"dbWaterSystem.SOL_MainWater.bPBEN_Home"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.SOL_MainWater.bPBEN_Work		16	"dbWaterSystem.SOL_MainWater.bPBEN_Work"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.SOL_MainWater.bHomeOn		16	"dbWaterSystem.SOL_MainWater.bHomeOn"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.SOL_MainWater.bWorkOn		16	"dbWaterSystem.SOL_MainWater.bWorkOn"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.SOL_MainWater.bSignalHome		16	"dbWaterSystem.SOL_MainWater.bSignalHome"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.SOL_MainWater.bSignalWork		16	"dbWaterSystem.SOL_MainWater.bSignalWork"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.SOL_MainWater.bError		16	"dbWaterSystem.SOL_MainWater.bError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.SOL_MainWater.bInterlock		16	"dbWaterSystem.SOL_MainWater.bInterlock"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.VFD_WaterPump.iMode		16	"dbWaterSystem.VFD_WaterPump.iMode"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.VFD_WaterPump.iErrorCode		16	"dbWaterSystem.VFD_WaterPump.iErrorCode"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.VFD_WaterPump.iStatus		16	"dbWaterSystem.VFD_WaterPump.iStatus"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.VFD_WaterPump.rManualSpeedSP		16	"dbWaterSystem.VFD_WaterPump.rManualSpeedSP"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.VFD_WaterPump.rAutoSpeedSP		16	"dbWaterSystem.VFD_WaterPump.rAutoSpeedSP"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.VFD_WaterPump.rActualSpeed		16	"dbWaterSystem.VFD_WaterPump.rActualSpeed"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.VFD_WaterPump.rActualCurrent		16	"dbWaterSystem.VFD_WaterPump.rActualCurrent"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.VFD_WaterPump.rActualPower		16	"dbWaterSystem.VFD_WaterPump.rActualPower"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.VFD_WaterPump.bPB_ResetError		16	"dbWaterSystem.VFD_WaterPump.bPB_ResetError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.VFD_WaterPump.bPB_Forward		16	"dbWaterSystem.VFD_WaterPump.bPB_Forward"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.VFD_WaterPump.bPB_Reverse		16	"dbWaterSystem.VFD_WaterPump.bPB_Reverse"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.VFD_WaterPump.bPB_Stop		16	"dbWaterSystem.VFD_WaterPump.bPB_Stop"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.VFD_WaterPump.bPBEN_ResetError		16	"dbWaterSystem.VFD_WaterPump.bPBEN_ResetError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.VFD_WaterPump.bPBEN_Forward		16	"dbWaterSystem.VFD_WaterPump.bPBEN_Forward"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.VFD_WaterPump.bPBEN_Reverse		16	"dbWaterSystem.VFD_WaterPump.bPBEN_Reverse"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.VFD_WaterPump.bPBEN_Stop		16	"dbWaterSystem.VFD_WaterPump.bPBEN_Stop"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.VFD_WaterPump.bForwardOn		16	"dbWaterSystem.VFD_WaterPump.bForwardOn"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.VFD_WaterPump.bReverseOn		16	"dbWaterSystem.VFD_WaterPump.bReverseOn"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.VFD_WaterPump.bSignalForward		16	"dbWaterSystem.VFD_WaterPump.bSignalForward"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.VFD_WaterPump.bSignalReverse		16	"dbWaterSystem.VFD_WaterPump.bSignalReverse"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.VFD_WaterPump.bError		16	"dbWaterSystem.VFD_WaterPump.bError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.VFD_WaterPump.bInterlock		16	"dbWaterSystem.VFD_WaterPump.bInterlock"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.INT_WaterPump.abInterlocks1		16	"dbWaterSystem.INT_WaterPump.abInterlocks.abInterlocks[1]"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.INT_WaterPump.abInterlocks2		16	"dbWaterSystem.INT_WaterPump.abInterlocks.abInterlocks[2]"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.INT_WaterPump.abInterlocks3		16	"dbWaterSystem.INT_WaterPump.abInterlocks.abInterlocks[3]"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.INT_WaterPump.abInterlocks4		16	"dbWaterSystem.INT_WaterPump.abInterlocks.abInterlocks[4]"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.INT_WaterPump.abInterlocks5		16	"dbWaterSystem.INT_WaterPump.abInterlocks.abInterlocks[5]"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.INT_WaterPump.abInterlocks6		16	"dbWaterSystem.INT_WaterPump.abInterlocks.abInterlocks[6]"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.INT_WaterPump.abInterlocks7		16	"dbWaterSystem.INT_WaterPump.abInterlocks.abInterlocks[7]"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.INT_WaterPump.abInterlocks8		16	"dbWaterSystem.INT_WaterPump.abInterlocks.abInterlocks[8]"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.INT_WaterPump.abInterlocks9		16	"dbWaterSystem.INT_WaterPump.abInterlocks.abInterlocks[9]"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.INT_WaterPump.abInterlocks10		16	"dbWaterSystem.INT_WaterPump.abInterlocks.abInterlocks[10]"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.INT_WaterPump.abInterlocks11		16	"dbWaterSystem.INT_WaterPump.abInterlocks.abInterlocks[11]"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.INT_WaterPump.abInterlocks12		16	"dbWaterSystem.INT_WaterPump.abInterlocks.abInterlocks[12]"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.INT_WaterPump.abInterlocks13		16	"dbWaterSystem.INT_WaterPump.abInterlocks.abInterlocks[13]"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.INT_WaterPump.abInterlocks14		16	"dbWaterSystem.INT_WaterPump.abInterlocks.abInterlocks[14]"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.INT_WaterPump.abInterlocks15		16	"dbWaterSystem.INT_WaterPump.abInterlocks.abInterlocks[15]"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.INT_WaterPump.abInterlocks16		16	"dbWaterSystem.INT_WaterPump.abInterlocks.abInterlocks[16]"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.INT_WaterPump.asInterlockNames1		16	"dbWaterSystem.INT_WaterPump.asInterlockNames.asInterlockNames[1]"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.INT_WaterPump.asInterlockNames2		16	"dbWaterSystem.INT_WaterPump.asInterlockNames.asInterlockNames[2]"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.INT_WaterPump.asInterlockNames3		16	"dbWaterSystem.INT_WaterPump.asInterlockNames.asInterlockNames[3]"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.INT_WaterPump.asInterlockNames4		16	"dbWaterSystem.INT_WaterPump.asInterlockNames.asInterlockNames[4]"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.INT_WaterPump.asInterlockNames5		16	"dbWaterSystem.INT_WaterPump.asInterlockNames.asInterlockNames[5]"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.INT_WaterPump.asInterlockNames6		16	"dbWaterSystem.INT_WaterPump.asInterlockNames.asInterlockNames[6]"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.INT_WaterPump.asInterlockNames7		16	"dbWaterSystem.INT_WaterPump.asInterlockNames.asInterlockNames[7]"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.INT_WaterPump.asInterlockNames8		16	"dbWaterSystem.INT_WaterPump.asInterlockNames.asInterlockNames[8]"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.INT_WaterPump.asInterlockNames9		16	"dbWaterSystem.INT_WaterPump.asInterlockNames.asInterlockNames[9]"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.INT_WaterPump.asInterlockNames10		16	"dbWaterSystem.INT_WaterPump.asInterlockNames.asInterlockNames[10]"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.INT_WaterPump.asInterlockNames11		16	"dbWaterSystem.INT_WaterPump.asInterlockNames.asInterlockNames[11]"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.INT_WaterPump.asInterlockNames12		16	"dbWaterSystem.INT_WaterPump.asInterlockNames.asInterlockNames[12]"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.INT_WaterPump.asInterlockNames13		16	"dbWaterSystem.INT_WaterPump.asInterlockNames.asInterlockNames[13]"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.INT_WaterPump.asInterlockNames14		16	"dbWaterSystem.INT_WaterPump.asInterlockNames.asInterlockNames[14]"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.INT_WaterPump.asInterlockNames15		16	"dbWaterSystem.INT_WaterPump.asInterlockNames.asInterlockNames[15]"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.INT_WaterPump.asInterlockNames16		16	"dbWaterSystem.INT_WaterPump.asInterlockNames.asInterlockNames[16]"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.INT_WaterPump.bInterlockOk		16	"dbWaterSystem.INT_WaterPump.bInterlockOk"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.AI_WaterPumpPressure.iMode		16	"dbWaterSystem.AI_WaterPumpPressure.iMode"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.AI_WaterPumpPressure.iErrorCode		16	"dbWaterSystem.AI_WaterPumpPressure.iErrorCode"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.AI_WaterPumpPressure.iStatus		16	"dbWaterSystem.AI_WaterPumpPressure.iStatus"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.AI_WaterPumpPressure.rActiveValue		16	"dbWaterSystem.AI_WaterPumpPressure.rActiveValue"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.AI_WaterPumpPressure.rInputValue		16	"dbWaterSystem.AI_WaterPumpPressure.rInputValue"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.AI_WaterPumpPressure.rManualValue		16	"dbWaterSystem.AI_WaterPumpPressure.rManualValue"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.AI_WaterPumpPressure.bPB_ResetError		16	"dbWaterSystem.AI_WaterPumpPressure.bPB_ResetError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.AI_WaterPumpPressure.bPBEN_ResetError		16	"dbWaterSystem.AI_WaterPumpPressure.bPBEN_ResetError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.AI_WaterPumpPressure.bError		16	"dbWaterSystem.AI_WaterPumpPressure.bError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.MTR_ReturnWaterPump.iMode		16	"dbWaterSystem.MTR_ReturnWaterPump.iMode"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.MTR_ReturnWaterPump.iErrorCode		16	"dbWaterSystem.MTR_ReturnWaterPump.iErrorCode"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.MTR_ReturnWaterPump.iStatus		16	"dbWaterSystem.MTR_ReturnWaterPump.iStatus"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.MTR_ReturnWaterPump.bPB_ResetError		16	"dbWaterSystem.MTR_ReturnWaterPump.bPB_ResetError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.MTR_ReturnWaterPump.bPB_Forward		16	"dbWaterSystem.MTR_ReturnWaterPump.bPB_Forward"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.MTR_ReturnWaterPump.bPB_Reverse		16	"dbWaterSystem.MTR_ReturnWaterPump.bPB_Reverse"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.MTR_ReturnWaterPump.bPB_Stop		16	"dbWaterSystem.MTR_ReturnWaterPump.bPB_Stop"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.MTR_ReturnWaterPump.bPBEN_ResetError		16	"dbWaterSystem.MTR_ReturnWaterPump.bPBEN_ResetError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.MTR_ReturnWaterPump.bPBEN_Forward		16	"dbWaterSystem.MTR_ReturnWaterPump.bPBEN_Forward"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.MTR_ReturnWaterPump.bPBEN_Reverse		16	"dbWaterSystem.MTR_ReturnWaterPump.bPBEN_Reverse"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.MTR_ReturnWaterPump.bPBEN_Stop		16	"dbWaterSystem.MTR_ReturnWaterPump.bPBEN_Stop"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.MTR_ReturnWaterPump.bForwardOn		16	"dbWaterSystem.MTR_ReturnWaterPump.bForwardOn"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.MTR_ReturnWaterPump.bReverseOn		16	"dbWaterSystem.MTR_ReturnWaterPump.bReverseOn"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.MTR_ReturnWaterPump.bSignalForward		16	"dbWaterSystem.MTR_ReturnWaterPump.bSignalForward"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.MTR_ReturnWaterPump.bSignalReverse		16	"dbWaterSystem.MTR_ReturnWaterPump.bSignalReverse"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.MTR_ReturnWaterPump.bError		16	"dbWaterSystem.MTR_ReturnWaterPump.bError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.MTR_ReturnWaterPump.bInterlock		16	"dbWaterSystem.MTR_ReturnWaterPump.bInterlock"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.ANA_SteamValve.iMode		16	"dbWaterSystem.ANA_SteamValve.iMode"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.ANA_SteamValve.iErrorCode		16	"dbWaterSystem.ANA_SteamValve.iErrorCode"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.ANA_SteamValve.iStatus		16	"dbWaterSystem.ANA_SteamValve.iStatus"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.ANA_SteamValve.rManualSP		16	"dbWaterSystem.ANA_SteamValve.rManualSP"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.ANA_SteamValve.rAutoSP		16	"dbWaterSystem.ANA_SteamValve.rAutoSP"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.ANA_SteamValve.rEstopSP		16	"dbWaterSystem.ANA_SteamValve.rEstopSP"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.ANA_SteamValve.rActual		16	"dbWaterSystem.ANA_SteamValve.rActual"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.ANA_SteamValve.bPB_ResetError		16	"dbWaterSystem.ANA_SteamValve.bPB_ResetError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.ANA_SteamValve.bPBEN_ResetError		16	"dbWaterSystem.ANA_SteamValve.bPBEN_ResetError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.ANA_SteamValve.bError		16	"dbWaterSystem.ANA_SteamValve.bError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.ANA_SteamValve.bInterlock		16	"dbWaterSystem.ANA_SteamValve.bInterlock"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.ANA_SteamValve.iEstopFunction		16	"dbWaterSystem.ANA_SteamValve.iEstopFunction"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.AO_CoolingCoil.iMode		16	"dbWaterSystem.AO_CoolingCoil.iMode"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.AO_CoolingCoil.iErrorCode		16	"dbWaterSystem.AO_CoolingCoil.iErrorCode"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.AO_CoolingCoil.rValue		16	"dbWaterSystem.AO_CoolingCoil.rValue"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.AO_CoolingCoil.rAutoValue		16	"dbWaterSystem.AO_CoolingCoil.rAutoValue"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.AO_CoolingCoil.rManualValue		16	"dbWaterSystem.AO_CoolingCoil.rManualValue"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.AO_CoolingCoil.rEstopValue		16	"dbWaterSystem.AO_CoolingCoil.rEstopValue"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.AO_CoolingCoil.bPB_ResetError		16	"dbWaterSystem.AO_CoolingCoil.bPB_ResetError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.AO_CoolingCoil.bPBEN_ResetError		16	"dbWaterSystem.AO_CoolingCoil.bPBEN_ResetError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.AO_CoolingCoil.bError		16	"dbWaterSystem.AO_CoolingCoil.bError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.AO_CoolingCoil.bInterlock		16	"dbWaterSystem.AO_CoolingCoil.bInterlock"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.AO_CoolingCoil.iEstopFunction		16	"dbWaterSystem.AO_CoolingCoil.iEstopFunction"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.SystemControl.iMode		16	"dbWaterSystem.SystemControl.iMode"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.SystemControl.bEStop		16	"dbWaterSystem.SystemControl.bEStop"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.SystemControl.bError		16	"dbWaterSystem.SystemControl.bError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.SystemControl.bWarning		16	"dbWaterSystem.SystemControl.bWarning"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.SystemControl.bAuto		16	"dbWaterSystem.SystemControl.bAuto"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.SystemControl.bPB_ResetError		16	"dbWaterSystem.SystemControl.bPB_ResetError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.WaterTemperature.AI_WaterTemperature.iMode		16	"dbWaterSystem.WaterTemperature.AI_WaterTemperature.iMode"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.WaterTemperature.AI_WaterTemperature.iErrorCode		16	"dbWaterSystem.WaterTemperature.AI_WaterTemperature.iErrorCode"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.WaterTemperature.AI_WaterTemperature.iStatus		16	"dbWaterSystem.WaterTemperature.AI_WaterTemperature.iStatus"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.WaterTemperature.AI_WaterTemperature.rActiveValue		16	"dbWaterSystem.WaterTemperature.AI_WaterTemperature.rActiveValue"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.WaterTemperature.AI_WaterTemperature.rInputValue		16	"dbWaterSystem.WaterTemperature.AI_WaterTemperature.rInputValue"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.WaterTemperature.AI_WaterTemperature.rManualValue		16	"dbWaterSystem.WaterTemperature.AI_WaterTemperature.rManualValue"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.WaterTemperature.AI_WaterTemperature.bPB_ResetError		16	"dbWaterSystem.WaterTemperature.AI_WaterTemperature.bPB_ResetError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.WaterTemperature.AI_WaterTemperature.bPBEN_ResetError		16	"dbWaterSystem.WaterTemperature.AI_WaterTemperature.bPBEN_ResetError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.WaterTemperature.AI_WaterTemperature.bError		16	"dbWaterSystem.WaterTemperature.AI_WaterTemperature.bError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.iMode		16	"dbWaterSystem.WaterTemperature.PID_WaterTempInterface.iMode"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.iPIDMode		16	"dbWaterSystem.WaterTemperature.PID_WaterTempInterface.iPIDMode"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.iErrorCode		16	"dbWaterSystem.WaterTemperature.PID_WaterTempInterface.iErrorCode"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.iEstopFunction		16	"dbWaterSystem.WaterTemperature.PID_WaterTempInterface.iEstopFunction"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rEstopValue		16	"dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rEstopValue"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rManualSP		16	"dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rManualSP"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rAutoSP		16	"dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rAutoSP"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rActualInput		16	"dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rActualInput"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.wActualInputPeripheral		16	"dbWaterSystem.WaterTemperature.PID_WaterTempInterface.wActualInputPeripheral"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rOutput		16	"dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rOutput"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.wOutputPeripheral		16	"dbWaterSystem.WaterTemperature.PID_WaterTempInterface.wOutputPeripheral"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rProportionalGain		16	"dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rProportionalGain"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rIntegralTime		16	"dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rIntegralTime"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rDerivativeTime		16	"dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rDerivativeTime"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rProportionalWeight		16	"dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rProportionalWeight"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rDerivativeWeight		16	"dbWaterSystem.WaterTemperature.PID_WaterTempInterface.rDerivativeWeight"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPB_ResetError		16	"dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPB_ResetError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPB_Pretune		16	"dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPB_Pretune"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPB_FineTune		16	"dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPB_FineTune"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPB_AutomaticMode		16	"dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPB_AutomaticMode"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPB_ManualMode		16	"dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPB_ManualMode"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPB_ManualTuning		16	"dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPB_ManualTuning"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bTOG_ManualTuning		16	"dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bTOG_ManualTuning"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPBEN_ResetError		16	"dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPBEN_ResetError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPBEN_Pretune		16	"dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPBEN_Pretune"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPBEN_FineTune		16	"dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPBEN_FineTune"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPBEN_AutomaticMode		16	"dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPBEN_AutomaticMode"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPBEN_ManualMode		16	"dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bPBEN_ManualMode"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bError		16	"dbWaterSystem.WaterTemperature.PID_WaterTempInterface.bError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"

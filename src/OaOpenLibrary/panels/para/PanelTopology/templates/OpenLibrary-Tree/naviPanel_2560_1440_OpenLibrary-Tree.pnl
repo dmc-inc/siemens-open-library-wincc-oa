@@ -1,0 +1,197 @@
+V 14
+3
+LANG:10001 10 Navigation
+LANG:10000 10 Navigation
+LANG:10027 18 Навигация
+PANEL,-1 -1 200 1380 N "Window_Background" 0
+"main()
+{
+  // Init the alarm indicator
+  string strServerName = substr(getSystemName(), 0, strlen(getSystemName()) - 1);
+
+  if (!mappingHasKey(ptnavi_navigation, strServerName))
+  {
+    DebugN(\"naviPanel Initialize has no valid servername ALARMINDICATOR has not been initialized!\");
+
+    return;
+  }
+
+  string strFileName = ptnavi_navigation[ strServerName ][ ptnavi_FILENAME ][ 1 ];
+
+  // Determine the filename and sum alert number of the sumalert for this panel
+  int iSumAlertNumber = ptnavi_navigation[ strServerName ][ ptnavi_SUMALERTNUMBER ][ 1 ];
+
+  // determine the name of the sumalert datapoint
+  string sPanelSumAlert = strServerName + \":\" + pt_fileNameToDpName(strFileName, iSumAlertNumber);
+
+  if (strFileName == \"\")
+  {
+    return;
+  }
+
+  if (!dpExists(sPanelSumAlert)) return;
+
+  dpConnect( \"ShowAlarmCB\",
+    sPanelSumAlert + \".Warning:_alert_hdl.._act_state_color\",
+    sPanelSumAlert + \".Alert:_alert_hdl.._act_state_color\",
+    sPanelSumAlert + \".Danger:_alert_hdl.._act_state_color\" );
+
+}
+
+void ShowAlarmCB(
+  string strDP1, string strWarning,
+  string strDP2, string strAlert,
+  string strDP3, string strDanger
+)
+{
+  string strColor;
+
+  if( strlen( strWarning )) strColor = strWarning;
+  if( strlen( strAlert ))   strColor = strAlert;
+  if( strlen( strDanger ))  strColor = strDanger;
+
+}
+
+
+
+
+
+
+
+
+" 0
+ E E E E 1 -1 -1 0  350 60
+""0  1
+E "dyn_string ptnavi_strOfflineServers;
+" 0
+ 3
+"CBRef" "1"
+"EClose" E
+"dpi" "96"
+0 1 0 0 0 0 0
+""
+NC
+DISPLAY_LAYER, 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0
+LAYER, 0 
+1
+LANG:10001 6 Layer1
+6 13
+"RECTANGLE1"
+""
+1 20 25 E E E 1 E 1 E N {0,0,0} E N {255,255,255} E E
+ E E
+129 0 0 0 0 0
+E E E
+0
+1
+LANG:10001 0 
+
+3
+"layoutAlignment" "AlignNone"
+"dashclr"N "_Transparent"
+"antiAliased" "0"
+E E 0 1 3 2 1 E 1.187467218818259 0 1.592 -25.24383713783267 -40.8 2  1 0  "13.png" 4294967295 E 20 25 188 150
+29 67
+"TREE"
+""
+1 9.9375 -92.41681682691134 E E E 1 E 1 E N "_WindowText" E N "_Window" E E
+ E E
+145 0 0 0 0 0
+E E E
+0
+3
+LANG:10001 0 
+LANG:10000 0 
+LANG:10027 0 
+
+2
+"sizePolicy" "Preferred Expanding"
+"layoutAlignment" "AlignNone"
+3
+LANG:10001 35 MS Shell Dlg 2,-1,11,5,50,0,0,0,0,0
+LANG:10000 35 MS Shell Dlg 2,-1,11,5,50,0,0,0,0,0
+LANG:10027 35 MS Shell Dlg 2,-1,11,5,50,0,0,0,0,0
+0  1 199.0000000000001 199 1278
+10 TreeWidget
+2
+0 "selectionChanged" "(string id)"
+"  ptnavi_TreeSelectionChanged(id);"
+0 "clicked" "(string id, int column)"
+"  ptnavi_TreeClicked(id, column);"
+"main()
+{
+    dpConnect(\"del_History\", myUiDpName()+\".UserName\");
+}
+
+void del_History(string sdp, string sUser)
+{
+  if(sUser == \"\")
+    return;
+
+  string strDisplay = ptnavi_GetScreenName();
+  int iPos = ptnavi_navigation[ ptnavi_HISTORY ][ strDisplay ][ ptnavi_HISTORY_POS ];
+  dyn_int diHistTopo = (iPos > 0) ? makeDynInt(ptnavi_navigation[ ptnavi_HISTORY ][ strDisplay ][ ptnavi_HISTORY_TOPO ][iPos]) : makeDynInt(1);
+  dyn_string dsHistLocation = (iPos > 0) ? makeDynString(ptnavi_navigation[ ptnavi_HISTORY ][ strDisplay ][ ptnavi_HISTORY_LOCATION ][iPos]) : makeDynString(\"\");
+
+  ptnavi_navigation[ ptnavi_HISTORY ][ strDisplay ][ ptnavi_HISTORY_TOPO     ] = diHistTopo;
+  ptnavi_navigation[ ptnavi_HISTORY ][ strDisplay ][ ptnavi_HISTORY_LOCATION ] = dsHistLocation;
+  delay(0,250);
+  ptnavi_TreeInitialize();
+
+}
+
+
+" 0
+1 68 0 "" 0
+0
+6 69
+"RECTANGLE2"
+""
+1 20 25 E E E 1 E 1 E N {0,0,0} E N {255,255,255} E E
+ E E
+146 0 0 0 0 0
+E E E
+0
+1
+LANG:10001 0 
+
+3
+"layoutAlignment" "AlignNone"
+"dashclr"N "_Transparent"
+"antiAliased" "0"
+E E -1 0 3 2 1 E 1.187467218818259 0 0.7120000000000004 -23.74934437636518 36.19999999999997 2  1 0  "pictures/DMC_LOGO.png" 4294967295 E 20 25 188 150
+0
+LAYER, 1 
+1
+LANG:10001 6 Layer2
+0
+LAYER, 2 
+1
+LANG:10001 6 Layer3
+0
+LAYER, 3 
+1
+LANG:10001 6 Layer4
+0
+LAYER, 4 
+1
+LANG:10001 6 Layer5
+0
+LAYER, 5 
+1
+LANG:10001 6 Layer6
+0
+LAYER, 6 
+1
+LANG:10001 6 Layer7
+0
+LAYER, 7 
+1
+LANG:10001 6 Layer8
+0
+3 0 "PANEL_REF1" -1
+"layoutAlignment" "AlignNone"
+"" ""
+"dmcAES/btnAlm.xml" 62.75399606339056 980 T 146 1.031088082901555 0 1.164556962025317 -64.70489749541306 136.7341772151895
+0
+0

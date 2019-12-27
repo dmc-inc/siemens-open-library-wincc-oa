@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<panel version="14">
+ <properties>
+  <prop name="Name">
+   <prop name="en_US.utf8"></prop>
+  </prop>
+  <prop name="Size">195 113</prop>
+  <prop name="BackColor">_3DFace</prop>
+  <prop name="RefPoint">95 44</prop>
+  <prop name="InitAndTermRef">True</prop>
+  <prop name="SendClick">False</prop>
+  <prop name="RefFileName"></prop>
+  <prop name="DPI">96</prop>
+  <prop name="layoutType">None</prop>
+ </properties>
+ <events>
+  <script name="ScopeLib" isEscaped="1"><![CDATA[/////////////////////////////////////////////////////////////////////////////
+//
+//  WinCC OA Open Library
+//
+//  Author:     DMC, Inc. http://www.dmcinfo.com
+//
+//  File:       fpValve_Solenoid.xml
+//
+//  Revisions:  01/20/2017 - Leigh Mathews (leigh.mathews@dmcinfo.com) :
+//                         Created
+//              05/17/2017 - Added extended propertied
+//              06/01/2018 - LG Refactored to be more abstract for future
+//                           ease of creating object variants.
+//              06/06/2018 - PJL Minor refactoring here to use Device class
+//                           in Valve_Solenoid.ctl
+//              10/13/2018 - Oliver Reed (oliver.reed@dmcinfo.com) :
+//                           Changed from pnl to xml
+//              01/23/19 - Nick Leisle (nicholas.leisle@dmcinfo.com):
+//                         Implemented OL Component class into popup
+//
+//  Description: Solenoid Valve Icon faceplate
+//
+/////////////////////////////////////////////////////////////////////////////
+
+#uses &quot;OpenLibrary/Classes/Implementations/DisplayBehaviors/Common/Enumeration&quot;
+#uses &quot;OpenLibrary/Classes/Implementations/DisplayBehaviors/Common/DynamicVisibility&quot;
+#uses &quot;OpenLibrary/Classes/Implementations/ActionBehaviors/OpenPopup&quot;
+#uses &quot;OpenLibrary/Classes/Components/Component&quot;
+#uses &quot;OpenLibrary/Constants/Colors&quot;
+#uses &quot;OpenLibrary/Enums/DirectionType&quot;
+#uses &quot;OpenLibrary/Enums/ModeType&quot;
+#uses &quot;OpenLibrary/Enums/VisibilityType&quot;
+#uses &quot;OpenLibrary/Macros&quot;
+
+private dyn_string deviceColors = makeDynString(
+    DEVICE_STOPPED_COLOR,  // 0 = stopped
+    DEVICE_ERRORED_COLOR,  // 1 = E-stopped
+    DEVICE_ERRORED_COLOR,  // 2 = Error
+    DEVICE_WORK_COLOR,     // 3 = Forward / Work
+    DEVICE_HOME_COLOR,     // 4 = Reverse / Home
+    DEVICE_ON_WORK_COLOR,  // 5 = Forwarding / Working
+    DEVICE_ON_HOME_COLOR); // 6 = Reversing / Homing
+
+private dyn_string outlineColors = generateContrastingColors(deviceColors, DEVICE_OUTLINE_LIGHT, DEVICE_OUTLINE_DARK);
+
+private string dp = $dpe;
+private string interlockDp = $_interlockDpe;
+
+private ComponentClass Overlay = ComponentClass(getShape(&quot;overlay&quot;));
+private ComponentClass ManualIndicator = ComponentClass(getShape(&quot;manualIndicator&quot;));
+private ComponentClass Valve = ComponentClass(getShape(&quot;valve&quot;));
+
+
+public void initializePanel()
+{
+  //Overlay and Manual Indicator behaviors
+  Overlay.addActionBehavior(new OpenPopupActionBehaviorClass(makeDynString(&quot;$dpe:&quot; + dp, &quot;$_interlockDpe:&quot; + interlockDp), &quot;objects/OL_DevicePopups/solenoidValve.xml&quot;));
+  ManualIndicator.addDisplayBehavior(new DynamicVisibilityDisplayBehaviorClass(dp + &quot;.iMode&quot;, (int)ModeType::Manual));
+
+  //Device colors
+  Valve.addDisplayBehavior(new EnumerationDisplayBehaviorClass(dp + &quot;.iStatus&quot;, deviceColors, &quot;backCol&quot;));
+  Valve.addDisplayBehavior(new EnumerationDisplayBehaviorClass(dp + &quot;.iStatus&quot;, outlineColors, &quot;foreCol&quot;));
+}
+
+
+public void displayDevicePopup()
+{
+  Overlay.invokeAction();
+}
+
+
+
+//Rotation property of panel
+
+DirectionType orientation = DirectionType::Horizontal;
+#property DirectionType orientation
+private dyn_string shapes = makeDynString
+  (
+    &quot;overlay&quot;,
+    &quot;manualIndicator&quot;,
+    &quot;valve&quot;
+  );
+
+
+
+public void setOrientation(DirectionType newOrientation)
+{
+  changeOrientation(newOrientation, shapes);
+}
+
+public DirectionType getOrientation()
+{
+  return orientation;
+}]]></script>
+  <script name="Initialize" isEscaped="1"><![CDATA[main()
+{
+  initializePanel();
+}
+
+]]></script>
+ </events>
+ <shapes>
+  <shape layerId="0" Name="valve" shapeType="POLYGON">
+   <properties>
+    <prop name="serialId">1</prop>
+    <prop name="Type">Rotatable</prop>
+    <prop name="RefPoint">180.6523253227137 209.8754915475606</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">White</prop>
+    <prop name="BackColor">OL_Device_Stopped</prop>
+    <prop name="TabOrder">0</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">True</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,2]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[solid]</prop>
+    <prop name="Geometry">0.9936686793473739 2.433786335151478e-16 -1.866110064227549e-16 0.7618972529576722 -83.50855752445305 -108.9035604732276</prop>
+    <prop name="Closed">True</prop>
+    <prop name="Points">
+     <prop name="Location">90 160</prop>
+     <prop name="Location">90 260</prop>
+     <prop name="Location">180 210</prop>
+     <prop name="Location">270 260</prop>
+     <prop name="Location">270 160</prop>
+     <prop name="Location">180 210</prop>
+    </prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="manualIndicator" shapeType="RECTANGLE">
+   <properties>
+    <prop name="serialId">11</prop>
+    <prop name="Type">Rotatable</prop>
+    <prop name="RefPoint">105.689691050248 76.97518243954546</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">OL_Device_Manual_Control</prop>
+    <prop name="BackColor">OL_Device_Manual_Control</prop>
+    <prop name="TabOrder">4</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,5]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[outline]</prop>
+    <prop name="Geometry">0.9047619047619048 0 0 0.666666666666667 -0.8361349486343101 -0.4671713777953385</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop name="Location">0 0</prop>
+    <prop name="Size">211 151</prop>
+    <prop name="CornerRadius">0</prop>
+    <prop name="Transformable">True</prop>
+   </properties>
+  </shape>
+  <reference referenceId="1" Name="interlockIndicator" parentSerial="-1">
+   <properties>
+    <prop name="FileName">objects/OL_Components/interlockIcon.xml</prop>
+    <prop name="Location">96.12125141500208 147.1894792426843</prop>
+    <prop name="Geometry">0.8636363636363636 0 0 0.8543689320388349 13.15005701113664 -73.61966432035045</prop>
+    <prop name="TabOrder">6</prop>
+    <prop name="dollarParameters">
+     <prop name="dollarParameter">
+      <prop name="Dollar">$dpe</prop>
+      <prop name="Value">$dpe</prop>
+     </prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+   </properties>
+  </reference>
+  <shape layerId="7" Name="overlay" shapeType="RECTANGLE">
+   <properties>
+    <prop name="serialId">4</prop>
+    <prop name="Type">Rotatable</prop>
+    <prop name="RefPoint">195.8299768540988 190.9485419081157</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">{0,0,0}</prop>
+    <prop name="BackColor">_Transparent</prop>
+    <prop name="TabOrder">3</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[none,oneColor,JoinBevel,CapProjecting,1]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[solid]</prop>
+    <prop name="Geometry">0.5236784877677303 1.166090166382895e-16 -1.200954391157352e-16 0.4199864562885891 -10.57183250218033 -30.66297282725796</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop name="Location">20 70</prop>
+    <prop name="Size">361 241</prop>
+    <prop name="CornerRadius">0</prop>
+    <prop name="Transformable">True</prop>
+   </properties>
+   <events>
+    <script name="Clicked" isEscaped="1"><![CDATA[main()
+{
+  displayDevicePopup();
+}
+
+
+
+
+]]></script>
+   </events>
+  </shape>
+ </shapes>
+</panel>

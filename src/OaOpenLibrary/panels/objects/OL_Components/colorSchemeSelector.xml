@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<panel version="14">
+ <properties>
+  <prop name="Name">
+   <prop name="en_US.utf8"></prop>
+  </prop>
+  <prop name="Size">400 400</prop>
+  <prop name="BackColor">_3DFace</prop>
+  <prop name="RefPoint">18 6</prop>
+  <prop name="InitAndTermRef">True</prop>
+  <prop name="SendClick">False</prop>
+  <prop name="RefFileName"></prop>
+  <prop name="DPI">96</prop>
+  <prop name="layoutType">None</prop>
+ </properties>
+ <events>
+  <script name="ScopeLib" isEscaped="1"><![CDATA[private dyn_string colorDBs = makeDynString(&quot;Standard&quot;, &quot;High Performance&quot;);
+
+public void initialize()
+{
+  //Clear the drop down before repopulating it.
+  colorSchemeDropDown.deleteAllItems();
+
+  dyn_string colorSchemes = getColorSchemes();
+
+  // Populate drop down with supported Color DBs
+  for (int i = 1; i &lt;= dynlen(colorSchemes); i++)
+  {
+    colorSchemeDropDown.appendItem(colorSchemes[i]);
+  }
+
+  // Make the active item be the active color scheme
+  string activeColorScheme = colorGetActiveScheme();
+  string displayColorScheme = activeColorScheme == &quot;&quot; ? &quot;Standard&quot; : activeColorScheme;
+  colorSchemeDropDown.selectedPos(dynContains(colorSchemes, displayColorScheme));
+}
+
+private dyn_string getColorSchemes()
+{
+  // Get project paths
+  dyn_string projectPaths;
+  paCfgReadValueList(getPath(CONFIG_REL_PATH) + &quot;config&quot;, &quot;general&quot;, &quot;proj_path&quot;, projectPaths);
+
+  dyn_string colorSchemes = makeDynString(&quot;Standard&quot;);
+  for (int i = 1; i &lt;= dynlen(projectPaths); i++)
+  {
+    string projectPath = projectPaths[i];
+    dynAppend(colorSchemes, getFileNames(projectPath + &quot;/colorDB/&quot;, &quot;*&quot;, FILTER_DIRS));
+  }
+
+  // Filter out duplicates and punctuation
+  dyn_string filteredColorSchemes;
+  dynSortAsc(colorSchemes);
+  dynUnique(colorSchemes);
+  for (int i = 1; i &lt;= dynlen(colorSchemes); i++)
+  {
+    string colorScheme = colorSchemes[i];
+    if (colorScheme[0] != &quot;.&quot;)
+    {
+      dynAppend(filteredColorSchemes, colorScheme);
+    }
+  }
+
+  return filteredColorSchemes;
+}
+
+public void changeColorScheme(string newColorScheme)
+{
+  if (newColorScheme == &quot;Standard&quot;)
+  {
+    newColorScheme = &quot;&quot;;
+  }
+  colorSetActiveScheme(newColorScheme);
+}
+]]></script>
+  <script name="Initialize" isEscaped="1"><![CDATA[main()
+{
+  initialize();
+}]]></script>
+ </events>
+ <shapes>
+  <shape layerId="0" Name="colorSchemeDropDown" shapeType="COMBO_BOX">
+   <properties>
+    <prop name="serialId">2</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">20 9</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">_WindowText</prop>
+    <prop name="BackColor">_Window</prop>
+    <prop name="TabOrder">1</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="Font">
+     <prop name="en_US.utf8">Segoe UI Semibold,-1,11,5,50,0,0,0,0,0</prop>
+    </prop>
+    <prop name="Location">20 5</prop>
+    <prop name="Size">121 20</prop>
+    <prop name="Listitems"/>
+    <prop name="Editable">False</prop>
+   </properties>
+   <events>
+    <script name="Changed" isEscaped="1"><![CDATA[main()
+{
+  changeColorScheme(this.selectedText());
+}]]></script>
+   </events>
+  </shape>
+ </shapes>
+</panel>

@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<panel version="14">
+ <properties>
+  <prop name="Name">
+   <prop name="en_US.utf8"></prop>
+  </prop>
+  <prop name="Size">191 164</prop>
+  <prop name="BackColor">_3DFace</prop>
+  <prop name="RefPoint">56 57</prop>
+  <prop name="InitAndTermRef">True</prop>
+  <prop name="SendClick">False</prop>
+  <prop name="RefFileName"></prop>
+  <prop name="DPI">96</prop>
+  <prop name="layoutType">None</prop>
+ </properties>
+ <events>
+  <script name="ScopeLib" isEscaped="1"><![CDATA[/////////////////////////////////////////////////////////////////////////////
+//
+//  WinCC OA Open Library
+//
+//  Author:     DMC, Inc. http://www.dmcinfo.com
+//
+//  File:       fpInterlock.pnl
+//
+//  Revisions:  01/20/17 - Leigh Mathews (leigh.mathews@dmcinfo.com) :
+//                         Created
+//              04/06/2017 - Leon Grossman:
+//                           Modified to use interlock object rather than duplicated
+//                           code.
+//              01/03/2019 - Nick Leisle:
+//                           Moved function definitions to ScopeLib to comply with standards.
+//              01/21/19 -   Nick Leisle (nicholas.leisle@dmcinfo.com):
+//                           Implemented OL Component class into popup
+//
+//  Description: Interlock Icon faceplate
+//
+/////////////////////////////////////////////////////////////////////////////
+
+#uses &quot;OpenLibrary/Classes/Implementations/DisplayBehaviors/Common/Enumeration&quot;
+#uses &quot;OpenLibrary/Classes/Implementations/DisplayBehaviors/Common/DynamicVisibility&quot;
+#uses &quot;OpenLibrary/Classes/Implementations/ActionBehaviors/OpenPopup&quot;
+#uses &quot;OpenLibrary/Classes/Components/Component&quot;
+#uses &quot;OpenLibrary/Enums/VisibilityType&quot;
+
+
+private string dp = $dpe;
+
+private ComponentClass Overlay         = ComponentClass(getShape(&quot;overlay&quot;));
+private ComponentClass InterlockSymbol = ComponentClass(getShape(&quot;interlockSymbol&quot;));
+
+private ComponentClass Itop            = ComponentClass(getShape(&quot;itop&quot;));
+private ComponentClass Imiddle         = ComponentClass(getShape(&quot;imiddle&quot;));
+private ComponentClass Ibottom         = ComponentClass(getShape(&quot;ibottom&quot;));
+
+
+
+public void initializePanel()
+{
+  Overlay.addActionBehavior(         new OpenPopupActionBehaviorClass(makeDynString(&quot;$dpe:&quot; + dp), &quot;objects/OL_DevicePopups/interlock.xml&quot;));
+  Overlay.addDisplayBehavior(        new DynamicVisibilityDisplayBehaviorClass(dp + &quot;.bInterlockOk&quot;, 0));
+
+  InterlockSymbol.addDisplayBehavior(new DynamicVisibilityDisplayBehaviorClass(dp + &quot;.bInterlockOk&quot;, 0));
+  Itop.addDisplayBehavior(           new DynamicVisibilityDisplayBehaviorClass(dp + &quot;.bInterlockOk&quot;, 0));
+  Imiddle.addDisplayBehavior(        new DynamicVisibilityDisplayBehaviorClass(dp + &quot;.bInterlockOk&quot;, 0));
+  Ibottom.addDisplayBehavior(        new DynamicVisibilityDisplayBehaviorClass(dp + &quot;.bInterlockOk&quot;, 0));
+}
+
+
+public void click()
+{
+  Overlay.invokeAction();
+}
+]]></script>
+  <script name="Initialize" isEscaped="1"><![CDATA[// Show hide all elements of the interlock icon.
+main()
+{
+  initializePanel();
+}
+]]></script>
+ </events>
+ <shapes>
+  <shape layerId="0" Name="interlockSymbol" shapeType="POLYGON">
+   <properties>
+    <prop name="serialId">15</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">199.9999999999999 211.8134863701581</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">OL_UI_Border</prop>
+    <prop name="BackColor">OL_Device_Interlocked</prop>
+    <prop name="TabOrder">10</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">True</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,2]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[solid]</prop>
+    <prop name="Geometry">0.4374999999999999 0 0 0.3300189393939381 -31.43750000000004 -13.90246212121194</prop>
+    <prop name="Closed">True</prop>
+    <prop name="Points">
+     <prop name="Location">100 128.2352941176471</prop>
+     <prop name="Location">100 297.6470588235294</prop>
+     <prop name="Location">200 368.2352941176472</prop>
+     <prop name="Location">300 297.6470588235295</prop>
+     <prop name="Location">300 128.2352941176471</prop>
+     <prop name="Location">200 57.64705882352945</prop>
+    </prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="imiddle" shapeType="RECTANGLE">
+   <properties>
+    <prop name="serialId">16</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">190.5263157894736 258.5135336109462</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">OL_UI_Dark_Text</prop>
+    <prop name="BackColor">OL_UI_Dark_Text</prop>
+    <prop name="TabOrder">11</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,1]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[solid]</prop>
+    <prop name="Geometry">0.4156249999999999 0 0 0.4244949494949475 -23.125 -53.73768939393901</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop name="Location">180 210</prop>
+    <prop name="Size">21 91</prop>
+    <prop name="CornerRadius">0</prop>
+    <prop name="Transformable">True</prop>
+   </properties>
+   <events>
+    <script name="Initialize" isEscaped="1"><![CDATA[
+]]></script>
+   </events>
+  </shape>
+  <shape layerId="0" Name="ibottom" shapeType="RECTANGLE">
+   <properties>
+    <prop name="serialId">17</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">247.2484756097558 255.62874251497</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">OL_UI_Dark_Text</prop>
+    <prop name="BackColor">OL_UI_Dark_Text</prop>
+    <prop name="TabOrder">12</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,1]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[solid]</prop>
+    <prop name="Geometry">-6.391125483050242e-17 -0.3727272727272711 0.3479166666666663 -6.846888922505626e-17 -32.87499999999991 148.1562499999995</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop name="Location">180 210</prop>
+    <prop name="Size">21 91</prop>
+    <prop name="CornerRadius">0</prop>
+    <prop name="Transformable">True</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="itop" shapeType="RECTANGLE">
+   <properties>
+    <prop name="serialId">18</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">134.7484756097558 255.62874251497</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">OL_UI_Dark_Text</prop>
+    <prop name="BackColor">OL_UI_Dark_Text</prop>
+    <prop name="TabOrder">13</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[solid,oneColor,JoinBevel,CapProjecting,1]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[solid]</prop>
+    <prop name="Geometry">-6.391125483050242e-17 -0.3727272727272711 0.3479166666666663 -6.846888922505626e-17 -32.87499999999994 106.2244318181815</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop name="Location">180 210</prop>
+    <prop name="Size">21 91</prop>
+    <prop name="CornerRadius">0</prop>
+    <prop name="Transformable">True</prop>
+   </properties>
+  </shape>
+  <shape layerId="0" Name="overlay" shapeType="RECTANGLE">
+   <properties>
+    <prop name="serialId">20</prop>
+    <prop name="Type"></prop>
+    <prop name="RefPoint">200.0000000000001 190</prop>
+    <prop name="Enable">True</prop>
+    <prop name="Visible">True</prop>
+    <prop name="ForeColor">{0,0,0}</prop>
+    <prop name="BackColor">_Transparent</prop>
+    <prop name="TabOrder">14</prop>
+    <prop name="ToolTipText">
+     <prop name="en_US.utf8"></prop>
+    </prop>
+    <prop name="layoutAlignment">AlignNone</prop>
+    <prop name="snapMode">Point</prop>
+    <prop name="DashBackColor">_Transparent</prop>
+    <prop name="AntiAliased">False</prop>
+    <prop name="LineType">[none,oneColor,JoinBevel,CapProjecting,1]</prop>
+    <prop name="BorderZoomable">False</prop>
+    <prop name="FillType">[solid]</prop>
+    <prop name="Geometry">0.2430555555555556 0 0 0.4270833333333317 7.451388888888827 -24.77367424242401</prop>
+    <prop name="BorderStyle">Normal</prop>
+    <prop name="Location">20 70</prop>
+    <prop name="Size">361 241</prop>
+    <prop name="CornerRadius">0</prop>
+    <prop name="Transformable">True</prop>
+   </properties>
+   <events>
+    <script name="Clicked" isEscaped="1"><![CDATA[main()
+{
+  click();
+}
+]]></script>
+   </events>
+  </shape>
+ </shapes>
+</panel>

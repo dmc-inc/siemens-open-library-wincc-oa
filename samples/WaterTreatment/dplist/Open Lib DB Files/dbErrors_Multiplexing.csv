@@ -1,0 +1,21 @@
+tag,active,comment,unit,floating point precision,Type Sub Active,Data Type,Subscription
+dbErrors_Multiplexing.Valve_Array[0],True,0..3,,-1,False,udtError_Valve,_Slow
+dbErrors_Multiplexing.Valve_Array[0].NoHomeFeedback,True,0..3,,-1,False,Bool,_Slow
+dbErrors_Multiplexing.Valve_Array[0].NoWorkFeedback,True,0..3,,-1,False,Bool,_Slow
+dbErrors_Multiplexing.Valve_Array[0].HomeFeedbackStillActive,True,0..3,,-1,False,Bool,_Slow
+dbErrors_Multiplexing.Valve_Array[0].WorkFeedbackStillActive,True,0..3,,-1,False,Bool,_Slow
+dbErrors_Multiplexing.Valve_Array[1],True,0..3,,-1,False,udtError_Valve,_Slow
+dbErrors_Multiplexing.Valve_Array[1].NoHomeFeedback,True,0..3,,-1,False,Bool,_Slow
+dbErrors_Multiplexing.Valve_Array[1].NoWorkFeedback,True,0..3,,-1,False,Bool,_Slow
+dbErrors_Multiplexing.Valve_Array[1].HomeFeedbackStillActive,True,0..3,,-1,False,Bool,_Slow
+dbErrors_Multiplexing.Valve_Array[1].WorkFeedbackStillActive,True,0..3,,-1,False,Bool,_Slow
+dbErrors_Multiplexing.Valve_Array[2],True,0..3,,-1,False,udtError_Valve,_Slow
+dbErrors_Multiplexing.Valve_Array[2].NoHomeFeedback,True,0..3,,-1,False,Bool,_Slow
+dbErrors_Multiplexing.Valve_Array[2].NoWorkFeedback,True,0..3,,-1,False,Bool,_Slow
+dbErrors_Multiplexing.Valve_Array[2].HomeFeedbackStillActive,True,0..3,,-1,False,Bool,_Slow
+dbErrors_Multiplexing.Valve_Array[2].WorkFeedbackStillActive,True,0..3,,-1,False,Bool,_Slow
+dbErrors_Multiplexing.Valve_Array[3],True,0..3,,-1,False,udtError_Valve,_Slow
+dbErrors_Multiplexing.Valve_Array[3].NoHomeFeedback,True,0..3,,-1,False,Bool,_Slow
+dbErrors_Multiplexing.Valve_Array[3].NoWorkFeedback,True,0..3,,-1,False,Bool,_Slow
+dbErrors_Multiplexing.Valve_Array[3].HomeFeedbackStillActive,True,0..3,,-1,False,Bool,_Slow
+dbErrors_Multiplexing.Valve_Array[3].WorkFeedbackStillActive,True,0..3,,-1,False,Bool,_Slow

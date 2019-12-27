@@ -1,0 +1,410 @@
+# ascii dump of database
+
+# DpType
+TypeName
+udtHMI_SystemControl.udtHMI_SystemControl	1#1
+	iMode	21#2
+	bEStop	23#3
+	bError	23#4
+	bWarning	23#5
+	bAuto	23#6
+	bPB_ResetError	23#7
+udtHMI_VFD_Control.udtHMI_VFD_Control	1#1
+	iMode	21#2
+	iErrorCode	21#3
+	iStatus	21#4
+	rManualSpeedSP	22#5
+	rAutoSpeedSP	22#6
+	rActualSpeed	22#7
+	rActualCurrent	22#8
+	rActualPower	22#9
+	bPB_ResetError	23#10
+	bPB_Forward	23#11
+	bPB_Reverse	23#12
+	bPB_Stop	23#13
+	bPBEN_ResetError	23#14
+	bPBEN_Forward	23#15
+	bPBEN_Reverse	23#16
+	bPBEN_Stop	23#17
+	bForwardOn	23#18
+	bReverseOn	23#19
+	bSignalForward	23#20
+	bSignalReverse	23#21
+	bError	23#22
+	bInterlock	23#23
+udtHMI_SystemControl.udtHMI_SystemControl	1#1
+	iMode	21#2
+	bEStop	23#3
+	bError	23#4
+	bWarning	23#5
+	bAuto	23#6
+	bPB_ResetError	23#7
+udtHMI_VFD_Control.udtHMI_VFD_Control	1#1
+	iMode	21#2
+	iErrorCode	21#3
+	iStatus	21#4
+	rManualSpeedSP	22#5
+	rAutoSpeedSP	22#6
+	rActualSpeed	22#7
+	rActualCurrent	22#8
+	rActualPower	22#9
+	bPB_ResetError	23#10
+	bPB_Forward	23#11
+	bPB_Reverse	23#12
+	bPB_Stop	23#13
+	bPBEN_ResetError	23#14
+	bPBEN_Forward	23#15
+	bPBEN_Reverse	23#16
+	bPBEN_Stop	23#17
+	bForwardOn	23#18
+	bReverseOn	23#19
+	bSignalForward	23#20
+	bSignalReverse	23#21
+	bError	23#22
+	bInterlock	23#23
+udtHMI_SystemControl.udtHMI_SystemControl	1#1
+	iMode	21#2
+	bEStop	23#3
+	bError	23#4
+	bWarning	23#5
+	bAuto	23#6
+	bPB_ResetError	23#7
+udtHMI_VFD_Control.udtHMI_VFD_Control	1#1
+	iMode	21#2
+	iErrorCode	21#3
+	iStatus	21#4
+	rManualSpeedSP	22#5
+	rAutoSpeedSP	22#6
+	rActualSpeed	22#7
+	rActualCurrent	22#8
+	rActualPower	22#9
+	bPB_ResetError	23#10
+	bPB_Forward	23#11
+	bPB_Reverse	23#12
+	bPB_Stop	23#13
+	bPBEN_ResetError	23#14
+	bPBEN_Forward	23#15
+	bPBEN_Reverse	23#16
+	bPBEN_Stop	23#17
+	bForwardOn	23#18
+	bReverseOn	23#19
+	bSignalForward	23#20
+	bSignalReverse	23#21
+	bError	23#22
+	bInterlock	23#23
+udtError_VFD.udtError_VFD	1#1
+	MotorProtectorTripped	23#2
+	LocalDisconnectOff	23#3
+	ClutchTripped	23#4
+	NoContactorFeedback	23#5
+	ContactorStillOn	23#6
+	NoSignalForward	23#7
+	NoSignalReverse	23#8
+	MotorNotStopped	23#9
+	MaxFrequencyReached	23#10
+	Overcurrent	23#11
+	MotorOverload	23#12
+	VFDOverload	23#13
+	GeneralFault	23#14
+	NoCoolingFanFeedback	23#15
+udtError_Valve.udtError_Valve	1#1
+	NoHomeFeedback	23#2
+	NoWorkFeedback	23#3
+	HomeFeedbackStillActive	23#4
+	WorkFeedbackStillActive	23#5
+udtError_Valve.udtError_Valve	1#1
+	NoHomeFeedback	23#2
+	NoWorkFeedback	23#3
+	HomeFeedbackStillActive	23#4
+	WorkFeedbackStillActive	23#5
+udtError_VFD.udtError_VFD	1#1
+	MotorProtectorTripped	23#2
+	LocalDisconnectOff	23#3
+	ClutchTripped	23#4
+	NoContactorFeedback	23#5
+	ContactorStillOn	23#6
+	NoSignalForward	23#7
+	NoSignalReverse	23#8
+	MotorNotStopped	23#9
+	MaxFrequencyReached	23#10
+	Overcurrent	23#11
+	MotorOverload	23#12
+	VFDOverload	23#13
+	GeneralFault	23#14
+	NoCoolingFanFeedback	23#15
+udtError_PID.udtError_PID	1#1
+	InputOutOfRange	23#2
+	InputPERInvalid	23#3
+	ValueOscillationFailed	23#4
+	ProcessValueCloseToSetPoint	23#5
+	SetPointChangedDuringTuning	23#6
+	PretuningDuringFineTuning	23#7
+	InvalidOutputValueLimits	23#8
+	InvalidFineTuningParameter	23#9
+	InputInvalidFormat	23#10
+	OutputCalculationError	23#11
+	SamplingTimeError	23#12
+	SetPointInvalidFormat	23#13
+	ManualInvalidFormat	23#14
+	SubstituteOutputInvalidFormat	23#15
+	DisturbanceInvalidFormat	23#16
+udtError_Motor.udtError_Motor	1#1
+	MotorProtectorTripped	23#2
+	LocalDisconnectOff	23#3
+	ClutchTripped	23#4
+	NoSignalForward	23#5
+	NoSignalReverse	23#6
+	MotorNotStopped	23#7
+udtError_AnalogValve.udtError_AnalogValve	1#1
+	InvalidFeedback	23#2
+udtError_AnalogOutput.udtError_AnalogOutput	1#1
+	OutOfRange	23#2
+	ConfigurationError	23#3
+udtError_AnalogInput.udtError_AnalogInput	1#1
+	LowLowAlarm	23#2
+	HighHighAlarm	23#3
+	Invalid	23#4
+udtHMI_ValveControl.udtHMI_ValveControl	1#1
+	iMode	21#2
+	iErrorCode	21#3
+	iStatus	21#4
+	bPB_ResetError	23#5
+	bPB_Home	23#6
+	bPB_Work	23#7
+	bPBEN_ResetError	23#8
+	bPBEN_Home	23#9
+	bPBEN_Work	23#10
+	bHomeOn	23#11
+	bWorkOn	23#12
+	bSignalHome	23#13
+	bSignalWork	23#14
+	bError	23#15
+	bInterlock	23#16
+
+# ascii dump of database
+# ascii dump of database
+
+# DpType
+TypeName
+dbMultiplexing.dbMultiplexing	1#1
+	Valve_Array0	41#2:udtHMI_ValveControl
+	Valve_Array1	41#3:udtHMI_ValveControl
+	Valve_Array2	41#4:udtHMI_ValveControl
+	Valve_Array3	41#5:udtHMI_ValveControl
+
+
+
+# Datapoint/DpId
+DpName	TypeName	ID
+dbMultiplexing	dbMultiplexing
+
+# PvssRangeCheck
+Manager/User	ElementName	TypeName	_pv_range.._type	_pv_range.._ignor_inv	_pv_range.._neg	_pv_range.._min	_pv_range.._max	_pv_range.._incl_min	_pv_range.._incl_max	_pv_range.._set	_pv_range.._match
+UI (1)/0	dbMultiplexing.Valve_Array0.iMode		7	0	0	-2147483648	2147483647	1	1
+UI (1)/0	dbMultiplexing.Valve_Array0.iErrorCode		7	0	0	-2147483648	2147483647	1	1
+UI (1)/0	dbMultiplexing.Valve_Array0.iStatus		7	0	0	-2147483648	2147483647	1	1
+UI (1)/0	dbMultiplexing.Valve_Array1.iMode		7	0	0	-2147483648	2147483647	1	1
+UI (1)/0	dbMultiplexing.Valve_Array1.iErrorCode		7	0	0	-2147483648	2147483647	1	1
+UI (1)/0	dbMultiplexing.Valve_Array1.iStatus		7	0	0	-2147483648	2147483647	1	1
+UI (1)/0	dbMultiplexing.Valve_Array2.iMode		7	0	0	-2147483648	2147483647	1	1
+UI (1)/0	dbMultiplexing.Valve_Array2.iErrorCode		7	0	0	-2147483648	2147483647	1	1
+UI (1)/0	dbMultiplexing.Valve_Array2.iStatus		7	0	0	-2147483648	2147483647	1	1
+UI (1)/0	dbMultiplexing.Valve_Array3.iMode		7	0	0	-2147483648	2147483647	1	1
+UI (1)/0	dbMultiplexing.Valve_Array3.iErrorCode		7	0	0	-2147483648	2147483647	1	1
+UI (1)/0	dbMultiplexing.Valve_Array3.iStatus		7	0	0	-2147483648	2147483647	1	1
+
+# AlertValue
+Manager/User	ElementName	TypeName	DetailNr	_alert_hdl.._type	_alert_hdl.._l_limit	_alert_hdl.._u_limit	_alert_hdl.._l_incl	_alert_hdl.._u_incl	_alert_hdl.._panel	_alert_hdl.._panel_param	_alert_hdl.._help	_alert_hdl.._min_prio	_alert_hdl.._class	_alert_hdl.._text	_alert_hdl.._active	_alert_hdl.._orig_hdl	_alert_hdl.._ok_range	_alert_hdl.._hyst_type	_alert_hdl.._hyst_time	_alert_hdl.._multi_instance	_alert_hdl.._l_hyst_limit	_alert_hdl.._u_hyst_limit	_alert_hdl.._text1	_alert_hdl.._text0	_alert_hdl.._ack_has_prio	_alert_hdl.._order	_alert_hdl.._dp_pattern	_alert_hdl.._dp_list	_alert_hdl.._prio_pattern	_alert_hdl.._abbr_pattern	_alert_hdl.._ack_deletes	_alert_hdl.._non_ack	_alert_hdl.._came_ack	_alert_hdl.._pair_ack	_alert_hdl.._both_ack	_alert_hdl.._impulse	_alert_hdl.._filter_threshold	_alert_hdl.._went_text	_alert_hdl.._add_text	_alert_hdl.._status64_pattern	_alert_hdl.._neg	_alert_hdl.._status64_match	_alert_hdl.._match	_alert_hdl.._set
+
+# DistributionInfo
+Manager/User	ElementName	TypeName	_distrib.._type	_distrib.._driver
+UI (1)/0	dbMultiplexing.Valve_Array0.iMode		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array0.iErrorCode		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array0.iStatus		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array0.bPB_ResetError		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array0.bPB_Home		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array0.bPB_Work		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array0.bPBEN_ResetError		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array0.bPBEN_Home		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array0.bPBEN_Work		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array0.bHomeOn		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array0.bWorkOn		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array0.bSignalHome		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array0.bSignalWork		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array0.bError		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array0.bInterlock		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array1.iMode		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array1.iErrorCode		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array1.iStatus		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array1.bPB_ResetError		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array1.bPB_Home		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array1.bPB_Work		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array1.bPBEN_ResetError		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array1.bPBEN_Home		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array1.bPBEN_Work		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array1.bHomeOn		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array1.bWorkOn		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array1.bSignalHome		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array1.bSignalWork		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array1.bError		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array1.bInterlock		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array2.iMode		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array2.iErrorCode		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array2.iStatus		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array2.bPB_ResetError		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array2.bPB_Home		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array2.bPB_Work		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array2.bPBEN_ResetError		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array2.bPBEN_Home		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array2.bPBEN_Work		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array2.bHomeOn		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array2.bWorkOn		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array2.bSignalHome		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array2.bSignalWork		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array2.bError		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array2.bInterlock		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array3.iMode		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array3.iErrorCode		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array3.iStatus		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array3.bPB_ResetError		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array3.bPB_Home		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array3.bPB_Work		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array3.bPBEN_ResetError		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array3.bPBEN_Home		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array3.bPBEN_Work		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array3.bHomeOn		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array3.bWorkOn		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array3.bSignalHome		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array3.bSignalWork		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array3.bError		56	\1
+UI (1)/0	dbMultiplexing.Valve_Array3.bInterlock		56	\1
+
+# # Aliases/Comments
+AliasId	AliasName	CommentName
+dbMultiplexing.Valve_Array0	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array0.iMode	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array0.iErrorCode	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array0.iStatus	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array0.bPB_ResetError	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array0.bPB_Home	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array0.bPB_Work	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array0.bPBEN_ResetError	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array0.bPBEN_Home	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array0.bPBEN_Work	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array0.bHomeOn	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array0.bWorkOn	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array0.bSignalHome	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array0.bSignalWork	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array0.bError	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array0.bInterlock	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array1	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array1.iMode	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array1.iErrorCode	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array1.iStatus	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array1.bPB_ResetError	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array1.bPB_Home	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array1.bPB_Work	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array1.bPBEN_ResetError	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array1.bPBEN_Home	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array1.bPBEN_Work	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array1.bHomeOn	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array1.bWorkOn	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array1.bSignalHome	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array1.bSignalWork	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array1.bError	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array1.bInterlock	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array2	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array2.iMode	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array2.iErrorCode	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array2.iStatus	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array2.bPB_ResetError	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array2.bPB_Home	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array2.bPB_Work	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array2.bPBEN_ResetError	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array2.bPBEN_Home	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array2.bPBEN_Work	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array2.bHomeOn	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array2.bWorkOn	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array2.bSignalHome	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array2.bSignalWork	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array2.bError	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array2.bInterlock	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array3	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array3.iMode	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array3.iErrorCode	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array3.iStatus	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array3.bPB_ResetError	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array3.bPB_Home	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array3.bPB_Work	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array3.bPBEN_ResetError	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array3.bPBEN_Home	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array3.bPBEN_Work	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array3.bHomeOn	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array3.bWorkOn	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array3.bSignalHome	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array3.bSignalWork	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array3.bError	""	lt:1 LANG:10001 "0..3@@"
+dbMultiplexing.Valve_Array3.bInterlock	""	lt:1 LANG:10001 "0..3@@"
+
+# PeriphAddrMain
+Manager/User	ElementName	TypeName	_address.._type	_address.._reference	_address.._poll_group	_address.._connection	_address.._offset	_address.._subindex	_address.._direction	_address.._internal	_address.._lowlevel	_address.._active	_address.._start	_address.._interval	_address.._reply	_address.._datatype	_address.._drv_ident
+UI (1)/0	dbMultiplexing.Valve_Array0.iMode		16	"dbMultiplexing.Valve_Array.Valve_Array[0].iMode"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array0.iErrorCode		16	"dbMultiplexing.Valve_Array.Valve_Array[0].iErrorCode"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array0.iStatus		16	"dbMultiplexing.Valve_Array.Valve_Array[0].iStatus"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array0.bPB_ResetError		16	"dbMultiplexing.Valve_Array.Valve_Array[0].bPB_ResetError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array0.bPB_Home		16	"dbMultiplexing.Valve_Array.Valve_Array[0].bPB_Home"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array0.bPB_Work		16	"dbMultiplexing.Valve_Array.Valve_Array[0].bPB_Work"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array0.bPBEN_ResetError		16	"dbMultiplexing.Valve_Array.Valve_Array[0].bPBEN_ResetError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array0.bPBEN_Home		16	"dbMultiplexing.Valve_Array.Valve_Array[0].bPBEN_Home"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array0.bPBEN_Work		16	"dbMultiplexing.Valve_Array.Valve_Array[0].bPBEN_Work"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array0.bHomeOn		16	"dbMultiplexing.Valve_Array.Valve_Array[0].bHomeOn"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array0.bWorkOn		16	"dbMultiplexing.Valve_Array.Valve_Array[0].bWorkOn"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array0.bSignalHome		16	"dbMultiplexing.Valve_Array.Valve_Array[0].bSignalHome"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array0.bSignalWork		16	"dbMultiplexing.Valve_Array.Valve_Array[0].bSignalWork"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array0.bError		16	"dbMultiplexing.Valve_Array.Valve_Array[0].bError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array0.bInterlock		16	"dbMultiplexing.Valve_Array.Valve_Array[0].bInterlock"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array1.iMode		16	"dbMultiplexing.Valve_Array.Valve_Array[1].iMode"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array1.iErrorCode		16	"dbMultiplexing.Valve_Array.Valve_Array[1].iErrorCode"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array1.iStatus		16	"dbMultiplexing.Valve_Array.Valve_Array[1].iStatus"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array1.bPB_ResetError		16	"dbMultiplexing.Valve_Array.Valve_Array[1].bPB_ResetError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array1.bPB_Home		16	"dbMultiplexing.Valve_Array.Valve_Array[1].bPB_Home"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array1.bPB_Work		16	"dbMultiplexing.Valve_Array.Valve_Array[1].bPB_Work"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array1.bPBEN_ResetError		16	"dbMultiplexing.Valve_Array.Valve_Array[1].bPBEN_ResetError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array1.bPBEN_Home		16	"dbMultiplexing.Valve_Array.Valve_Array[1].bPBEN_Home"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array1.bPBEN_Work		16	"dbMultiplexing.Valve_Array.Valve_Array[1].bPBEN_Work"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array1.bHomeOn		16	"dbMultiplexing.Valve_Array.Valve_Array[1].bHomeOn"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array1.bWorkOn		16	"dbMultiplexing.Valve_Array.Valve_Array[1].bWorkOn"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array1.bSignalHome		16	"dbMultiplexing.Valve_Array.Valve_Array[1].bSignalHome"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array1.bSignalWork		16	"dbMultiplexing.Valve_Array.Valve_Array[1].bSignalWork"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array1.bError		16	"dbMultiplexing.Valve_Array.Valve_Array[1].bError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array1.bInterlock		16	"dbMultiplexing.Valve_Array.Valve_Array[1].bInterlock"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array2.iMode		16	"dbMultiplexing.Valve_Array.Valve_Array[2].iMode"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array2.iErrorCode		16	"dbMultiplexing.Valve_Array.Valve_Array[2].iErrorCode"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array2.iStatus		16	"dbMultiplexing.Valve_Array.Valve_Array[2].iStatus"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array2.bPB_ResetError		16	"dbMultiplexing.Valve_Array.Valve_Array[2].bPB_ResetError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array2.bPB_Home		16	"dbMultiplexing.Valve_Array.Valve_Array[2].bPB_Home"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array2.bPB_Work		16	"dbMultiplexing.Valve_Array.Valve_Array[2].bPB_Work"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array2.bPBEN_ResetError		16	"dbMultiplexing.Valve_Array.Valve_Array[2].bPBEN_ResetError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array2.bPBEN_Home		16	"dbMultiplexing.Valve_Array.Valve_Array[2].bPBEN_Home"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array2.bPBEN_Work		16	"dbMultiplexing.Valve_Array.Valve_Array[2].bPBEN_Work"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array2.bHomeOn		16	"dbMultiplexing.Valve_Array.Valve_Array[2].bHomeOn"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array2.bWorkOn		16	"dbMultiplexing.Valve_Array.Valve_Array[2].bWorkOn"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array2.bSignalHome		16	"dbMultiplexing.Valve_Array.Valve_Array[2].bSignalHome"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array2.bSignalWork		16	"dbMultiplexing.Valve_Array.Valve_Array[2].bSignalWork"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array2.bError		16	"dbMultiplexing.Valve_Array.Valve_Array[2].bError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array2.bInterlock		16	"dbMultiplexing.Valve_Array.Valve_Array[2].bInterlock"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array3.iMode		16	"dbMultiplexing.Valve_Array.Valve_Array[3].iMode"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array3.iErrorCode		16	"dbMultiplexing.Valve_Array.Valve_Array[3].iErrorCode"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array3.iStatus		16	"dbMultiplexing.Valve_Array.Valve_Array[3].iStatus"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array3.bPB_ResetError		16	"dbMultiplexing.Valve_Array.Valve_Array[3].bPB_ResetError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array3.bPB_Home		16	"dbMultiplexing.Valve_Array.Valve_Array[3].bPB_Home"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array3.bPB_Work		16	"dbMultiplexing.Valve_Array.Valve_Array[3].bPB_Work"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array3.bPBEN_ResetError		16	"dbMultiplexing.Valve_Array.Valve_Array[3].bPBEN_ResetError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array3.bPBEN_Home		16	"dbMultiplexing.Valve_Array.Valve_Array[3].bPBEN_Home"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array3.bPBEN_Work		16	"dbMultiplexing.Valve_Array.Valve_Array[3].bPBEN_Work"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array3.bHomeOn		16	"dbMultiplexing.Valve_Array.Valve_Array[3].bHomeOn"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array3.bWorkOn		16	"dbMultiplexing.Valve_Array.Valve_Array[3].bWorkOn"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array3.bSignalHome		16	"dbMultiplexing.Valve_Array.Valve_Array[3].bSignalHome"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array3.bSignalWork		16	"dbMultiplexing.Valve_Array.Valve_Array[3].bSignalWork"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array3.bError		16	"dbMultiplexing.Valve_Array.Valve_Array[3].bError"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"
+UI (1)/0	dbMultiplexing.Valve_Array3.bInterlock		16	"dbMultiplexing.Valve_Array.Valve_Array[3].bInterlock"	_Slow	_WaterTreatmentPLC	0	0	\7	0	1	1	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	01.01.1970 00:00:00.000	1001	"S7PLUS"

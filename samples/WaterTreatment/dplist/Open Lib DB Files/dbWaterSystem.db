@@ -1,0 +1,211 @@
+﻿TYPE "udtHMI_PID"
+VERSION : 0.1
+   STRUCT
+      iMode : Int;   // Current mode
+      iPIDMode { ExternalWritable := 'False'} : Int;   // PID compact mode
+      iErrorCode { ExternalWritable := 'False'} : Int;   // Error code
+      iEstopFunction { S7_SetPoint := 'True'} : Int;   // Enum of E-Stop repsonse (Estop.xxx)
+      rEstopValue { S7_SetPoint := 'True'} : Real;   // PID value for an e-stop if custom value is selected
+      rManualSP { S7_SetPoint := 'True'} : Real;   // PID set point for manual mode
+      rAutoSP { ExternalWritable := 'False'} : Real;   // PID set point for automatic mode
+      rActualInput { ExternalWritable := 'False'} : Real;   // Actual PID input value
+      wActualInputPeripheral { ExternalWritable := 'False'} : Word;   // Actual PID input peripheral value
+      rOutput { ExternalWritable := 'False'} : Real;   // PID output value
+      wOutputPeripheral { ExternalWritable := 'False'} : Word;   // PID output peripheral value
+      rProportionalGain { S7_SetPoint := 'True'} : Real;   // Proportional gain coefficient
+      rIntegralTime { S7_SetPoint := 'True'} : Real;   // Integral control time
+      rDerivativeTime { S7_SetPoint := 'True'} : Real;   // Derivative control time
+      rProportionalWeight { S7_SetPoint := 'True'} : Real;   // Proportional control weighting
+      rDerivativeWeight { S7_SetPoint := 'True'} : Real;   // Derivative control weighting
+      bPB_ResetError : Bool;   // PB Reset errors
+      bPB_Pretune : Bool;   // PB Start pretuning
+      bPB_FineTune : Bool;   // PB Start finetuning
+      bPB_AutomaticMode : Bool;   // PB Switch to automatic mode
+      bPB_ManualMode : Bool;   // PB Switch to manual mode
+      bPB_ManualTuning : Bool;   // PB Switch to manual PID tuning
+      bTOG_ManualTuning { ExternalWritable := 'False'} : Bool;   // TOG Manual tuning enabled
+      bPBEN_ResetError { ExternalWritable := 'False'} : Bool;   // PB Reset errors enabled
+      bPBEN_Pretune { ExternalWritable := 'False'} : Bool;   // PB Pretuning enabled
+      bPBEN_FineTune { ExternalWritable := 'False'} : Bool;   // PB Fine tuning enabled
+      bPBEN_AutomaticMode { ExternalWritable := 'False'} : Bool;   // PB Automatic mode enabled
+      bPBEN_ManualMode { ExternalWritable := 'False'} : Bool;   // PB Manual mode enabled
+      bError { ExternalWritable := 'False'} : Bool;   // Overall error
+   END_STRUCT;
+
+END_TYPE
+
+TYPE "udtHMI_ValveControl"
+VERSION : 0.1
+   STRUCT
+      iMode : Int;   // Current mode
+      iErrorCode { ExternalWritable := 'False'} : Int;   // Error code
+      iStatus { ExternalWritable := 'False'} : Int;   // Status for HMI display
+      bPB_ResetError : Bool;   // PB Reset block errors
+      bPB_Home : Bool;   // PB Move to home in manual mode
+      bPB_Work : Bool;   // PB Move to work in manual mode
+      bPBEN_ResetError { ExternalWritable := 'False'} : Bool;   // PB Reset error enabled
+      bPBEN_Home { ExternalWritable := 'False'} : Bool;   // PB Home enabled
+      bPBEN_Work { ExternalWritable := 'False'} : Bool;   // PB Work enabled
+      bHomeOn { ExternalWritable := 'False'} : Bool;   // Home command is on
+      bWorkOn { ExternalWritable := 'False'} : Bool;   // Work command is on
+      bSignalHome { ExternalWritable := 'False'} : Bool;   // Home feedback
+      bSignalWork { ExternalWritable := 'False'} : Bool;   // Work feedback
+      bError { ExternalWritable := 'False'} : Bool;   // Error status
+      bInterlock { ExternalWritable := 'False'} : Bool;   // Valve interlocked
+   END_STRUCT;
+
+END_TYPE
+
+TYPE "udtHMI_SystemControl"
+VERSION : 0.1
+   STRUCT
+      iMode { S7_SetPoint := 'True'} : Int;   // System mode
+      bEStop { ExternalWritable := 'False'} : Bool;   // System hardware E-Stop
+      bError { ExternalWritable := 'False'} : Bool;   // Actuators error present
+      bWarning { ExternalWritable := 'False'} : Bool;   // Warning present
+      bAuto { ExternalWritable := 'False'} : Bool;   // All actuators in auto mode
+      bPB_ResetError : Bool;   // Reset error push button
+   END_STRUCT;
+
+END_TYPE
+
+TYPE "udtHMI_VFD_Control"
+VERSION : 0.1
+   STRUCT
+      iMode : Int;   // Current mode
+      iErrorCode { ExternalWritable := 'False'} : Int;   // Error code
+      iStatus { ExternalWritable := 'False'} : Int;   // Status for HMI display
+      rManualSpeedSP { S7_SetPoint := 'True'} : Real;   // Speed set point for manual mode
+      rAutoSpeedSP { ExternalWritable := 'False'} : Real;   // Speed set point for automatic mode
+      rActualSpeed { ExternalWritable := 'False'} : Real;   // Actual motor speed
+      rActualCurrent { ExternalWritable := 'False'} : Real;   // Actual motor current
+      rActualPower { ExternalWritable := 'False'} : Real;   // Actual motor power
+      bPB_ResetError : Bool;   // PB Reset errors
+      bPB_Forward : Bool;   // PB Move forward in manual mode
+      bPB_Reverse : Bool;   // PB Move reverse in manual mode
+      bPB_Stop : Bool;   // PB Stop in manual mode
+      bPBEN_ResetError { ExternalWritable := 'False'} : Bool;   // PB Reset errors enabled
+      bPBEN_Forward { ExternalWritable := 'False'} : Bool;   // PB Forward enabled
+      bPBEN_Reverse { ExternalWritable := 'False'} : Bool;   // PB Reverse enabled
+      bPBEN_Stop { ExternalWritable := 'False'} : Bool;   // PB Stop enabled
+      bForwardOn { ExternalWritable := 'False'} : Bool;   // Moving forward
+      bReverseOn { ExternalWritable := 'False'} : Bool;   // Moving Reverse
+      bSignalForward { ExternalWritable := 'False'} : Bool;   // Forward signal
+      bSignalReverse { ExternalWritable := 'False'} : Bool;   // Reverse signal
+      bError { ExternalWritable := 'False'} : Bool;   // Overall error
+      bInterlock { ExternalWritable := 'False'} : Bool;   // VFD Interlocked
+   END_STRUCT;
+
+END_TYPE
+
+TYPE "udtHMI_AnalogInput"
+VERSION : 0.1
+   STRUCT
+      iMode : Int;   // Current mode
+      iErrorCode { ExternalWritable := 'False'} : Int;   // Error code
+      iStatus { ExternalWritable := 'False'} : Int;   // Overall HMI Status
+      rActiveValue { ExternalWritable := 'False'} : Real;   // Used Value, Input or Override
+      rInputValue { ExternalWritable := 'False'} : Real;   // Input Value
+      rManualValue { S7_SetPoint := 'True'} : Real;   // Manual mode simulated value
+      bPB_ResetError : Bool;   // PB Reset block errors
+      bPBEN_ResetError { ExternalWritable := 'False'} : Bool;   // PB Reset error enabled
+      bError { ExternalWritable := 'False'} : Bool;   // Overall error
+   END_STRUCT;
+
+END_TYPE
+
+TYPE "udtHMI_MotorControl"
+VERSION : 0.1
+   STRUCT
+      iMode : Int;   // Current mode
+      iErrorCode { ExternalWritable := 'False'} : Int;   // Error code
+      iStatus { ExternalWritable := 'False'} : Int;   // Status for HMI display
+      bPB_ResetError : Bool;   // PB Reset block errors
+      bPB_Forward : Bool;   // PB Move forward in manual mode
+      bPB_Reverse : Bool;   // PB Move Reverse in manual mode
+      bPB_Stop : Bool;   // PB Stop in manual mode
+      bPBEN_ResetError { ExternalWritable := 'False'} : Bool;   // PB Reset error enabled
+      bPBEN_Forward { ExternalWritable := 'False'} : Bool;   // PB Forward enabled
+      bPBEN_Reverse { ExternalWritable := 'False'} : Bool;   // PB Reverse enabled
+      bPBEN_Stop { ExternalWritable := 'False'} : Bool;   // PB Stop enabled
+      bForwardOn { ExternalWritable := 'False'} : Bool;   // Moving forward
+      bReverseOn { ExternalWritable := 'False'} : Bool;   // Moving Reverse
+      bSignalForward { ExternalWritable := 'False'} : Bool;   // Forward signal
+      bSignalReverse { ExternalWritable := 'False'} : Bool;   // Reverse signal
+      bError { ExternalWritable := 'False'} : Bool;   // Overall error
+      bInterlock { ExternalWritable := 'False'} : Bool;   // Motor interlocked
+   END_STRUCT;
+
+END_TYPE
+
+TYPE "udtHMI_AnalogValveControl"
+VERSION : 0.1
+   STRUCT
+      iMode : Int;   // Current mode
+      iErrorCode { ExternalWritable := 'False'} : Int;   // Error code
+      iStatus { ExternalWritable := 'False'} : Int;   // Color status for HMI
+      rManualSP { S7_SetPoint := 'True'} : Real;   // Set point for manual mode
+      rAutoSP { ExternalWritable := 'False'} : Real;   // Set point for automatic mode
+      rEstopSP { S7_SetPoint := 'True'} : Real;   // Set point for an e-stop condition, if selected
+      rActual { ExternalWritable := 'False'} : Real;   // Actual value
+      bPB_ResetError : Bool;   // PB Reset errors
+      bPBEN_ResetError { ExternalWritable := 'False'} : Bool;   // PB reset errors enable
+      bError { ExternalWritable := 'False'} : Bool;   // Overall error
+      bInterlock { ExternalWritable := 'False'} : Bool;   // Valve Interlocked
+      iEstopFunction { S7_SetPoint := 'True'} : Int;   // Enum of E-Stop repsonse (Estop.xxx)
+   END_STRUCT;
+
+END_TYPE
+
+TYPE "udtHMI_Interlock"
+VERSION : 0.1
+   STRUCT
+      abInterlocks { ExternalWritable := 'False'} : Array[1..16] of Bool;   // Interlock statuses
+      asInterlockNames { S7_SetPoint := 'True'} : Array[1..16] of String[20];   // Interlock names
+      bInterlockOk { ExternalWritable := 'False'} : Bool;   // System Interlock is ok
+   END_STRUCT;
+
+END_TYPE
+
+TYPE "udtHMI_AnalogOutput"
+VERSION : 0.1
+   STRUCT
+      iMode : Int;   // Current mode
+      iErrorCode { ExternalWritable := 'False'} : Int;   // Error code
+      rValue { ExternalWritable := 'False'} : Real;   // Output Value
+      rAutoValue { ExternalWritable := 'False'} : Real;   // Auto mode value
+      rManualValue { S7_SetPoint := 'True'} : Real;   // Manual mode value
+      rEstopValue { S7_SetPoint := 'True'} : Real;   // Estop condition custom value
+      bPB_ResetError : Bool;   // PB Reset block errors
+      bPBEN_ResetError { ExternalWritable := 'False'} : Bool;   // PB Reset error enabled
+      bError { ExternalWritable := 'False'} : Bool;   // Overall error
+      bInterlock { ExternalWritable := 'False'} : Bool;   // Analog output is interlocked
+      iEstopFunction { S7_SetPoint := 'True'} : Int;   // Enum of E-Stop repsonse (Estop.xxx)
+   END_STRUCT;
+
+END_TYPE
+
+DATA_BLOCK "dbWaterSystem"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+NON_RETAIN
+   VAR 
+      SOL_MainWater : "udtHMI_ValveControl";   // Main Water Valve
+      VFD_WaterPump : "udtHMI_VFD_Control";   // Main Water Pump
+      INT_WaterPump : "udtHMI_Interlock";   // Main Water Pump Interlock
+      AI_WaterPumpPressure : "udtHMI_AnalogInput";   // Main Water Pump Pressure
+      MTR_ReturnWaterPump : "udtHMI_MotorControl";   // Return Water Pump
+      ANA_SteamValve : "udtHMI_AnalogValveControl";   // Water Temperature Steam Valve
+      AO_CoolingCoil : "udtHMI_AnalogOutput";   // Water Cooling Coil
+      SystemControl : "udtHMI_SystemControl";   // Water System Control
+      WaterTemperature : Struct   // Water Temperature Control
+         AI_WaterTemperature : "udtHMI_AnalogInput";   // Water Temperature Analog Input
+         PID_WaterTempInterface : "udtHMI_PID";   // PID Interface and Control
+      END_STRUCT;
+   END_VAR
+
+
+BEGIN
+
+END_DATA_BLOCK
+

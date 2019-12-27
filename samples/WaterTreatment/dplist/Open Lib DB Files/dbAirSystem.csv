@@ -1,0 +1,31 @@
+tag,active,comment,unit,floating point precision,Type Sub Active,Data Type,Subscription
+dbAirSystem.SystemControl,TRUE,System Control,,-1,FALSE,udtHMI_SystemControl,_Slow
+dbAirSystem.SystemControl.iMode,TRUE,System Mode,,-1,FALSE,Int,_Slow
+dbAirSystem.SystemControl.bEStop,TRUE,E-Stop,,-1,FALSE,Bool,_Slow
+dbAirSystem.SystemControl.bError,TRUE,Error,,-1,FALSE,Bool,_Slow
+dbAirSystem.SystemControl.bWarning,TRUE,Warning,,-1,FALSE,Bool,_Slow
+dbAirSystem.SystemControl.bAuto,TRUE,Auto Mode,,-1,FALSE,Bool,_Slow
+dbAirSystem.SystemControl.bPB_ResetError,TRUE,Reset Error,,-1,FALSE,Bool,_Slow
+dbAirSystem.VFD_RecirculationFan,TRUE,Recirculation Fan,,-1,FALSE,udtHMI_VFD_Control,_Slow
+dbAirSystem.VFD_RecirculationFan.iMode,TRUE,Mode,,-1,FALSE,Int,_Slow
+dbAirSystem.VFD_RecirculationFan.iErrorCode,TRUE,Error Code,,-1,FALSE,Int,_Slow
+dbAirSystem.VFD_RecirculationFan.iStatus,TRUE,Statu,,-1,FALSE,Int,_Slow
+dbAirSystem.VFD_RecirculationFan.rManualSpeedSP,TRUE,Manual Speed Setpoint,%,%f3.1,FALSE,Real,_Slow
+dbAirSystem.VFD_RecirculationFan.rAutoSpeedSP,TRUE,Auto Speed Setpoint,%,%f3.1,FALSE,Real,_Slow
+dbAirSystem.VFD_RecirculationFan.rActualSpeed,TRUE,Actual Speed,%,%f3.1,FALSE,Real,_Slow
+dbAirSystem.VFD_RecirculationFan.rActualCurrent,TRUE,Actual Current,A,%f3.1,FALSE,Real,_Slow
+dbAirSystem.VFD_RecirculationFan.rActualPower,TRUE,Actual Power,,%f3.1,FALSE,Real,_Slow
+dbAirSystem.VFD_RecirculationFan.bPB_ResetError,TRUE,Reset Error,,-1,FALSE,Bool,_Slow
+dbAirSystem.VFD_RecirculationFan.bPB_Forward,TRUE,Forware,,-1,FALSE,Bool,_Slow
+dbAirSystem.VFD_RecirculationFan.bPB_Reverse,TRUE,Reverse,,-1,FALSE,Bool,_Slow
+dbAirSystem.VFD_RecirculationFan.bPB_Stop,TRUE,Stop,,-1,FALSE,Bool,_Slow
+dbAirSystem.VFD_RecirculationFan.bPBEN_ResetError,TRUE,Enable Reset Error,,-1,FALSE,Bool,_Slow
+dbAirSystem.VFD_RecirculationFan.bPBEN_Forward,TRUE,Enable Forward,,-1,FALSE,Bool,_Slow
+dbAirSystem.VFD_RecirculationFan.bPBEN_Reverse,TRUE,Enable Revierse,,-1,FALSE,Bool,_Slow
+dbAirSystem.VFD_RecirculationFan.bPBEN_Stop,TRUE,Enable Stop,,-1,FALSE,Bool,_Slow
+dbAirSystem.VFD_RecirculationFan.bForwardOn,TRUE,Forward On,,-1,FALSE,Bool,_Slow
+dbAirSystem.VFD_RecirculationFan.bReverseOn,TRUE,Reverse On,,-1,FALSE,Bool,_Slow
+dbAirSystem.VFD_RecirculationFan.bSignalForward,TRUE,Signal Forward,,-1,FALSE,Bool,_Slow
+dbAirSystem.VFD_RecirculationFan.bSignalReverse,TRUE,Signal Reverse,,-1,FALSE,Bool,_Slow
+dbAirSystem.VFD_RecirculationFan.bError,TRUE,Error,,-1,FALSE,Bool,_Slow
+dbAirSystem.VFD_RecirculationFan.bInterlock,TRUE,Interlock Active,,-1,FALSE,Bool,_Slow

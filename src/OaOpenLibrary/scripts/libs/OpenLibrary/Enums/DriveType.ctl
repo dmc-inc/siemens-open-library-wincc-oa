@@ -1,0 +1,5 @@
+enum DriveType
+{
+  VFD,
+  Contactor
+};

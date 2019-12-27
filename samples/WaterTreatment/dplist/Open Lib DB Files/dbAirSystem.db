@@ -1,0 +1,56 @@
+﻿TYPE "udtHMI_SystemControl"
+VERSION : 0.1
+   STRUCT
+      iMode { S7_SetPoint := 'True'} : Int;   // System mode
+      bEStop { ExternalWritable := 'False'} : Bool;   // System hardware E-Stop
+      bError { ExternalWritable := 'False'} : Bool;   // Actuators error present
+      bWarning { ExternalWritable := 'False'} : Bool;   // Warning present
+      bAuto { ExternalWritable := 'False'} : Bool;   // All actuators in auto mode
+      bPB_ResetError : Bool;   // Reset error push button
+   END_STRUCT;
+
+END_TYPE
+
+TYPE "udtHMI_VFD_Control"
+VERSION : 0.1
+   STRUCT
+      iMode : Int;   // Current mode
+      iErrorCode { ExternalWritable := 'False'} : Int;   // Error code
+      iStatus { ExternalWritable := 'False'} : Int;   // Status for HMI display
+      rManualSpeedSP { S7_SetPoint := 'True'} : Real;   // Speed set point for manual mode
+      rAutoSpeedSP { ExternalWritable := 'False'} : Real;   // Speed set point for automatic mode
+      rActualSpeed { ExternalWritable := 'False'} : Real;   // Actual motor speed
+      rActualCurrent { ExternalWritable := 'False'} : Real;   // Actual motor current
+      rActualPower { ExternalWritable := 'False'} : Real;   // Actual motor power
+      bPB_ResetError : Bool;   // PB Reset errors
+      bPB_Forward : Bool;   // PB Move forward in manual mode
+      bPB_Reverse : Bool;   // PB Move reverse in manual mode
+      bPB_Stop : Bool;   // PB Stop in manual mode
+      bPBEN_ResetError { ExternalWritable := 'False'} : Bool;   // PB Reset errors enabled
+      bPBEN_Forward { ExternalWritable := 'False'} : Bool;   // PB Forward enabled
+      bPBEN_Reverse { ExternalWritable := 'False'} : Bool;   // PB Reverse enabled
+      bPBEN_Stop { ExternalWritable := 'False'} : Bool;   // PB Stop enabled
+      bForwardOn { ExternalWritable := 'False'} : Bool;   // Moving forward
+      bReverseOn { ExternalWritable := 'False'} : Bool;   // Moving Reverse
+      bSignalForward { ExternalWritable := 'False'} : Bool;   // Forward signal
+      bSignalReverse { ExternalWritable := 'False'} : Bool;   // Reverse signal
+      bError { ExternalWritable := 'False'} : Bool;   // Overall error
+      bInterlock { ExternalWritable := 'False'} : Bool;   // VFD Interlocked
+   END_STRUCT;
+
+END_TYPE
+
+DATA_BLOCK "dbAirSystem"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+NON_RETAIN
+   VAR 
+      SystemControl : "udtHMI_SystemControl";   // Air System Control
+      VFD_RecirculationFan : "udtHMI_VFD_Control";   // Recirculation Fan
+   END_VAR
+
+
+BEGIN
+
+END_DATA_BLOCK
+

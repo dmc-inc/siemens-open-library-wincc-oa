@@ -1,0 +1,35 @@
+﻿TYPE "udtHMI_ValveControl"
+VERSION : 0.1
+   STRUCT
+      iMode : Int;   // Current mode
+      iErrorCode { ExternalWritable := 'False'} : Int;   // Error code
+      iStatus { ExternalWritable := 'False'} : Int;   // Status for HMI display
+      bPB_ResetError : Bool;   // PB Reset block errors
+      bPB_Home : Bool;   // PB Move to home in manual mode
+      bPB_Work : Bool;   // PB Move to work in manual mode
+      bPBEN_ResetError { ExternalWritable := 'False'} : Bool;   // PB Reset error enabled
+      bPBEN_Home { ExternalWritable := 'False'} : Bool;   // PB Home enabled
+      bPBEN_Work { ExternalWritable := 'False'} : Bool;   // PB Work enabled
+      bHomeOn { ExternalWritable := 'False'} : Bool;   // Home command is on
+      bWorkOn { ExternalWritable := 'False'} : Bool;   // Work command is on
+      bSignalHome { ExternalWritable := 'False'} : Bool;   // Home feedback
+      bSignalWork { ExternalWritable := 'False'} : Bool;   // Work feedback
+      bError { ExternalWritable := 'False'} : Bool;   // Error status
+      bInterlock { ExternalWritable := 'False'} : Bool;   // Valve interlocked
+   END_STRUCT;
+
+END_TYPE
+
+DATA_BLOCK "dbMultiplexing"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+NON_RETAIN
+   VAR 
+      Valve_Array : Array[0..3] of "udtHMI_ValveControl";
+   END_VAR
+
+
+BEGIN
+
+END_DATA_BLOCK
+

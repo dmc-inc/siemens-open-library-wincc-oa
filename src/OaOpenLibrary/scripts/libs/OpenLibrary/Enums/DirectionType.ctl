@@ -1,0 +1,5 @@
+enum DirectionType
+{
+  Horizontal,
+  Vertical
+};

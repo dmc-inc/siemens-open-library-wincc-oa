@@ -1,0 +1,84 @@
+V 14
+3
+LANG:10001 0 
+LANG:10000 0 
+LANG:10027 0 
+PANEL,-1 -1 500 45 N "OLC_Section_Background" 0
+E E E E E 1 -1 -1 0  0 0
+""0  1
+E E 3
+"CBRef" "1"
+"EClose" E
+"dpi" "96"
+0 0 0
+""
+DISPLAY_LAYER, 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0
+LAYER, 0 
+1
+LANG:10001 0 
+4 1
+"LINE1"
+""
+1 0 0 E E E 1 E 1 E N "_ButtonBarLine" E N {255,255,255} E E
+ E E
+1 0 0 0 0 0
+E E E
+0
+3
+LANG:10001 0 
+LANG:10000 0 
+LANG:10027 0 
+
+3
+"layoutAlignment" "AlignCenter"
+"dashclr"N "_Transparent"
+"antiAliased" "0"
+E E 0 1 1 2 1 E  0 0 499 0
+6 2
+"RECTANGLE1"
+""
+1 0 350 E E E 1 E 1 E N "OL_UI_Subgroup_Color" E N "OL_UI_Subgroup_Color" E E
+ E E
+2 0 0 0 0 0
+E E E
+0
+3
+LANG:10001 0 
+LANG:10000 0 
+LANG:10027 0 
+
+3
+"layoutAlignment" "AlignCenter"
+"dashclr"N "_Transparent"
+"antiAliased" "0"
+E E 0 1 1 2 1 E U  1 E 0 0 499 44
+0
+LAYER, 1 
+1
+LANG:10001 0 
+0
+LAYER, 2 
+1
+LANG:10001 0 
+0
+LAYER, 3 
+1
+LANG:10001 0 
+0
+LAYER, 4 
+1
+LANG:10001 0 
+0
+LAYER, 5 
+1
+LANG:10001 0 
+0
+LAYER, 6 
+1
+LANG:10001 0 
+0
+LAYER, 7 
+1
+LANG:10001 0 
+0
+0

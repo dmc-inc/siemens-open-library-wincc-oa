@@ -1,0 +1,1175 @@
+# ascii dump of database
+
+# DpType
+TypeName
+udtHMI_VFD_Control.udtHMI_VFD_Control	1#1
+	iMode	21#2
+	iErrorCode	21#3
+	iStatus	21#4
+	rManualSpeedSP	22#5
+	rAutoSpeedSP	22#6
+	rActualSpeed	22#7
+	rActualCurrent	22#8
+	rActualPower	22#9
+	bPB_ResetError	23#10
+	bPB_Forward	23#11
+	bPB_Reverse	23#12
+	bPB_Stop	23#13
+	bPBEN_ResetError	23#14
+	bPBEN_Forward	23#15
+	bPBEN_Reverse	23#16
+	bPBEN_Stop	23#17
+	bForwardOn	23#18
+	bReverseOn	23#19
+	bSignalForward	23#20
+	bSignalReverse	23#21
+	bError	23#22
+	bInterlock	23#23
+udtHMI_AnalogValveControl.udtHMI_AnalogValveControl	1#1
+	iMode	21#2
+	iErrorCode	21#3
+	iStatus	21#4
+	rManualSP	22#5
+	rAutoSP	22#6
+	rEstopSP	22#7
+	rActual	22#8
+	bPB_ResetError	23#9
+	bPBEN_ResetError	23#10
+	bError	23#11
+	bInterlock	23#12
+	iEstopFunction	21#13
+udtHMI_ValveControl.udtHMI_ValveControl	1#1
+	iMode	21#2
+	iErrorCode	21#3
+	iStatus	21#4
+	bPB_ResetError	23#5
+	bPB_Home	23#6
+	bPB_Work	23#7
+	bPBEN_ResetError	23#8
+	bPBEN_Home	23#9
+	bPBEN_Work	23#10
+	bHomeOn	23#11
+	bWorkOn	23#12
+	bSignalHome	23#13
+	bSignalWork	23#14
+	bError	23#15
+	bInterlock	23#16
+udtHMI_MotorControl.udtHMI_MotorControl	1#1
+	iMode	21#2
+	iErrorCode	21#3
+	iStatus	21#4
+	bPB_ResetError	23#5
+	bPB_Forward	23#6
+	bPB_Reverse	23#7
+	bPB_Stop	23#8
+	bPBEN_ResetError	23#9
+	bPBEN_Forward	23#10
+	bPBEN_Reverse	23#11
+	bPBEN_Stop	23#12
+	bForwardOn	23#13
+	bReverseOn	23#14
+	bSignalForward	23#15
+	bSignalReverse	23#16
+	bError	23#17
+	bInterlock	23#18
+udtHMI_AnalogInput.udtHMI_AnalogInput	1#1
+	iMode	21#2
+	iErrorCode	21#3
+	iStatus	21#4
+	rActiveValue	22#5
+	rInputValue	22#6
+	rManualValue	22#7
+	bPB_ResetError	23#8
+	bPBEN_ResetError	23#9
+	bError	23#10
+udtHMI_SystemControl.udtHMI_SystemControl	1#1
+	iMode	21#2
+	bEStop	23#3
+	bError	23#4
+	bAuto	23#5
+	bIndependentEnable	23#6
+	bPB_ResetError	23#7
+udtHMI_AnalogOutput.udtHMI_AnalogOutput	1#1
+	iMode	21#13
+	iErrorCode	21#14
+	rValue	22#15
+	rAutoValue	22#16
+	rManualValue	22#17
+	rEstopValue	22#18
+	bPB_ResetError	23#19
+	bPBEN_ResetError	23#20
+	bError	23#21
+	bInterlock	23#22
+	iEstopFunction	21#23
+udtHMI_Interlock.udtHMI_Interlock	1#1
+	abInterlocks	7#2
+	asInterlockNames	9#3
+	bInterlockOk	23#4
+udtHMI_PIDControlParameters.udtHMI_PIDControlParameters	1#1
+	rProportionalGain	22#2
+	rIntegralTime	22#3
+	rDerivativeTime	22#4
+	rProportionalWeight	22#5
+	rDerivativeWeight	22#6
+udtHMI_PIDInterface.udtHMI_PIDInterface	1#1
+	iMode	21#19
+	iPIDMode	21#20
+	iErrorCode	21#21
+	iEstopFunction	21#22
+	rEstopValue	22#51
+	rManualSP	22#24
+	rAutoSP	22#25
+	rActualInput	22#26
+	wActualInputPeripheral	54#27
+	rOutput	22#28
+	wOutputPeripheral	54#29
+	bPB_ResetError	23#30
+	bPB_Pretune	23#31
+	bPB_FineTune	23#32
+	bPB_AutomaticMode	23#33
+	bPB_ManualMode	23#34
+	bPB_ManualTuning	23#35
+	bTOG_ManualTuning	23#36
+	bPBEN_ResetError	23#37
+	bPBEN_Pretune	23#38
+	bPBEN_FineTune	23#39
+	bPBEN_AutomaticMode	23#40
+	bPBEN_ManualMode	23#41
+	bError	23#42
+	bErrorAck	23#43
+	PID_ControlParameters	41#44:udtHMI_PIDControlParameters
+udtError_Motor.udtError_Motor	1#1
+	iError	21#4
+	MotorProtectorTripped	23#3
+	LocalDisconnectOff	23#5
+	ClutchTripped	23#6
+	NoSignalForward	23#7
+	NoSignalReverse	23#8
+	MotorNotStopped	23#9
+udtMotor_Reversing.udtMotor_Reversing	1#1
+	HMI	41#2:udtHMI_MotorControl
+	Errors	41#3:udtError_Motor
+udtError_AnalogInput.udtError_AnalogInput	1#1
+	iError	21#2
+	LowLowAlarm	23#3
+	HighHighAlarm	23#4
+	Invalid	23#5
+udtError_AnalogOutput.udtError_AnalogOutput	1#1
+	iError	21#4
+	OutOfRange	23#3
+	ConfigurationError	23#5
+udtAnalogInput.udtAnalogInput	1#1
+	HMI	41#2:udtHMI_AnalogInput
+	Errors	41#3:udtError_AnalogInput
+udtAnalogOutput.udtAnalogOutput	1#1
+	HMI	41#2:udtHMI_AnalogOutput
+	Errors	41#3:udtError_AnalogOutput
+udtError_AnalogValve.udtError_AnalogValve	1#1
+	iError	21#3
+	InvalidFeedback	23#4
+udtAnalogValveControl.udtAnalogValveControl	1#1
+	HMI	41#2:udtHMI_AnalogValveControl
+	Errors	41#3:udtError_AnalogValve
+udtError_Valve.udtError_Valve	1#1
+	iError	21#2
+	NoHomeFeedback	23#3
+	NoWorkFeedback	23#4
+	HomeFeedbackStillActive	23#5
+	WorkFeedbackStillActive	23#6
+udtValve.udtValve	1#1
+	HMI	41#2:udtHMI_ValveControl
+	Errors	41#3:udtError_Valve
+udtError_VFD.udtError_VFD	1#1
+	iError	21#2
+	MotorProtectorTripped	23#3
+	LocalDisconnectOff	23#4
+	ClutchTripped	23#5
+	NoContactorFeedback	23#6
+	ContactorStillOn	23#7
+	NoSignalForward	23#8
+	NoSignalReverse	23#9
+	MotorNotStopped	23#10
+	MaxFrequencyReached	23#11
+	Overcurrent	23#12
+	MotorOverload	23#13
+	VFDOverload	23#14
+	GeneralFault	23#15
+	NoCoolingFanFeedback	23#16
+udtVFD.udtVFD	1#1
+	HMI	41#2:udtHMI_VFD_Control
+	Errors	41#3:udtError_VFD
+udtSystem.udtSystem	1#1
+	HMI	41#2:udtHMI_SystemControl
+udtInterlock.udtInterlock	1#1
+	HMI	41#2:udtHMI_Interlock
+udtPIDInterface.udtPIDInterface	1#1
+	HMI	41#2:udtHMI_PIDInterface
+
+# Datapoint/DpId
+DpName	TypeName	ID
+_mp_udtHMI_AnalogInput	udtHMI_AnalogInput	595
+_mp_udtHMI_VFD_Control	udtHMI_VFD_Control	602
+_mp_udtError_Motor	udtError_Motor	634
+_mp_udtHMI_MotorControl	udtHMI_MotorControl	636
+_mp_udtMotor_Reversing	udtMotor_Reversing	638
+_mp_udtError_AnalogInput	udtError_AnalogInput	640
+_mp_udtHMI_AnalogOutput	udtHMI_AnalogOutput	646
+_mp_udtAnalogInput	udtAnalogInput	649
+_mp_udtHMI_AnalogValveControl	udtHMI_AnalogValveControl	655
+_mp_udtHMI_ValveControl	udtHMI_ValveControl	657
+_mp_udtError_AnalogValve	udtError_AnalogValve	659
+_mp_udtAnalogValveControl	udtAnalogValveControl	661
+_mp_udtError_AnalogOutput	udtError_AnalogOutput	663
+_mp_udtError_Valve	udtError_Valve	667
+_mp_udtValve	udtValve	669
+_mp_udtError_VFD	udtError_VFD	671
+_mp_udtVFD	udtVFD	674
+_mp_udtAnalogOutput	udtAnalogOutput	679
+_mp_udtSystem	udtSystem	684
+_mp_udtHMI_Interlock	udtHMI_Interlock	699
+_mp_udtInterlock	udtInterlock	701
+_mp_udtHMI_PIDControlParameters	udtHMI_PIDControlParameters	703
+_mp_udtHMI_PIDInterface	udtHMI_PIDInterface	705
+_mp_udtHMI_SystemControl	udtHMI_SystemControl	707
+_mp_udtPIDInterface	udtPIDInterface	709
+
+# Aliases/Comments
+AliasId	AliasName	CommentName
+_mp_udtHMI_AnalogInput.iMode	""	lt:1 LANG:10001 "Current Mode@@"
+_mp_udtHMI_AnalogInput.iErrorCode	""	lt:1 LANG:10001 "Error Code@@"
+_mp_udtHMI_AnalogInput.iStatus	""	lt:1 LANG:10001 "Status@@"
+_mp_udtHMI_AnalogInput.rActiveValue	""	lt:1 LANG:10001 "@%15.2f@"
+_mp_udtHMI_AnalogInput.rInputValue	""	lt:1 LANG:10001 "@%15.2f@"
+_mp_udtHMI_AnalogInput.rManualValue	""	lt:1 LANG:10001 "@%15.2f@"
+_mp_udtHMI_AnalogInput.bPB_ResetError	""	lt:1 LANG:10001 "Reset errors PB@@"
+_mp_udtHMI_AnalogInput.bPBEN_ResetError	""	lt:1 LANG:10001 "Enable reset errors PB@@"
+_mp_udtHMI_AnalogInput.bError	""	lt:1 LANG:10001 "Overall error@@"
+_mp_udtHMI_VFD_Control.iMode	""	lt:1 LANG:10001 "Current mode@@"
+_mp_udtHMI_VFD_Control.iErrorCode	""	lt:1 LANG:10001 "Error code@@"
+_mp_udtHMI_VFD_Control.iStatus	""	lt:1 LANG:10001 "Status@@"
+_mp_udtHMI_VFD_Control.rManualSpeedSP	""	lt:1 LANG:10001 "Manual mode speed set point@@RPM"
+_mp_udtHMI_VFD_Control.rAutoSpeedSP	""	lt:1 LANG:10001 "Auto mode speed set point@@RPM"
+_mp_udtHMI_VFD_Control.rActualSpeed	""	lt:1 LANG:10001 "Actual motor speed@@RPM"
+_mp_udtHMI_VFD_Control.rActualCurrent	""	lt:1 LANG:10001 "Actual motor current@@A"
+_mp_udtHMI_VFD_Control.rActualPower	""	lt:1 LANG:10001 "Actual motor power@@W"
+_mp_udtHMI_VFD_Control.bPB_ResetError	""	lt:1 LANG:10001 "Reset errors PB@@"
+_mp_udtHMI_VFD_Control.bPB_Forward	""	lt:1 LANG:10001 "Move forward in manual mode PB@@"
+_mp_udtHMI_VFD_Control.bPB_Reverse	""	lt:1 LANG:10001 "Move reverse in manual mode PB@@"
+_mp_udtHMI_VFD_Control.bPB_Stop	""	lt:1 LANG:10001 "Stop in manual mode PB@@"
+_mp_udtHMI_VFD_Control.bPBEN_ResetError	""	lt:1 LANG:10001 "Enable reset errors PB@@"
+_mp_udtHMI_VFD_Control.bPBEN_Forward	""	lt:1 LANG:10001 "Enable move forward PB@@"
+_mp_udtHMI_VFD_Control.bPBEN_Reverse	""	lt:1 LANG:10001 "Enable move reverse PB@@"
+_mp_udtHMI_VFD_Control.bPBEN_Stop	""	lt:1 LANG:10001 "Enable stop PB@@"
+_mp_udtHMI_VFD_Control.bForwardOn	""	lt:1 LANG:10001 "Moving forward@@"
+_mp_udtHMI_VFD_Control.bReverseOn	""	lt:1 LANG:10001 "Moving reverse@@"
+_mp_udtHMI_VFD_Control.bSignalForward	""	lt:1 LANG:10001 "Forward signal@@"
+_mp_udtHMI_VFD_Control.bSignalReverse	""	lt:1 LANG:10001 "Reverse signal@@"
+_mp_udtHMI_VFD_Control.bError	""	lt:1 LANG:10001 "Overall error@@"
+_mp_udtHMI_VFD_Control.bInterlock	""	lt:1 LANG:10001 "VFD interlocked@@"
+_mp_udtError_Motor.MotorProtectorTripped	""	lt:1 LANG:10001 "Motor Protector Tripped@@"
+_mp_udtError_Motor.LocalDisconnectOff	""	lt:1 LANG:10001 "Local Disconnect Off@@"
+_mp_udtError_Motor.ClutchTripped	""	lt:1 LANG:10001 "Clutch Tripped@@"
+_mp_udtError_Motor.NoSignalForward	""	lt:1 LANG:10001 "No Signal Forward@@"
+_mp_udtError_Motor.NoSignalReverse	""	lt:1 LANG:10001 "No Signal Reverse@@"
+_mp_udtError_Motor.MotorNotStopped	""	lt:1 LANG:10001 "Motor Not Stopped@@"
+_mp_udtHMI_MotorControl.iMode	""	lt:1 LANG:10001 "Current Mode@@"
+_mp_udtHMI_MotorControl.iErrorCode	""	lt:1 LANG:10001 "Error Code@@"
+_mp_udtHMI_MotorControl.iStatus	""	lt:1 LANG:10001 "Status@@"
+_mp_udtHMI_MotorControl.bPB_ResetError	""	lt:1 LANG:10001 "Reset Errors PB@@"
+_mp_udtHMI_MotorControl.bPB_Forward	""	lt:1 LANG:10001 "Move forward in manual mode PB@@"
+_mp_udtHMI_MotorControl.bPB_Reverse	""	lt:1 LANG:10001 "Move reverse in manual mode PB@@"
+_mp_udtHMI_MotorControl.bPB_Stop	""	lt:1 LANG:10001 "Stop in manual mode PB@@"
+_mp_udtHMI_MotorControl.bPBEN_ResetError	""	lt:1 LANG:10001 "Enable Reset Error PB@@"
+_mp_udtHMI_MotorControl.bPBEN_Forward	""	lt:1 LANG:10001 "Enable Forward PB@@"
+_mp_udtHMI_MotorControl.bPBEN_Reverse	""	lt:1 LANG:10001 "Enable Reverse PB@@"
+_mp_udtHMI_MotorControl.bPBEN_Stop	""	lt:1 LANG:10001 "Enable Stop PB@@"
+_mp_udtHMI_MotorControl.bForwardOn	""	lt:1 LANG:10001 "Moving forward@@"
+_mp_udtHMI_MotorControl.bReverseOn	""	lt:1 LANG:10001 "Moving reverse@@"
+_mp_udtHMI_MotorControl.bSignalForward	""	lt:1 LANG:10001 "Forward signal@@"
+_mp_udtHMI_MotorControl.bSignalReverse	""	lt:1 LANG:10001 "Reverse signal@@"
+_mp_udtHMI_MotorControl.bError	""	lt:1 LANG:10001 "Overall error@@"
+_mp_udtHMI_MotorControl.bInterlock	""	lt:1 LANG:10001 "Motor interlocked@@"
+_mp_udtMotor_Reversing.HMI.iMode	""	lt:1 LANG:10001 "Current Mode@@"
+_mp_udtMotor_Reversing.HMI.iErrorCode	""	lt:1 LANG:10001 "Error Code@@"
+_mp_udtMotor_Reversing.HMI.iStatus	""	lt:1 LANG:10001 "Status@@"
+_mp_udtMotor_Reversing.HMI.bPB_ResetError	""	lt:1 LANG:10001 "Reset Errors PB@@"
+_mp_udtMotor_Reversing.HMI.bPB_Forward	""	lt:1 LANG:10001 "Move forward in manual mode PB@@"
+_mp_udtMotor_Reversing.HMI.bPB_Reverse	""	lt:1 LANG:10001 "Move reverse in manual mode PB@@"
+_mp_udtMotor_Reversing.HMI.bPB_Stop	""	lt:1 LANG:10001 "Stop in manual mode PB@@"
+_mp_udtMotor_Reversing.HMI.bPBEN_ResetError	""	lt:1 LANG:10001 "Enable Reset Error PB@@"
+_mp_udtMotor_Reversing.HMI.bPBEN_Forward	""	lt:1 LANG:10001 "Enable Forward PB@@"
+_mp_udtMotor_Reversing.HMI.bPBEN_Reverse	""	lt:1 LANG:10001 "Enable Reverse PB@@"
+_mp_udtMotor_Reversing.HMI.bPBEN_Stop	""	lt:1 LANG:10001 "Enable Stop PB@@"
+_mp_udtMotor_Reversing.HMI.bForwardOn	""	lt:1 LANG:10001 "Moving forward@@"
+_mp_udtMotor_Reversing.HMI.bReverseOn	""	lt:1 LANG:10001 "Moving reverse@@"
+_mp_udtMotor_Reversing.HMI.bSignalForward	""	lt:1 LANG:10001 "Forward signal@@"
+_mp_udtMotor_Reversing.HMI.bSignalReverse	""	lt:1 LANG:10001 "Reverse signal@@"
+_mp_udtMotor_Reversing.HMI.bError	""	lt:1 LANG:10001 "Overall error@@"
+_mp_udtMotor_Reversing.HMI.bInterlock	""	lt:1 LANG:10001 "Motor interlocked@@"
+_mp_udtMotor_Reversing.Errors.MotorProtectorTripped	""	lt:1 LANG:10001 "Motor Protector Tripped@@"
+_mp_udtMotor_Reversing.Errors.LocalDisconnectOff	""	lt:1 LANG:10001 "Local Disconnect Off@@"
+_mp_udtMotor_Reversing.Errors.ClutchTripped	""	lt:1 LANG:10001 "Clutch Tripped@@"
+_mp_udtMotor_Reversing.Errors.NoSignalForward	""	lt:1 LANG:10001 "No Signal Forward@@"
+_mp_udtMotor_Reversing.Errors.NoSignalReverse	""	lt:1 LANG:10001 "No Signal Reverse@@"
+_mp_udtMotor_Reversing.Errors.MotorNotStopped	""	lt:1 LANG:10001 "Motor Not Stopped@@"
+_mp_udtError_AnalogInput.LowLowAlarm	""	lt:1 LANG:10001 "Value below low low set point@@"
+_mp_udtError_AnalogInput.HighHighAlarm	""	lt:1 LANG:10001 "Value above high high set point@@"
+_mp_udtError_AnalogInput.Invalid	""	lt:1 LANG:10001 "Invalid input value@@"
+_mp_udtHMI_AnalogOutput.iMode	""	lt:1 LANG:10001 "Current Mode@@"
+_mp_udtHMI_AnalogOutput.iErrorCode	""	lt:1 LANG:10001 "Error Code@@"
+_mp_udtHMI_AnalogOutput.rValue	""	lt:1 LANG:10001 "@%15.2f@"
+_mp_udtHMI_AnalogOutput.rAutoValue	""	lt:1 LANG:10001 "@%15.2f@"
+_mp_udtHMI_AnalogOutput.rManualValue	""	lt:1 LANG:10001 "@%15.2f@"
+_mp_udtHMI_AnalogOutput.rEstopValue	""	lt:1 LANG:10001 "@%15.2f@"
+_mp_udtHMI_AnalogOutput.bPB_ResetError	""	lt:1 LANG:10001 "Reset errors PB@@"
+_mp_udtHMI_AnalogOutput.bPBEN_ResetError	""	lt:1 LANG:10001 "Enable reset errors PB@@"
+_mp_udtHMI_AnalogOutput.bError	""	lt:1 LANG:10001 "Overall error@@"
+_mp_udtHMI_AnalogOutput.bInterlock	""	lt:1 LANG:10001 "Analog output is interlocked@@"
+_mp_udtHMI_AnalogOutput.iEstopFunction	""	lt:1 LANG:10001 "Enum of Estop response@@"
+_mp_udtAnalogInput.HMI.iMode	""	lt:1 LANG:10001 "Current Mode@@"
+_mp_udtAnalogInput.HMI.iErrorCode	""	lt:1 LANG:10001 "Error Code@@"
+_mp_udtAnalogInput.HMI.iStatus	""	lt:1 LANG:10001 "Status@@"
+_mp_udtAnalogInput.HMI.rActiveValue	""	lt:1 LANG:10001 "@%15.2f@"
+_mp_udtAnalogInput.HMI.rInputValue	""	lt:1 LANG:10001 "@%15.2f@"
+_mp_udtAnalogInput.HMI.rManualValue	""	lt:1 LANG:10001 "@%15.2f@"
+_mp_udtAnalogInput.HMI.bPB_ResetError	""	lt:1 LANG:10001 "Reset errors PB@@"
+_mp_udtAnalogInput.HMI.bPBEN_ResetError	""	lt:1 LANG:10001 "Enable reset errors PB@@"
+_mp_udtAnalogInput.HMI.bError	""	lt:1 LANG:10001 "Overall error@@"
+_mp_udtAnalogInput.Errors.LowLowAlarm	""	lt:1 LANG:10001 "Value below low low set point@@"
+_mp_udtAnalogInput.Errors.HighHighAlarm	""	lt:1 LANG:10001 "Value above high high set point@@"
+_mp_udtAnalogInput.Errors.Invalid	""	lt:1 LANG:10001 "Invalid input value@@"
+_mp_udtHMI_AnalogValveControl.iMode	""	lt:1 LANG:10001 "Current Mode@@"
+_mp_udtHMI_AnalogValveControl.iErrorCode	""	lt:1 LANG:10001 "Error Code@@"
+_mp_udtHMI_AnalogValveControl.iStatus	""	lt:1 LANG:10001 "Status@@"
+_mp_udtHMI_AnalogValveControl.rManualSP	""	lt:1 LANG:10001 "Set point for manual mode@@"
+_mp_udtHMI_AnalogValveControl.rAutoSP	""	lt:1 LANG:10001 "Set point for automatic mode@@"
+_mp_udtHMI_AnalogValveControl.rEstopSP	""	lt:1 LANG:10001 "Set point for an e-stop condition@@"
+_mp_udtHMI_AnalogValveControl.rActual	""	lt:1 LANG:10001 "@%15.0f@%"
+_mp_udtHMI_AnalogValveControl.bPB_ResetError	""	lt:1 LANG:10001 "Reset errors PB@@"
+_mp_udtHMI_AnalogValveControl.bPBEN_ResetError	""	lt:1 LANG:10001 "Enable reset errors PB@@"
+_mp_udtHMI_AnalogValveControl.bError	""	lt:1 LANG:10001 "Overall error@@"
+_mp_udtHMI_AnalogValveControl.bInterlock	""	lt:1 LANG:10001 "Valve interlocked@@"
+_mp_udtHMI_AnalogValveControl.iEstopFunction	""	lt:1 LANG:10001 "Enum of Estop response@@"
+_mp_udtHMI_ValveControl.iMode	""	lt:1 LANG:10001 "Current Mode@@"
+_mp_udtHMI_ValveControl.iErrorCode	""	lt:1 LANG:10001 "Error Code@@"
+_mp_udtHMI_ValveControl.iStatus	""	lt:1 LANG:10001 "Status@@"
+_mp_udtHMI_ValveControl.bPB_ResetError	""	lt:1 LANG:10001 "Reset errors PB@@"
+_mp_udtHMI_ValveControl.bPB_Home	""	lt:1 LANG:10001 "Manual mode home PB@@"
+_mp_udtHMI_ValveControl.bPB_Work	""	lt:1 LANG:10001 "Manual mode work PB@@"
+_mp_udtHMI_ValveControl.bPBEN_ResetError	""	lt:1 LANG:10001 "Enable reset errors PB@@"
+_mp_udtHMI_ValveControl.bPBEN_Home	""	lt:1 LANG:10001 "Enable manual move to home PB@@"
+_mp_udtHMI_ValveControl.bPBEN_Work	""	lt:1 LANG:10001 "Enable manual move to work PB@@"
+_mp_udtHMI_ValveControl.bHomeOn	""	lt:1 LANG:10001 "Home command is on@@"
+_mp_udtHMI_ValveControl.bWorkOn	""	lt:1 LANG:10001 "Work command is on@@"
+_mp_udtHMI_ValveControl.bSignalHome	""	lt:1 LANG:10001 "Home feedback@@"
+_mp_udtHMI_ValveControl.bSignalWork	""	lt:1 LANG:10001 "Work feedback@@"
+_mp_udtHMI_ValveControl.bError	""	lt:1 LANG:10001 "Error status@@"
+_mp_udtHMI_ValveControl.bInterlock	""	lt:1 LANG:10001 "Valve interlocked@@"
+_mp_udtError_AnalogValve.InvalidFeedback	""	lt:1 LANG:10001 "Valve feedback is not within command tolerance@@"
+_mp_udtAnalogValveControl.HMI.iMode	""	lt:1 LANG:10001 "Current Mode@@"
+_mp_udtAnalogValveControl.HMI.iErrorCode	""	lt:1 LANG:10001 "Error Code@@"
+_mp_udtAnalogValveControl.HMI.iStatus	""	lt:1 LANG:10001 "Status@@"
+_mp_udtAnalogValveControl.HMI.rManualSP	""	lt:1 LANG:10001 "Set point for manual mode@@"
+_mp_udtAnalogValveControl.HMI.rAutoSP	""	lt:1 LANG:10001 "Set point for automatic mode@@"
+_mp_udtAnalogValveControl.HMI.rEstopSP	""	lt:1 LANG:10001 "Set point for an e-stop condition@@"
+_mp_udtAnalogValveControl.HMI.rActual	""	lt:1 LANG:10001 "@%15.0f@%"
+_mp_udtAnalogValveControl.HMI.bPB_ResetError	""	lt:1 LANG:10001 "Reset errors PB@@"
+_mp_udtAnalogValveControl.HMI.bPBEN_ResetError	""	lt:1 LANG:10001 "Enable reset errors PB@@"
+_mp_udtAnalogValveControl.HMI.bError	""	lt:1 LANG:10001 "Overall error@@"
+_mp_udtAnalogValveControl.HMI.bInterlock	""	lt:1 LANG:10001 "Valve interlocked@@"
+_mp_udtAnalogValveControl.HMI.iEstopFunction	""	lt:1 LANG:10001 "Enum of Estop response@@"
+_mp_udtAnalogValveControl.Errors.InvalidFeedback	""	lt:1 LANG:10001 "Valve feedback is not within command tolerance@@"
+_mp_udtError_AnalogOutput.OutOfRange	""	lt:1 LANG:10001 "Input value is outside range of engineering units@@"
+_mp_udtError_AnalogOutput.ConfigurationError	""	lt:1 LANG:10001 "Engineering units are not properly configured@@"
+_mp_udtError_Valve.NoHomeFeedback	""	lt:1 LANG:10001 "Home position feedback not active@@"
+_mp_udtError_Valve.NoWorkFeedback	""	lt:1 LANG:10001 "Work position feedback not active@@"
+_mp_udtError_Valve.HomeFeedbackStillActive	""	lt:1 LANG:10001 "Home position feedback still active@@"
+_mp_udtError_Valve.WorkFeedbackStillActive	""	lt:1 LANG:10001 "Work position feedback still active@@"
+_mp_udtValve.HMI.iMode	""	lt:1 LANG:10001 "Current Mode@@"
+_mp_udtValve.HMI.iErrorCode	""	lt:1 LANG:10001 "Error Code@@"
+_mp_udtValve.HMI.iStatus	""	lt:1 LANG:10001 "Status@@"
+_mp_udtValve.HMI.bPB_ResetError	""	lt:1 LANG:10001 "Reset errors PB@@"
+_mp_udtValve.HMI.bPB_Home	""	lt:1 LANG:10001 "Manual mode home PB@@"
+_mp_udtValve.HMI.bPB_Work	""	lt:1 LANG:10001 "Manual mode work PB@@"
+_mp_udtValve.HMI.bPBEN_ResetError	""	lt:1 LANG:10001 "Enable reset errors PB@@"
+_mp_udtValve.HMI.bPBEN_Home	""	lt:1 LANG:10001 "Enable manual move to home PB@@"
+_mp_udtValve.HMI.bPBEN_Work	""	lt:1 LANG:10001 "Enable manual move to work PB@@"
+_mp_udtValve.HMI.bHomeOn	""	lt:1 LANG:10001 "Home command is on@@"
+_mp_udtValve.HMI.bWorkOn	""	lt:1 LANG:10001 "Work command is on@@"
+_mp_udtValve.HMI.bSignalHome	""	lt:1 LANG:10001 "Home feedback@@"
+_mp_udtValve.HMI.bSignalWork	""	lt:1 LANG:10001 "Work feedback@@"
+_mp_udtValve.HMI.bError	""	lt:1 LANG:10001 "Error status@@"
+_mp_udtValve.HMI.bInterlock	""	lt:1 LANG:10001 "Valve interlocked@@"
+_mp_udtValve.Errors.NoHomeFeedback	""	lt:1 LANG:10001 "Home position feedback not active@@"
+_mp_udtValve.Errors.NoWorkFeedback	""	lt:1 LANG:10001 "Work position feedback not active@@"
+_mp_udtValve.Errors.HomeFeedbackStillActive	""	lt:1 LANG:10001 "Home position feedback still active@@"
+_mp_udtValve.Errors.WorkFeedbackStillActive	""	lt:1 LANG:10001 "Work position feedback still active@@"
+_mp_udtError_VFD.MotorProtectorTripped	""	lt:1 LANG:10001 "Motor Protector Tripped@@"
+_mp_udtError_VFD.LocalDisconnectOff	""	lt:1 LANG:10001 "Motor disconnect off@@"
+_mp_udtError_VFD.ClutchTripped	""	lt:1 LANG:10001 "Clutch tripped@@"
+_mp_udtError_VFD.NoContactorFeedback	""	lt:1 LANG:10001 "No feedback from motor contactor@@"
+_mp_udtError_VFD.ContactorStillOn	""	lt:1 LANG:10001 "Contactor still on@@"
+_mp_udtError_VFD.NoSignalForward	""	lt:1 LANG:10001 "No signal forward from VFD@@"
+_mp_udtError_VFD.NoSignalReverse	""	lt:1 LANG:10001 "No signal reverse from VFD@@"
+_mp_udtError_VFD.MotorNotStopped	""	lt:1 LANG:10001 "Motor did not stop@@"
+_mp_udtError_VFD.MaxFrequencyReached	""	lt:1 LANG:10001 "Max frequency reached@@"
+_mp_udtError_VFD.Overcurrent	""	lt:1 LANG:10001 "VFD over current@@"
+_mp_udtError_VFD.MotorOverload	""	lt:1 LANG:10001 "Motor overload@@"
+_mp_udtError_VFD.VFDOverload	""	lt:1 LANG:10001 "VFD overload@@"
+_mp_udtError_VFD.GeneralFault	""	lt:1 LANG:10001 "VFD fault@@"
+_mp_udtError_VFD.NoCoolingFanFeedback	""	lt:1 LANG:10001 "No feedback from cooling fan@@"
+_mp_udtVFD.HMI.iMode	""	lt:1 LANG:10001 "Current mode@@"
+_mp_udtVFD.HMI.iErrorCode	""	lt:1 LANG:10001 "Error code@@"
+_mp_udtVFD.HMI.iStatus	""	lt:1 LANG:10001 "Status@@"
+_mp_udtVFD.HMI.rManualSpeedSP	""	lt:1 LANG:10001 "Manual mode speed set point@@RPM"
+_mp_udtVFD.HMI.rAutoSpeedSP	""	lt:1 LANG:10001 "Auto mode speed set point@@RPM"
+_mp_udtVFD.HMI.rActualSpeed	""	lt:1 LANG:10001 "Actual motor speed@@RPM"
+_mp_udtVFD.HMI.rActualCurrent	""	lt:1 LANG:10001 "Actual motor current@@A"
+_mp_udtVFD.HMI.rActualPower	""	lt:1 LANG:10001 "Actual motor power@@W"
+_mp_udtVFD.HMI.bPB_ResetError	""	lt:1 LANG:10001 "Reset errors PB@@"
+_mp_udtVFD.HMI.bPB_Forward	""	lt:1 LANG:10001 "Move forward in manual mode PB@@"
+_mp_udtVFD.HMI.bPB_Reverse	""	lt:1 LANG:10001 "Move reverse in manual mode PB@@"
+_mp_udtVFD.HMI.bPB_Stop	""	lt:1 LANG:10001 "Stop in manual mode PB@@"
+_mp_udtVFD.HMI.bPBEN_ResetError	""	lt:1 LANG:10001 "Enable reset errors PB@@"
+_mp_udtVFD.HMI.bPBEN_Forward	""	lt:1 LANG:10001 "Enable move forward PB@@"
+_mp_udtVFD.HMI.bPBEN_Reverse	""	lt:1 LANG:10001 "Enable move reverse PB@@"
+_mp_udtVFD.HMI.bPBEN_Stop	""	lt:1 LANG:10001 "Enable stop PB@@"
+_mp_udtVFD.HMI.bForwardOn	""	lt:1 LANG:10001 "Moving forward@@"
+_mp_udtVFD.HMI.bReverseOn	""	lt:1 LANG:10001 "Moving reverse@@"
+_mp_udtVFD.HMI.bSignalForward	""	lt:1 LANG:10001 "Forward signal@@"
+_mp_udtVFD.HMI.bSignalReverse	""	lt:1 LANG:10001 "Reverse signal@@"
+_mp_udtVFD.HMI.bError	""	lt:1 LANG:10001 "Overall error@@"
+_mp_udtVFD.HMI.bInterlock	""	lt:1 LANG:10001 "VFD interlocked@@"
+_mp_udtVFD.Errors.MotorProtectorTripped	""	lt:1 LANG:10001 "Motor Protector Tripped@@"
+_mp_udtVFD.Errors.LocalDisconnectOff	""	lt:1 LANG:10001 "Motor disconnect off@@"
+_mp_udtVFD.Errors.ClutchTripped	""	lt:1 LANG:10001 "Clutch tripped@@"
+_mp_udtVFD.Errors.NoContactorFeedback	""	lt:1 LANG:10001 "No feedback from motor contactor@@"
+_mp_udtVFD.Errors.ContactorStillOn	""	lt:1 LANG:10001 "Contactor still on@@"
+_mp_udtVFD.Errors.NoSignalForward	""	lt:1 LANG:10001 "No signal forward from VFD@@"
+_mp_udtVFD.Errors.NoSignalReverse	""	lt:1 LANG:10001 "No signal reverse from VFD@@"
+_mp_udtVFD.Errors.MotorNotStopped	""	lt:1 LANG:10001 "Motor did not stop@@"
+_mp_udtVFD.Errors.MaxFrequencyReached	""	lt:1 LANG:10001 "Max frequency reached@@"
+_mp_udtVFD.Errors.Overcurrent	""	lt:1 LANG:10001 "VFD over current@@"
+_mp_udtVFD.Errors.MotorOverload	""	lt:1 LANG:10001 "Motor overload@@"
+_mp_udtVFD.Errors.VFDOverload	""	lt:1 LANG:10001 "VFD overload@@"
+_mp_udtVFD.Errors.GeneralFault	""	lt:1 LANG:10001 "VFD fault@@"
+_mp_udtVFD.Errors.NoCoolingFanFeedback	""	lt:1 LANG:10001 "No feedback from cooling fan@@"
+_mp_udtAnalogOutput.HMI.iMode	""	lt:1 LANG:10001 "Current Mode@@"
+_mp_udtAnalogOutput.HMI.iErrorCode	""	lt:1 LANG:10001 "Error Code@@"
+_mp_udtAnalogOutput.HMI.rValue	""	lt:1 LANG:10001 "@%15.2f@"
+_mp_udtAnalogOutput.HMI.rAutoValue	""	lt:1 LANG:10001 "@%15.2f@"
+_mp_udtAnalogOutput.HMI.rManualValue	""	lt:1 LANG:10001 "@%15.2f@"
+_mp_udtAnalogOutput.HMI.rEstopValue	""	lt:1 LANG:10001 "@%15.2f@"
+_mp_udtAnalogOutput.HMI.bPB_ResetError	""	lt:1 LANG:10001 "Reset errors PB@@"
+_mp_udtAnalogOutput.HMI.bPBEN_ResetError	""	lt:1 LANG:10001 "Enable reset errors PB@@"
+_mp_udtAnalogOutput.HMI.bError	""	lt:1 LANG:10001 "Overall error@@"
+_mp_udtAnalogOutput.HMI.bInterlock	""	lt:1 LANG:10001 "Analog output is interlocked@@"
+_mp_udtAnalogOutput.HMI.iEstopFunction	""	lt:1 LANG:10001 "Enum of Estop response@@"
+_mp_udtAnalogOutput.Errors.OutOfRange	""	lt:1 LANG:10001 "Input value is outside range of engineering units@@"
+_mp_udtAnalogOutput.Errors.ConfigurationError	""	lt:1 LANG:10001 "Engineering units are not properly configured@@"
+
+# AlertValue
+Manager/User	ElementName	TypeName	DetailNr	_alert_hdl.._type	_alert_hdl.._l_limit	_alert_hdl.._u_limit	_alert_hdl.._l_incl	_alert_hdl.._u_incl	_alert_hdl.._panel	_alert_hdl.._panel_param	_alert_hdl.._help	_alert_hdl.._min_prio	_alert_hdl.._class	_alert_hdl.._text	_alert_hdl.._active	_alert_hdl.._orig_hdl	_alert_hdl.._ok_range	_alert_hdl.._hyst_type	_alert_hdl.._hyst_time	_alert_hdl.._multi_instance	_alert_hdl.._l_hyst_limit	_alert_hdl.._u_hyst_limit	_alert_hdl.._text1	_alert_hdl.._text0	_alert_hdl.._ack_has_prio	_alert_hdl.._order	_alert_hdl.._dp_pattern	_alert_hdl.._dp_list	_alert_hdl.._prio_pattern	_alert_hdl.._abbr_pattern	_alert_hdl.._ack_deletes	_alert_hdl.._non_ack	_alert_hdl.._came_ack	_alert_hdl.._pair_ack	_alert_hdl.._both_ack	_alert_hdl.._impulse	_alert_hdl.._filter_threshold	_alert_hdl.._went_text	_alert_hdl.._add_text	_alert_hdl.._status64_pattern	_alert_hdl.._neg	_alert_hdl.._status64_match	_alert_hdl.._match	_alert_hdl.._set
+UI (1)/0	_mp_udtError_Motor.MotorProtectorTripped	udtError_Motor		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtError_Motor.LocalDisconnectOff	udtError_Motor		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtError_Motor.ClutchTripped	udtError_Motor		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtError_Motor.NoSignalForward	udtError_Motor		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtError_Motor.NoSignalReverse	udtError_Motor		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtError_Motor.MotorNotStopped	udtError_Motor		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtMotor_Reversing.Errors.MotorProtectorTripped	udtMotor_Reversing		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtMotor_Reversing.Errors.LocalDisconnectOff	udtMotor_Reversing		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtMotor_Reversing.Errors.ClutchTripped	udtMotor_Reversing		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtMotor_Reversing.Errors.NoSignalForward	udtMotor_Reversing		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtMotor_Reversing.Errors.NoSignalReverse	udtMotor_Reversing		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtMotor_Reversing.Errors.MotorNotStopped	udtMotor_Reversing		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtError_AnalogInput.LowLowAlarm	udtError_AnalogInput		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtError_AnalogInput.HighHighAlarm	udtError_AnalogInput		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtError_AnalogInput.Invalid	udtError_AnalogInput		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtAnalogInput.Errors.LowLowAlarm	udtAnalogInput		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtAnalogInput.Errors.HighHighAlarm	udtAnalogInput		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtAnalogInput.Errors.Invalid	udtAnalogInput		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtError_AnalogValve.InvalidFeedback	udtError_AnalogValve		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtAnalogValveControl.Errors.InvalidFeedback	udtAnalogValveControl		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtError_AnalogOutput.OutOfRange	udtError_AnalogOutput		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtError_AnalogOutput.ConfigurationError	udtError_AnalogOutput		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtError_Valve.NoHomeFeedback	udtError_Valve		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtError_Valve.NoWorkFeedback	udtError_Valve		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtError_Valve.HomeFeedbackStillActive	udtError_Valve		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtError_Valve.WorkFeedbackStillActive	udtError_Valve		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtValve.Errors.NoHomeFeedback	udtValve		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtValve.Errors.NoWorkFeedback	udtValve		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtValve.Errors.HomeFeedbackStillActive	udtValve		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtValve.Errors.WorkFeedbackStillActive	udtValve		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtError_VFD.MotorProtectorTripped	udtError_VFD		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtError_VFD.LocalDisconnectOff	udtError_VFD		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtError_VFD.ClutchTripped	udtError_VFD		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtError_VFD.NoContactorFeedback	udtError_VFD		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtError_VFD.ContactorStillOn	udtError_VFD		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtError_VFD.NoSignalForward	udtError_VFD		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtError_VFD.NoSignalReverse	udtError_VFD		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtError_VFD.MotorNotStopped	udtError_VFD		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtError_VFD.MaxFrequencyReached	udtError_VFD		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtError_VFD.Overcurrent	udtError_VFD		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtError_VFD.MotorOverload	udtError_VFD		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtError_VFD.VFDOverload	udtError_VFD		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtError_VFD.GeneralFault	udtError_VFD		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtError_VFD.NoCoolingFanFeedback	udtError_VFD		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtVFD.Errors.MotorProtectorTripped	udtVFD		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtVFD.Errors.LocalDisconnectOff	udtVFD		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtVFD.Errors.ClutchTripped	udtVFD		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtVFD.Errors.NoContactorFeedback	udtVFD		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtVFD.Errors.ContactorStillOn	udtVFD		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtVFD.Errors.NoSignalForward	udtVFD		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtVFD.Errors.NoSignalReverse	udtVFD		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtVFD.Errors.MotorNotStopped	udtVFD		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtVFD.Errors.MaxFrequencyReached	udtVFD		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtVFD.Errors.Overcurrent	udtVFD		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtVFD.Errors.MotorOverload	udtVFD		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtVFD.Errors.VFDOverload	udtVFD		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtVFD.Errors.GeneralFault	udtVFD		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtVFD.Errors.NoCoolingFanFeedback	udtVFD		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtAnalogOutput.Errors.OutOfRange	udtAnalogOutput		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+UI (1)/0	_mp_udtAnalogOutput.Errors.ConfigurationError	udtAnalogOutput		12					""	""	lt:1 LANG:10001 ""	\0	alert.		0	1	0	0	01.01.1970 00:00:00.000	0			lt:1 LANG:10001 "State ON"	lt:1 LANG:10001 "State OFF"												0								
+
+# DbArchiveInfo
+Manager/User	ElementName	TypeName	DetailNr	_archive.._type	_archive.._archive	_archive.._class	_archive.._interv	_archive.._interv_type	_archive.._std_type	_archive.._std_tol	_archive.._std_time	_archive.._round_val	_archive.._round_inv
+UI (1)/0	_mp_udtHMI_AnalogInput.iMode	udtHMI_AnalogInput		45	0
+UI (1)/0	_mp_udtHMI_AnalogInput.iMode	udtHMI_AnalogInput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_AnalogInput.iErrorCode	udtHMI_AnalogInput		45	0
+UI (1)/0	_mp_udtHMI_AnalogInput.iErrorCode	udtHMI_AnalogInput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_AnalogInput.iStatus	udtHMI_AnalogInput		45	0
+UI (1)/0	_mp_udtHMI_AnalogInput.iStatus	udtHMI_AnalogInput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_AnalogInput.rActiveValue	udtHMI_AnalogInput		45	0
+UI (1)/0	_mp_udtHMI_AnalogInput.rActiveValue	udtHMI_AnalogInput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_AnalogInput.rInputValue	udtHMI_AnalogInput		45	0
+UI (1)/0	_mp_udtHMI_AnalogInput.rInputValue	udtHMI_AnalogInput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_AnalogInput.rManualValue	udtHMI_AnalogInput		45	0
+UI (1)/0	_mp_udtHMI_AnalogInput.rManualValue	udtHMI_AnalogInput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_AnalogInput.bPB_ResetError	udtHMI_AnalogInput		45	0
+UI (1)/0	_mp_udtHMI_AnalogInput.bPB_ResetError	udtHMI_AnalogInput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_AnalogInput.bPBEN_ResetError	udtHMI_AnalogInput		45	0
+UI (1)/0	_mp_udtHMI_AnalogInput.bPBEN_ResetError	udtHMI_AnalogInput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_AnalogInput.bError	udtHMI_AnalogInput		45	0
+UI (1)/0	_mp_udtHMI_AnalogInput.bError	udtHMI_AnalogInput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_VFD_Control.iMode	udtHMI_VFD_Control		45	0
+UI (1)/0	_mp_udtHMI_VFD_Control.iMode	udtHMI_VFD_Control	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_VFD_Control.iErrorCode	udtHMI_VFD_Control		45	0
+UI (1)/0	_mp_udtHMI_VFD_Control.iErrorCode	udtHMI_VFD_Control	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_VFD_Control.iStatus	udtHMI_VFD_Control		45	0
+UI (1)/0	_mp_udtHMI_VFD_Control.iStatus	udtHMI_VFD_Control	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_VFD_Control.rManualSpeedSP	udtHMI_VFD_Control		45	0
+UI (1)/0	_mp_udtHMI_VFD_Control.rManualSpeedSP	udtHMI_VFD_Control	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_VFD_Control.rAutoSpeedSP	udtHMI_VFD_Control		45	0
+UI (1)/0	_mp_udtHMI_VFD_Control.rAutoSpeedSP	udtHMI_VFD_Control	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_VFD_Control.rActualSpeed	udtHMI_VFD_Control		45	0
+UI (1)/0	_mp_udtHMI_VFD_Control.rActualSpeed	udtHMI_VFD_Control	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_VFD_Control.rActualCurrent	udtHMI_VFD_Control		45	0
+UI (1)/0	_mp_udtHMI_VFD_Control.rActualCurrent	udtHMI_VFD_Control	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_VFD_Control.rActualPower	udtHMI_VFD_Control		45	0
+UI (1)/0	_mp_udtHMI_VFD_Control.rActualPower	udtHMI_VFD_Control	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_VFD_Control.bPB_ResetError	udtHMI_VFD_Control		45	0
+UI (1)/0	_mp_udtHMI_VFD_Control.bPB_ResetError	udtHMI_VFD_Control	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_VFD_Control.bPB_Forward	udtHMI_VFD_Control		45	0
+UI (1)/0	_mp_udtHMI_VFD_Control.bPB_Forward	udtHMI_VFD_Control	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_VFD_Control.bPB_Reverse	udtHMI_VFD_Control		45	0
+UI (1)/0	_mp_udtHMI_VFD_Control.bPB_Reverse	udtHMI_VFD_Control	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_VFD_Control.bPB_Stop	udtHMI_VFD_Control		45	0
+UI (1)/0	_mp_udtHMI_VFD_Control.bPB_Stop	udtHMI_VFD_Control	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_VFD_Control.bPBEN_ResetError	udtHMI_VFD_Control		45	0
+UI (1)/0	_mp_udtHMI_VFD_Control.bPBEN_ResetError	udtHMI_VFD_Control	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_VFD_Control.bPBEN_Forward	udtHMI_VFD_Control		45	0
+UI (1)/0	_mp_udtHMI_VFD_Control.bPBEN_Forward	udtHMI_VFD_Control	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_VFD_Control.bPBEN_Reverse	udtHMI_VFD_Control		45	0
+UI (1)/0	_mp_udtHMI_VFD_Control.bPBEN_Reverse	udtHMI_VFD_Control	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_VFD_Control.bPBEN_Stop	udtHMI_VFD_Control		45	0
+UI (1)/0	_mp_udtHMI_VFD_Control.bPBEN_Stop	udtHMI_VFD_Control	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_VFD_Control.bForwardOn	udtHMI_VFD_Control		45	0
+UI (1)/0	_mp_udtHMI_VFD_Control.bForwardOn	udtHMI_VFD_Control	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_VFD_Control.bReverseOn	udtHMI_VFD_Control		45	0
+UI (1)/0	_mp_udtHMI_VFD_Control.bReverseOn	udtHMI_VFD_Control	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_VFD_Control.bSignalForward	udtHMI_VFD_Control		45	0
+UI (1)/0	_mp_udtHMI_VFD_Control.bSignalForward	udtHMI_VFD_Control	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_VFD_Control.bSignalReverse	udtHMI_VFD_Control		45	0
+UI (1)/0	_mp_udtHMI_VFD_Control.bSignalReverse	udtHMI_VFD_Control	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_VFD_Control.bError	udtHMI_VFD_Control		45	0
+UI (1)/0	_mp_udtHMI_VFD_Control.bError	udtHMI_VFD_Control	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_VFD_Control.bInterlock	udtHMI_VFD_Control		45	0
+UI (1)/0	_mp_udtHMI_VFD_Control.bInterlock	udtHMI_VFD_Control	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_MotorControl.iMode	udtHMI_MotorControl		45	0
+UI (1)/0	_mp_udtHMI_MotorControl.iMode	udtHMI_MotorControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_MotorControl.iErrorCode	udtHMI_MotorControl		45	0
+UI (1)/0	_mp_udtHMI_MotorControl.iErrorCode	udtHMI_MotorControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_MotorControl.iStatus	udtHMI_MotorControl		45	0
+UI (1)/0	_mp_udtHMI_MotorControl.iStatus	udtHMI_MotorControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_MotorControl.bPB_ResetError	udtHMI_MotorControl		45	0
+UI (1)/0	_mp_udtHMI_MotorControl.bPB_ResetError	udtHMI_MotorControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_MotorControl.bPB_Forward	udtHMI_MotorControl		45	0
+UI (1)/0	_mp_udtHMI_MotorControl.bPB_Forward	udtHMI_MotorControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_MotorControl.bPB_Reverse	udtHMI_MotorControl		45	0
+UI (1)/0	_mp_udtHMI_MotorControl.bPB_Reverse	udtHMI_MotorControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_MotorControl.bPB_Stop	udtHMI_MotorControl		45	0
+UI (1)/0	_mp_udtHMI_MotorControl.bPB_Stop	udtHMI_MotorControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_MotorControl.bPBEN_ResetError	udtHMI_MotorControl		45	0
+UI (1)/0	_mp_udtHMI_MotorControl.bPBEN_ResetError	udtHMI_MotorControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_MotorControl.bPBEN_Forward	udtHMI_MotorControl		45	0
+UI (1)/0	_mp_udtHMI_MotorControl.bPBEN_Forward	udtHMI_MotorControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_MotorControl.bPBEN_Reverse	udtHMI_MotorControl		45	0
+UI (1)/0	_mp_udtHMI_MotorControl.bPBEN_Reverse	udtHMI_MotorControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_MotorControl.bPBEN_Stop	udtHMI_MotorControl		45	0
+UI (1)/0	_mp_udtHMI_MotorControl.bPBEN_Stop	udtHMI_MotorControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_MotorControl.bForwardOn	udtHMI_MotorControl		45	0
+UI (1)/0	_mp_udtHMI_MotorControl.bForwardOn	udtHMI_MotorControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_MotorControl.bReverseOn	udtHMI_MotorControl		45	0
+UI (1)/0	_mp_udtHMI_MotorControl.bReverseOn	udtHMI_MotorControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_MotorControl.bSignalForward	udtHMI_MotorControl		45	0
+UI (1)/0	_mp_udtHMI_MotorControl.bSignalForward	udtHMI_MotorControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_MotorControl.bSignalReverse	udtHMI_MotorControl		45	0
+UI (1)/0	_mp_udtHMI_MotorControl.bSignalReverse	udtHMI_MotorControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_MotorControl.bError	udtHMI_MotorControl		45	0
+UI (1)/0	_mp_udtHMI_MotorControl.bError	udtHMI_MotorControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_MotorControl.bInterlock	udtHMI_MotorControl		45	0
+UI (1)/0	_mp_udtHMI_MotorControl.bInterlock	udtHMI_MotorControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtMotor_Reversing.HMI.iMode	udtMotor_Reversing		45	0
+UI (1)/0	_mp_udtMotor_Reversing.HMI.iMode	udtMotor_Reversing	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtMotor_Reversing.HMI.iErrorCode	udtMotor_Reversing		45	0
+UI (1)/0	_mp_udtMotor_Reversing.HMI.iErrorCode	udtMotor_Reversing	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtMotor_Reversing.HMI.iStatus	udtMotor_Reversing		45	0
+UI (1)/0	_mp_udtMotor_Reversing.HMI.iStatus	udtMotor_Reversing	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtMotor_Reversing.HMI.bPB_ResetError	udtMotor_Reversing		45	0
+UI (1)/0	_mp_udtMotor_Reversing.HMI.bPB_ResetError	udtMotor_Reversing	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtMotor_Reversing.HMI.bPB_Forward	udtMotor_Reversing		45	0
+UI (1)/0	_mp_udtMotor_Reversing.HMI.bPB_Forward	udtMotor_Reversing	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtMotor_Reversing.HMI.bPB_Reverse	udtMotor_Reversing		45	0
+UI (1)/0	_mp_udtMotor_Reversing.HMI.bPB_Reverse	udtMotor_Reversing	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtMotor_Reversing.HMI.bPB_Stop	udtMotor_Reversing		45	0
+UI (1)/0	_mp_udtMotor_Reversing.HMI.bPB_Stop	udtMotor_Reversing	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtMotor_Reversing.HMI.bPBEN_ResetError	udtMotor_Reversing		45	0
+UI (1)/0	_mp_udtMotor_Reversing.HMI.bPBEN_ResetError	udtMotor_Reversing	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtMotor_Reversing.HMI.bPBEN_Forward	udtMotor_Reversing		45	0
+UI (1)/0	_mp_udtMotor_Reversing.HMI.bPBEN_Forward	udtMotor_Reversing	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtMotor_Reversing.HMI.bPBEN_Reverse	udtMotor_Reversing		45	0
+UI (1)/0	_mp_udtMotor_Reversing.HMI.bPBEN_Reverse	udtMotor_Reversing	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtMotor_Reversing.HMI.bPBEN_Stop	udtMotor_Reversing		45	0
+UI (1)/0	_mp_udtMotor_Reversing.HMI.bPBEN_Stop	udtMotor_Reversing	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtMotor_Reversing.HMI.bForwardOn	udtMotor_Reversing		45	0
+UI (1)/0	_mp_udtMotor_Reversing.HMI.bForwardOn	udtMotor_Reversing	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtMotor_Reversing.HMI.bReverseOn	udtMotor_Reversing		45	0
+UI (1)/0	_mp_udtMotor_Reversing.HMI.bReverseOn	udtMotor_Reversing	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtMotor_Reversing.HMI.bSignalForward	udtMotor_Reversing		45	0
+UI (1)/0	_mp_udtMotor_Reversing.HMI.bSignalForward	udtMotor_Reversing	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtMotor_Reversing.HMI.bSignalReverse	udtMotor_Reversing		45	0
+UI (1)/0	_mp_udtMotor_Reversing.HMI.bSignalReverse	udtMotor_Reversing	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtMotor_Reversing.HMI.bError	udtMotor_Reversing		45	0
+UI (1)/0	_mp_udtMotor_Reversing.HMI.bError	udtMotor_Reversing	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtMotor_Reversing.HMI.bInterlock	udtMotor_Reversing		45	0
+UI (1)/0	_mp_udtMotor_Reversing.HMI.bInterlock	udtMotor_Reversing	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_AnalogOutput.iMode	udtHMI_AnalogOutput		45	0
+UI (1)/0	_mp_udtHMI_AnalogOutput.iMode	udtHMI_AnalogOutput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_AnalogOutput.iErrorCode	udtHMI_AnalogOutput		45	0
+UI (1)/0	_mp_udtHMI_AnalogOutput.iErrorCode	udtHMI_AnalogOutput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_AnalogOutput.rValue	udtHMI_AnalogOutput		45	0
+UI (1)/0	_mp_udtHMI_AnalogOutput.rValue	udtHMI_AnalogOutput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_AnalogOutput.rAutoValue	udtHMI_AnalogOutput		45	0
+UI (1)/0	_mp_udtHMI_AnalogOutput.rAutoValue	udtHMI_AnalogOutput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_AnalogOutput.rManualValue	udtHMI_AnalogOutput		45	0
+UI (1)/0	_mp_udtHMI_AnalogOutput.rManualValue	udtHMI_AnalogOutput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_AnalogOutput.rEstopValue	udtHMI_AnalogOutput		45	0
+UI (1)/0	_mp_udtHMI_AnalogOutput.rEstopValue	udtHMI_AnalogOutput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_AnalogOutput.bPB_ResetError	udtHMI_AnalogOutput		45	0
+UI (1)/0	_mp_udtHMI_AnalogOutput.bPB_ResetError	udtHMI_AnalogOutput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_AnalogOutput.bPBEN_ResetError	udtHMI_AnalogOutput		45	0
+UI (1)/0	_mp_udtHMI_AnalogOutput.bPBEN_ResetError	udtHMI_AnalogOutput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_AnalogOutput.bError	udtHMI_AnalogOutput		45	0
+UI (1)/0	_mp_udtHMI_AnalogOutput.bError	udtHMI_AnalogOutput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_AnalogOutput.bInterlock	udtHMI_AnalogOutput		45	0
+UI (1)/0	_mp_udtHMI_AnalogOutput.bInterlock	udtHMI_AnalogOutput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_AnalogOutput.iEstopFunction	udtHMI_AnalogOutput		45	0
+UI (1)/0	_mp_udtHMI_AnalogOutput.iEstopFunction	udtHMI_AnalogOutput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtAnalogInput.HMI.iMode	udtAnalogInput		45	0
+UI (1)/0	_mp_udtAnalogInput.HMI.iMode	udtAnalogInput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtAnalogInput.HMI.iErrorCode	udtAnalogInput		45	0
+UI (1)/0	_mp_udtAnalogInput.HMI.iErrorCode	udtAnalogInput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtAnalogInput.HMI.iStatus	udtAnalogInput		45	0
+UI (1)/0	_mp_udtAnalogInput.HMI.iStatus	udtAnalogInput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtAnalogInput.HMI.rActiveValue	udtAnalogInput		45	0
+UI (1)/0	_mp_udtAnalogInput.HMI.rActiveValue	udtAnalogInput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtAnalogInput.HMI.rInputValue	udtAnalogInput		45	0
+UI (1)/0	_mp_udtAnalogInput.HMI.rInputValue	udtAnalogInput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtAnalogInput.HMI.rManualValue	udtAnalogInput		45	0
+UI (1)/0	_mp_udtAnalogInput.HMI.rManualValue	udtAnalogInput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtAnalogInput.HMI.bPB_ResetError	udtAnalogInput		45	0
+UI (1)/0	_mp_udtAnalogInput.HMI.bPB_ResetError	udtAnalogInput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtAnalogInput.HMI.bPBEN_ResetError	udtAnalogInput		45	0
+UI (1)/0	_mp_udtAnalogInput.HMI.bPBEN_ResetError	udtAnalogInput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtAnalogInput.HMI.bError	udtAnalogInput		45	0
+UI (1)/0	_mp_udtAnalogInput.HMI.bError	udtAnalogInput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_AnalogValveControl.iMode	udtHMI_AnalogValveControl		45	0
+UI (1)/0	_mp_udtHMI_AnalogValveControl.iMode	udtHMI_AnalogValveControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_AnalogValveControl.iErrorCode	udtHMI_AnalogValveControl		45	0
+UI (1)/0	_mp_udtHMI_AnalogValveControl.iErrorCode	udtHMI_AnalogValveControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_AnalogValveControl.iStatus	udtHMI_AnalogValveControl		45	0
+UI (1)/0	_mp_udtHMI_AnalogValveControl.iStatus	udtHMI_AnalogValveControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_AnalogValveControl.rManualSP	udtHMI_AnalogValveControl		45	0
+UI (1)/0	_mp_udtHMI_AnalogValveControl.rManualSP	udtHMI_AnalogValveControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_AnalogValveControl.rAutoSP	udtHMI_AnalogValveControl		45	0
+UI (1)/0	_mp_udtHMI_AnalogValveControl.rAutoSP	udtHMI_AnalogValveControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_AnalogValveControl.rEstopSP	udtHMI_AnalogValveControl		45	0
+UI (1)/0	_mp_udtHMI_AnalogValveControl.rEstopSP	udtHMI_AnalogValveControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_AnalogValveControl.rActual	udtHMI_AnalogValveControl		45	0
+UI (1)/0	_mp_udtHMI_AnalogValveControl.rActual	udtHMI_AnalogValveControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_AnalogValveControl.bPB_ResetError	udtHMI_AnalogValveControl		45	0
+UI (1)/0	_mp_udtHMI_AnalogValveControl.bPB_ResetError	udtHMI_AnalogValveControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_AnalogValveControl.bPBEN_ResetError	udtHMI_AnalogValveControl		45	0
+UI (1)/0	_mp_udtHMI_AnalogValveControl.bPBEN_ResetError	udtHMI_AnalogValveControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_AnalogValveControl.bError	udtHMI_AnalogValveControl		45	0
+UI (1)/0	_mp_udtHMI_AnalogValveControl.bError	udtHMI_AnalogValveControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_AnalogValveControl.bInterlock	udtHMI_AnalogValveControl		45	0
+UI (1)/0	_mp_udtHMI_AnalogValveControl.bInterlock	udtHMI_AnalogValveControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_AnalogValveControl.iEstopFunction	udtHMI_AnalogValveControl		45	0
+UI (1)/0	_mp_udtHMI_AnalogValveControl.iEstopFunction	udtHMI_AnalogValveControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_ValveControl.iMode	udtHMI_ValveControl		45	0
+UI (1)/0	_mp_udtHMI_ValveControl.iMode	udtHMI_ValveControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_ValveControl.iErrorCode	udtHMI_ValveControl		45	0
+UI (1)/0	_mp_udtHMI_ValveControl.iErrorCode	udtHMI_ValveControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_ValveControl.iStatus	udtHMI_ValveControl		45	0
+UI (1)/0	_mp_udtHMI_ValveControl.iStatus	udtHMI_ValveControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_ValveControl.bPB_ResetError	udtHMI_ValveControl		45	0
+UI (1)/0	_mp_udtHMI_ValveControl.bPB_ResetError	udtHMI_ValveControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_ValveControl.bPB_Home	udtHMI_ValveControl		45	0
+UI (1)/0	_mp_udtHMI_ValveControl.bPB_Home	udtHMI_ValveControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_ValveControl.bPB_Work	udtHMI_ValveControl		45	0
+UI (1)/0	_mp_udtHMI_ValveControl.bPB_Work	udtHMI_ValveControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_ValveControl.bPBEN_ResetError	udtHMI_ValveControl		45	0
+UI (1)/0	_mp_udtHMI_ValveControl.bPBEN_ResetError	udtHMI_ValveControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_ValveControl.bPBEN_Home	udtHMI_ValveControl		45	0
+UI (1)/0	_mp_udtHMI_ValveControl.bPBEN_Home	udtHMI_ValveControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_ValveControl.bPBEN_Work	udtHMI_ValveControl		45	0
+UI (1)/0	_mp_udtHMI_ValveControl.bPBEN_Work	udtHMI_ValveControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_ValveControl.bHomeOn	udtHMI_ValveControl		45	0
+UI (1)/0	_mp_udtHMI_ValveControl.bHomeOn	udtHMI_ValveControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_ValveControl.bWorkOn	udtHMI_ValveControl		45	0
+UI (1)/0	_mp_udtHMI_ValveControl.bWorkOn	udtHMI_ValveControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_ValveControl.bSignalHome	udtHMI_ValveControl		45	0
+UI (1)/0	_mp_udtHMI_ValveControl.bSignalHome	udtHMI_ValveControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_ValveControl.bSignalWork	udtHMI_ValveControl		45	0
+UI (1)/0	_mp_udtHMI_ValveControl.bSignalWork	udtHMI_ValveControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_ValveControl.bError	udtHMI_ValveControl		45	0
+UI (1)/0	_mp_udtHMI_ValveControl.bError	udtHMI_ValveControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_ValveControl.bInterlock	udtHMI_ValveControl		45	0
+UI (1)/0	_mp_udtHMI_ValveControl.bInterlock	udtHMI_ValveControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtAnalogValveControl.HMI.iMode	udtAnalogValveControl		45	0
+UI (1)/0	_mp_udtAnalogValveControl.HMI.iMode	udtAnalogValveControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtAnalogValveControl.HMI.iErrorCode	udtAnalogValveControl		45	0
+UI (1)/0	_mp_udtAnalogValveControl.HMI.iErrorCode	udtAnalogValveControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtAnalogValveControl.HMI.iStatus	udtAnalogValveControl		45	0
+UI (1)/0	_mp_udtAnalogValveControl.HMI.iStatus	udtAnalogValveControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtAnalogValveControl.HMI.rManualSP	udtAnalogValveControl		45	0
+UI (1)/0	_mp_udtAnalogValveControl.HMI.rManualSP	udtAnalogValveControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtAnalogValveControl.HMI.rAutoSP	udtAnalogValveControl		45	0
+UI (1)/0	_mp_udtAnalogValveControl.HMI.rAutoSP	udtAnalogValveControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtAnalogValveControl.HMI.rEstopSP	udtAnalogValveControl		45	0
+UI (1)/0	_mp_udtAnalogValveControl.HMI.rEstopSP	udtAnalogValveControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtAnalogValveControl.HMI.rActual	udtAnalogValveControl		45	0
+UI (1)/0	_mp_udtAnalogValveControl.HMI.rActual	udtAnalogValveControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtAnalogValveControl.HMI.bPB_ResetError	udtAnalogValveControl		45	0
+UI (1)/0	_mp_udtAnalogValveControl.HMI.bPB_ResetError	udtAnalogValveControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtAnalogValveControl.HMI.bPBEN_ResetError	udtAnalogValveControl		45	0
+UI (1)/0	_mp_udtAnalogValveControl.HMI.bPBEN_ResetError	udtAnalogValveControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtAnalogValveControl.HMI.bError	udtAnalogValveControl		45	0
+UI (1)/0	_mp_udtAnalogValveControl.HMI.bError	udtAnalogValveControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtAnalogValveControl.HMI.bInterlock	udtAnalogValveControl		45	0
+UI (1)/0	_mp_udtAnalogValveControl.HMI.bInterlock	udtAnalogValveControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtAnalogValveControl.HMI.iEstopFunction	udtAnalogValveControl		45	0
+UI (1)/0	_mp_udtAnalogValveControl.HMI.iEstopFunction	udtAnalogValveControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtValve.HMI.iMode	udtValve		45	0
+UI (1)/0	_mp_udtValve.HMI.iMode	udtValve	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtValve.HMI.iErrorCode	udtValve		45	0
+UI (1)/0	_mp_udtValve.HMI.iErrorCode	udtValve	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtValve.HMI.iStatus	udtValve		45	0
+UI (1)/0	_mp_udtValve.HMI.iStatus	udtValve	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtValve.HMI.bPB_ResetError	udtValve		45	0
+UI (1)/0	_mp_udtValve.HMI.bPB_ResetError	udtValve	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtValve.HMI.bPB_Home	udtValve		45	0
+UI (1)/0	_mp_udtValve.HMI.bPB_Home	udtValve	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtValve.HMI.bPB_Work	udtValve		45	0
+UI (1)/0	_mp_udtValve.HMI.bPB_Work	udtValve	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtValve.HMI.bPBEN_ResetError	udtValve		45	0
+UI (1)/0	_mp_udtValve.HMI.bPBEN_ResetError	udtValve	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtValve.HMI.bPBEN_Home	udtValve		45	0
+UI (1)/0	_mp_udtValve.HMI.bPBEN_Home	udtValve	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtValve.HMI.bPBEN_Work	udtValve		45	0
+UI (1)/0	_mp_udtValve.HMI.bPBEN_Work	udtValve	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtValve.HMI.bHomeOn	udtValve		45	0
+UI (1)/0	_mp_udtValve.HMI.bHomeOn	udtValve	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtValve.HMI.bWorkOn	udtValve		45	0
+UI (1)/0	_mp_udtValve.HMI.bWorkOn	udtValve	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtValve.HMI.bSignalHome	udtValve		45	0
+UI (1)/0	_mp_udtValve.HMI.bSignalHome	udtValve	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtValve.HMI.bSignalWork	udtValve		45	0
+UI (1)/0	_mp_udtValve.HMI.bSignalWork	udtValve	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtValve.HMI.bError	udtValve		45	0
+UI (1)/0	_mp_udtValve.HMI.bError	udtValve	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtValve.HMI.bInterlock	udtValve		45	0
+UI (1)/0	_mp_udtValve.HMI.bInterlock	udtValve	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtVFD.HMI.iMode	udtVFD		45	0
+UI (1)/0	_mp_udtVFD.HMI.iMode	udtVFD	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtVFD.HMI.iErrorCode	udtVFD		45	0
+UI (1)/0	_mp_udtVFD.HMI.iErrorCode	udtVFD	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtVFD.HMI.iStatus	udtVFD		45	0
+UI (1)/0	_mp_udtVFD.HMI.iStatus	udtVFD	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtVFD.HMI.rManualSpeedSP	udtVFD		45	0
+UI (1)/0	_mp_udtVFD.HMI.rManualSpeedSP	udtVFD	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtVFD.HMI.rAutoSpeedSP	udtVFD		45	0
+UI (1)/0	_mp_udtVFD.HMI.rAutoSpeedSP	udtVFD	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtVFD.HMI.rActualSpeed	udtVFD		45	0
+UI (1)/0	_mp_udtVFD.HMI.rActualSpeed	udtVFD	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtVFD.HMI.rActualCurrent	udtVFD		45	0
+UI (1)/0	_mp_udtVFD.HMI.rActualCurrent	udtVFD	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtVFD.HMI.rActualPower	udtVFD		45	0
+UI (1)/0	_mp_udtVFD.HMI.rActualPower	udtVFD	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtVFD.HMI.bPB_ResetError	udtVFD		45	0
+UI (1)/0	_mp_udtVFD.HMI.bPB_ResetError	udtVFD	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtVFD.HMI.bPB_Forward	udtVFD		45	0
+UI (1)/0	_mp_udtVFD.HMI.bPB_Forward	udtVFD	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtVFD.HMI.bPB_Reverse	udtVFD		45	0
+UI (1)/0	_mp_udtVFD.HMI.bPB_Reverse	udtVFD	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtVFD.HMI.bPB_Stop	udtVFD		45	0
+UI (1)/0	_mp_udtVFD.HMI.bPB_Stop	udtVFD	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtVFD.HMI.bPBEN_ResetError	udtVFD		45	0
+UI (1)/0	_mp_udtVFD.HMI.bPBEN_ResetError	udtVFD	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtVFD.HMI.bPBEN_Forward	udtVFD		45	0
+UI (1)/0	_mp_udtVFD.HMI.bPBEN_Forward	udtVFD	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtVFD.HMI.bPBEN_Reverse	udtVFD		45	0
+UI (1)/0	_mp_udtVFD.HMI.bPBEN_Reverse	udtVFD	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtVFD.HMI.bPBEN_Stop	udtVFD		45	0
+UI (1)/0	_mp_udtVFD.HMI.bPBEN_Stop	udtVFD	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtVFD.HMI.bForwardOn	udtVFD		45	0
+UI (1)/0	_mp_udtVFD.HMI.bForwardOn	udtVFD	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtVFD.HMI.bReverseOn	udtVFD		45	0
+UI (1)/0	_mp_udtVFD.HMI.bReverseOn	udtVFD	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtVFD.HMI.bSignalForward	udtVFD		45	0
+UI (1)/0	_mp_udtVFD.HMI.bSignalForward	udtVFD	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtVFD.HMI.bSignalReverse	udtVFD		45	0
+UI (1)/0	_mp_udtVFD.HMI.bSignalReverse	udtVFD	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtVFD.HMI.bError	udtVFD		45	0
+UI (1)/0	_mp_udtVFD.HMI.bError	udtVFD	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtVFD.HMI.bInterlock	udtVFD		45	0
+UI (1)/0	_mp_udtVFD.HMI.bInterlock	udtVFD	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtAnalogOutput.HMI.iMode	udtAnalogOutput		45	0
+UI (1)/0	_mp_udtAnalogOutput.HMI.iMode	udtAnalogOutput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtAnalogOutput.HMI.iErrorCode	udtAnalogOutput		45	0
+UI (1)/0	_mp_udtAnalogOutput.HMI.iErrorCode	udtAnalogOutput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtAnalogOutput.HMI.rValue	udtAnalogOutput		45	0
+UI (1)/0	_mp_udtAnalogOutput.HMI.rValue	udtAnalogOutput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtAnalogOutput.HMI.rAutoValue	udtAnalogOutput		45	0
+UI (1)/0	_mp_udtAnalogOutput.HMI.rAutoValue	udtAnalogOutput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtAnalogOutput.HMI.rManualValue	udtAnalogOutput		45	0
+UI (1)/0	_mp_udtAnalogOutput.HMI.rManualValue	udtAnalogOutput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtAnalogOutput.HMI.rEstopValue	udtAnalogOutput		45	0
+UI (1)/0	_mp_udtAnalogOutput.HMI.rEstopValue	udtAnalogOutput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtAnalogOutput.HMI.bPB_ResetError	udtAnalogOutput		45	0
+UI (1)/0	_mp_udtAnalogOutput.HMI.bPB_ResetError	udtAnalogOutput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtAnalogOutput.HMI.bPBEN_ResetError	udtAnalogOutput		45	0
+UI (1)/0	_mp_udtAnalogOutput.HMI.bPBEN_ResetError	udtAnalogOutput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtAnalogOutput.HMI.bError	udtAnalogOutput		45	0
+UI (1)/0	_mp_udtAnalogOutput.HMI.bError	udtAnalogOutput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtAnalogOutput.HMI.bInterlock	udtAnalogOutput		45	0
+UI (1)/0	_mp_udtAnalogOutput.HMI.bInterlock	udtAnalogOutput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtAnalogOutput.HMI.iEstopFunction	udtAnalogOutput		45	0
+UI (1)/0	_mp_udtAnalogOutput.HMI.iEstopFunction	udtAnalogOutput	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtSystem.HMI.iMode	udtSystem		45	0
+UI (1)/0	_mp_udtSystem.HMI.iMode	udtSystem	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtSystem.HMI.bEStop	udtSystem		45	0
+UI (1)/0	_mp_udtSystem.HMI.bEStop	udtSystem	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtSystem.HMI.bError	udtSystem		45	0
+UI (1)/0	_mp_udtSystem.HMI.bError	udtSystem	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtSystem.HMI.bAuto	udtSystem		45	0
+UI (1)/0	_mp_udtSystem.HMI.bAuto	udtSystem	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtSystem.HMI.bIndependentEnable	udtSystem		45	0
+UI (1)/0	_mp_udtSystem.HMI.bIndependentEnable	udtSystem	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtSystem.HMI.bPB_ResetError	udtSystem		45	0
+UI (1)/0	_mp_udtSystem.HMI.bPB_ResetError	udtSystem	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_Interlock.abInterlocks	udtHMI_Interlock		45	0
+UI (1)/0	_mp_udtHMI_Interlock.abInterlocks	udtHMI_Interlock	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_Interlock.asInterlockNames	udtHMI_Interlock		45	0
+UI (1)/0	_mp_udtHMI_Interlock.asInterlockNames	udtHMI_Interlock	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_Interlock.bInterlockOk	udtHMI_Interlock		45	0
+UI (1)/0	_mp_udtHMI_Interlock.bInterlockOk	udtHMI_Interlock	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtInterlock.HMI.abInterlocks	udtInterlock		45	0
+UI (1)/0	_mp_udtInterlock.HMI.abInterlocks	udtInterlock	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtInterlock.HMI.asInterlockNames	udtInterlock		45	0
+UI (1)/0	_mp_udtInterlock.HMI.asInterlockNames	udtInterlock	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtInterlock.HMI.bInterlockOk	udtInterlock		45	0
+UI (1)/0	_mp_udtInterlock.HMI.bInterlockOk	udtInterlock	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_PIDControlParameters.rProportionalGain	udtHMI_PIDControlParameters		45	0
+UI (1)/0	_mp_udtHMI_PIDControlParameters.rProportionalGain	udtHMI_PIDControlParameters	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_PIDControlParameters.rIntegralTime	udtHMI_PIDControlParameters		45	0
+UI (1)/0	_mp_udtHMI_PIDControlParameters.rIntegralTime	udtHMI_PIDControlParameters	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_PIDControlParameters.rDerivativeTime	udtHMI_PIDControlParameters		45	0
+UI (1)/0	_mp_udtHMI_PIDControlParameters.rDerivativeTime	udtHMI_PIDControlParameters	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_PIDControlParameters.rProportionalWeight	udtHMI_PIDControlParameters		45	0
+UI (1)/0	_mp_udtHMI_PIDControlParameters.rProportionalWeight	udtHMI_PIDControlParameters	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_PIDControlParameters.rDerivativeWeight	udtHMI_PIDControlParameters		45	0
+UI (1)/0	_mp_udtHMI_PIDControlParameters.rDerivativeWeight	udtHMI_PIDControlParameters	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_PIDInterface.iMode	udtHMI_PIDInterface		45	0
+UI (1)/0	_mp_udtHMI_PIDInterface.iMode	udtHMI_PIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_PIDInterface.iPIDMode	udtHMI_PIDInterface		45	0
+UI (1)/0	_mp_udtHMI_PIDInterface.iPIDMode	udtHMI_PIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_PIDInterface.iErrorCode	udtHMI_PIDInterface		45	0
+UI (1)/0	_mp_udtHMI_PIDInterface.iErrorCode	udtHMI_PIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_PIDInterface.iEstopFunction	udtHMI_PIDInterface		45	0
+UI (1)/0	_mp_udtHMI_PIDInterface.iEstopFunction	udtHMI_PIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_PIDInterface.rManualSP	udtHMI_PIDInterface		45	0
+UI (1)/0	_mp_udtHMI_PIDInterface.rManualSP	udtHMI_PIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_PIDInterface.rAutoSP	udtHMI_PIDInterface		45	0
+UI (1)/0	_mp_udtHMI_PIDInterface.rAutoSP	udtHMI_PIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_PIDInterface.rActualInput	udtHMI_PIDInterface		45	0
+UI (1)/0	_mp_udtHMI_PIDInterface.rActualInput	udtHMI_PIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_PIDInterface.wActualInputPeripheral	udtHMI_PIDInterface		45	0
+UI (1)/0	_mp_udtHMI_PIDInterface.wActualInputPeripheral	udtHMI_PIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_PIDInterface.rOutput	udtHMI_PIDInterface		45	0
+UI (1)/0	_mp_udtHMI_PIDInterface.rOutput	udtHMI_PIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_PIDInterface.wOutputPeripheral	udtHMI_PIDInterface		45	0
+UI (1)/0	_mp_udtHMI_PIDInterface.wOutputPeripheral	udtHMI_PIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_PIDInterface.bPB_ResetError	udtHMI_PIDInterface		45	0
+UI (1)/0	_mp_udtHMI_PIDInterface.bPB_ResetError	udtHMI_PIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_PIDInterface.bPB_Pretune	udtHMI_PIDInterface		45	0
+UI (1)/0	_mp_udtHMI_PIDInterface.bPB_Pretune	udtHMI_PIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_PIDInterface.bPB_FineTune	udtHMI_PIDInterface		45	0
+UI (1)/0	_mp_udtHMI_PIDInterface.bPB_FineTune	udtHMI_PIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_PIDInterface.bPB_AutomaticMode	udtHMI_PIDInterface		45	0
+UI (1)/0	_mp_udtHMI_PIDInterface.bPB_AutomaticMode	udtHMI_PIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_PIDInterface.bPB_ManualMode	udtHMI_PIDInterface		45	0
+UI (1)/0	_mp_udtHMI_PIDInterface.bPB_ManualMode	udtHMI_PIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_PIDInterface.bPB_ManualTuning	udtHMI_PIDInterface		45	0
+UI (1)/0	_mp_udtHMI_PIDInterface.bPB_ManualTuning	udtHMI_PIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_PIDInterface.bTOG_ManualTuning	udtHMI_PIDInterface		45	0
+UI (1)/0	_mp_udtHMI_PIDInterface.bTOG_ManualTuning	udtHMI_PIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_PIDInterface.bPBEN_ResetError	udtHMI_PIDInterface		45	0
+UI (1)/0	_mp_udtHMI_PIDInterface.bPBEN_ResetError	udtHMI_PIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_PIDInterface.bPBEN_Pretune	udtHMI_PIDInterface		45	0
+UI (1)/0	_mp_udtHMI_PIDInterface.bPBEN_Pretune	udtHMI_PIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_PIDInterface.bPBEN_FineTune	udtHMI_PIDInterface		45	0
+UI (1)/0	_mp_udtHMI_PIDInterface.bPBEN_FineTune	udtHMI_PIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_PIDInterface.bPBEN_AutomaticMode	udtHMI_PIDInterface		45	0
+UI (1)/0	_mp_udtHMI_PIDInterface.bPBEN_AutomaticMode	udtHMI_PIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_PIDInterface.bPBEN_ManualMode	udtHMI_PIDInterface		45	0
+UI (1)/0	_mp_udtHMI_PIDInterface.bPBEN_ManualMode	udtHMI_PIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_PIDInterface.bError	udtHMI_PIDInterface		45	0
+UI (1)/0	_mp_udtHMI_PIDInterface.bError	udtHMI_PIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_PIDInterface.bErrorAck	udtHMI_PIDInterface		45	0
+UI (1)/0	_mp_udtHMI_PIDInterface.bErrorAck	udtHMI_PIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_PIDInterface.PID_ControlParameters.rProportionalGain	udtHMI_PIDInterface		45	0
+UI (1)/0	_mp_udtHMI_PIDInterface.PID_ControlParameters.rProportionalGain	udtHMI_PIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_PIDInterface.PID_ControlParameters.rIntegralTime	udtHMI_PIDInterface		45	0
+UI (1)/0	_mp_udtHMI_PIDInterface.PID_ControlParameters.rIntegralTime	udtHMI_PIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_PIDInterface.PID_ControlParameters.rDerivativeTime	udtHMI_PIDInterface		45	0
+UI (1)/0	_mp_udtHMI_PIDInterface.PID_ControlParameters.rDerivativeTime	udtHMI_PIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_PIDInterface.PID_ControlParameters.rProportionalWeight	udtHMI_PIDInterface		45	0
+UI (1)/0	_mp_udtHMI_PIDInterface.PID_ControlParameters.rProportionalWeight	udtHMI_PIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_PIDInterface.PID_ControlParameters.rDerivativeWeight	udtHMI_PIDInterface		45	0
+UI (1)/0	_mp_udtHMI_PIDInterface.PID_ControlParameters.rDerivativeWeight	udtHMI_PIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_PIDInterface.rEstopValue	udtHMI_PIDInterface		45	0
+UI (1)/0	_mp_udtHMI_PIDInterface.rEstopValue	udtHMI_PIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_SystemControl.iMode	udtHMI_SystemControl		45	0
+UI (1)/0	_mp_udtHMI_SystemControl.iMode	udtHMI_SystemControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_SystemControl.bEStop	udtHMI_SystemControl		45	0
+UI (1)/0	_mp_udtHMI_SystemControl.bEStop	udtHMI_SystemControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_SystemControl.bError	udtHMI_SystemControl		45	0
+UI (1)/0	_mp_udtHMI_SystemControl.bError	udtHMI_SystemControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_SystemControl.bAuto	udtHMI_SystemControl		45	0
+UI (1)/0	_mp_udtHMI_SystemControl.bAuto	udtHMI_SystemControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_SystemControl.bIndependentEnable	udtHMI_SystemControl		45	0
+UI (1)/0	_mp_udtHMI_SystemControl.bIndependentEnable	udtHMI_SystemControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtHMI_SystemControl.bPB_ResetError	udtHMI_SystemControl		45	0
+UI (1)/0	_mp_udtHMI_SystemControl.bPB_ResetError	udtHMI_SystemControl	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtPIDInterface.HMI.iMode	udtPIDInterface		45	0
+UI (1)/0	_mp_udtPIDInterface.HMI.iMode	udtPIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtPIDInterface.HMI.iPIDMode	udtPIDInterface		45	0
+UI (1)/0	_mp_udtPIDInterface.HMI.iPIDMode	udtPIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtPIDInterface.HMI.iErrorCode	udtPIDInterface		45	0
+UI (1)/0	_mp_udtPIDInterface.HMI.iErrorCode	udtPIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtPIDInterface.HMI.iEstopFunction	udtPIDInterface		45	0
+UI (1)/0	_mp_udtPIDInterface.HMI.iEstopFunction	udtPIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtPIDInterface.HMI.rManualSP	udtPIDInterface		45	0
+UI (1)/0	_mp_udtPIDInterface.HMI.rManualSP	udtPIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtPIDInterface.HMI.rAutoSP	udtPIDInterface		45	0
+UI (1)/0	_mp_udtPIDInterface.HMI.rAutoSP	udtPIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtPIDInterface.HMI.rActualInput	udtPIDInterface		45	0
+UI (1)/0	_mp_udtPIDInterface.HMI.rActualInput	udtPIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtPIDInterface.HMI.wActualInputPeripheral	udtPIDInterface		45	0
+UI (1)/0	_mp_udtPIDInterface.HMI.wActualInputPeripheral	udtPIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtPIDInterface.HMI.rOutput	udtPIDInterface		45	0
+UI (1)/0	_mp_udtPIDInterface.HMI.rOutput	udtPIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtPIDInterface.HMI.wOutputPeripheral	udtPIDInterface		45	0
+UI (1)/0	_mp_udtPIDInterface.HMI.wOutputPeripheral	udtPIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtPIDInterface.HMI.bPB_ResetError	udtPIDInterface		45	0
+UI (1)/0	_mp_udtPIDInterface.HMI.bPB_ResetError	udtPIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtPIDInterface.HMI.bPB_Pretune	udtPIDInterface		45	0
+UI (1)/0	_mp_udtPIDInterface.HMI.bPB_Pretune	udtPIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtPIDInterface.HMI.bPB_FineTune	udtPIDInterface		45	0
+UI (1)/0	_mp_udtPIDInterface.HMI.bPB_FineTune	udtPIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtPIDInterface.HMI.bPB_AutomaticMode	udtPIDInterface		45	0
+UI (1)/0	_mp_udtPIDInterface.HMI.bPB_AutomaticMode	udtPIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtPIDInterface.HMI.bPB_ManualMode	udtPIDInterface		45	0
+UI (1)/0	_mp_udtPIDInterface.HMI.bPB_ManualMode	udtPIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtPIDInterface.HMI.bPB_ManualTuning	udtPIDInterface		45	0
+UI (1)/0	_mp_udtPIDInterface.HMI.bPB_ManualTuning	udtPIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtPIDInterface.HMI.bTOG_ManualTuning	udtPIDInterface		45	0
+UI (1)/0	_mp_udtPIDInterface.HMI.bTOG_ManualTuning	udtPIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtPIDInterface.HMI.bPBEN_ResetError	udtPIDInterface		45	0
+UI (1)/0	_mp_udtPIDInterface.HMI.bPBEN_ResetError	udtPIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtPIDInterface.HMI.bPBEN_Pretune	udtPIDInterface		45	0
+UI (1)/0	_mp_udtPIDInterface.HMI.bPBEN_Pretune	udtPIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtPIDInterface.HMI.bPBEN_FineTune	udtPIDInterface		45	0
+UI (1)/0	_mp_udtPIDInterface.HMI.bPBEN_FineTune	udtPIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtPIDInterface.HMI.bPBEN_AutomaticMode	udtPIDInterface		45	0
+UI (1)/0	_mp_udtPIDInterface.HMI.bPBEN_AutomaticMode	udtPIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtPIDInterface.HMI.bPBEN_ManualMode	udtPIDInterface		45	0
+UI (1)/0	_mp_udtPIDInterface.HMI.bPBEN_ManualMode	udtPIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtPIDInterface.HMI.bError	udtPIDInterface		45	0
+UI (1)/0	_mp_udtPIDInterface.HMI.bError	udtPIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtPIDInterface.HMI.bErrorAck	udtPIDInterface		45	0
+UI (1)/0	_mp_udtPIDInterface.HMI.bErrorAck	udtPIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtPIDInterface.HMI.PID_ControlParameters.rProportionalGain	udtPIDInterface		45	0
+UI (1)/0	_mp_udtPIDInterface.HMI.PID_ControlParameters.rProportionalGain	udtPIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtPIDInterface.HMI.PID_ControlParameters.rIntegralTime	udtPIDInterface		45	0
+UI (1)/0	_mp_udtPIDInterface.HMI.PID_ControlParameters.rIntegralTime	udtPIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtPIDInterface.HMI.PID_ControlParameters.rDerivativeTime	udtPIDInterface		45	0
+UI (1)/0	_mp_udtPIDInterface.HMI.PID_ControlParameters.rDerivativeTime	udtPIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtPIDInterface.HMI.PID_ControlParameters.rProportionalWeight	udtPIDInterface		45	0
+UI (1)/0	_mp_udtPIDInterface.HMI.PID_ControlParameters.rProportionalWeight	udtPIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtPIDInterface.HMI.PID_ControlParameters.rDerivativeWeight	udtPIDInterface		45	0
+UI (1)/0	_mp_udtPIDInterface.HMI.PID_ControlParameters.rDerivativeWeight	udtPIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+UI (1)/0	_mp_udtPIDInterface.HMI.rEstopValue	udtPIDInterface		45	0
+UI (1)/0	_mp_udtPIDInterface.HMI.rEstopValue	udtPIDInterface	1	15		_ValueArchive_0	0	0	0	0	01.01.1970 00:00:00.000	0	0
+# ascii dump of database
+
+# Datapoint/DpId
+DpName	TypeName	ID
+_ds_udtHMI_AnalogInput	_DynamicDptSettings	489
+_ds_udtHMI_AnalogOutput	_DynamicDptSettings	492
+_ds_udtHMI_MotorControl	_DynamicDptSettings	496
+_ds_udtHMI_Interlock	_DynamicDptSettings	500
+_ds_udtHMI_ValveControl	_DynamicDptSettings	587
+_ds_udtHMI_AnalogValveControl	_DynamicDptSettings	588
+_ds_udtHMI_SystemControl	_DynamicDptSettings	589
+_ds_udtHMI_VFD_Control	_DynamicDptSettings	590
+_dt_udtHMI_AnalogInput	_DynamicDatapoints	596
+_dt_udtHMI_VFD_Control	_DynamicDatapoints	603
+_dt_udtError_Motor	_DynamicDatapoints	635
+_dt_udtHMI_MotorControl	_DynamicDatapoints	637
+_dt_udtMotor_Reversing	_DynamicDatapoints	639
+_dt_udtError_AnalogInput	_DynamicDatapoints	641
+_dt_udtHMI_AnalogOutput	_DynamicDatapoints	647
+_dt_udtAnalogInput	_DynamicDatapoints	650
+_dt_udtHMI_AnalogValveControl	_DynamicDatapoints	656
+_dt_udtHMI_ValveControl	_DynamicDatapoints	658
+_dt_udtError_AnalogValve	_DynamicDatapoints	660
+_dt_udtAnalogValveControl	_DynamicDatapoints	662
+_dt_udtError_AnalogOutput	_DynamicDatapoints	664
+_dt_udtError_Valve	_DynamicDatapoints	668
+_dt_udtValve	_DynamicDatapoints	670
+_dt_udtError_VFD	_DynamicDatapoints	672
+_ds_udtError_VFD	_DynamicDptSettings	673
+_dt_udtVFD	_DynamicDatapoints	675
+_dt_udtAnalogOutput	_DynamicDatapoints	680
+_ds_udtMotor_Reversing	_DynamicDptSettings	683
+_dt_udtSystem	_DynamicDatapoints	685
+_ds_udtAnalogValveControl	_DynamicDptSettings	688
+_ds_udtHMI_PIDInterface	_DynamicDptSettings	694
+_dt_udtHMI_Interlock	_DynamicDatapoints	700
+_dt_udtInterlock	_DynamicDatapoints	702
+_dt_udtHMI_PIDControlParameters	_DynamicDatapoints	704
+_dt_udtHMI_PIDInterface	_DynamicDatapoints	706
+_dt_udtHMI_SystemControl	_DynamicDatapoints	708
+_dt_udtPIDInterface	_DynamicDatapoints	710
+
+# DpValue
+Manager/User	ElementName	TypeName	_original.._value	_original.._status64	_original.._stime
+UI (1)/0	_ds_udtHMI_AnalogInput.symbols	_DynamicDptSettings	"/OpenLibrary/Faceplates/Icons/fpAnalogInput_Numeric.pnl"	0x8300000000000101	15.02.2017 23:51:01.952
+UI (1)/0	_ds_udtHMI_AnalogInput.symboldefault	_DynamicDptSettings	""	0x8300000000100101	15.02.2017 23:51:01.953
+UI (1)/0	_ds_udtHMI_AnalogInput.trendElements	_DynamicDptSettings		0x8300000000000101	15.02.2017 23:51:01.954
+UI (1)/0	_ds_udtHMI_AnalogOutput.symbols	_DynamicDptSettings	"/OpenLibrary/Faceplates/Icons/fpAnalogOutput.pnl"	0x8300000000000101	15.02.2017 23:09:28.447
+UI (1)/0	_ds_udtHMI_AnalogOutput.symboldefault	_DynamicDptSettings	""	0x8300000000100101	15.02.2017 23:09:28.448
+UI (1)/0	_ds_udtHMI_AnalogOutput.trendElements	_DynamicDptSettings		0x8300000000000101	15.02.2017 23:09:28.449
+UI (1)/0	_ds_udtHMI_MotorControl.symbols	_DynamicDptSettings	"/OpenLibrary/Faceplates/Icons/fpMotor_Motor_Horizontal.pnl", "/OpenLibrary/Faceplates/Icons/fpMotor_Motor_Vertical.pnl", "/OpenLibrary/Faceplates/Icons/fpMotor_Pump_Horizontal.pnl", "/OpenLibrary/Faceplates/Icons/fpMotor_Pump_Vertical.pnl"	0x8300000000000101	16.06.2017 13:58:50.062
+UI (1)/0	_ds_udtHMI_MotorControl.symboldefault	_DynamicDptSettings	"/OpenLibrary/Faceplates/Icons/fpMotor_Motor_Horizontal.pnl"	0x8300000000200101	16.06.2017 13:58:50.063
+UI (1)/0	_ds_udtHMI_MotorControl.trendElements	_DynamicDptSettings		0x8300000000000101	16.06.2017 13:58:50.064
+UI (1)/0	_ds_udtHMI_Interlock.symbols	_DynamicDptSettings	"/OpenLibrary/Faceplates/Icons/fpInterlockIcon.pnl"	0x8300000000000101	15.02.2017 20:38:42.044
+UI (1)/0	_ds_udtHMI_Interlock.symboldefault	_DynamicDptSettings	"/OpenLibrary/Faceplates/Icons/fpInterlockIcon.pnl"	0x8300000000300101	15.02.2017 20:38:42.045
+UI (1)/0	_ds_udtHMI_Interlock.trendElements	_DynamicDptSettings		0x8300000000000101	15.02.2017 20:38:42.046
+UI (1)/0	_ds_udtHMI_ValveControl.symbols	_DynamicDptSettings	"/OpenLibrary/Faceplates/Icons/fpValve_SlideGate_Horizontal.pnl", "/OpenLibrary/Faceplates/Icons/fpValve_SlideGate_Vertical.pnl", "/OpenLibrary/Faceplates/Icons/fpValve_Solenoid_Horizontal.pnl", "/OpenLibrary/Faceplates/Icons/fpValve_Solenoid_Vertical.pnl"	0x8300000000000101	15.02.2017 23:50:28.912
+UI (1)/0	_ds_udtHMI_ValveControl.symboldefault	_DynamicDptSettings	"/OpenLibrary/Faceplates/Icons/fpValve_Solenoid_Horizontal.pnl"	0x8300000000200101	15.02.2017 23:50:28.913
+UI (1)/0	_ds_udtHMI_ValveControl.trendElements	_DynamicDptSettings		0x8300000000000101	15.02.2017 23:50:28.913
+UI (1)/0	_ds_udtHMI_AnalogValveControl.symbols	_DynamicDptSettings	"/OpenLibrary/Faceplates/Icons/fpValve_Analog_Horizontal.pnl", "/OpenLibrary/Faceplates/Icons/fpValve_Analog_Vertical.pnl"	0x8300000000000101	05.06.2017 20:56:42.169
+UI (1)/0	_ds_udtHMI_AnalogValveControl.symboldefault	_DynamicDptSettings	"/OpenLibrary/Faceplates/Icons/fpValve_Analog_Horizontal.pnl"	0x8300000000000101	05.06.2017 20:56:42.169
+UI (1)/0	_ds_udtHMI_AnalogValveControl.trendElements	_DynamicDptSettings		0x8300000000000101	05.06.2017 20:56:42.170
+UI (1)/0	_ds_udtHMI_SystemControl.symbols	_DynamicDptSettings	"/OpenLibrary/Faceplates/Icons/fpSystemControl.pnl"	0x8300000000000101	15.02.2017 20:38:08.449
+UI (1)/0	_ds_udtHMI_SystemControl.symboldefault	_DynamicDptSettings	"/OpenLibrary/Faceplates/Icons/fpSystemControl.pnl"	0x8300000000100101	15.02.2017 20:38:08.450
+UI (1)/0	_ds_udtHMI_SystemControl.trendElements	_DynamicDptSettings		0x8300000000000101	15.02.2017 20:38:08.451
+UI (1)/0	_ds_udtHMI_VFD_Control.symbols	_DynamicDptSettings	"/OpenLibrary/Faceplates/Icons/fpVFD_Motor_Horizontal.pnl", "/OpenLibrary/Faceplates/Icons/fpVFD_Motor_Vertical.pnl"	0x8300000000000101	15.02.2017 23:21:51.519
+UI (1)/0	_ds_udtHMI_VFD_Control.symboldefault	_DynamicDptSettings	"/OpenLibrary/Faceplates/Icons/fpVFD_Motor_Horizontal.pnl"	0x8300000000000101	15.02.2017 23:21:51.520
+UI (1)/0	_ds_udtHMI_VFD_Control.trendElements	_DynamicDptSettings		0x8300000000000101	15.02.2017 23:21:51.521
+UI (1)/0	_dt_udtHMI_AnalogInput.Leaf	_DynamicDatapoints	"_mp_udtHMI_AnalogInput.iMode:_common", "_mp_udtHMI_AnalogInput.iErrorCode:_common", "_mp_udtHMI_AnalogInput.iStatus:_common", "_mp_udtHMI_AnalogInput.bPB_ResetError:_common", "_mp_udtHMI_AnalogInput.bPBEN_ResetError:_common", "_mp_udtHMI_AnalogInput.bError:_common", "_mp_udtHMI_AnalogInput.rActiveValue:_common", "_mp_udtHMI_AnalogInput.rInputValue:_common", "_mp_udtHMI_AnalogInput.rManualValue:_common", "_mp_udtHMI_AnalogInput.iMode:_archive", "_mp_udtHMI_AnalogInput.iErrorCode:_archive", "_mp_udtHMI_AnalogInput.iStatus:_archive", "_mp_udtHMI_AnalogInput.rActiveValue:_archive", "_mp_udtHMI_AnalogInput.rInputValue:_archive", "_mp_udtHMI_AnalogInput.rManualValue:_archive", "_mp_udtHMI_AnalogInput.bPB_ResetError:_archive", "_mp_udtHMI_AnalogInput.bPBEN_ResetError:_archive", "_mp_udtHMI_AnalogInput.bError:_archive"	0x8300000000000101	22.06.2017 13:51:48.190
+UI (1)/0	_dt_udtHMI_AnalogInput.DynamicAttribute	_DynamicDatapoints	"_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_common", "_da_common", "_da_common", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive"	0x8300000000000101	22.06.2017 13:51:48.190
+UI (1)/0	_dt_udtHMI_VFD_Control.Leaf	_DynamicDatapoints	"_mp_udtHMI_VFD_Control.iMode:_common", "_mp_udtHMI_VFD_Control.iErrorCode:_common", "_mp_udtHMI_VFD_Control.iStatus:_common", "_mp_udtHMI_VFD_Control.rManualSpeedSP:_common", "_mp_udtHMI_VFD_Control.rAutoSpeedSP:_common", "_mp_udtHMI_VFD_Control.rActualSpeed:_common", "_mp_udtHMI_VFD_Control.rActualCurrent:_common", "_mp_udtHMI_VFD_Control.rActualPower:_common", "_mp_udtHMI_VFD_Control.bPB_ResetError:_common", "_mp_udtHMI_VFD_Control.bPB_Forward:_common", "_mp_udtHMI_VFD_Control.bPB_Reverse:_common", "_mp_udtHMI_VFD_Control.bPB_Stop:_common", "_mp_udtHMI_VFD_Control.bPBEN_ResetError:_common", "_mp_udtHMI_VFD_Control.bPBEN_Forward:_common", "_mp_udtHMI_VFD_Control.bPBEN_Reverse:_common", "_mp_udtHMI_VFD_Control.bPBEN_Stop:_common", "_mp_udtHMI_VFD_Control.bForwardOn:_common", "_mp_udtHMI_VFD_Control.bReverseOn:_common", "_mp_udtHMI_VFD_Control.bSignalForward:_common", "_mp_udtHMI_VFD_Control.bSignalReverse:_common", "_mp_udtHMI_VFD_Control.bError:_common", "_mp_udtHMI_VFD_Control.bInterlock:_common", "_mp_udtHMI_VFD_Control.iMode:_archive", "_mp_udtHMI_VFD_Control.iErrorCode:_archive", "_mp_udtHMI_VFD_Control.iStatus:_archive", "_mp_udtHMI_VFD_Control.rManualSpeedSP:_archive", "_mp_udtHMI_VFD_Control.rAutoSpeedSP:_archive", "_mp_udtHMI_VFD_Control.rActualSpeed:_archive", "_mp_udtHMI_VFD_Control.rActualCurrent:_archive", "_mp_udtHMI_VFD_Control.rActualPower:_archive", "_mp_udtHMI_VFD_Control.bPB_ResetError:_archive", "_mp_udtHMI_VFD_Control.bPB_Forward:_archive", "_mp_udtHMI_VFD_Control.bPB_Reverse:_archive", "_mp_udtHMI_VFD_Control.bPB_Stop:_archive", "_mp_udtHMI_VFD_Control.bPBEN_ResetError:_archive", "_mp_udtHMI_VFD_Control.bPBEN_Forward:_archive", "_mp_udtHMI_VFD_Control.bPBEN_Reverse:_archive", "_mp_udtHMI_VFD_Control.bPBEN_Stop:_archive", "_mp_udtHMI_VFD_Control.bForwardOn:_archive", "_mp_udtHMI_VFD_Control.bReverseOn:_archive", "_mp_udtHMI_VFD_Control.bSignalForward:_archive", "_mp_udtHMI_VFD_Control.bSignalReverse:_archive", "_mp_udtHMI_VFD_Control.bError:_archive", "_mp_udtHMI_VFD_Control.bInterlock:_archive"	0x8300000000000101	22.06.2017 15:57:39.329
+UI (1)/0	_dt_udtHMI_VFD_Control.DynamicAttribute	_DynamicDatapoints	"_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive"	0x8300000000000101	22.06.2017 15:57:39.329
+UI (1)/0	_dt_udtError_Motor.Leaf	_DynamicDatapoints	"_mp_udtError_Motor.MotorProtectorTripped:_common", "_mp_udtError_Motor.LocalDisconnectOff:_alert_hdl", "_mp_udtError_Motor.MotorProtectorTripped:_alert_hdl", "_mp_udtError_Motor.LocalDisconnectOff:_common", "_mp_udtError_Motor.ClutchTripped:_alert_hdl", "_mp_udtError_Motor.ClutchTripped:_common", "_mp_udtError_Motor.NoSignalForward:_alert_hdl", "_mp_udtError_Motor.NoSignalForward:_common", "_mp_udtError_Motor.NoSignalReverse:_alert_hdl", "_mp_udtError_Motor.NoSignalReverse:_common", "_mp_udtError_Motor.MotorNotStopped:_alert_hdl", "_mp_udtError_Motor.MotorNotStopped:_common"	0x8300000000000101	01.06.2017 20:54:14.620
+UI (1)/0	_dt_udtError_Motor.DynamicAttribute	_DynamicDatapoints	"_da_none", "_da_alert_hdl", "_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none"	0x8300000000000101	01.06.2017 20:54:14.620
+UI (1)/0	_dt_udtHMI_MotorControl.Leaf	_DynamicDatapoints	"_mp_udtHMI_MotorControl.iMode:_common", "_mp_udtHMI_MotorControl.iErrorCode:_common", "_mp_udtHMI_MotorControl.iStatus:_common", "_mp_udtHMI_MotorControl.bPB_ResetError:_common", "_mp_udtHMI_MotorControl.bPB_Forward:_common", "_mp_udtHMI_MotorControl.bPB_Reverse:_common", "_mp_udtHMI_MotorControl.bPB_Stop:_common", "_mp_udtHMI_MotorControl.bPBEN_ResetError:_common", "_mp_udtHMI_MotorControl.bPBEN_Forward:_common", "_mp_udtHMI_MotorControl.bPBEN_Reverse:_common", "_mp_udtHMI_MotorControl.bPBEN_Stop:_common", "_mp_udtHMI_MotorControl.bForwardOn:_common", "_mp_udtHMI_MotorControl.bReverseOn:_common", "_mp_udtHMI_MotorControl.bSignalForward:_common", "_mp_udtHMI_MotorControl.bSignalReverse:_common", "_mp_udtHMI_MotorControl.bError:_common", "_mp_udtHMI_MotorControl.bInterlock:_common", "_mp_udtHMI_MotorControl.iMode:_archive", "_mp_udtHMI_MotorControl.iErrorCode:_archive", "_mp_udtHMI_MotorControl.iStatus:_archive", "_mp_udtHMI_MotorControl.bPB_ResetError:_archive", "_mp_udtHMI_MotorControl.bPB_Forward:_archive", "_mp_udtHMI_MotorControl.bPB_Reverse:_archive", "_mp_udtHMI_MotorControl.bPB_Stop:_archive", "_mp_udtHMI_MotorControl.bPBEN_ResetError:_archive", "_mp_udtHMI_MotorControl.bPBEN_Forward:_archive", "_mp_udtHMI_MotorControl.bPBEN_Reverse:_archive", "_mp_udtHMI_MotorControl.bPBEN_Stop:_archive", "_mp_udtHMI_MotorControl.bForwardOn:_archive", "_mp_udtHMI_MotorControl.bReverseOn:_archive", "_mp_udtHMI_MotorControl.bSignalForward:_archive", "_mp_udtHMI_MotorControl.bSignalReverse:_archive", "_mp_udtHMI_MotorControl.bError:_archive", "_mp_udtHMI_MotorControl.bInterlock:_archive"	0x8300000000000101	22.06.2017 14:28:02.213
+UI (1)/0	_dt_udtHMI_MotorControl.DynamicAttribute	_DynamicDatapoints	"_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive"	0x8300000000000101	22.06.2017 14:28:02.213
+UI (1)/0	_dt_udtMotor_Reversing.Leaf	_DynamicDatapoints	"_mp_udtMotor_Reversing.Errors.MotorProtectorTripped:_common", "_mp_udtMotor_Reversing.Errors.LocalDisconnectOff:_alert_hdl", "_mp_udtMotor_Reversing.Errors.MotorProtectorTripped:_alert_hdl", "_mp_udtMotor_Reversing.Errors.LocalDisconnectOff:_common", "_mp_udtMotor_Reversing.Errors.ClutchTripped:_alert_hdl", "_mp_udtMotor_Reversing.Errors.ClutchTripped:_common", "_mp_udtMotor_Reversing.Errors.NoSignalForward:_alert_hdl", "_mp_udtMotor_Reversing.Errors.NoSignalForward:_common", "_mp_udtMotor_Reversing.Errors.NoSignalReverse:_alert_hdl", "_mp_udtMotor_Reversing.Errors.NoSignalReverse:_common", "_mp_udtMotor_Reversing.Errors.MotorNotStopped:_alert_hdl", "_mp_udtMotor_Reversing.Errors.MotorNotStopped:_common", "_mp_udtMotor_Reversing.HMI.iMode:_common", "_mp_udtMotor_Reversing.HMI.iMode:_archive", "_mp_udtMotor_Reversing.HMI.iErrorCode:_common", "_mp_udtMotor_Reversing.HMI.iErrorCode:_archive", "_mp_udtMotor_Reversing.HMI.iStatus:_common", "_mp_udtMotor_Reversing.HMI.iStatus:_archive", "_mp_udtMotor_Reversing.HMI.bPB_ResetError:_common", "_mp_udtMotor_Reversing.HMI.bPB_ResetError:_archive", "_mp_udtMotor_Reversing.HMI.bPB_Forward:_common", "_mp_udtMotor_Reversing.HMI.bPB_Forward:_archive", "_mp_udtMotor_Reversing.HMI.bPB_Reverse:_common", "_mp_udtMotor_Reversing.HMI.bPB_Reverse:_archive", "_mp_udtMotor_Reversing.HMI.bPB_Stop:_common", "_mp_udtMotor_Reversing.HMI.bPB_Stop:_archive", "_mp_udtMotor_Reversing.HMI.bPBEN_ResetError:_common", "_mp_udtMotor_Reversing.HMI.bPBEN_ResetError:_archive", "_mp_udtMotor_Reversing.HMI.bPBEN_Forward:_common", "_mp_udtMotor_Reversing.HMI.bPBEN_Forward:_archive", "_mp_udtMotor_Reversing.HMI.bPBEN_Reverse:_common", "_mp_udtMotor_Reversing.HMI.bPBEN_Reverse:_archive", "_mp_udtMotor_Reversing.HMI.bPBEN_Stop:_common", "_mp_udtMotor_Reversing.HMI.bPBEN_Stop:_archive", "_mp_udtMotor_Reversing.HMI.bForwardOn:_common", "_mp_udtMotor_Reversing.HMI.bForwardOn:_archive", "_mp_udtMotor_Reversing.HMI.bReverseOn:_common", "_mp_udtMotor_Reversing.HMI.bReverseOn:_archive", "_mp_udtMotor_Reversing.HMI.bSignalForward:_common", "_mp_udtMotor_Reversing.HMI.bSignalForward:_archive", "_mp_udtMotor_Reversing.HMI.bSignalReverse:_common", "_mp_udtMotor_Reversing.HMI.bSignalReverse:_archive", "_mp_udtMotor_Reversing.HMI.bError:_common", "_mp_udtMotor_Reversing.HMI.bError:_archive", "_mp_udtMotor_Reversing.HMI.bInterlock:_common", "_mp_udtMotor_Reversing.HMI.bInterlock:_archive"	0x8300000000000101	22.06.2017 14:28:08.148
+UI (1)/0	_dt_udtMotor_Reversing.DynamicAttribute	_DynamicDatapoints	"_da_none", "_da_alert_hdl", "_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive"	0x8300000000000101	22.06.2017 14:28:08.148
+UI (1)/0	_dt_udtError_AnalogInput.Leaf	_DynamicDatapoints	"_mp_udtError_AnalogInput.LowLowAlarm:_alert_hdl", "_mp_udtError_AnalogInput.LowLowAlarm:_common", "_mp_udtError_AnalogInput.HighHighAlarm:_alert_hdl", "_mp_udtError_AnalogInput.HighHighAlarm:_common", "_mp_udtError_AnalogInput.Invalid:_alert_hdl", "_mp_udtError_AnalogInput.Invalid:_common"	0x8300000000000101	01.06.2017 21:34:10.321
+UI (1)/0	_dt_udtError_AnalogInput.DynamicAttribute	_DynamicDatapoints	"_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none"	0x8300000000000101	01.06.2017 21:34:10.321
+UI (1)/0	_dt_udtHMI_AnalogOutput.Leaf	_DynamicDatapoints	"_mp_udtHMI_AnalogOutput.iMode:_common", "_mp_udtHMI_AnalogOutput.iErrorCode:_common", "_mp_udtHMI_AnalogOutput.bPB_ResetError:_common", "_mp_udtHMI_AnalogOutput.bPBEN_ResetError:_common", "_mp_udtHMI_AnalogOutput.bError:_common", "_mp_udtHMI_AnalogOutput.bInterlock:_common", "_mp_udtHMI_AnalogOutput.iEstopFunction:_common", "_mp_udtHMI_AnalogOutput.rValue:_common", "_mp_udtHMI_AnalogOutput.rAutoValue:_common", "_mp_udtHMI_AnalogOutput.rManualValue:_common", "_mp_udtHMI_AnalogOutput.rEstopValue:_common", "_mp_udtHMI_AnalogOutput.iMode:_archive", "_mp_udtHMI_AnalogOutput.iErrorCode:_archive", "_mp_udtHMI_AnalogOutput.rValue:_archive", "_mp_udtHMI_AnalogOutput.rAutoValue:_archive", "_mp_udtHMI_AnalogOutput.rManualValue:_archive", "_mp_udtHMI_AnalogOutput.rEstopValue:_archive", "_mp_udtHMI_AnalogOutput.bPB_ResetError:_archive", "_mp_udtHMI_AnalogOutput.bPBEN_ResetError:_archive", "_mp_udtHMI_AnalogOutput.bError:_archive", "_mp_udtHMI_AnalogOutput.bInterlock:_archive", "_mp_udtHMI_AnalogOutput.iEstopFunction:_archive"	0x8300000000000101	22.06.2017 13:54:57.517
+UI (1)/0	_dt_udtHMI_AnalogOutput.DynamicAttribute	_DynamicDatapoints	"_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_common", "_da_common", "_da_common", "_da_common", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive"	0x8300000000000101	22.06.2017 13:54:57.517
+UI (1)/0	_dt_udtAnalogInput.Leaf	_DynamicDatapoints	"_mp_udtAnalogInput.Errors.LowLowAlarm:_alert_hdl", "_mp_udtAnalogInput.Errors.LowLowAlarm:_common", "_mp_udtAnalogInput.Errors.HighHighAlarm:_alert_hdl", "_mp_udtAnalogInput.Errors.HighHighAlarm:_common", "_mp_udtAnalogInput.Errors.Invalid:_alert_hdl", "_mp_udtAnalogInput.Errors.Invalid:_common", "_mp_udtAnalogInput.HMI.iMode:_common", "_mp_udtAnalogInput.HMI.iMode:_archive", "_mp_udtAnalogInput.HMI.iErrorCode:_common", "_mp_udtAnalogInput.HMI.iErrorCode:_archive", "_mp_udtAnalogInput.HMI.iStatus:_common", "_mp_udtAnalogInput.HMI.iStatus:_archive", "_mp_udtAnalogInput.HMI.rActiveValue:_common", "_mp_udtAnalogInput.HMI.rActiveValue:_archive", "_mp_udtAnalogInput.HMI.rInputValue:_common", "_mp_udtAnalogInput.HMI.rInputValue:_archive", "_mp_udtAnalogInput.HMI.rManualValue:_common", "_mp_udtAnalogInput.HMI.rManualValue:_archive", "_mp_udtAnalogInput.HMI.bPB_ResetError:_common", "_mp_udtAnalogInput.HMI.bPB_ResetError:_archive", "_mp_udtAnalogInput.HMI.bPBEN_ResetError:_common", "_mp_udtAnalogInput.HMI.bPBEN_ResetError:_archive", "_mp_udtAnalogInput.HMI.bError:_common", "_mp_udtAnalogInput.HMI.bError:_archive"	0x8300000000000101	22.06.2017 13:51:55.237
+UI (1)/0	_dt_udtAnalogInput.DynamicAttribute	_DynamicDatapoints	"_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive"	0x8300000000000101	22.06.2017 13:51:55.237
+UI (1)/0	_dt_udtHMI_AnalogValveControl.Leaf	_DynamicDatapoints	"_mp_udtHMI_AnalogValveControl.iMode:_common", "_mp_udtHMI_AnalogValveControl.iErrorCode:_common", "_mp_udtHMI_AnalogValveControl.iStatus:_common", "_mp_udtHMI_AnalogValveControl.rManualSP:_common", "_mp_udtHMI_AnalogValveControl.rAutoSP:_common", "_mp_udtHMI_AnalogValveControl.rEstopSP:_common", "_mp_udtHMI_AnalogValveControl.bPB_ResetError:_common", "_mp_udtHMI_AnalogValveControl.bPBEN_ResetError:_common", "_mp_udtHMI_AnalogValveControl.bError:_common", "_mp_udtHMI_AnalogValveControl.bInterlock:_common", "_mp_udtHMI_AnalogValveControl.iEstopFunction:_common", "_mp_udtHMI_AnalogValveControl.rActual:_common", "_mp_udtHMI_AnalogValveControl.iMode:_archive", "_mp_udtHMI_AnalogValveControl.iErrorCode:_archive", "_mp_udtHMI_AnalogValveControl.iStatus:_archive", "_mp_udtHMI_AnalogValveControl.rManualSP:_archive", "_mp_udtHMI_AnalogValveControl.rAutoSP:_archive", "_mp_udtHMI_AnalogValveControl.rEstopSP:_archive", "_mp_udtHMI_AnalogValveControl.rActual:_archive", "_mp_udtHMI_AnalogValveControl.bPB_ResetError:_archive", "_mp_udtHMI_AnalogValveControl.bPBEN_ResetError:_archive", "_mp_udtHMI_AnalogValveControl.bError:_archive", "_mp_udtHMI_AnalogValveControl.bInterlock:_archive", "_mp_udtHMI_AnalogValveControl.iEstopFunction:_archive"	0x8300000000000101	22.06.2017 14:20:00.631
+UI (1)/0	_dt_udtHMI_AnalogValveControl.DynamicAttribute	_DynamicDatapoints	"_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_common", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive"	0x8300000000000101	22.06.2017 14:20:00.631
+UI (1)/0	_dt_udtHMI_ValveControl.Leaf	_DynamicDatapoints	"_mp_udtHMI_ValveControl.iMode:_common", "_mp_udtHMI_ValveControl.iErrorCode:_common", "_mp_udtHMI_ValveControl.iStatus:_common", "_mp_udtHMI_ValveControl.bPB_ResetError:_common", "_mp_udtHMI_ValveControl.bPB_Home:_common", "_mp_udtHMI_ValveControl.bPB_Work:_common", "_mp_udtHMI_ValveControl.bPBEN_ResetError:_common", "_mp_udtHMI_ValveControl.bPBEN_Home:_common", "_mp_udtHMI_ValveControl.bPBEN_Work:_common", "_mp_udtHMI_ValveControl.bHomeOn:_common", "_mp_udtHMI_ValveControl.bWorkOn:_common", "_mp_udtHMI_ValveControl.bSignalHome:_common", "_mp_udtHMI_ValveControl.bSignalWork:_common", "_mp_udtHMI_ValveControl.bError:_common", "_mp_udtHMI_ValveControl.bInterlock:_common", "_mp_udtHMI_ValveControl.iMode:_archive", "_mp_udtHMI_ValveControl.iErrorCode:_archive", "_mp_udtHMI_ValveControl.iStatus:_archive", "_mp_udtHMI_ValveControl.bPB_ResetError:_archive", "_mp_udtHMI_ValveControl.bPB_Home:_archive", "_mp_udtHMI_ValveControl.bPB_Work:_archive", "_mp_udtHMI_ValveControl.bPBEN_ResetError:_archive", "_mp_udtHMI_ValveControl.bPBEN_Home:_archive", "_mp_udtHMI_ValveControl.bPBEN_Work:_archive", "_mp_udtHMI_ValveControl.bHomeOn:_archive", "_mp_udtHMI_ValveControl.bWorkOn:_archive", "_mp_udtHMI_ValveControl.bSignalHome:_archive", "_mp_udtHMI_ValveControl.bSignalWork:_archive", "_mp_udtHMI_ValveControl.bError:_archive", "_mp_udtHMI_ValveControl.bInterlock:_archive"	0x8300000000000101	22.06.2017 14:57:35.709
+UI (1)/0	_dt_udtHMI_ValveControl.DynamicAttribute	_DynamicDatapoints	"_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_none", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive", "_da_archive"	0x8300000000000101	22.06.2017 14:57:35.709
+UI (1)/0	_dt_udtError_AnalogValve.Leaf	_DynamicDatapoints	"_mp_udtError_AnalogValve.InvalidFeedback:_alert_hdl", "_mp_udtError_AnalogValve.InvalidFeedback:_common"	0x8300000000000101	02.06.2017 13:39:36.826
+UI (1)/0	_dt_udtError_AnalogValve.DynamicAttribute	_DynamicDatapoints	"_da_alert_hdl", "_da_none"	0x8300000000000101	02.06.2017 13:39:36.826
+UI (1)/0	_dt_udtAnalogValveControl.Leaf	_DynamicDatapoints	"_mp_udtAnalogValveControl.Errors.InvalidFeedback:_alert_hdl", "_mp_udtAnalogValveControl.Errors.InvalidFeedback:_common", "_mp_udtAnalogValveControl.HMI.iMode:_common", "_mp_udtAnalogValveControl.HMI.iMode:_archive", "_mp_udtAnalogValveControl.HMI.iErrorCode:_common", "_mp_udtAnalogValveControl.HMI.iErrorCode:_archive", "_mp_udtAnalogValveControl.HMI.iStatus:_common", "_mp_udtAnalogValveControl.HMI.iStatus:_archive", "_mp_udtAnalogValveControl.HMI.rManualSP:_common", "_mp_udtAnalogValveControl.HMI.rManualSP:_archive", "_mp_udtAnalogValveControl.HMI.rAutoSP:_common", "_mp_udtAnalogValveControl.HMI.rAutoSP:_archive", "_mp_udtAnalogValveControl.HMI.rEstopSP:_common", "_mp_udtAnalogValveControl.HMI.rEstopSP:_archive", "_mp_udtAnalogValveControl.HMI.rActual:_common", "_mp_udtAnalogValveControl.HMI.rActual:_archive", "_mp_udtAnalogValveControl.HMI.bPB_ResetError:_common", "_mp_udtAnalogValveControl.HMI.bPB_ResetError:_archive", "_mp_udtAnalogValveControl.HMI.bPBEN_ResetError:_common", "_mp_udtAnalogValveControl.HMI.bPBEN_ResetError:_archive", "_mp_udtAnalogValveControl.HMI.bError:_common", "_mp_udtAnalogValveControl.HMI.bError:_archive", "_mp_udtAnalogValveControl.HMI.bInterlock:_common", "_mp_udtAnalogValveControl.HMI.bInterlock:_archive", "_mp_udtAnalogValveControl.HMI.iEstopFunction:_common", "_mp_udtAnalogValveControl.HMI.iEstopFunction:_archive"	0x8300000000000101	22.06.2017 14:21:45.691
+UI (1)/0	_dt_udtAnalogValveControl.DynamicAttribute	_DynamicDatapoints	"_da_alert_hdl", "_da_none", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_common", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive"	0x8300000000000101	22.06.2017 14:21:45.691
+UI (1)/0	_dt_udtError_AnalogOutput.Leaf	_DynamicDatapoints	"_mp_udtError_AnalogOutput.OutOfRange:_alert_hdl", "_mp_udtError_AnalogOutput.OutOfRange:_common", "_mp_udtError_AnalogOutput.ConfigurationError:_alert_hdl", "_mp_udtError_AnalogOutput.ConfigurationError:_common"	0x8300000000000101	02.06.2017 13:44:19.793
+UI (1)/0	_dt_udtError_AnalogOutput.DynamicAttribute	_DynamicDatapoints	"_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none"	0x8300000000000101	02.06.2017 13:44:19.793
+UI (1)/0	_dt_udtError_Valve.Leaf	_DynamicDatapoints	"_mp_udtError_Valve.NoHomeFeedback:_alert_hdl", "_mp_udtError_Valve.NoHomeFeedback:_common", "_mp_udtError_Valve.NoWorkFeedback:_alert_hdl", "_mp_udtError_Valve.NoWorkFeedback:_common", "_mp_udtError_Valve.HomeFeedbackStillActive:_alert_hdl", "_mp_udtError_Valve.HomeFeedbackStillActive:_common", "_mp_udtError_Valve.WorkFeedbackStillActive:_alert_hdl", "_mp_udtError_Valve.WorkFeedbackStillActive:_common"	0x8300000000000101	02.06.2017 14:00:51.821
+UI (1)/0	_dt_udtError_Valve.DynamicAttribute	_DynamicDatapoints	"_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none"	0x8300000000000101	02.06.2017 14:00:51.821
+UI (1)/0	_dt_udtValve.Leaf	_DynamicDatapoints	"_mp_udtValve.Errors.NoHomeFeedback:_alert_hdl", "_mp_udtValve.Errors.NoHomeFeedback:_common", "_mp_udtValve.Errors.NoWorkFeedback:_alert_hdl", "_mp_udtValve.Errors.NoWorkFeedback:_common", "_mp_udtValve.Errors.HomeFeedbackStillActive:_alert_hdl", "_mp_udtValve.Errors.HomeFeedbackStillActive:_common", "_mp_udtValve.Errors.WorkFeedbackStillActive:_alert_hdl", "_mp_udtValve.Errors.WorkFeedbackStillActive:_common", "_mp_udtValve.HMI.iMode:_common", "_mp_udtValve.HMI.iMode:_archive", "_mp_udtValve.HMI.iErrorCode:_common", "_mp_udtValve.HMI.iErrorCode:_archive", "_mp_udtValve.HMI.iStatus:_common", "_mp_udtValve.HMI.iStatus:_archive", "_mp_udtValve.HMI.bPB_ResetError:_common", "_mp_udtValve.HMI.bPB_ResetError:_archive", "_mp_udtValve.HMI.bPB_Home:_common", "_mp_udtValve.HMI.bPB_Home:_archive", "_mp_udtValve.HMI.bPB_Work:_common", "_mp_udtValve.HMI.bPB_Work:_archive", "_mp_udtValve.HMI.bPBEN_ResetError:_common", "_mp_udtValve.HMI.bPBEN_ResetError:_archive", "_mp_udtValve.HMI.bPBEN_Home:_common", "_mp_udtValve.HMI.bPBEN_Home:_archive", "_mp_udtValve.HMI.bPBEN_Work:_common", "_mp_udtValve.HMI.bPBEN_Work:_archive", "_mp_udtValve.HMI.bHomeOn:_common", "_mp_udtValve.HMI.bHomeOn:_archive", "_mp_udtValve.HMI.bWorkOn:_common", "_mp_udtValve.HMI.bWorkOn:_archive", "_mp_udtValve.HMI.bSignalHome:_common", "_mp_udtValve.HMI.bSignalHome:_archive", "_mp_udtValve.HMI.bSignalWork:_common", "_mp_udtValve.HMI.bSignalWork:_archive", "_mp_udtValve.HMI.bError:_common", "_mp_udtValve.HMI.bError:_archive", "_mp_udtValve.HMI.bInterlock:_common", "_mp_udtValve.HMI.bInterlock:_archive"	0x8300000000000101	22.06.2017 14:57:42.053
+UI (1)/0	_dt_udtValve.DynamicAttribute	_DynamicDatapoints	"_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive"	0x8300000000000101	22.06.2017 14:57:42.053
+UI (1)/0	_dt_udtError_VFD.Leaf	_DynamicDatapoints	"_mp_udtError_VFD.MotorProtectorTripped:_alert_hdl", "_mp_udtError_VFD.MotorProtectorTripped:_common", "_mp_udtError_VFD.LocalDisconnectOff:_alert_hdl", "_mp_udtError_VFD.LocalDisconnectOff:_common", "_mp_udtError_VFD.ClutchTripped:_alert_hdl", "_mp_udtError_VFD.ClutchTripped:_common", "_mp_udtError_VFD.NoContactorFeedback:_alert_hdl", "_mp_udtError_VFD.NoContactorFeedback:_common", "_mp_udtError_VFD.ContactorStillOn:_alert_hdl", "_mp_udtError_VFD.ContactorStillOn:_common", "_mp_udtError_VFD.NoSignalForward:_alert_hdl", "_mp_udtError_VFD.NoSignalForward:_common", "_mp_udtError_VFD.NoSignalReverse:_alert_hdl", "_mp_udtError_VFD.NoSignalReverse:_common", "_mp_udtError_VFD.MotorNotStopped:_alert_hdl", "_mp_udtError_VFD.MotorNotStopped:_common", "_mp_udtError_VFD.MaxFrequencyReached:_alert_hdl", "_mp_udtError_VFD.MaxFrequencyReached:_common", "_mp_udtError_VFD.Overcurrent:_alert_hdl", "_mp_udtError_VFD.Overcurrent:_common", "_mp_udtError_VFD.MotorOverload:_alert_hdl", "_mp_udtError_VFD.MotorOverload:_common", "_mp_udtError_VFD.VFDOverload:_alert_hdl", "_mp_udtError_VFD.VFDOverload:_common", "_mp_udtError_VFD.GeneralFault:_alert_hdl", "_mp_udtError_VFD.GeneralFault:_common", "_mp_udtError_VFD.NoCoolingFanFeedback:_alert_hdl", "_mp_udtError_VFD.NoCoolingFanFeedback:_common"	0x8300000000000101	02.06.2017 14:38:59.491
+UI (1)/0	_dt_udtError_VFD.DynamicAttribute	_DynamicDatapoints	"_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none"	0x8300000000000101	02.06.2017 14:38:59.491
+UI (1)/0	_ds_udtError_VFD.symbols	_DynamicDptSettings		0x8300000000000101	02.06.2017 14:57:30.198
+UI (1)/0	_ds_udtError_VFD.symboldefault	_DynamicDptSettings	""	0x8300000000000101	02.06.2017 14:57:30.199
+UI (1)/0	_ds_udtError_VFD.trendElements	_DynamicDptSettings		0x8300000000000101	02.06.2017 14:57:30.200
+UI (1)/0	_dt_udtVFD.Leaf	_DynamicDatapoints	"_mp_udtVFD.Errors.MotorProtectorTripped:_alert_hdl", "_mp_udtVFD.Errors.MotorProtectorTripped:_common", "_mp_udtVFD.Errors.LocalDisconnectOff:_alert_hdl", "_mp_udtVFD.Errors.LocalDisconnectOff:_common", "_mp_udtVFD.Errors.ClutchTripped:_alert_hdl", "_mp_udtVFD.Errors.ClutchTripped:_common", "_mp_udtVFD.Errors.NoContactorFeedback:_alert_hdl", "_mp_udtVFD.Errors.NoContactorFeedback:_common", "_mp_udtVFD.Errors.ContactorStillOn:_alert_hdl", "_mp_udtVFD.Errors.ContactorStillOn:_common", "_mp_udtVFD.Errors.NoSignalForward:_alert_hdl", "_mp_udtVFD.Errors.NoSignalForward:_common", "_mp_udtVFD.Errors.NoSignalReverse:_alert_hdl", "_mp_udtVFD.Errors.NoSignalReverse:_common", "_mp_udtVFD.Errors.MotorNotStopped:_alert_hdl", "_mp_udtVFD.Errors.MotorNotStopped:_common", "_mp_udtVFD.Errors.MaxFrequencyReached:_alert_hdl", "_mp_udtVFD.Errors.MaxFrequencyReached:_common", "_mp_udtVFD.Errors.Overcurrent:_alert_hdl", "_mp_udtVFD.Errors.Overcurrent:_common", "_mp_udtVFD.Errors.MotorOverload:_alert_hdl", "_mp_udtVFD.Errors.MotorOverload:_common", "_mp_udtVFD.Errors.VFDOverload:_alert_hdl", "_mp_udtVFD.Errors.VFDOverload:_common", "_mp_udtVFD.Errors.GeneralFault:_alert_hdl", "_mp_udtVFD.Errors.GeneralFault:_common", "_mp_udtVFD.Errors.NoCoolingFanFeedback:_alert_hdl", "_mp_udtVFD.Errors.NoCoolingFanFeedback:_common", "_mp_udtVFD.HMI.iMode:_common", "_mp_udtVFD.HMI.iMode:_archive", "_mp_udtVFD.HMI.iErrorCode:_common", "_mp_udtVFD.HMI.iErrorCode:_archive", "_mp_udtVFD.HMI.iStatus:_common", "_mp_udtVFD.HMI.iStatus:_archive", "_mp_udtVFD.HMI.rManualSpeedSP:_common", "_mp_udtVFD.HMI.rManualSpeedSP:_archive", "_mp_udtVFD.HMI.rAutoSpeedSP:_common", "_mp_udtVFD.HMI.rAutoSpeedSP:_archive", "_mp_udtVFD.HMI.rActualSpeed:_common", "_mp_udtVFD.HMI.rActualSpeed:_archive", "_mp_udtVFD.HMI.rActualCurrent:_common", "_mp_udtVFD.HMI.rActualCurrent:_archive", "_mp_udtVFD.HMI.rActualPower:_common", "_mp_udtVFD.HMI.rActualPower:_archive", "_mp_udtVFD.HMI.bPB_ResetError:_common", "_mp_udtVFD.HMI.bPB_ResetError:_archive", "_mp_udtVFD.HMI.bPB_Forward:_common", "_mp_udtVFD.HMI.bPB_Forward:_archive", "_mp_udtVFD.HMI.bPB_Reverse:_common", "_mp_udtVFD.HMI.bPB_Reverse:_archive", "_mp_udtVFD.HMI.bPB_Stop:_common", "_mp_udtVFD.HMI.bPB_Stop:_archive", "_mp_udtVFD.HMI.bPBEN_ResetError:_common", "_mp_udtVFD.HMI.bPBEN_ResetError:_archive", "_mp_udtVFD.HMI.bPBEN_Forward:_common", "_mp_udtVFD.HMI.bPBEN_Forward:_archive", "_mp_udtVFD.HMI.bPBEN_Reverse:_common", "_mp_udtVFD.HMI.bPBEN_Reverse:_archive", "_mp_udtVFD.HMI.bPBEN_Stop:_common", "_mp_udtVFD.HMI.bPBEN_Stop:_archive", "_mp_udtVFD.HMI.bForwardOn:_common", "_mp_udtVFD.HMI.bForwardOn:_archive", "_mp_udtVFD.HMI.bReverseOn:_common", "_mp_udtVFD.HMI.bReverseOn:_archive", "_mp_udtVFD.HMI.bSignalForward:_common", "_mp_udtVFD.HMI.bSignalForward:_archive", "_mp_udtVFD.HMI.bSignalReverse:_common", "_mp_udtVFD.HMI.bSignalReverse:_archive", "_mp_udtVFD.HMI.bError:_common", "_mp_udtVFD.HMI.bError:_archive", "_mp_udtVFD.HMI.bInterlock:_common", "_mp_udtVFD.HMI.bInterlock:_archive"	0x8300000000000101	22.06.2017 15:58:38.089
+UI (1)/0	_dt_udtVFD.DynamicAttribute	_DynamicDatapoints	"_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive"	0x8300000000000101	22.06.2017 15:58:38.089
+UI (1)/0	_dt_udtAnalogOutput.Leaf	_DynamicDatapoints	"_mp_udtAnalogOutput.Errors.OutOfRange:_alert_hdl", "_mp_udtAnalogOutput.Errors.OutOfRange:_common", "_mp_udtAnalogOutput.Errors.ConfigurationError:_alert_hdl", "_mp_udtAnalogOutput.Errors.ConfigurationError:_common", "_mp_udtAnalogOutput.HMI.iMode:_common", "_mp_udtAnalogOutput.HMI.iMode:_archive", "_mp_udtAnalogOutput.HMI.iErrorCode:_common", "_mp_udtAnalogOutput.HMI.iErrorCode:_archive", "_mp_udtAnalogOutput.HMI.rValue:_common", "_mp_udtAnalogOutput.HMI.rValue:_archive", "_mp_udtAnalogOutput.HMI.rAutoValue:_common", "_mp_udtAnalogOutput.HMI.rAutoValue:_archive", "_mp_udtAnalogOutput.HMI.rManualValue:_common", "_mp_udtAnalogOutput.HMI.rManualValue:_archive", "_mp_udtAnalogOutput.HMI.rEstopValue:_common", "_mp_udtAnalogOutput.HMI.rEstopValue:_archive", "_mp_udtAnalogOutput.HMI.bPB_ResetError:_common", "_mp_udtAnalogOutput.HMI.bPB_ResetError:_archive", "_mp_udtAnalogOutput.HMI.bPBEN_ResetError:_common", "_mp_udtAnalogOutput.HMI.bPBEN_ResetError:_archive", "_mp_udtAnalogOutput.HMI.bError:_common", "_mp_udtAnalogOutput.HMI.bError:_archive", "_mp_udtAnalogOutput.HMI.bInterlock:_common", "_mp_udtAnalogOutput.HMI.bInterlock:_archive", "_mp_udtAnalogOutput.HMI.iEstopFunction:_common", "_mp_udtAnalogOutput.HMI.iEstopFunction:_archive"	0x8300000000000101	22.06.2017 13:55:03.436
+UI (1)/0	_dt_udtAnalogOutput.DynamicAttribute	_DynamicDatapoints	"_da_alert_hdl", "_da_none", "_da_alert_hdl", "_da_none", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive", "_da_none", "_da_archive"	0x8300000000000101	22.06.2017 13:55:03.436
+UI (1)/0	_ds_udtMotor_Reversing.symbols	_DynamicDptSettings		0x8300000000000101	16.06.2017 14:47:05.867
+UI (1)/0	_ds_udtMotor_Reversing.symboldefault	_DynamicDptSettings	""	0x8300000000000101	16.06.2017 14:47:05.868
+UI (1)/0	_ds_udtMotor_Reversing.trendElements	_DynamicDptSettings		0x8300000000000101	16.06.2017 14:47:05.869
+UI (1)/0	_dt_udtSystem.Leaf	_DynamicDatapoints	"_mp_udtSystem.HMI.iMode:_archive", "_mp_udtSystem.HMI.iMode:_common", "_mp_udtSystem.HMI.bEStop:_archive", "_mp_udtSystem.HMI.bEStop:_common", "_mp_udtSystem.HMI.bError:_archive", "_mp_udtSystem.HMI.bError:_common", "_mp_udtSystem.HMI.bAuto:_archive", "_mp_udtSystem.HMI.bAuto:_common", "_mp_udtSystem.HMI.bIndependentEnable:_archive", "_mp_udtSystem.HMI.bIndependentEnable:_common", "_mp_udtSystem.HMI.bPB_ResetError:_archive", "_mp_udtSystem.HMI.bPB_ResetError:_common"	0x8300000000000101	22.06.2017 14:52:54.644
+UI (1)/0	_dt_udtSystem.DynamicAttribute	_DynamicDatapoints	"_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common"	0x8300000000000101	22.06.2017 14:52:54.644
+UI (1)/0	_ds_udtAnalogValveControl.symbols	_DynamicDptSettings		0x8300000000000101	16.06.2017 19:48:44.473
+UI (1)/0	_ds_udtAnalogValveControl.symboldefault	_DynamicDptSettings	""	0x8300000000000101	16.06.2017 19:48:44.474
+UI (1)/0	_ds_udtAnalogValveControl.trendElements	_DynamicDptSettings		0x8300000000000101	16.06.2017 19:48:44.475
+UI (1)/0	_ds_udtHMI_PIDInterface.symbols	_DynamicDptSettings		0x8300000000000101	21.06.2017 18:24:45.045
+UI (1)/0	_ds_udtHMI_PIDInterface.symboldefault	_DynamicDptSettings	""	0x8300000000000101	21.06.2017 18:24:45.047
+UI (1)/0	_ds_udtHMI_PIDInterface.trendElements	_DynamicDptSettings		0x8300000000000101	21.06.2017 18:24:45.048
+UI (1)/0	_dt_udtHMI_Interlock.Leaf	_DynamicDatapoints	"_mp_udtHMI_Interlock.abInterlocks:_archive", "_mp_udtHMI_Interlock.asInterlockNames:_archive", "_mp_udtHMI_Interlock.bInterlockOk:_archive", "_mp_udtHMI_Interlock.abInterlocks:_common", "_mp_udtHMI_Interlock.asInterlockNames:_common", "_mp_udtHMI_Interlock.bInterlockOk:_common"	0x8300000000000101	22.06.2017 14:33:01.606
+UI (1)/0	_dt_udtHMI_Interlock.DynamicAttribute	_DynamicDatapoints	"_da_archive", "_da_archive", "_da_archive", "_da_common", "_da_common", "_da_common"	0x8300000000000101	22.06.2017 14:33:01.606
+UI (1)/0	_dt_udtInterlock.Leaf	_DynamicDatapoints	"_mp_udtInterlock.HMI.abInterlocks:_archive", "_mp_udtInterlock.HMI.abInterlocks:_common", "_mp_udtInterlock.HMI.asInterlockNames:_archive", "_mp_udtInterlock.HMI.asInterlockNames:_common", "_mp_udtInterlock.HMI.bInterlockOk:_archive", "_mp_udtInterlock.HMI.bInterlockOk:_common"	0x8300000000000101	22.06.2017 14:33:08.060
+UI (1)/0	_dt_udtInterlock.DynamicAttribute	_DynamicDatapoints	"_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common"	0x8300000000000101	22.06.2017 14:33:08.060
+UI (1)/0	_dt_udtHMI_PIDControlParameters.Leaf	_DynamicDatapoints	"_mp_udtHMI_PIDControlParameters.rProportionalGain:_archive", "_mp_udtHMI_PIDControlParameters.rProportionalGain:_common", "_mp_udtHMI_PIDControlParameters.rIntegralTime:_archive", "_mp_udtHMI_PIDControlParameters.rIntegralTime:_common", "_mp_udtHMI_PIDControlParameters.rDerivativeTime:_archive", "_mp_udtHMI_PIDControlParameters.rDerivativeTime:_common", "_mp_udtHMI_PIDControlParameters.rProportionalWeight:_archive", "_mp_udtHMI_PIDControlParameters.rProportionalWeight:_common", "_mp_udtHMI_PIDControlParameters.rDerivativeWeight:_archive", "_mp_udtHMI_PIDControlParameters.rDerivativeWeight:_common"	0x8300000000000101	22.06.2017 14:32:07.598
+UI (1)/0	_dt_udtHMI_PIDControlParameters.DynamicAttribute	_DynamicDatapoints	"_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common"	0x8300000000000101	22.06.2017 14:32:07.598
+UI (1)/0	_dt_udtHMI_PIDInterface.Leaf	_DynamicDatapoints	"_mp_udtHMI_PIDInterface.PID_ControlParameters.rProportionalGain:_archive", "_mp_udtHMI_PIDInterface.PID_ControlParameters.rProportionalGain:_common", "_mp_udtHMI_PIDInterface.PID_ControlParameters.rIntegralTime:_archive", "_mp_udtHMI_PIDInterface.PID_ControlParameters.rIntegralTime:_common", "_mp_udtHMI_PIDInterface.PID_ControlParameters.rDerivativeTime:_archive", "_mp_udtHMI_PIDInterface.PID_ControlParameters.rDerivativeTime:_common", "_mp_udtHMI_PIDInterface.PID_ControlParameters.rProportionalWeight:_archive", "_mp_udtHMI_PIDInterface.PID_ControlParameters.rProportionalWeight:_common", "_mp_udtHMI_PIDInterface.PID_ControlParameters.rDerivativeWeight:_archive", "_mp_udtHMI_PIDInterface.PID_ControlParameters.rDerivativeWeight:_common", "_mp_udtHMI_PIDInterface.iMode:_archive", "_mp_udtHMI_PIDInterface.iMode:_common", "_mp_udtHMI_PIDInterface.iPIDMode:_archive", "_mp_udtHMI_PIDInterface.iPIDMode:_common", "_mp_udtHMI_PIDInterface.iErrorCode:_archive", "_mp_udtHMI_PIDInterface.iErrorCode:_common", "_mp_udtHMI_PIDInterface.iEstopFunction:_archive", "_mp_udtHMI_PIDInterface.iEstopFunction:_common", "_mp_udtHMI_PIDInterface.rEstopValue:_archive", "_mp_udtHMI_PIDInterface.rEstopValue:_common", "_mp_udtHMI_PIDInterface.rManualSP:_archive", "_mp_udtHMI_PIDInterface.rManualSP:_common", "_mp_udtHMI_PIDInterface.rAutoSP:_archive", "_mp_udtHMI_PIDInterface.rAutoSP:_common", "_mp_udtHMI_PIDInterface.rActualInput:_archive", "_mp_udtHMI_PIDInterface.rActualInput:_common", "_mp_udtHMI_PIDInterface.wActualInputPeripheral:_archive", "_mp_udtHMI_PIDInterface.wActualInputPeripheral:_common", "_mp_udtHMI_PIDInterface.rOutput:_archive", "_mp_udtHMI_PIDInterface.rOutput:_common", "_mp_udtHMI_PIDInterface.wOutputPeripheral:_archive", "_mp_udtHMI_PIDInterface.wOutputPeripheral:_common", "_mp_udtHMI_PIDInterface.bPB_ResetError:_archive", "_mp_udtHMI_PIDInterface.bPB_ResetError:_common", "_mp_udtHMI_PIDInterface.bPB_Pretune:_archive", "_mp_udtHMI_PIDInterface.bPB_Pretune:_common", "_mp_udtHMI_PIDInterface.bPB_FineTune:_archive", "_mp_udtHMI_PIDInterface.bPB_FineTune:_common", "_mp_udtHMI_PIDInterface.bPB_AutomaticMode:_archive", "_mp_udtHMI_PIDInterface.bPB_AutomaticMode:_common", "_mp_udtHMI_PIDInterface.bPB_ManualMode:_archive", "_mp_udtHMI_PIDInterface.bPB_ManualMode:_common", "_mp_udtHMI_PIDInterface.bPB_ManualTuning:_archive", "_mp_udtHMI_PIDInterface.bPB_ManualTuning:_common", "_mp_udtHMI_PIDInterface.bTOG_ManualTuning:_archive", "_mp_udtHMI_PIDInterface.bTOG_ManualTuning:_common", "_mp_udtHMI_PIDInterface.bPBEN_ResetError:_archive", "_mp_udtHMI_PIDInterface.bPBEN_ResetError:_common", "_mp_udtHMI_PIDInterface.bPBEN_Pretune:_archive", "_mp_udtHMI_PIDInterface.bPBEN_Pretune:_common", "_mp_udtHMI_PIDInterface.bPBEN_FineTune:_archive", "_mp_udtHMI_PIDInterface.bPBEN_FineTune:_common", "_mp_udtHMI_PIDInterface.bPBEN_AutomaticMode:_archive", "_mp_udtHMI_PIDInterface.bPBEN_AutomaticMode:_common", "_mp_udtHMI_PIDInterface.bPBEN_ManualMode:_archive", "_mp_udtHMI_PIDInterface.bPBEN_ManualMode:_common", "_mp_udtHMI_PIDInterface.bError:_archive", "_mp_udtHMI_PIDInterface.bError:_common", "_mp_udtHMI_PIDInterface.bErrorAck:_archive", "_mp_udtHMI_PIDInterface.bErrorAck:_common"	0x8300000000000101	22.06.2017 14:49:16.720
+UI (1)/0	_dt_udtHMI_PIDInterface.DynamicAttribute	_DynamicDatapoints	"_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common"	0x8300000000000101	22.06.2017 14:49:16.720
+UI (1)/0	_dt_udtHMI_SystemControl.Leaf	_DynamicDatapoints	"_mp_udtHMI_SystemControl.iMode:_archive", "_mp_udtHMI_SystemControl.iMode:_common", "_mp_udtHMI_SystemControl.bEStop:_archive", "_mp_udtHMI_SystemControl.bEStop:_common", "_mp_udtHMI_SystemControl.bError:_archive", "_mp_udtHMI_SystemControl.bError:_common", "_mp_udtHMI_SystemControl.bAuto:_archive", "_mp_udtHMI_SystemControl.bAuto:_common", "_mp_udtHMI_SystemControl.bIndependentEnable:_archive", "_mp_udtHMI_SystemControl.bIndependentEnable:_common", "_mp_udtHMI_SystemControl.bPB_ResetError:_archive", "_mp_udtHMI_SystemControl.bPB_ResetError:_common"	0x8300000000000101	22.06.2017 14:52:46.275
+UI (1)/0	_dt_udtHMI_SystemControl.DynamicAttribute	_DynamicDatapoints	"_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common"	0x8300000000000101	22.06.2017 14:52:46.275
+UI (1)/0	_dt_udtPIDInterface.Leaf	_DynamicDatapoints	"_mp_udtPIDInterface.HMI.PID_ControlParameters.rProportionalGain:_archive", "_mp_udtPIDInterface.HMI.PID_ControlParameters.rProportionalGain:_common", "_mp_udtPIDInterface.HMI.PID_ControlParameters.rIntegralTime:_archive", "_mp_udtPIDInterface.HMI.PID_ControlParameters.rIntegralTime:_common", "_mp_udtPIDInterface.HMI.PID_ControlParameters.rDerivativeTime:_archive", "_mp_udtPIDInterface.HMI.PID_ControlParameters.rDerivativeTime:_common", "_mp_udtPIDInterface.HMI.PID_ControlParameters.rProportionalWeight:_archive", "_mp_udtPIDInterface.HMI.PID_ControlParameters.rProportionalWeight:_common", "_mp_udtPIDInterface.HMI.PID_ControlParameters.rDerivativeWeight:_archive", "_mp_udtPIDInterface.HMI.PID_ControlParameters.rDerivativeWeight:_common", "_mp_udtPIDInterface.HMI.iMode:_archive", "_mp_udtPIDInterface.HMI.iMode:_common", "_mp_udtPIDInterface.HMI.iPIDMode:_archive", "_mp_udtPIDInterface.HMI.iPIDMode:_common", "_mp_udtPIDInterface.HMI.iErrorCode:_archive", "_mp_udtPIDInterface.HMI.iErrorCode:_common", "_mp_udtPIDInterface.HMI.iEstopFunction:_archive", "_mp_udtPIDInterface.HMI.iEstopFunction:_common", "_mp_udtPIDInterface.HMI.rEstopValue:_archive", "_mp_udtPIDInterface.HMI.rEstopValue:_common", "_mp_udtPIDInterface.HMI.rManualSP:_archive", "_mp_udtPIDInterface.HMI.rManualSP:_common", "_mp_udtPIDInterface.HMI.rAutoSP:_archive", "_mp_udtPIDInterface.HMI.rAutoSP:_common", "_mp_udtPIDInterface.HMI.rActualInput:_archive", "_mp_udtPIDInterface.HMI.rActualInput:_common", "_mp_udtPIDInterface.HMI.wActualInputPeripheral:_archive", "_mp_udtPIDInterface.HMI.wActualInputPeripheral:_common", "_mp_udtPIDInterface.HMI.rOutput:_archive", "_mp_udtPIDInterface.HMI.rOutput:_common", "_mp_udtPIDInterface.HMI.wOutputPeripheral:_archive", "_mp_udtPIDInterface.HMI.wOutputPeripheral:_common", "_mp_udtPIDInterface.HMI.bPB_ResetError:_archive", "_mp_udtPIDInterface.HMI.bPB_ResetError:_common", "_mp_udtPIDInterface.HMI.bPB_Pretune:_archive", "_mp_udtPIDInterface.HMI.bPB_Pretune:_common", "_mp_udtPIDInterface.HMI.bPB_FineTune:_archive", "_mp_udtPIDInterface.HMI.bPB_FineTune:_common", "_mp_udtPIDInterface.HMI.bPB_AutomaticMode:_archive", "_mp_udtPIDInterface.HMI.bPB_AutomaticMode:_common", "_mp_udtPIDInterface.HMI.bPB_ManualMode:_archive", "_mp_udtPIDInterface.HMI.bPB_ManualMode:_common", "_mp_udtPIDInterface.HMI.bPB_ManualTuning:_archive", "_mp_udtPIDInterface.HMI.bPB_ManualTuning:_common", "_mp_udtPIDInterface.HMI.bTOG_ManualTuning:_archive", "_mp_udtPIDInterface.HMI.bTOG_ManualTuning:_common", "_mp_udtPIDInterface.HMI.bPBEN_ResetError:_archive", "_mp_udtPIDInterface.HMI.bPBEN_ResetError:_common", "_mp_udtPIDInterface.HMI.bPBEN_Pretune:_archive", "_mp_udtPIDInterface.HMI.bPBEN_Pretune:_common", "_mp_udtPIDInterface.HMI.bPBEN_FineTune:_archive", "_mp_udtPIDInterface.HMI.bPBEN_FineTune:_common", "_mp_udtPIDInterface.HMI.bPBEN_AutomaticMode:_archive", "_mp_udtPIDInterface.HMI.bPBEN_AutomaticMode:_common", "_mp_udtPIDInterface.HMI.bPBEN_ManualMode:_archive", "_mp_udtPIDInterface.HMI.bPBEN_ManualMode:_common", "_mp_udtPIDInterface.HMI.bError:_archive", "_mp_udtPIDInterface.HMI.bError:_common", "_mp_udtPIDInterface.HMI.bErrorAck:_archive", "_mp_udtPIDInterface.HMI.bErrorAck:_common"	0x8300000000000101	22.06.2017 14:58:01.148
+UI (1)/0	_dt_udtPIDInterface.DynamicAttribute	_DynamicDatapoints	"_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common", "_da_archive", "_da_common"	0x8300000000000101	22.06.2017 14:58:01.148
