@@ -1,0 +1,57 @@
+
+
+---------------------------------------------------------------------------------
+Archive started : 01.07.2019, 10:06:14
+Archive stopped : 01.07.2019, 10:09:50
+
+
+Name of statistic;Collected values;Total sum;Average;Minimum;Maximum;Time collecting
+Time spent processing write requests;-;-;-;-;-;-
+Time spent processing write requests after lock was acquired;-;-;-;-;-;-
+Time spent processing write in ArchivSet::sequentialWrite;-;-;-;-;-;-
+Time spent writing heap;-;-;-;-;-;-
+Time spent writing correction values;-;-;-;-;-;-
+Time between incoming write requests;-;-;-;-;-;-
+Time of wait of write request in queue;-;-;-;-;-;-
+Time which spent write, when waiting for mapping;-;-;-;-;-;-
+Time spent write when creating IndexAccess object;-;-;-;-;-;-
+Time spent when retrieving write request from queue;-;-;-;-;-;-
+Time spent adding write request to queue;-;-;-;-;-;-
+Time spent processing read requests;-;-;-;-;-;-
+Time between incoming read requests;-;-;-;-;-;-
+Time of wait of read request in queue;-;-;-;-;-;-
+Time spent in read while searching for time (one DPE, one set);-;-;-;-;-;-
+Time spent while reading one DPE in one set;-;-;-;-;-;-
+Time spent read while waiting to map stripe;-;-;-;-;-;-
+Time spent read while reading from one stripe;-;-;-;-;-;-
+Time spent processing read request message (come - sent answer);-;-;-;-;-;-
+Time spent while waiting for write lock;-;-;-;-;-;-
+Time spent while looping and looking for right write request;-;-;-;-;-;-
+Time spent while waiting for read lock;-;-;-;-;-;-
+Time when no writes were allowed;-;-;-;-;-;-
+Time writing redo transactions;-;-;-;-;-;-
+Time writing request transactions (cached);-;-;-;-;-;-
+Time waiting for lock when doing commit;-;-;-;-;-;-
+Time commiting request transactions (cached);-;-;-;-;-;-
+Time of physical write of request transactions;-;-;-;-;-;-
+Time of physical write of request commits;-;-;-;-;-;-
+Time of consolidation of request log;-;-;-;-;-;-
+Time in simulation InputThread (one iteration);-;-;-;-;-;-
+Time of processing +/- read requests;-;-;-;-;-;-
+
+
+Name of statistic;Collected values;Total sum;Average;Minimum;Maximum;Time collecting;Values /sec;Total sum/ time
+Count of read results (for one request);-;-;-;-;-;-;-;-
+Count of read elements (in one request);-;-;-;-;-;-;-;-
+Count of read sets (in one request);-;-;-;-;-;-;-;-
+Count of correction values (in one correction batch);-;-;-;-;-;-;-;-
+Size of heap value;-;-;-;-;-;-;-;-
+Count of discarded transactions;-;-;-;-;-;-;-;-
+Count of messages received from DM;-;-;-;-;-;-;-;-
+Count of messages sent to DM;-;-;-;-;-;-;-;-
+Count of messages prepared to send (added to send queue);-;-;-;-;-;-;-;-
+Count of messages being sent without waiting in queue;-;-;-;-;-;-;-;-
+Count of read request messages received;-;-;-;-;-;-;-;-
+Count of read request answers sent ;-;-;-;-;-;-;-;-
+
+

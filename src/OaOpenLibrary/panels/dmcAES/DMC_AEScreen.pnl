@@ -4342,7 +4342,7 @@ main()
   </reference>
   <reference referenceId="7" Name="PANEL_REF7" parentSerial="-1">
    <properties>
-    <prop name="FileName">OpenLibrary/Components/button.xml</prop>
+    <prop name="FileName">objects/OL_Components/button.xml</prop>
     <prop name="Location">2203 1177.125</prop>
     <prop name="Geometry">1.743243243243243 0 0 1.251082251082251 -1625.364864864865 -224.4134199134201</prop>
     <prop name="TabOrder">30</prop>

@@ -1,7 +1,7 @@
 [general]
 pvss_path = "C:/Siemens/Automation/WinCC_OA/3.16"
-proj_path = "C:/Siemens/Automation/WinCC_OA/3.16/OaOpenLibrary"
-proj_path = "C:/Siemens/Automation/WinCC_OA/3.16/WaterTreatment"
+proj_path = "C:/WinCC_OA_Proj/siemens-open-library-wincc-oa/src/OaOpenLibrary"
+proj_path = "C:/WinCC_OA_Proj/siemens-open-library-wincc-oa/samples/WaterTreatment"
 proj_version = "3.16"
 langs = "en_US.utf8"
 
